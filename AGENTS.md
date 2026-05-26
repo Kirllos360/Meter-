@@ -27,7 +27,7 @@
 13. Save prompt to `prompt-history_TXXX.md`
 
 ### Documentation Structure
-- 16 markdown, 7 sql, 18 text, 15 csv, 20 pdf files
+- 17 markdown, 7 sql, 19 text, 16 csv, 21 pdf files
 - Index: `documentation/markdown/00-index.md`
 - Validation reports: `documentation/markdown/13-T001-validation-report.md` through `13-T006-validation-report.md`
 
