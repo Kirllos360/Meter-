@@ -8,7 +8,7 @@
 - **T005**: Docker PostgreSQL — `docker-compose.yml` (env vars, healthcheck, volume, restart), `README.md` (start/stop/reset/connection docs)
 - **T006**: Error envelope + global filter — `ErrorEnvelope` interface, `AllExceptionsFilter`, 10 unit tests; validated 3/3
 - **T007**: Correlation-ID middleware — `CorrelationMiddleware` class, registered globally, `req.correlationId` set on every request; 7 unit tests; validated 3/3
-- **T008**: Idempotency-Key interceptor — `IdempotencyInterceptor`, Prisma-backed idempotency store, scoped `actor:route:method:key`, safe replay; 15 unit tests; validated 4/4
+- **T008**: Idempotency-Key interceptor — `IdempotencyInterceptor`, Prisma-backed idempotency store, scoped `actor:route:method:key`, safe replay; 18 unit tests; validated 4/4
 
 ### Next Unfinished Task
 - **T009**: Implement Auth (JWT) + RBAC guard + role model
