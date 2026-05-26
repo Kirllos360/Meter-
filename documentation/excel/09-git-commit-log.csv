@@ -12,3 +12,4 @@
 11,2026-05-26,4f12da5,Kirllos Hany,"build(backend): add correlation middleware for T007",Phase 2
 12,2026-05-26,d0d72b4,Kirllos Hany,"build(backend): implement append-only audit logging for T010",Phase 2
 13,2026-05-26,a18038f,Kirllos Hany,"build(backend): wire api versioning and openapi for T011",Phase 2
+14,2026-05-26,79d9620,Kirllos Hany,"T012: build contract-test harness against meter-pulse-api.yaml",Phase 2

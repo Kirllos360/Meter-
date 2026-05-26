@@ -1,0 +1,16 @@
+Category,Metric,Result
+Test Suite,contract/health.spec.ts,PASS
+Tests Total,26,26
+Tests Passed,26,26
+Tests Failed,0,0
+Build,npm run build,CLEAN
+Lint,npx eslint src,CLEAN
+YAML Loading,loadContract(),PASS
+Operation Resolve,getOperation(),PASS
+Status Validation,validateStatus(),PASS
+Response Schema,getResponseSchema(),PASS
+Schema Deref,getDereferencedResponseSchema(),PASS
+Body Validation,validateResponseBody(),PASS
+End-to-End Validation,validateResponseBodyFromContract(),PASS
+App Bootstrap,createTestApp(),PASS
+Health Endpoint,GET /api/v1/health,200 OK

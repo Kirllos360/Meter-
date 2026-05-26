@@ -1,0 +1,83 @@
+﻿# T012 Validation Report â€” Contract-Test Harness
+
+**Date**: 2026-05-26
+**Branch**: `feature/t012-contract-harness`
+**Commit**: `79d9620`
+
+## Summary
+
+Built contract-test harness against `meter-pulse-api.yaml` in `backend/test/contract/`.
+
+## Files Changed
+
+- `backend/test/contract/setup.ts` â€” Contract-test harness with YAML loading, operation lookup, schema validation, and NestJS bootstrap
+- `backend/test/contract/health.spec.ts` â€” 26 tests covering all harness functions
+- `backend/package.json` â€” Added devDependencies
+- `backend/package-lock.json` â€” Lock file update
+
+## Dependencies Added
+
+- `supertest`, `@types/supertest` â€” HTTP integration testing
+- `js-yaml`, `@types/js-yaml` â€” YAML parsing
+- `ajv`, `ajv-formats` â€” JSON Schema validation
+- `@apidevtools/json-schema-ref-parser` â€” OpenAPI $ref resolution
+
+## Test Results
+
+```
+PASS test/contract/health.spec.ts
+  Contract Harness
+    loadContract
+      âœ“ should load the OpenAPI YAML successfully
+      âœ“ should have the correct API title
+      âœ“ should have a servers array with /api/v1
+      âœ“ should define known paths
+      âœ“ should define components.schemas with known types
+    getOperation
+      âœ“ should find an operation by operationId
+      âœ“ should find generateInvoices operation
+      âœ“ should return null for unknown operationId
+    getExpectedStatuses
+      âœ“ should return expected status codes for assignMeter
+      âœ“ should return expected status codes for generateInvoice
+    getResponseSchema
+      âœ“ should return a schema object for assignMeter 200
+      âœ“ should return null for an unknown status code
+      âœ“ should return null for an unknown operationId
+    getDereferencedResponseSchema
+      âœ“ should resolve $ref to the actual schema for assignMeter 200
+      âœ“ should resolve ErrorEnvelope for assignMeter 409
+      âœ“ should return null for an unknown operationId
+    validateResponseBody
+      âœ“ should validate a valid ErrorEnvelope body
+      âœ“ should reject an invalid ErrorEnvelope body
+      âœ“ should validate an empty object against MeterAssignment
+    validateResponseBodyFromContract
+      âœ“ should validate against assignMeter 409 ErrorEnvelope
+      âœ“ should fail validation for invalid error body
+      âœ“ should return error for unknown operationId
+    createTestApp
+      âœ“ should bootstrap the NestJS app and call health endpoint
+    validateStatus
+      âœ“ should validate that 200 is valid for assignMeter
+      âœ“ should return false for invalid status 418
+      âœ“ should return true for unknown operationIds
+
+Test Suites: 1 passed, 1 total
+Tests:       26 passed, 26 total
+```
+
+## Build Results
+
+- `npm run build` â€” Clean
+- `npx eslint src/**/*.ts` â€” Clean
+
+## Acceptance Criteria
+
+| Criterion | Status |
+|-----------|--------|
+| Harness validates responses against meter-pulse-api.yaml | âœ… |
+| One smoke assertion passes | âœ… (health endpoint) |
+| YAML path stable from repo root | âœ… (repo-root anchor) |
+| Jest discovers and executes contract tests | âœ… |
+| Backend build succeeds | âœ… |

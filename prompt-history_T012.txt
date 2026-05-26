@@ -1,0 +1,63 @@
+T012 — Contract-Test Harness Implementation Notes
+==================================================
+Date: 2026-05-26
+Branch: feature/t012-contract-harness
+Commit: 79d9620
+
+Problem:
+Build a reusable contract-test harness in backend/test/contract/ that:
+1. Loads meter-pulse-api.yaml
+2. Validates responses against schema, status code, operationId
+3. Supports Supertest integration
+4. Supports operationId-based validation
+5. Has at least one passing smoke assertion
+
+Implementation:
+
+1. backend/test/contract/setup.ts:
+   - loadContract() — js-yaml parsing of the OpenAPI 3.1 YAML
+   - loadDereferencedContract() — $ref resolution via @apidevtools/json-schema-ref-parser (async)
+   - getOperation(operationId) — walks paths to find operation by ID
+   - getExpectedStatuses(operationId) — extracts valid status codes
+   - getResponseSchema(operationId, statusCode) — extracts raw $ref schema
+   - getDereferencedResponseSchema(operationId, statusCode) — resolves $ref to get actual schema from components.schemas
+   - Handles both inline schema.$ref and response-level $ref (e.g., $ref: '#/components/responses/ConflictError')
+   - validateResponseBody(schema, body) — uses ajv for JSON Schema validation
+   - validateResponseBodyFromContract(operationId, statusCode, body) — end-to-end validation
+   - createTestApp() — NestJS Test.createTestingModule + supertest bootstrap
+   - validateStatus(operationId, status) — checks status code against spec
+   - YAML path anchored to REPO_ROOT (../../.. from __dirname)
+
+2. backend/test/contract/health.spec.ts:
+   - 26 tests across 8 describe blocks
+   - Tests: YAML loading, operation lookup, status extraction, schema resolution,
+     response body validation, app bootstrap, health endpoint
+
+3. Dependencies added:
+   - supertest + @types/supertest
+   - js-yaml + @types/js-yaml
+   - ajv + ajv-formats
+   - @apidevtools/json-schema-ref-parser
+
+Key Design Decisions:
+- Used require() for supertest and js-yaml (CJS compatible, avoids ESM interop issues)
+- Lazy-cached _spec, _dereferencedSpec, _ajv for performance across tests
+- Separated getResponseSchema (raw $ref) from getDereferencedResponseSchema (resolved)
+- YAML path: resolve(__dirname, '..', '..', '..') from test/contract/ → repo root
+
+Validation:
+- npm test -- test/contract → 26/26 passing
+- npm run build → clean
+- npx eslint src/**/*.ts → clean
+
+SpecKit Acceptance:
+[ X ] Harness validates responses against meter-pulse-api.yaml
+[ X ] One smoke assertion passes (health endpoint)
+[ X ] YAML path stable from repo root
+[ X ] Jest discovers and executes contract tests
+[ X ] Backend build succeeds
+
+Risks:
+- YAML path depends on __dirname being correct (jest.config.ts maps to ts-jest)
+- ajv strict:false may miss some schema violations (but avoids OpenAPI 3.1 edge cases)
+- $ref resolution requires the spec to be well-formed (no circular refs)

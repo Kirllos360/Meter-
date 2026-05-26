@@ -194,3 +194,41 @@ Every time the user sends a message, run `git status --short` to detect any chan
 
 ### Next Task
 - T012
+
+---
+
+## T012 Memory Log
+
+**Task**: T012 — Build contract-test harness against `meter-pulse-api.yaml`
+**Story**: Foundational — Phase 2
+**Status**: Complete
+**Date**: 2026-05-26
+**Branch**: feature/t012-contract-harness
+**Commit**: 79d9620
+
+### What Changed
+- Created `backend/test/contract/setup.ts` — reusable contract-test harness
+  - `loadContract()` — loads `meter-pulse-api.yaml` via js-yaml
+  - `loadDereferencedContract()` — resolves all `$ref` via `@apidevtools/json-schema-ref-parser`
+  - `getOperation()` — finds operation by operationId
+  - `getExpectedStatuses()` — returns valid status codes for an operation
+  - `getResponseSchema()` / `getDereferencedResponseSchema()` — extracts response schemas
+  - `validateResponseBody()` — validates body against a JSON schema via ajv
+  - `validateResponseBodyFromContract()` — end-to-end schema validation from contract
+  - `createTestApp()` — NestJS bootstrap with supertest
+  - `validateStatus()` — checks status against spec
+- Created `backend/test/contract/health.spec.ts` — 26 tests covering all helpers
+- Installed `supertest`, `@types/supertest`, `js-yaml`, `@types/js-yaml`, `ajv`, `ajv-formats`, `@apidevtools/json-schema-ref-parser`
+
+### Harness Capabilities
+- Loads YAML contract from `specs/001-metering-billing-platform/contracts/meter-pulse-api.yaml`
+- Validates responses against schema, status code, and operationId
+- Supports Supertest integration for HTTP testing
+- Supports operationId-based validation
+- Handles both inline `$ref` and response-level `$ref` resolution
+- Reusable across future test files
+
+### Validation
+- `npm test -- test/contract` — 26/26 passing
+- `npm run build` — clean
+- `npx eslint src/**/*.ts` — clean

@@ -1,0 +1,17 @@
+-- T012 Validation Report — Contract-Test Harness
+-- Date: 2026-05-26
+-- 
+-- Validates that contract-test harness loads, resolves, and validates
+-- against meter-pulse-api.yaml.
+--
+-- Commands to validate:
+--   cd backend
+--   npm test -- test/contract
+--   npm run build
+--   npx eslint src/**/*.ts
+
+-- Test results summary:
+--   PASS test/contract/health.spec.ts
+--   26 tests passed, 0 failed
+--   Build: CLEAN
+--   Lint: CLEAN

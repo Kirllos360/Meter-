@@ -1,4 +1,14 @@
-import { loadContract, getOperation, getExpectedStatuses, createTestApp, validateStatus } from './setup';
+import {
+  loadContract,
+  getOperation,
+  getExpectedStatuses,
+  createTestApp,
+  validateStatus,
+  getResponseSchema,
+  getDereferencedResponseSchema,
+  validateResponseBody,
+  validateResponseBodyFromContract,
+} from './setup';
 
 describe('Contract Harness', () => {
   describe('loadContract', () => {
@@ -30,6 +40,15 @@ describe('Contract Harness', () => {
       expect(paths).toHaveProperty('/readings');
       expect(paths).toHaveProperty('/invoices/generate');
     });
+
+    it('should define components.schemas with known types', () => {
+      const spec = loadContract();
+      const components = spec.components as Record<string, unknown>;
+      const schemas = components.schemas as Record<string, unknown>;
+      expect(schemas).toHaveProperty('ErrorEnvelope');
+      expect(schemas).toHaveProperty('MeterAssignment');
+      expect(schemas).toHaveProperty('Reading');
+    });
   });
 
   describe('getOperation', () => {
@@ -38,6 +57,13 @@ describe('Contract Harness', () => {
       expect(result).not.toBeNull();
       expect(result!.method).toBe('POST');
       expect(result!.path).toBe('/meters/{meterId}/assign');
+    });
+
+    it('should find generateInvoices operation', () => {
+      const result = getOperation('generateInvoices');
+      expect(result).not.toBeNull();
+      expect(result!.method).toBe('POST');
+      expect(result!.path).toBe('/invoices/generate');
     });
 
     it('should return null for unknown operationId', () => {
@@ -50,6 +76,106 @@ describe('Contract Harness', () => {
     it('should return expected status codes for assignMeter', () => {
       const statuses = getExpectedStatuses('assignMeter');
       expect(statuses).toContain(200);
+    });
+
+    it('should return expected status codes for generateInvoice', () => {
+      const statuses = getExpectedStatuses('generateInvoices');
+      expect(statuses).toContain(202);
+    });
+  });
+
+  describe('getResponseSchema', () => {
+    it('should return a schema object for assignMeter 200', () => {
+      const schema = getResponseSchema('assignMeter', 200);
+      expect(schema).not.toBeNull();
+      expect(schema!.$ref).toBe('#/components/schemas/MeterAssignment');
+    });
+
+    it('should return null for an unknown status code', () => {
+      const schema = getResponseSchema('assignMeter', 999);
+      expect(schema).toBeNull();
+    });
+
+    it('should return null for an unknown operationId', () => {
+      const schema = getResponseSchema('nonExistent', 200);
+      expect(schema).toBeNull();
+    });
+  });
+
+  describe('getDereferencedResponseSchema', () => {
+    it('should resolve $ref to the actual schema for assignMeter 200', () => {
+      const schema = getDereferencedResponseSchema('assignMeter', 200);
+      expect(schema).not.toBeNull();
+      expect(schema!.type).toBe('object');
+    });
+
+    it('should resolve ErrorEnvelope for assignMeter 409', () => {
+      const schema = getDereferencedResponseSchema('assignMeter', 409);
+      expect(schema).not.toBeNull();
+      expect(schema!.type).toBe('object');
+    });
+
+    it('should return null for an unknown operationId', () => {
+      const schema = getDereferencedResponseSchema('other', 200);
+      expect(schema).toBeNull();
+    });
+  });
+
+  describe('validateResponseBody', () => {
+    it('should validate a valid ErrorEnvelope body', () => {
+      const schema = getDereferencedResponseSchema('assignMeter', 409);
+      expect(schema).not.toBeNull();
+
+      const result = validateResponseBody(schema!, {
+        code: 'CONFLICT',
+        message: 'Meter already assigned',
+        correlationId: 'abc-123',
+      });
+      expect(result.valid).toBe(true);
+      expect(result.errors).toEqual([]);
+    });
+
+    it('should reject an invalid ErrorEnvelope body (missing required fields)', () => {
+      const schema = getDereferencedResponseSchema('assignMeter', 409);
+      expect(schema).not.toBeNull();
+
+      const result = validateResponseBody(schema!, {
+        code: 'CONFLICT',
+      });
+      expect(result.valid).toBe(false);
+      expect(result.errors.length).toBeGreaterThan(0);
+    });
+
+    it('should validate an empty object against MeterAssignment (all optional)', () => {
+      const schema = getDereferencedResponseSchema('assignMeter', 200);
+      expect(schema).not.toBeNull();
+
+      const result = validateResponseBody(schema!, {});
+      expect(result.valid).toBe(true);
+    });
+  });
+
+  describe('validateResponseBodyFromContract', () => {
+    it('should validate against assignMeter 409 ErrorEnvelope', async () => {
+      const result = await validateResponseBodyFromContract('assignMeter', 409, {
+        code: 'CONFLICT',
+        message: 'Duplicate',
+        correlationId: 'xyz',
+      });
+      expect(result.valid).toBe(true);
+    });
+
+    it('should fail validation for invalid error body', async () => {
+      const result = await validateResponseBodyFromContract('assignMeter', 409, {
+        code: 'CONFLICT',
+      });
+      expect(result.valid).toBe(false);
+    });
+
+    it('should return error for unknown operationId', async () => {
+      const result = await validateResponseBodyFromContract('unknown', 200, {});
+      expect(result.valid).toBe(false);
+      expect(result.errors[0]).toContain('No schema found');
     });
   });
 
@@ -67,6 +193,10 @@ describe('Contract Harness', () => {
   describe('validateStatus', () => {
     it('should validate that 200 is valid for assignMeter', () => {
       expect(validateStatus('assignMeter', 200)).toBe(true);
+    });
+
+    it('should return false for invalid status 418 for assignMeter', () => {
+      expect(validateStatus('assignMeter', 418)).toBe(false);
     });
 
     it('should return true for unknown operationIds', () => {

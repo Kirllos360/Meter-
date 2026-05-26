@@ -140,7 +140,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd backend && npm run start:dev` then `curl -s localhost:3000/api/v1/docs-json | head`
   - **Risk**: Generated spec diverging from `meter-pulse-api.yaml`; reconcile in T083.
 
-- [ ] T012 Build contract-test harness against `meter-pulse-api.yaml` in `backend/test/contract/`
+- [X] T012 Build contract-test harness against `meter-pulse-api.yaml` in `backend/test/contract/`
   - **Dependencies**: T011
   - **Area/Files**: `backend/test/contract/setup.ts` (supertest app bootstrap + OpenAPI response validator loading `specs/001-metering-billing-platform/contracts/meter-pulse-api.yaml`)
   - **Acceptance**: Harness can assert any response against a schema/operationId from the YAML; one smoke assertion passes
