@@ -1,5 +1,27 @@
 # Meter Pulse — Utility Metering & Billing Platform
 
+### Completed Tasks (8 of ~91 — 8.8%)
+- **T001**: NestJS backend scaffold — `backend/` structure, main.ts, app.module.ts, package.json, tsconfig.json
+- **T002**: Config + PostgreSQL connection — `AppConfigModule`, `DatabaseModule`, `.env`, Docker container `meter-pulse-db`
+- **T003**: Backend tooling — ESLint, Prettier, Jest configured; eslint fix: added `jest.config.ts` to ignorePatterns
+- **T004**: Prisma ORM init — `schema.prisma` (multiSchema, sim_system), `PrismaService`, `DATABASE_URL`; validated 5/5
+- **T005**: Docker PostgreSQL — `docker-compose.yml` (env vars, healthcheck, volume, restart), `README.md` (start/stop/reset/connection docs)
+- **T006**: Error envelope + global filter — `ErrorEnvelope` interface, `AllExceptionsFilter`, 10 unit tests; validated 3/3
+- **T007**: Correlation-ID middleware — `CorrelationMiddleware` class, registered globally, `req.correlationId` set on every request; 7 unit tests; validated 3/3
+- **T008**: Idempotency-Key interceptor — `IdempotencyInterceptor`, Prisma-backed idempotency store, scoped `actor:route:method:key`, safe replay; 15 unit tests; validated 4/4
+
+### Next Unfinished Task
+- **T009**: Implement Auth (JWT) + RBAC guard + role model
+
+## T008 Memory Log (2026-05-26)
+
+- **Task**: T008 — Add Idempotency-Key interceptor
+- **Status**: done
+- **Changed**: Created `idempotency.interceptor.ts`, `idempotency.spec.ts`; added `IdempotencyRecord` model to `schema.prisma`; updated `app.module.ts` (APP_INTERCEPTOR), `tsconfig.json` (jest types)
+- **Validation**: npm test ✅ (15/15), npm run build ✅, prisma validate ✅
+- **Branch**: `feature/t008-idempotency-interceptor`
+- **Next**: T009
+
 ## Stack
 - **Frontend** (`Frontend/`): Next.js 16 + React 19 + TypeScript + Tailwind v4 + shadcn/ui
 - **Backend** (planned, not yet created): NestJS + PostgreSQL + Prisma ORM

@@ -4,10 +4,13 @@ import {
   ExecutionContext,
   CallHandler,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
+import { switchMap, catchError, map } from 'rxjs/operators';
 import { PrismaService } from '../database/prisma.service';
-import { IdempotencyRecord, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import * as crypto from 'crypto';
+
+const UNIQUE_CONSTRAINT_CODE = 'P2002';
 
 @Injectable()
 export class IdempotencyInterceptor implements NestInterceptor {
@@ -33,54 +36,47 @@ export class IdempotencyInterceptor implements NestInterceptor {
     const route = request.route?.path ?? request.path ?? '/';
     const scopedKey = `${actor}:${route}:${method}:${idempotencyKey}`;
 
-    return this.handleIdempotentRequest(scopedKey, request, response, next);
+    return from(
+      this.prisma.idempotencyRecord.findUnique({ where: { key: scopedKey } }),
+    ).pipe(
+      switchMap((record) => {
+        if (record) {
+          response.status(record.responseStatus);
+          return of(record.responseBody);
+        }
+        return this.executeAndCache(scopedKey, request, response, next);
+      }),
+      catchError(() => next.handle()),
+    );
   }
 
-  private handleIdempotentRequest(
+  private executeAndCache(
     scopedKey: string,
     request: any,
     response: any,
     next: CallHandler,
   ): Observable<unknown> {
-    const existing = this.prisma.idempotencyRecord.findUnique({
-      where: { key: scopedKey },
-    });
-
-    return new Observable<unknown>((subscriber) => {
-      existing
-        .then((record: IdempotencyRecord | null) => {
-          if (record) {
-            response.status(record.responseStatus);
-            subscriber.next(record.responseBody);
-            subscriber.complete();
-            return;
-          }
-
-          next.handle().subscribe({
-            next: (body) => {
-              this.cacheResponse(scopedKey, request, response, body);
-              subscriber.next(body);
-            },
-            error: (err) => subscriber.error(err),
-            complete: () => subscriber.complete(),
-          });
-        })
-        .catch(() => {
-          next.handle().subscribe({
-            next: (body) => subscriber.next(body),
-            error: (err) => subscriber.error(err),
-            complete: () => subscriber.complete(),
-          });
-        });
-    });
+    return next.handle().pipe(
+      switchMap((body) =>
+        from(this.tryCache(scopedKey, request, response, body)).pipe(
+          map((cached) => {
+            if (cached) {
+              response.status(cached.responseStatus);
+              return cached.responseBody;
+            }
+            return body;
+          }),
+        ),
+      ),
+    );
   }
 
-  private async cacheResponse(
+  private async tryCache(
     scopedKey: string,
     request: any,
     response: any,
     body: unknown,
-  ): Promise<void> {
+  ): Promise<{ responseStatus: number; responseBody: unknown } | null> {
     const method = request.method as string;
     const route = request.route?.path ?? request.path ?? '/';
     const actor = request.user?.id ?? 'anonymous';
@@ -101,8 +97,23 @@ export class IdempotencyInterceptor implements NestInterceptor {
           responseStatus: response.statusCode,
         },
       });
-    } catch {
-      // Cache write failure must not fail the original request
+      return null;
+    } catch (err: unknown) {
+      if (
+        typeof err === 'object' &&
+        err !== null &&
+        'code' in err &&
+        (err as Record<string, unknown>).code === UNIQUE_CONSTRAINT_CODE
+      ) {
+        const existing = await this.prisma.idempotencyRecord.findUniqueOrThrow({
+          where: { key: scopedKey },
+        });
+        return {
+          responseStatus: existing.responseStatus,
+          responseBody: existing.responseBody,
+        };
+      }
+      return null;
     }
   }
 }

@@ -1,0 +1,29 @@
+Category,Step,Check,Result,Details
+Speckit Pre-req,1,Feature branch,PASS,feature/t008-idempotency-interceptor
+Speckit Pre-req,2,plan.md exists,PASS,specs/001-metering-billing-platform/plan.md
+Speckit Pre-req,3,spec.md exists,PASS,specs/001-metering-billing-platform/spec.md
+Speckit Pre-req,4,tasks.md exists,PASS,specs/001-metering-billing-platform/tasks.md
+Speckit Pre-req,5,research.md exists,PASS,specs/001-metering-billing-platform/research.md
+Speckit Pre-req,6,data-model.md exists,PASS,specs/001-metering-billing-platform/data-model.md
+Speckit Pre-req,7,quickstart.md exists,PASS,specs/001-metering-billing-platform/quickstart.md
+Speckit Pre-req,8,T002 dependency,PASS,Config + PostgreSQL complete
+Speckit Pre-req,9,T004 dependency,PASS,Prisma ORM initialized
+Implementation,1,npm test -- idempotency,PASS,18/18 tests passed
+Implementation,2,Duplicate POST prevention,PASS,First cached second replayed
+Implementation,3,Non-mutation bypass,PASS,GET/OPTIONS not checked
+Implementation,4,No key = passthrough,PASS,Missing key = execute normally
+Implementation,5,Status replay,PASS,Original status code preserved
+Implementation,6,Body replay,PASS,Original body preserved
+Implementation,7,Actor isolation,PASS,Scoped by actor
+Implementation,8,Route isolation,PASS,Scoped by route
+Implementation,9,Method isolation,PASS,Scoped by method
+Implementation,10,Concurrent safety,PASS,First-winner replayed on P2002
+Implementation,11,Cache write fail safe (other),PASS,Non-constraint error = original unaffected
+Implementation,12,Lookup fail safe,PASS,Falls through to handler
+Implementation,13,Error propagation,PASS,Handler errors forwarded
+Implementation,14,PUT/PATCH support,PASS,Both methods handled
+Implementation,15,DELETE support,PASS,Cached and replayed correctly
+Implementation,16,npm run build,PASS,Exit code 0
+Implementation,17,npx prisma validate,PASS,Schema valid
+,,,,,
+OVERALL VERDICT,PASS,,,,,

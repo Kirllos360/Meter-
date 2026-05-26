@@ -1,0 +1,49 @@
+T008 VALIDATION REPORT - IDEMPOTENCY-KEY INTERCEPTOR
+=======================================================
+
+Task:   T008 [P] Add Idempotency-Key interceptor
+Date:   2026-05-26
+Author: Kirllos Hany
+Branch: feature/t008-idempotency-interceptor (0dbc77e)
+Verdict: PASS (ALL CHECKS PASSED)
+
+SPECKIT PRE-REQUISITE CHECKS
+
+ 1. Feature branch ............ PASS - feature/t008-idempotency-interceptor
+ 2. plan.md exists ............ PASS - specs/.../plan.md
+ 3. spec.md exists ............ PASS - specs/.../spec.md
+ 4. tasks.md exists ........... PASS - specs/.../tasks.md
+ 5. research.md exists ........ PASS - specs/.../research.md
+ 6. data-model.md exists ...... PASS - specs/.../data-model.md
+ 7. quickstart.md exists ...... PASS - specs/.../quickstart.md
+ 8. T002 dependency ........... PASS - Config + PostgreSQL complete
+ 9. T004 dependency ........... PASS - Prisma ORM initialized
+
+IMPLEMENTATION VALIDATION
+
+ 1. npm test -- idempotency .. PASS - 18/18 tests passed
+ 2. Duplicate POST prevention . PASS - First cached, second replayed
+ 3. Non-mutation bypass ....... PASS - GET/OPTIONS not checked
+ 4. No key = passthrough ...... PASS - Missing key = execute normally
+ 5. Status replay ............. PASS - Original status code preserved
+ 6. Body replay ............... PASS - Original body preserved
+ 7. Actor isolation ........... PASS - Scoped by actor
+ 8. Route isolation ........... PASS - Scoped by route
+ 9. Method isolation .......... PASS - Scoped by method
+10. Concurrent safety .......... PASS - First-winner replayed on P2002
+11. Cache write fail safe ..... PASS - Non-constraint error = original request unaffected
+12. Lookup fail safe ......... PASS - Falls through to handler
+13. Error propagation ........ PASS - Handler errors forwarded
+14. PUT/PATCH support ........ PASS - Both methods handled
+15. DELETE support ............ PASS - Cached and replayed correctly
+16. npm run build ............. PASS - Exit code 0
+17. npx prisma validate ....... PASS - Schema valid
+
+FILES CHANGED
+  backend/src/common/http/idempotency.interceptor.ts (created)
+  backend/test/idempotency.spec.ts (created)
+  backend/prisma/schema.prisma (updated - added IdempotencyRecord model)
+  backend/src/app.module.ts (updated - APP_INTERCEPTOR registration)
+  backend/tsconfig.json (updated - jest types)
+
+OVERALL VERDICT: PASS

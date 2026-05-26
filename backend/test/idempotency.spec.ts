@@ -12,6 +12,7 @@ describe('IdempotencyInterceptor', () => {
     mockPrisma = {
       idempotencyRecord: {
         findUnique: jest.fn(),
+        findUniqueOrThrow: jest.fn(),
         create: jest.fn().mockResolvedValue({}),
       },
     };
@@ -208,8 +209,36 @@ describe('IdempotencyInterceptor', () => {
     });
   });
 
+  describe('concurrent safety', () => {
+    it('replays first-winner response when create hits unique constraint', (done) => {
+      mockRequest.headers['idempotency-key'] = 'concurrent-key';
+      mockPrisma.idempotencyRecord.findUnique.mockResolvedValue(null);
+
+      const prismaError = new Error('Unique constraint');
+      (prismaError as any).code = 'P2002';
+      mockPrisma.idempotencyRecord.create.mockRejectedValue(prismaError);
+
+      const firstResponse = { id: 1, status: 'created-by-first' };
+      mockPrisma.idempotencyRecord.findUniqueOrThrow.mockResolvedValue({
+        responseStatus: 201,
+        responseBody: firstResponse,
+      });
+
+      const next = { handle: () => of({ id: 1, status: 'created-by-second' }) };
+
+      interceptor.intercept(mockContext, next).subscribe({
+        next: (body) => {
+          expect(body).toEqual(firstResponse);
+          expect(mockResponse.status).toHaveBeenCalledWith(201);
+          expect(mockPrisma.idempotencyRecord.findUniqueOrThrow).toHaveBeenCalled();
+          done();
+        },
+      });
+    });
+  });
+
   describe('error handling', () => {
-    it('continues request when cache write fails', (done) => {
+    it('continues request when cache write fails (non-constraint error)', (done) => {
       mockRequest.headers['idempotency-key'] = 'key-write-fail';
       mockPrisma.idempotencyRecord.findUnique.mockResolvedValue(null);
       mockPrisma.idempotencyRecord.create.mockRejectedValue(new Error('DB error'));
@@ -280,6 +309,42 @@ describe('IdempotencyInterceptor', () => {
       interceptor.intercept(mockContext, next).subscribe({
         next: () => {
           expect(mockPrisma.idempotencyRecord.create).toHaveBeenCalled();
+          done();
+        },
+      });
+    });
+  });
+
+  describe('DELETE method', () => {
+    it('caches and replays DELETE responses', (done) => {
+      mockRequest.method = 'DELETE';
+      mockRequest.headers['idempotency-key'] = 'delete-key';
+      mockPrisma.idempotencyRecord.findUnique.mockResolvedValue(null);
+
+      const next = { handle: () => of({ deleted: true }) };
+
+      interceptor.intercept(mockContext, next).subscribe({
+        next: () => {
+          expect(mockPrisma.idempotencyRecord.create).toHaveBeenCalled();
+          done();
+        },
+      });
+    });
+
+    it('replays cached DELETE response', (done) => {
+      mockRequest.method = 'DELETE';
+      mockRequest.headers['idempotency-key'] = 'delete-key-replay';
+      mockPrisma.idempotencyRecord.findUnique.mockResolvedValue({
+        responseStatus: 200,
+        responseBody: { deleted: true },
+      });
+
+      const next = { handle: jest.fn() };
+
+      interceptor.intercept(mockContext, next).subscribe({
+        next: (body) => {
+          expect(body).toEqual({ deleted: true });
+          expect(next.handle).not.toHaveBeenCalled();
           done();
         },
       });
