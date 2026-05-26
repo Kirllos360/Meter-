@@ -98,7 +98,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
 
 ### Backend cross-cutting infrastructure
 
-- [ ] T006 [P] Implement standard error envelope + global exception filter in `backend/src/common/http/`
+- [X] T006 [P] Implement standard error envelope + global exception filter in `backend/src/common/http/`
   - **Dependencies**: T001
   - **Area/Files**: `backend/src/common/http/error-envelope.ts`, `backend/src/common/http/all-exceptions.filter.ts`
   - **Acceptance**: All errors serialize to `{ code, message, details?, correlationId }` exactly matching `ErrorEnvelope` in the contract

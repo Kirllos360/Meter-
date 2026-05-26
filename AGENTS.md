@@ -58,6 +58,15 @@ bun run db:generate      # Prisma generate
 - **Pre-commit**: Always run `git status` first; only stage intended files; check for secrets
 - **Never commit**: `.env`, `*.db`, `.next/`, `node_modules/`, `graphify-out/cache/`, workspace archives, tokens
 
+## T006 Memory Log (2026-05-26)
+
+- **Task**: T006 — Implement standard error envelope + global exception filter
+- **Status**: done
+- **Changed**: Created `error-envelope.ts`, `all-exceptions.filter.ts`, `error-envelope.spec.ts`; updated `main.ts`, `tsconfig.json`, `.eslintrc.cjs`
+- **Validation**: npm test -- error-envelope ✅ (10/10), tsc --noEmit ✅, eslint ✅
+- **Branch**: `feature/t006-error-envelope`
+- **Next**: T007
+
 ## On-Message Git Check
 Every time the user sends a message, run `git status --short` to detect any changes since last session. If changes exist, log them to the audit log and commit log. Keep local files in sync.
 
