@@ -8,3 +8,19 @@ datasource db {
   url               = env("DATABASE_URL")
   schemas           = ["sim_system"]
 }
+
+model IdempotencyRecord {
+  id             String   @id @default(uuid())
+  key            String   @unique @map("scoped_key")
+  method         String
+  route          String
+  actor          String
+  requestHash    String?  @map("request_hash")
+  responseBody   Json?    @map("response_body")
+  responseStatus Int      @map("response_status")
+  createdAt      DateTime @default(now()) @map("created_at")
+  expiredAt      DateTime? @map("expired_at")
+
+  @@map("idempotency_records")
+  @@schema("sim_system")
+}
