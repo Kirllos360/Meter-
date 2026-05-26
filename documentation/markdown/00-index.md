@@ -36,7 +36,7 @@ documentation/
 | **10** | **Progress & Health Report** | `10-progress-health-report.md` | — | `10-progress-health-report.txt` | — | `10-progress-health-report.pdf` |
 | **11** | **Email Report Log** | `11-email-report-log.md` | — | `11-email-report-log.txt` | `11-email-report-log.csv` | `11-email-report-log.pdf` |
 | **12** | **T002-T003 Verification** | `12-T002-T003-verification-report.md` | — | — | — | — |
-| **13** | **Validation Reports** | `13-T001-validation-report.md`<br>`13-T002-validation-report.md`<br>`13-T003-validation-report.md`<br>`13-T004-validation-report.md`<br>`13-T005-validation-report.md`<br>`13-T006-validation-report.md` | `13-T001-validation-report.sql`<br>`13-T002-validation-report.sql`<br>`13-T003-validation-report.sql`<br>`13-T004-validation-report.sql`<br>`13-T005-validation-report.sql`<br>`13-T006-validation-report.sql` | `13-T001-validation-report.txt`<br>`13-T002-validation-report.txt`<br>`13-T003-validation-report.txt`<br>`13-T004-validation-report.txt`<br>`13-T005-validation-report.txt`<br>`13-T006-validation-report.txt` | `13-T001-validation-report.csv`<br>`13-T002-validation-report.csv`<br>`13-T003-validation-report.csv`<br>`13-T004-validation-report.csv`<br>`13-T005-validation-report.csv`<br>`13-T006-validation-report.csv` | `13-T001-validation-report.pdf`<br>`13-T002-validation-report.pdf`<br>`13-T003-validation-report.pdf`<br>`13-T004-validation-report.pdf`<br>`13-T005-validation-report.pdf`<br>`13-T006-validation-report.pdf` |
+| **14** | **Session Summary** | `14-session-summary-2026-05-26.md` | — | — | — | — |<br>`13-T002-validation-report.md`<br>`13-T003-validation-report.md`<br>`13-T004-validation-report.md`<br>`13-T005-validation-report.md`<br>`13-T006-validation-report.md` | `13-T001-validation-report.sql`<br>`13-T002-validation-report.sql`<br>`13-T003-validation-report.sql`<br>`13-T004-validation-report.sql`<br>`13-T005-validation-report.sql`<br>`13-T006-validation-report.sql` | `13-T001-validation-report.txt`<br>`13-T002-validation-report.txt`<br>`13-T003-validation-report.txt`<br>`13-T004-validation-report.txt`<br>`13-T005-validation-report.txt`<br>`13-T006-validation-report.txt` | `13-T001-validation-report.csv`<br>`13-T002-validation-report.csv`<br>`13-T003-validation-report.csv`<br>`13-T004-validation-report.csv`<br>`13-T005-validation-report.csv`<br>`13-T006-validation-report.csv` | `13-T001-validation-report.pdf`<br>`13-T002-validation-report.pdf`<br>`13-T003-validation-report.pdf`<br>`13-T004-validation-report.pdf`<br>`13-T005-validation-report.pdf`<br>`13-T006-validation-report.pdf` |
 
 ---
 
@@ -56,6 +56,7 @@ documentation/
 | `10-progress-health-report.md` | System health check, task progress %, feedback, and recommendations |
 | `11-email-report-log.md` | Log of all email reports sent — dates, subjects, recipients |
 | `12-T002-T003-verification-report.md` | T002+T003 pre-T004 verification report |
+| `14-session-summary-2026-05-26.md` | Full session summary for context recovery in new sessions |
 | `13-T001-validation-report.md` | T001 validation: NestJS scaffold checks (8 tests) |
 | `13-T002-validation-report.md` | T002 validation: config + PostgreSQL checks (7 tests) |
 | `13-T003-validation-report.md` | T003 validation: lint/format/test tooling checks (5 tests) |
@@ -153,7 +154,7 @@ documentation/
 ├── markdown/03-database-schema-overview.md ← Data model reference
 ├── markdown/05-programming-languages.md  ← Tech stack
 ├── markdown/06-github-packages-needed.md ← GitHub tools
-├── markdown/13-T00*-validation-report.md ← T001-T006 validation reports
+├── markdown/14-session-summary-2026-05-26.md ← Full session context
 ├── markdown/12-T002-T003-verification-report.md ← Pre-T004 verification
 │
 ├── sql/03-database-schema.sql     ← PostgreSQL DDL (20 tables)
