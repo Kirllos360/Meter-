@@ -74,7 +74,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd backend && npm run lint && npm test`
   - **Risk**: ESLint/TS version mismatch breaking CI; align with frontend toolchain versions.
 
-- [ ] T004 [P] Initialize Prisma ORM in `backend/prisma/`
+- [X] T004 [P] Initialize Prisma ORM in `backend/prisma/`
   - **Dependencies**: T002
   - **Area/Files**: `backend/prisma/schema.prisma` (datasource + generator only), `backend/src/common/database/prisma.service.ts`
   - **Acceptance**: `prisma generate` succeeds; `PrismaService` injectable; `multiSchema`/`sim_system` schema configured
