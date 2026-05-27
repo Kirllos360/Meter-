@@ -14,23 +14,6 @@ CREATE TYPE "sim_status" AS ENUM ('available', 'assigned', 'active', 'suspended'
 CREATE TYPE "assignment_status" AS ENUM ('active', 'ended');
 
 -- CreateTable
-CREATE TABLE "audit_log" (
-    "id" TEXT NOT NULL,
-    "actor_id" TEXT NOT NULL,
-    "actor_role" TEXT NOT NULL,
-    "action" TEXT NOT NULL,
-    "resource_type" TEXT NOT NULL,
-    "resource_id" TEXT NOT NULL,
-    "before_state" JSONB,
-    "after_state" JSONB,
-    "reason" TEXT,
-    "correlation_id" TEXT,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "audit_log_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "meters" (
     "id" TEXT NOT NULL,
     "serial_number" TEXT NOT NULL,
