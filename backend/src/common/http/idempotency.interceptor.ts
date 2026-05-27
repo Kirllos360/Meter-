@@ -3,6 +3,7 @@ import {
   NestInterceptor,
   ExecutionContext,
   CallHandler,
+  Logger,
 } from '@nestjs/common';
 import { Observable, from, of } from 'rxjs';
 import { switchMap, catchError, map } from 'rxjs/operators';
@@ -14,6 +15,7 @@ const UNIQUE_CONSTRAINT_CODE = 'P2002';
 
 @Injectable()
 export class IdempotencyInterceptor implements NestInterceptor {
+  private readonly logger = new Logger(IdempotencyInterceptor.name);
   private readonly mutationMethods = ['POST', 'PUT', 'PATCH', 'DELETE'];
 
   constructor(private readonly prisma: PrismaService) {}
@@ -46,7 +48,10 @@ export class IdempotencyInterceptor implements NestInterceptor {
         }
         return this.executeAndCache(scopedKey, request, response, next);
       }),
-      catchError(() => next.handle()),
+      catchError((err) => {
+        this.logger.error(`Idempotency check failed: ${err}`);
+        return next.handle();
+      }),
     );
   }
 
@@ -113,6 +118,7 @@ export class IdempotencyInterceptor implements NestInterceptor {
           responseBody: existing.responseBody,
         };
       }
+      this.logger.error(`Idempotency cache failed: ${err instanceof Error ? err.message : String(err)}`);
       return null;
     }
   }
