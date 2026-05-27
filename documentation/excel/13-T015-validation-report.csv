@@ -1,0 +1,17 @@
+Model,Table,Uniqueness,Key Feature,Precision
+Reading,readings,(meter_id,reading_at,source),raw_payload JSONB,DECIMAL(12,3)
+ReadingReview,reading_reviews,,review_action enum,
+TariffPlan,tariff_plans,,MeterType ref,DECIMAL(12,3)
+BillingPeriod,billing_periods,(project_id,period_code),lifecycle status,
+
+Validation,Result
+prisma validate,PASS
+prisma migrate status,PASS
+prisma generate,PASS
+npm run build,PASS
+npm test 69/69,PASS
+unique(meter_id,reading_at,source),PASS
+unique(project_id,period_code),PASS
+JSONB raw_payload,PASS
+DECIMAL(12,3) precision,PASS
+No duplicate DDL,PASS

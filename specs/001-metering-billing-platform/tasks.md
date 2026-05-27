@@ -112,28 +112,28 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd backend && npm test -- correlation`
   - **Risk**: Missing correlation IDs undermine audit traceability (FR-016).
 
-- [ ] T008 [P] Add Idempotency-Key interceptor in `backend/src/common/http/idempotency.interceptor.ts`
+- [X] T008 [P] Add Idempotency-Key interceptor in `backend/src/common/http/idempotency.interceptor.ts`
   - **Dependencies**: T002, T004
   - **Area/Files**: `backend/src/common/http/idempotency.interceptor.ts`, idempotency-key store table in `backend/prisma/schema.prisma`
   - **Acceptance**: Repeat mutation with same `Idempotency-Key` returns the original result without double-applying
   - **Validation**: `cd backend && npm test -- idempotency`
   - **Risk**: Incorrect keying double-bills/double-assigns; scope keys per route+actor.
 
-- [ ] T009 Implement Auth (JWT) + RBAC guard + role model in `backend/src/auth/`
+- [X] T009 Implement Auth (JWT) + RBAC guard + role model in `backend/src/auth/`
   - **Dependencies**: T002, T004
   - **Area/Files**: `backend/src/auth/auth.module.ts`, `backend/src/auth/jwt.strategy.ts`, `backend/src/auth/roles.guard.ts`, `backend/src/auth/roles.decorator.ts`
   - **Acceptance**: Roles `super_admin, project_admin, operator, technician, finance, support, customer` enforced at route + action level; project-scope claim respected (FR-015); all DTO request validation uses `class-validator` pipes (per research Decision 13)
   - **Validation**: `cd backend && npm test -- auth roles.guard`
   - **Risk**: Role names must match frontend `src/lib/navigation.ts`; mismatch breaks gating.
 
-- [ ] T010 [P] Implement append-only audit log service + interceptor in `backend/src/audit/`
+- [X] T010 [P] Implement append-only audit log service + interceptor in `backend/src/audit/`
   - **Dependencies**: T004, T007
   - **Area/Files**: `backend/src/audit/audit.service.ts`, `backend/src/audit/audit.interceptor.ts`
   - **Acceptance**: Sensitive actions write an `AuditLog` row (actor, role, action, resource, before/after, reason, correlationId); writes are append-only (FR-016)
   - **Validation**: `cd backend && npm test -- audit`
   - **Risk**: Missing before/after snapshots reduce dispute defensibility; capture both states in interceptor.
 
-- [ ] T011 Wire API versioning `/api/v1`, base routing, and OpenAPI serving in `backend/src/main.ts`
+- [X] T011 Wire API versioning `/api/v1`, base routing, and OpenAPI serving in `backend/src/main.ts`
   - **Dependencies**: T001, T006
   - **Area/Files**: `backend/src/main.ts`, `backend/src/common/openapi/openapi.setup.ts`
   - **Acceptance**: All routes mount under `/api/v1`; generated OpenAPI doc served at `/api/v1/docs`
@@ -141,6 +141,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Risk**: Generated spec diverging from `meter-pulse-api.yaml`; reconcile in T083.
 
 - [ ] T012 Build contract-test harness against `meter-pulse-api.yaml` in `backend/test/contract/`
+  - **Note**: Code exists on stale `feature/t012-contract-harness` branch; needs fresh branch from `abady/main`
   - **Dependencies**: T011
   - **Area/Files**: `backend/test/contract/setup.ts` (supertest app bootstrap + OpenAPI response validator loading `specs/001-metering-billing-platform/contracts/meter-pulse-api.yaml`)
   - **Acceptance**: Harness can assert any response against a schema/operationId from the YAML; one smoke assertion passes
@@ -149,14 +150,14 @@ A frontend task is not "started" until its `graphify query` has been run and its
 
 ### PostgreSQL schema/migrations (all data-model entities)
 
-- [ ] T013 [P] Migration — Project, LocationNode, Customer, CustomerUnitAssignment in `backend/prisma/`
+- [X] T013 [P] Migration — Project, LocationNode, Customer, CustomerUnitAssignment in `backend/prisma/`
   - **Dependencies**: T004
   - **Area/Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_core_org/`
   - **Acceptance**: Tables created with enums + `(project_id,node_type,code)` uniqueness and one-active-row-per `(customer_id,unit_id)` partial unique where `end_at IS NULL`; Project includes `tax_enabled`/`tax_rate`/`reading_threshold_profile_id`/`water_difference_mode` columns
   - **Validation**: `cd backend && npx prisma migrate dev --name core_org && npx prisma migrate status`
   - **Risk**: Hierarchy self-FK on LocationNode; ensure `parent_id` nullable + indexed.
 
-- [ ] T014 [P] Migration — Meter, SIMCard, MeterAssignment, SIMAssignment in `backend/prisma/`
+- [X] T014 [P] Migration — Meter, SIMCard, MeterAssignment, SIMAssignment in `backend/prisma/`
   - **Dependencies**: T013
   - **Area/Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_meter_sim/`
   - **Acceptance**: Unique `serial_number`, unique `iccid`; **partial unique index on `(meter_id) WHERE end_at IS NULL`** and **`(sim_id) WHERE end_at IS NULL`** (FR-004/FR-005); `parent_main_meter_id` required for `water_child`

@@ -36,7 +36,8 @@ documentation/
 | **10** | **Progress & Health Report** | `10-progress-health-report.md` | — | `10-progress-health-report.txt` | — | `10-progress-health-report.pdf` |
 | **11** | **Email Report Log** | `11-email-report-log.md` | — | `11-email-report-log.txt` | `11-email-report-log.csv` | `11-email-report-log.pdf` |
 | **12** | **T002-T003 Verification** | `12-T002-T003-verification-report.md` | — | — | — | — |
-| **13** | **Validation Reports** | `13-T001-validation-report.md`<br>`13-T002-validation-report.md`<br>`13-T003-validation-report.md`<br>`13-T004-validation-report.md`<br>`13-T009-validation-report.md`<br>`13-T010-validation-report.md`<br>`13-T011-validation-report.md` | `13-T001-validation-report.sql`<br>`13-T002-validation-report.sql`<br>`13-T003-validation-report.sql`<br>`13-T004-validation-report.sql`<br>`13-T009-validation-report.sql`<br>`13-T010-validation-report.sql`<br>`13-T011-validation-report.sql` | `13-T001-validation-report.txt`<br>`13-T002-validation-report.txt`<br>`13-T003-validation-report.txt`<br>`13-T004-validation-report.txt`<br>`13-T009-validation-report.txt`<br>`13-T010-validation-report.txt`<br>`13-T011-validation-report.txt` | `13-T001-validation-report.csv`<br>`13-T002-validation-report.csv`<br>`13-T003-validation-report.csv`<br>`13-T004-validation-report.csv`<br>`13-T009-validation-report.csv`<br>`13-T010-validation-report.csv`<br>`13-T011-validation-report.csv` | `13-T001-validation-report.pdf`<br>`13-T002-validation-report.pdf`<br>`13-T003-validation-report.pdf`<br>`13-T004-validation-report.pdf` |
+| **13** | **Validation Reports** | `13-T001-validation-report.md` | `13-T001-validation-report.sql` | `13-T001-validation-report.txt` | `13-T001-validation-report.csv` | `13-T001-validation-report.pdf` |
+| **15** | **AI Handoff Memory** | `15-ai-handoff-memory.md` | — | — | — | — |
 
 ---
 
@@ -60,6 +61,7 @@ documentation/
 | `13-T002-validation-report.md` | T002 validation: config + PostgreSQL checks (7 tests) |
 | `13-T003-validation-report.md` | T003 validation: lint/format/test tooling checks (5 tests) |
 | `13-T004-validation-report.md` | T004 validation: Prisma ORM checks (8 tests) |
+| `15-ai-handoff-memory.md` | AI handoff memory — full project state, errors, architecture, branch map |
 
 ### `sql/` — Database Definition
 
@@ -70,6 +72,7 @@ documentation/
 | `13-T002-validation-report.sql` | T002 validation SQL queries |
 | `13-T003-validation-report.sql` | T003 validation SQL queries |
 | `13-T004-validation-report.sql` | T004 validation SQL queries |
+| `13-T015-validation-report.sql` | T015 validation SQL queries |
 
 ### `text/` — Plain Text (terminal, grep, scripts)
 
@@ -88,6 +91,7 @@ documentation/
 | `13-T002-validation-report.txt` | T002 validation plain text |
 | `13-T003-validation-report.txt` | T003 validation plain text |
 | `13-T004-validation-report.txt` | T004 validation plain text |
+| `13-T015-validation-report.txt` | T015 validation plain text |
 | `07-github-packages-needed.txt` | Compact GitHub packages (original) |
 | `08-required-apps.txt` | All required applications (original) |
 
@@ -108,6 +112,7 @@ documentation/
 | `13-T002-validation-report.csv` | T002 validation tabular |
 | `13-T003-validation-report.csv` | T003 validation tabular |
 | `13-T004-validation-report.csv` | T004 validation tabular |
+| `13-T015-validation-report.csv` | T015 validation tabular |
 
 ### `pdf/` — Printable Documents (reports, printing)
 

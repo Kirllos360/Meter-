@@ -1,612 +1,612 @@
 {
-  "/home/abady/Downloads/09/Frontend/tsconfig.json": {
-    "mtime": 1779702698.0,
-    "ast_hash": "f22272b2d73081c86e26ecb388faff25",
+  "D:\\meter\\Meter-\\Frontend\\components.json": {
+    "mtime": 1779718058.7243974,
+    "ast_hash": "b609adc940ff52f0265e637c5422e217",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/eslint.config.mjs": {
-    "mtime": 1778580365.0,
-    "ast_hash": "ac19e4b067f4dbcde9ae67db96106680",
+  "D:\\meter\\Meter-\\Frontend\\eslint.config.mjs": {
+    "mtime": 1779718058.7253973,
+    "ast_hash": "f6641f8e1046b884a5b71309b994ee2d",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/postcss.config.mjs": {
-    "mtime": 1778580365.0,
-    "ast_hash": "675899342e765a4d16acd75a53389101",
+  "D:\\meter\\Meter-\\Frontend\\next.config.ts": {
+    "mtime": 1779718058.7413971,
+    "ast_hash": "6f92f75889768e631270eea23a341ffe",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/package.json": {
-    "mtime": 1779708170.9361072,
-    "ast_hash": "60bed4579d57e2b5f91d1a02c791bfbb",
+  "D:\\meter\\Meter-\\Frontend\\package.json": {
+    "mtime": 1779718058.7413971,
+    "ast_hash": "877e91ac49725202d930aed2b845965f",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/next.config.ts": {
-    "mtime": 1778580365.0,
-    "ast_hash": "a0f6d5f34e18c65b3b5ea4280a73286e",
+  "D:\\meter\\Meter-\\Frontend\\postcss.config.mjs": {
+    "mtime": 1779718058.742397,
+    "ast_hash": "0a8c5fa8885965eb3d71ee945ff2e9be",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/tailwind.config.ts": {
-    "mtime": 1778580366.0,
-    "ast_hash": "d8540179b01d61e5116ad3e288a21207",
+  "D:\\meter\\Meter-\\Frontend\\tailwind.config.ts": {
+    "mtime": 1779718058.7854915,
+    "ast_hash": "773b4b51ff9df772577cfa25e1e9ee8e",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/components.json": {
-    "mtime": 1778580365.0,
-    "ast_hash": "44a51b28bb75baa05a3557e6a612c0ed",
+  "D:\\meter\\Meter-\\Frontend\\tsconfig.json": {
+    "mtime": 1779718058.7854915,
+    "ast_hash": "980ee54ca57ec40c5e9d86633d6078d6",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/.zscripts/mini-services-install.sh": {
-    "mtime": 1778580364.0,
-    "ast_hash": "0c1796293ee7a35615930db861987c91",
+  "D:\\meter\\Meter-\\Frontend\\.opencode\\opencode.json": {
+    "mtime": 1779718058.716398,
+    "ast_hash": "f2ae21510d07365eb2bce8159272c7a0",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/.zscripts/start.sh": {
-    "mtime": 1778580365.0,
-    "ast_hash": "d729606f02f26d32949c445b54b23f57",
+  "D:\\meter\\Meter-\\Frontend\\.opencode\\plugins\\graphify.js": {
+    "mtime": 1779718058.7173984,
+    "ast_hash": "32b67963417a30cb80544e0b2a56a98d",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/.zscripts/build.sh": {
-    "mtime": 1778580364.0,
-    "ast_hash": "020c91b48659ec19832ebf9b46195285",
+  "D:\\meter\\Meter-\\Frontend\\.zscripts\\build.sh": {
+    "mtime": 1779718058.7183988,
+    "ast_hash": "6eeddf0a006d0a3231d9cacdc691d479",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/.zscripts/mini-services-start.sh": {
-    "mtime": 1778580365.0,
-    "ast_hash": "41884a489d1c760ab740528862e32753",
+  "D:\\meter\\Meter-\\Frontend\\.zscripts\\dev.sh": {
+    "mtime": 1779718058.7183988,
+    "ast_hash": "6923188e8c9df69bd90c55fc80bfcdac",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/.zscripts/mini-services-build.sh": {
-    "mtime": 1778580364.0,
-    "ast_hash": "09b913012e021bd85af4effa673afdb1",
+  "D:\\meter\\Meter-\\Frontend\\.zscripts\\mini-services-build.sh": {
+    "mtime": 1779718058.7183988,
+    "ast_hash": "1032365f227ab51c1a1605421b7e0fc1",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/.zscripts/dev.sh": {
-    "mtime": 1778580364.0,
-    "ast_hash": "df4ff7f2700c6c362271d3b0f1c489b4",
+  "D:\\meter\\Meter-\\Frontend\\.zscripts\\mini-services-install.sh": {
+    "mtime": 1779718058.7194004,
+    "ast_hash": "93e7ba96ff1e3e8f1de5a526c778e821",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/.opencode/opencode.json": {
-    "mtime": 1779708971.3806968,
-    "ast_hash": "abcc8b9dcd80bca5f9dde6d9f0c3ae79",
+  "D:\\meter\\Meter-\\Frontend\\.zscripts\\mini-services-start.sh": {
+    "mtime": 1779718058.7194004,
+    "ast_hash": "69aec1a0b654b383b902a245b86d5407",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/.opencode/plugins/graphify.js": {
-    "mtime": 1779708971.3804336,
-    "ast_hash": "64ccd3c03dbfe0980b6095766f5c4e52",
+  "D:\\meter\\Meter-\\Frontend\\.zscripts\\start.sh": {
+    "mtime": 1779718058.7194004,
+    "ast_hash": "a0771931dc6e12ca6a773adf413f4b3e",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/examples/websocket/server.ts": {
-    "mtime": 1778580365.0,
-    "ast_hash": "3ba2a5fee765ca07de02ad0c3be5a437",
+  "D:\\meter\\Meter-\\Frontend\\examples\\websocket\\frontend.tsx": {
+    "mtime": 1779718058.7253973,
+    "ast_hash": "32699c6f458f25f99a438b7bf5724c28",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/examples/websocket/frontend.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "fc591eee23eeb8fa123d22cc5083466d",
+  "D:\\meter\\Meter-\\Frontend\\examples\\websocket\\server.ts": {
+    "mtime": 1779718058.7263963,
+    "ast_hash": "fba07f902fc84ec947184a099739c2e4",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/scripts/smoke-all-pages.mjs": {
-    "mtime": 1779708179.9417515,
-    "ast_hash": "bc8b4b591672a1db320fcdeb6e03ab50",
+  "D:\\meter\\Meter-\\Frontend\\scripts\\smoke-all-pages.mjs": {
+    "mtime": 1779718058.7443984,
+    "ast_hash": "25371016a8b94201634196352efc01cf",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/hooks/use-toast.ts": {
-    "mtime": 1778580366.0,
-    "ast_hash": "9ba64fc4134b167b51e5e1070a510a00",
+  "D:\\meter\\Meter-\\Frontend\\src\\app\\layout.tsx": {
+    "mtime": 1779718058.7473967,
+    "ast_hash": "cc847a7aed842df693da3bb89b02fa39",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/hooks/use-mobile.ts": {
-    "mtime": 1778580366.0,
-    "ast_hash": "209b5193af16624cdd89d3591480dd48",
+  "D:\\meter\\Meter-\\Frontend\\src\\app\\page.tsx": {
+    "mtime": 1779718058.7473967,
+    "ast_hash": "09c7019bc937b623073bc0b357d8b4f1",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/lib/utils.ts": {
-    "mtime": 1778580366.0,
-    "ast_hash": "5a6fd53fdcf2be529e9cc0b718fde352",
+  "D:\\meter\\Meter-\\Frontend\\src\\app\\api\\route.ts": {
+    "mtime": 1779718058.7453985,
+    "ast_hash": "7757df45634fbc4e3ef174d7a895573b",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/lib/router-store.ts": {
-    "mtime": 1779705155.0,
-    "ast_hash": "ec9ae03cff57ec9fe2477f7cbeae3bb8",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\alerts\\AlertsPage.tsx": {
+    "mtime": 1779718058.7484076,
+    "ast_hash": "1c526a95d2ef7a1a576c48a3ae6f3ade",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/lib/types.ts": {
-    "mtime": 1779702839.0,
-    "ast_hash": "717998f66e75145f237de761b9fb970c",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\billing\\BalancesPage.tsx": {
+    "mtime": 1779718058.7484076,
+    "ast_hash": "0dd82e5801e3037365eaca2c9b977151",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/lib/mock-data.ts": {
-    "mtime": 1779705102.0,
-    "ast_hash": "1fa94969615eff564ae006a3feb5529b",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\billing\\ConsumptionPage.tsx": {
+    "mtime": 1779718058.7484076,
+    "ast_hash": "0f476af76aace4de24580b00adf71c52",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/lib/mock-auth.ts": {
-    "mtime": 1779703310.0,
-    "ast_hash": "c8642435247ae730da9abd8e455cd079",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\billing\\InvoiceDetailPage.tsx": {
+    "mtime": 1779718058.749408,
+    "ast_hash": "d4f96157e5032c2f2dcc8216acbdd725",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/lib/navigation.ts": {
-    "mtime": 1779703405.0,
-    "ast_hash": "efad1c639ed58c74f1eab6aa97aea352",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\billing\\InvoicesPage.tsx": {
+    "mtime": 1779718058.749408,
+    "ast_hash": "758c90d0c70351182905669d97139779",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/lib/db.ts": {
-    "mtime": 1778580366.0,
-    "ast_hash": "91eb0a5e8e2f120bf0913d91d1a82ecd",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\billing\\PaymentsPage.tsx": {
+    "mtime": 1779718058.749408,
+    "ast_hash": "582308d02ac2aa7ae4303b0e3cb818f0",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/projects/ProjectDetailPage.tsx": {
-    "mtime": 1779705701.0,
-    "ast_hash": "943bd40f4583af34679ba6f1c15d47ac",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\billing\\WaterBalancePage.tsx": {
+    "mtime": 1779718058.7504053,
+    "ast_hash": "81e9b8f6145d7921f8f19aeacc5f3802",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/projects/LocationsPage.tsx": {
-    "mtime": 1779705740.0,
-    "ast_hash": "221c49abf225e61aaad1392bb2ed3cc7",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\customers\\CustomerDetailPage.tsx": {
+    "mtime": 1779718058.751425,
+    "ast_hash": "3387a9ce4536ecf8684c807db4b81c65",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/projects/ProjectsPage.tsx": {
-    "mtime": 1779705617.0,
-    "ast_hash": "a9f8b4f53677133e5cb9d489110da5c4",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\customers\\CustomersPage.tsx": {
+    "mtime": 1779718058.751425,
+    "ast_hash": "f03e402c16a898ba9ee6b52f4d048d70",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/layout/AppSidebar.tsx": {
-    "mtime": 1779707487.8655326,
-    "ast_hash": "b395d76b546fbf81726bfa08dfeba733",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\dashboard\\DashboardPage.tsx": {
+    "mtime": 1779718058.752458,
+    "ast_hash": "b04e4d6056a060cdfd0a3d8cbdfedba6",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/layout/PagePlaceholder.tsx": {
-    "mtime": 1779705459.0,
-    "ast_hash": "71e99f19fc9ebd3618510f4b6e73f31d",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\layout\\AppShell.tsx": {
+    "mtime": 1779718058.7534804,
+    "ast_hash": "0bb00f9774028b8afe667f40dde62814",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/layout/RoleSwitcher.tsx": {
-    "mtime": 1779705479.0,
-    "ast_hash": "9e74984e0626f5b231f2023ff5d0a8a7",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\layout\\AppSidebar.tsx": {
+    "mtime": 1779718058.7534804,
+    "ast_hash": "d3f440002d297ba273cea11e86a5f73b",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/layout/ThemeProvider.tsx": {
-    "mtime": 1779705182.0,
-    "ast_hash": "1cbd6d46962821685404cfcdc8c4e802",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\layout\\LoginPage.tsx": {
+    "mtime": 1779718058.7544446,
+    "ast_hash": "5c3725dcc4eb1772624555360e162c58",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/layout/TopNav.tsx": {
-    "mtime": 1779705538.0,
-    "ast_hash": "543cedc27c61fd16e0539e3dfb26c640",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\layout\\PageHeader.tsx": {
+    "mtime": 1779718058.7544446,
+    "ast_hash": "f7d3b5319ca9e7d1b623e67d9ad5ce22",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/layout/AppShell.tsx": {
-    "mtime": 1779706885.0,
-    "ast_hash": "b2634606554e0cca87a8979238ad4c89",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\layout\\PagePlaceholder.tsx": {
+    "mtime": 1779718058.7554433,
+    "ast_hash": "0f731ced67b287681ee5ed7975abaab0",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/layout/PageHeader.tsx": {
-    "mtime": 1779705437.0,
-    "ast_hash": "15e6d5e4b14051e40e6907a59376d1a8",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\layout\\RoleSwitcher.tsx": {
+    "mtime": 1779718058.7554433,
+    "ast_hash": "b5a0c67c30732bffdabe2d38c3a36c7d",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/layout/LoginPage.tsx": {
-    "mtime": 1779707764.235445,
-    "ast_hash": "5f8efa3f2be1828d69b256f7143bad13",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\layout\\ThemeProvider.tsx": {
+    "mtime": 1779718058.7554433,
+    "ast_hash": "56c3e6e17cb292827a15e4fb9b5549f8",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/meters/MeterTerminatePage.tsx": {
-    "mtime": 1779706118.0,
-    "ast_hash": "34df0a44b5cc69397a5c2c13029392a8",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\layout\\TopNav.tsx": {
+    "mtime": 1779718058.756433,
+    "ast_hash": "11553464036306d852512b38dcbf25cd",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/meters/MeterAssignPage.tsx": {
-    "mtime": 1779706764.0,
-    "ast_hash": "84a8d12af6423fae1e1b20dff5d84e91",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\meters\\MeterAssignPage.tsx": {
+    "mtime": 1779718058.756433,
+    "ast_hash": "7070ad57125554c3cccacfbfaf494716",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/meters/MeterDetailPage.tsx": {
-    "mtime": 1779705915.0,
-    "ast_hash": "25318cb047aefcf978d108c1010c251a",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\meters\\MeterDetailPage.tsx": {
+    "mtime": 1779718058.756433,
+    "ast_hash": "167eae679f8d2e22cce1284519569ca5",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/meters/MetersPage.tsx": {
-    "mtime": 1779705864.0,
-    "ast_hash": "9a242aa2aa3d6bd74ee652de43ff571a",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\meters\\MeterReplacePage.tsx": {
+    "mtime": 1779718058.7574327,
+    "ast_hash": "188a85768efd2873c77b3f5a68dacd19",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/meters/MeterReplacePage.tsx": {
-    "mtime": 1779706067.0,
-    "ast_hash": "0930b8947cf76878d2bff8fec00f21d5",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\meters\\MetersPage.tsx": {
+    "mtime": 1779718058.7574327,
+    "ast_hash": "7bc95b34efdc7800d4f333040cff2bbb",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/alerts/AlertsPage.tsx": {
-    "mtime": 1779706513.0,
-    "ast_hash": "38670d6ac06cc56c77c6f787a08e218f",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\meters\\MeterTerminatePage.tsx": {
+    "mtime": 1779718058.7574327,
+    "ast_hash": "ecb8492a106c02420ee17325138b0669",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/alert-dialog.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "0a52d56b575340a3297c172f22d797ae",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\projects\\LocationsPage.tsx": {
+    "mtime": 1779718058.7584326,
+    "ast_hash": "2571745355a3628723b01ae8e18f4c06",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/collapsible.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "3280feca735918afc1e61fa59ba6e3f3",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\projects\\ProjectDetailPage.tsx": {
+    "mtime": 1779718058.7584326,
+    "ast_hash": "238bd4bb99c3896cad5475bb652e5e78",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/dialog.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "48a74bc4e6b2a9609c91582cae95730f",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\projects\\ProjectsPage.tsx": {
+    "mtime": 1779718058.7584326,
+    "ast_hash": "410b59805d9d9a5f355287e36e617f77",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/sidebar.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "9e981c1011ccf51eca1f6cb20fa599fd",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\readings\\ReadingNewPage.tsx": {
+    "mtime": 1779718058.7594378,
+    "ast_hash": "384103c3c41731c311ad5823a85254be",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/button.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "7cf5063b66e3ea629115772120bc57e7",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\readings\\ReadingsPage.tsx": {
+    "mtime": 1779718058.7594378,
+    "ast_hash": "0a0714377f007b76b0ad5e1f6d271f3d",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/chart.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "79030ea8a0db990faf5a06180d40b274",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\reports\\ReportsPage.tsx": {
+    "mtime": 1779718058.7614353,
+    "ast_hash": "db1e525eb264c3b9a765f8507fc4c0d4",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/progress.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "d0578ee4fb52d86376172c83fb67a9ba",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\reports\\SettingsPage.tsx": {
+    "mtime": 1779718058.7614353,
+    "ast_hash": "06cea61558c94f61e23bd54b08deb503",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/sonner.tsx": {
-    "mtime": 1778580366.0,
-    "ast_hash": "6ea1f5a74a5c8a3463d405fcd3099771",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\shared\\PageHelpers.tsx": {
+    "mtime": 1779718058.762435,
+    "ast_hash": "fe73bdfdf391c4bf2aac7c7e5fc20e26",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/aspect-ratio.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "be7a9b030095db724fb3d9ca4e62293c",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\shared\\StatusBadge.tsx": {
+    "mtime": 1779718058.7634342,
+    "ast_hash": "8c218db19663b992933c99db613a4ac7",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/pagination.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "c00a637aa821284c8d400e2b84003e31",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\sim-cards\\SimCardsPage.tsx": {
+    "mtime": 1779718058.7634342,
+    "ast_hash": "ea33869586b40402302fefcd010f2b4c",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/hover-card.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "a1010352934f4cdf860caa32491a3706",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\smart-table\\SmartTable.tsx": {
+    "mtime": 1779718058.764447,
+    "ast_hash": "c1f605961d1fe4ca635c49202469b4b1",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/tooltip.tsx": {
-    "mtime": 1778580366.0,
-    "ast_hash": "9f753bf8201bd05dae554f6808586391",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\tickets\\SupportPage.tsx": {
+    "mtime": 1779718058.764447,
+    "ast_hash": "0a3915542c469ceddc4c33f9774767cd",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/label.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "14f124762142b39a666ce10d3b42d28c",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\tickets\\TicketsPage.tsx": {
+    "mtime": 1779718058.765439,
+    "ast_hash": "22a0a9c5129feba1e8ae9e01a86bb1d7",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/separator.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "07b35dc35f811b26a1ee3982582ba9fb",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\accordion.tsx": {
+    "mtime": 1779718058.765439,
+    "ast_hash": "9acd8f651844143bd32aa3f4ebdd8498",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/badge.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "8162fc70aeb50791309f57f8f845d533",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\alert-dialog.tsx": {
+    "mtime": 1779718058.7664385,
+    "ast_hash": "96289b446b05be92f5fa68a99489c908",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/tabs.tsx": {
-    "mtime": 1778580366.0,
-    "ast_hash": "65854b541abbc3c9f39cb075d4cb43ca",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\alert.tsx": {
+    "mtime": 1779718058.7664385,
+    "ast_hash": "60a1358bb82344b005cea0eca2cbf275",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/switch.tsx": {
-    "mtime": 1778580366.0,
-    "ast_hash": "f93349e0eb061fc4e6c055ded4cff087",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\aspect-ratio.tsx": {
+    "mtime": 1779718058.7664385,
+    "ast_hash": "dcb189013ec808fefffceed9f15bcc3b",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/card.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "a1468e2e35dfde14b63b4308cd20d2c2",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\avatar.tsx": {
+    "mtime": 1779718058.7664385,
+    "ast_hash": "dfe8c1ef8f73aa7f91230c14a4a21b71",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/toggle.tsx": {
-    "mtime": 1778580366.0,
-    "ast_hash": "df65c0dfce4225ad57a1901b01580f54",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\badge.tsx": {
+    "mtime": 1779718058.767486,
+    "ast_hash": "b18d5e3e077aac3937008f6f09eb12d9",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/avatar.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "19bc4411b724fb504c65550b61a453b1",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\breadcrumb.tsx": {
+    "mtime": 1779718058.767486,
+    "ast_hash": "908958673b534e7ab8af02a47d450bf3",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/skeleton.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "ee5017bac14efeda715feaceb488382a",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\button.tsx": {
+    "mtime": 1779718058.767486,
+    "ast_hash": "ec47dd35a37fd626e7911239dedf5f18",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/toggle-group.tsx": {
-    "mtime": 1778580366.0,
-    "ast_hash": "a68b5be2c6b0ce6526a95d195b448810",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\calendar.tsx": {
+    "mtime": 1779718058.7684834,
+    "ast_hash": "4be1da833b44c7bbe86a3538d2bd0b9e",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/radio-group.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "42634c5e24aebafa3f4ce9c91960dbfe",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\card.tsx": {
+    "mtime": 1779718058.7684834,
+    "ast_hash": "486b4175c685923e8ace5592259f93c4",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/calendar.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "92c5e0827022c5fc482a151e58467cee",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\carousel.tsx": {
+    "mtime": 1779718058.7684834,
+    "ast_hash": "61511ca1762ddf6b333c382a4e921c52",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/toast.tsx": {
-    "mtime": 1778580366.0,
-    "ast_hash": "5bd1197d5cb25b2a6ca592850f0d8062",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\chart.tsx": {
+    "mtime": 1779718058.7694836,
+    "ast_hash": "08b75566d66e68af949d1cfbc3a9a632",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/input-otp.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "2598c4a03345f4d67397f90c3fbbaddb",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\checkbox.tsx": {
+    "mtime": 1779718058.7694836,
+    "ast_hash": "d2a583d1dcaf06dcf1ef6d83430f620f",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/menubar.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "f3836779da2e4f6a90dd7f2755f4c61e",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\collapsible.tsx": {
+    "mtime": 1779718058.7694836,
+    "ast_hash": "6dc9bbf54b5bdb11466bfa79966c2755",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/sheet.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "638d6ec8d932fb7adbcd6f58ad1d8475",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\command.tsx": {
+    "mtime": 1779718058.7694836,
+    "ast_hash": "c1db40a6f8892dba4122046b4b448484",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/resizable.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "e6bc37b4f3397d034e51f987d66ebd48",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\context-menu.tsx": {
+    "mtime": 1779718058.7704837,
+    "ast_hash": "87a6fe9d4a224f1750dd6e83dfee98ea",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/table.tsx": {
-    "mtime": 1778580366.0,
-    "ast_hash": "531bf830b5f3b399abe3fd453157cdb7",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\dialog.tsx": {
+    "mtime": 1779718058.7704837,
+    "ast_hash": "8735cc509ecf04f07f2e611bb03c3d6f",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/dropdown-menu.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "61ed555c8e1fdeb8556a276a1721c8d4",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\drawer.tsx": {
+    "mtime": 1779718058.7704837,
+    "ast_hash": "d013d8a10c5205e0436e0a0aceeb943e",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/form.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "06437ddc30eab3a60f7a561dbc2970ba",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\dropdown-menu.tsx": {
+    "mtime": 1779718058.7714846,
+    "ast_hash": "1f52d5f575d66293a8a16de5261e5064",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/select.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "bc5bd729efe33ebe26ea6aceeb18dded",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\form.tsx": {
+    "mtime": 1779718058.7714846,
+    "ast_hash": "99de6156a685803cbd5e1f044694502d",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/toaster.tsx": {
-    "mtime": 1778580366.0,
-    "ast_hash": "b36ad9f6793e952195dbec2c7dd4c0ee",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\hover-card.tsx": {
+    "mtime": 1779718058.7714846,
+    "ast_hash": "f681899e530942801ad3d2a98fa868d4",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/context-menu.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "ae9a7bdee410df0b5d0380784c3a2d16",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\input-otp.tsx": {
+    "mtime": 1779718058.7724843,
+    "ast_hash": "7943a8f7c2ccb786bf71682042e7ec00",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/slider.tsx": {
-    "mtime": 1778580366.0,
-    "ast_hash": "d72c2e0760fae2d1d586db1f8e2c50f9",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\input.tsx": {
+    "mtime": 1779718058.7724843,
+    "ast_hash": "e26a9d621d7015887b408d4428a6c869",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/breadcrumb.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "14763038175abd2410d97d8166c89480",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\label.tsx": {
+    "mtime": 1779718058.7724843,
+    "ast_hash": "54182f15eaa11b2f35bc2ff903e2557b",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/scroll-area.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "360243727fcdcb4d509af4516aaa9d0d",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\menubar.tsx": {
+    "mtime": 1779718058.7724843,
+    "ast_hash": "5ba9104f5c8183c72a6c9ec4f2643c4e",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/accordion.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "6f5ac2a39c951069d52ef56e1375d70a",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\navigation-menu.tsx": {
+    "mtime": 1779718058.773484,
+    "ast_hash": "74d588ba6187fb0c5620fcc3e5bfd19a",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/command.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "5632786c44eaa58e5110088afcfb48a6",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\pagination.tsx": {
+    "mtime": 1779718058.773484,
+    "ast_hash": "c4a1175870e223fe4af7cf5e89eb410d",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/carousel.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "b28bf29b5dccd43ddfa5fd7d38e8517f",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\popover.tsx": {
+    "mtime": 1779718058.773484,
+    "ast_hash": "6a3f7b8119ecbf80cad8bbe2848266ba",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/checkbox.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "9de07e415989a8ae7695361a9e5bd5b0",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\progress.tsx": {
+    "mtime": 1779718058.774485,
+    "ast_hash": "9c90dcb71b3ebb4af52e5b5bab7c4492",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/input.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "a516f41f19d79cbedfb354e893706d87",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\radio-group.tsx": {
+    "mtime": 1779718058.774485,
+    "ast_hash": "0f087070684fb1f5ca5eb2c1a263ad5f",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/navigation-menu.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "bea6b8a7ef7d7e7d5dc09afe7631fb59",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\resizable.tsx": {
+    "mtime": 1779718058.774485,
+    "ast_hash": "4ad1d7d1dba79f66fee0f602394ba62e",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/alert.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "8e59179ed2f0f6e33320d0081b9782fa",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\scroll-area.tsx": {
+    "mtime": 1779718058.774485,
+    "ast_hash": "bcfa838c604a2e1b3cba179c2c174989",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/drawer.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "d2f77e51ad7cefcf112c855235a172dc",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\select.tsx": {
+    "mtime": 1779718058.7754903,
+    "ast_hash": "e2968fe993602c0f40c7884a15682f25",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/popover.tsx": {
-    "mtime": 1778580365.0,
-    "ast_hash": "d7255316c532c766cee7792d775e4d0f",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\separator.tsx": {
+    "mtime": 1779718058.7754903,
+    "ast_hash": "981488d95a2e21d07ed8acfd3963d7e9",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/ui/textarea.tsx": {
-    "mtime": 1778580366.0,
-    "ast_hash": "04f9af2a78672f7018b16db2bcec5036",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\sheet.tsx": {
+    "mtime": 1779718058.7754903,
+    "ast_hash": "edbeb83948a72bc767f0052a40bc0dca",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/sim-cards/SimCardsPage.tsx": {
-    "mtime": 1779706150.0,
-    "ast_hash": "8386e6a82a09010b53336939966c09e6",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\sidebar.tsx": {
+    "mtime": 1779718058.7764845,
+    "ast_hash": "341bbb5b6d1852ca38bbd7de13fb4c2c",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/smart-table/SmartTable.tsx": {
-    "mtime": 1779705507.0,
-    "ast_hash": "86438ae3199c6268857e907396e768cf",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\skeleton.tsx": {
+    "mtime": 1779718058.7764845,
+    "ast_hash": "cbb09a6a9e8a6f87d3bbe20567e22c6e",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/reports/ReportsPage.tsx": {
-    "mtime": 1779707175.570797,
-    "ast_hash": "e291302894176ac649cf56f4743f8e54",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\slider.tsx": {
+    "mtime": 1779718058.7774794,
+    "ast_hash": "5fdb371d39dedd5962bbfae6e7282ead",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/reports/SettingsPage.tsx": {
-    "mtime": 1779706701.0,
-    "ast_hash": "d3c60ffdfe1bcb8a37838325b2b775a1",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\sonner.tsx": {
+    "mtime": 1779718058.7774794,
+    "ast_hash": "c94f3201849c1d1f3e679a631106c7a3",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/tickets/TicketsPage.tsx": {
-    "mtime": 1779706555.0,
-    "ast_hash": "117cef1e24effc8fc3ca18ab896855d2",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\switch.tsx": {
+    "mtime": 1779718058.7784793,
+    "ast_hash": "881e0aadc25f61839d2e97dd646f3ae3",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/tickets/SupportPage.tsx": {
-    "mtime": 1779706590.0,
-    "ast_hash": "56ad6f3211f17378334d02268e44b24e",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\table.tsx": {
+    "mtime": 1779718058.7784793,
+    "ast_hash": "1b339aeaa78100603808436dd1ae9fe2",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/dashboard/DashboardPage.tsx": {
-    "mtime": 1779705745.0,
-    "ast_hash": "08c9d2943b56179bc69fb521b3713dee",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\tabs.tsx": {
+    "mtime": 1779718058.7784793,
+    "ast_hash": "c40b57c831b57166ae18690a41e5d5b3",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/billing/InvoiceDetailPage.tsx": {
-    "mtime": 1779706399.0,
-    "ast_hash": "1f2d2e8742a36de5ad7e613c506b2db0",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\textarea.tsx": {
+    "mtime": 1779718058.779479,
+    "ast_hash": "16e5d792f0aed75752e902fa141a1f18",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/billing/WaterBalancePage.tsx": {
-    "mtime": 1779706320.0,
-    "ast_hash": "ea42c6b054a578ebc509a17e88e7421d",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\toast.tsx": {
+    "mtime": 1779718058.779479,
+    "ast_hash": "15bd047aca7fa00a0e13cf76d70e724d",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/billing/PaymentsPage.tsx": {
-    "mtime": 1779706441.0,
-    "ast_hash": "c7a492cd952decd2c4c9962a084cd61d",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\toaster.tsx": {
+    "mtime": 1779718058.779479,
+    "ast_hash": "f2e6f8929cb1d83cfc7ab4ec4e3f5f03",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/billing/InvoicesPage.tsx": {
-    "mtime": 1779706360.0,
-    "ast_hash": "695aed59542e47b00cec46e71d65dbcc",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\toggle-group.tsx": {
+    "mtime": 1779718058.780479,
+    "ast_hash": "b351a550a05e42fb26146c4d79e326f3",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/billing/ConsumptionPage.tsx": {
-    "mtime": 1779706283.0,
-    "ast_hash": "a1da5624a591fd602fe950bbfbc48f0d",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\toggle.tsx": {
+    "mtime": 1779718058.780479,
+    "ast_hash": "dd6df1b1c6551cff6a71aed52ece9236",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/billing/BalancesPage.tsx": {
-    "mtime": 1779706474.0,
-    "ast_hash": "415ee9183c31e9be12e2a756461d4ae1",
+  "D:\\meter\\Meter-\\Frontend\\src\\components\\ui\\tooltip.tsx": {
+    "mtime": 1779718058.781486,
+    "ast_hash": "c660b43af1749d010755b523f12d4d96",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/shared/StatusBadge.tsx": {
-    "mtime": 1779705574.0,
-    "ast_hash": "734da9922798ddc6f188dce930736ec1",
+  "D:\\meter\\Meter-\\Frontend\\src\\hooks\\use-mobile.ts": {
+    "mtime": 1779718058.781486,
+    "ast_hash": "654e2ca2e9fddc27eb7e3954900dc48e",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/shared/PageHelpers.tsx": {
-    "mtime": 1779705591.0,
-    "ast_hash": "25addf213ba81041e03f6a1e40c183d7",
+  "D:\\meter\\Meter-\\Frontend\\src\\hooks\\use-toast.ts": {
+    "mtime": 1779718058.781486,
+    "ast_hash": "7b28c570f5c22615bb4d91c30130e061",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/readings/ReadingsPage.tsx": {
-    "mtime": 1779706186.0,
-    "ast_hash": "01efbbcbb48ffdb3a3b9e80065cc1c7f",
+  "D:\\meter\\Meter-\\Frontend\\src\\lib\\db.ts": {
+    "mtime": 1779718058.7824793,
+    "ast_hash": "c083539b3e6fd753bb01f2eb6d888017",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/readings/ReadingNewPage.tsx": {
-    "mtime": 1779706747.0,
-    "ast_hash": "f8d7b1073b27cfcb6ce1c5742361537b",
+  "D:\\meter\\Meter-\\Frontend\\src\\lib\\mock-auth.ts": {
+    "mtime": 1779718058.7824793,
+    "ast_hash": "884fa33b40cbc25c5c2c104e6c35934d",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/customers/CustomerDetailPage.tsx": {
-    "mtime": 1779705814.0,
-    "ast_hash": "3f54c23a737098aa6de3cc6a9d34bdb2",
+  "D:\\meter\\Meter-\\Frontend\\src\\lib\\mock-data.ts": {
+    "mtime": 1779718058.7834787,
+    "ast_hash": "238deba7b5e338d564813a942cb52f0f",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/components/customers/CustomersPage.tsx": {
-    "mtime": 1779705766.0,
-    "ast_hash": "c989cc533b290dce2c66777407eb916c",
+  "D:\\meter\\Meter-\\Frontend\\src\\lib\\navigation.ts": {
+    "mtime": 1779718058.7834787,
+    "ast_hash": "caf13828a50e42cb99f66cc7cd680fc9",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/app/page.tsx": {
-    "mtime": 1779705829.0,
-    "ast_hash": "1559d6fd900e3dc9b9b6ac89788a694b",
+  "D:\\meter\\Meter-\\Frontend\\src\\lib\\router-store.ts": {
+    "mtime": 1779718058.7834787,
+    "ast_hash": "7973b9c3be1f8c7fcefd756ffc721671",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/app/layout.tsx": {
-    "mtime": 1779705164.0,
-    "ast_hash": "33bb4c8dc01c0fb0ed4f65e81f460365",
+  "D:\\meter\\Meter-\\Frontend\\src\\lib\\types.ts": {
+    "mtime": 1779718058.7844794,
+    "ast_hash": "d4fa749dbd107c990365c1e382c69fe9",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/src/app/api/route.ts": {
-    "mtime": 1778580365.0,
-    "ast_hash": "bea7bb6c5e8f4a6fad2e9ccc6324ae8a",
+  "D:\\meter\\Meter-\\Frontend\\src\\lib\\utils.ts": {
+    "mtime": 1779718058.7844794,
+    "ast_hash": "1d8011eb18769078bf77502b220daa5e",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/worklog.md": {
-    "mtime": 1779706995.0,
-    "ast_hash": "59dfd11359c61284511c9e71733aef5c",
+  "D:\\meter\\Meter-\\Frontend\\AGENTS.md": {
+    "mtime": 1779718058.7203963,
+    "ast_hash": "752aa83aa64361ac32860f882dcff932",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/AGENTS.md": {
-    "mtime": 1779708971.3801131,
-    "ast_hash": "62c05a2bf20bf036a0b2633478663e64",
+  "D:\\meter\\Meter-\\Frontend\\FRONTEND_BUILD.md": {
+    "mtime": 1779718058.7203963,
+    "ast_hash": "284390218d902694fcdc6c03bc65c57b",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/FRONTEND_BUILD.md": {
-    "mtime": 1779708806.8756528,
-    "ast_hash": "209322468dc8a01517b78358cac6cb17",
+  "D:\\meter\\Meter-\\Frontend\\FRONTEND_SPRINT_BACKLOG.md": {
+    "mtime": 1779718058.7213967,
+    "ast_hash": "db235097f90649f748257fcd52c8e4c7",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/FRONTEND_SPRINT_BACKLOG.md": {
-    "mtime": 1779709152.6477692,
-    "ast_hash": "6df5c5d41c9a1948ba2f7465c3146913",
+  "D:\\meter\\Meter-\\Frontend\\worklog.md": {
+    "mtime": 1779718058.7854915,
+    "ast_hash": "561b6047a33598c6197e100b45d7aaee",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/public/robots.txt": {
-    "mtime": 1778580365.0,
-    "ast_hash": "f9dff89adf98833e676de2205921996a",
+  "D:\\meter\\Meter-\\Frontend\\agent-ctx\\4-layout-builder.md": {
+    "mtime": 1779718058.7213967,
+    "ast_hash": "0f7d919e7d0dc9e6d45c5d6892d9a876",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/agent-ctx/4-layout-builder.md": {
-    "mtime": 1779706047.0,
-    "ast_hash": "cb2713d6e50e080f89d432aca0b68ef0",
+  "D:\\meter\\Meter-\\Frontend\\download\\README.md": {
+    "mtime": 1779718058.7243974,
+    "ast_hash": "67c5cc9f5c3f791595e3175bd023493b",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/download/README.md": {
-    "mtime": 1779701287.0,
-    "ast_hash": "45bbc1947dca1b9f21f04716bbf27562",
+  "D:\\meter\\Meter-\\Frontend\\public\\robots.txt": {
+    "mtime": 1779718058.7433977,
+    "ast_hash": "a9b03494151fe90e5decd2405400e106",
     "semantic_hash": ""
   },
-  "/home/abady/Downloads/09/Frontend/public/logo.svg": {
-    "mtime": 1778580365.0,
-    "ast_hash": "42f46ee1967225126315578016f0f9b6",
+  "D:\\meter\\Meter-\\Frontend\\public\\logo.svg": {
+    "mtime": 1779718058.7433977,
+    "ast_hash": "018c9d41fac1aec570870db154693656",
     "semantic_hash": ""
   }
 }

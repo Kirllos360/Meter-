@@ -1,0 +1,43 @@
+T015 VALIDATION REPORT -- MIGRATION: READING, READINGREVIEW, TARIFFPLAN, BILLINGPERIOD
+Date: 2026-05-27  Branch: feature/t015-readings-tariff-migration  Commit: c8c86aa
+
+SUMMARY
+Created 4 Prisma models + 6 enums. Migration: 4 tables, 5 enum types, 2 unique indexes.
+
+MODELS ADDED
+  Reading         -> readings          -> unique(meter_id,reading_at,source), JSONB, DECIMAL(12,3)
+  ReadingReview   -> reading_reviews   -> review_action enum, reviewer tracking
+  TariffPlan      -> tariff_plans      -> MeterType ref, DECIMAL(12,3) rate, effective window
+  BillingPeriod   -> billing_periods   -> unique(project_id,period_code), lifecycle status
+
+ENUMS ADDED
+  reading_source: manual, import, automatic
+  reading_status: valid, pending_review, estimated, suspicious, corrected, rejected
+  review_action: approve, reject, correct
+  tariff_status: draft, active, retired
+  billing_period_status: open, in_review, closed
+
+MIGRATION SQL: backend/prisma/migrations/20260527114543_readings_tariff/migration.sql
+  No duplicate DDL for audit_log, projects, customers, etc.
+  No duplicate CREATE TYPE for meter_type (exists from T014)
+
+VALIDATION RESULTS
+  npx prisma validate:       PASS
+  npx prisma migrate status: PASS (4 migrations, DB up-to-date)
+  npx prisma generate:       PASS
+  npm run build:             PASS
+  npm test:                  PASS (69/69, 8 suites)
+
+SQL VERIFICATION
+  readings_meter_id_reading_at_source_key: UNIQUE (meter_id,reading_at,source) --- PASS
+  billing_periods_project_id_period_code_key: UNIQUE (project_id,period_code) --- PASS
+  raw_payload: JSONB --- PASS
+  DECIMAL(12,3) on reading_value, consumption_value, rate_per_unit --- PASS
+  All 4 tables in sim_system schema --- PASS
+
+RISK NOTES
+  Shadow database unreachable - migration SQL crafted manually
+  T014 (MeterType) must merge before T015
+  All FKs are scalar fields (no Prisma @relation)
+  T008/T013/T014 migration folders included for history
+  AuditLog table created manually in dev DB (not in migration)

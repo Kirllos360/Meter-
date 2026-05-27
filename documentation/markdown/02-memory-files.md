@@ -1,7 +1,7 @@
 # Memory Files — Meter Pulse
 
 > All agent memory files: AGENTS.md, Speckit constitution, skills, OpenCode config, Graphify.
-> Last updated: 2026-05-26
+> Last updated: 2026-05-27
 
 ---
 
@@ -9,8 +9,9 @@
 
 | File | Purpose | Last Updated |
 |------|---------|-------------|
-| `AGENTS.md` | Agent session memory log | 2026-05-26 (T009) |
+| `AGENTS.md` | Agent session memory log | 2026-05-27 (T015) |
 | `prompt-history_T009.md` | T009 implementation prompt | 2026-05-26 |
+| `15-ai-handoff-memory.md` | AI handoff memory | 2026-05-27 |
 | `.specify/memory/constitution.md` | Speckit constitution (template) | N/A |
 
 ---
