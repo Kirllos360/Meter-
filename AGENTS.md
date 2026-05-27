@@ -1,6 +1,60 @@
 # Meter Pulse — Utility Metering & Billing Platform
 
-## Stack
+## Full Session Summary (2026-05-26)
+
+### Completed Tasks (6 of ~91 — 6.6%)
+- **T001**: NestJS backend scaffold — `backend/` structure, main.ts, app.module.ts, package.json, tsconfig.json
+- **T002**: Config + PostgreSQL connection — `AppConfigModule`, `DatabaseModule`, `.env`, Docker container `meter-pulse-db`
+- **T003**: Backend tooling — ESLint, Prettier, Jest configured; eslint fix: added `jest.config.ts` to ignorePatterns
+- **T004**: Prisma ORM init — `schema.prisma` (multiSchema, sim_system), `PrismaService`, `DATABASE_URL`; validated 5/5
+- **T005**: Docker PostgreSQL — `docker-compose.yml` (env vars, healthcheck, volume, restart), `README.md` (start/stop/reset/connection docs)
+- **T006**: Error envelope + global filter — `ErrorEnvelope` interface, `AllExceptionsFilter`, 10 unit tests; validated 3/3
+
+### Implementation Workflow
+1. User provides task via Speckit-style prompt
+2. Create feature branch: `feature/tXXX-task-name`
+3. Read SpecKit files: spec.md, plan.md, tasks.md, data-model.md, contracts/, research.md, quickstart.md
+4. Run `check-prerequisites.sh` (branch naming fails — ignore, but verify all files exist manually)
+5. Implement code in `backend/` only
+6. Validate: `npm test`, `tsc --noEmit`, `eslint`, `prisma validate`, `prisma generate`, `docker compose` as applicable
+7. Commit: one task, one branch, one commit, one PR
+8. Push to `Kirllos360/Meter-` (ask user first)
+9. Create PR via GitHub API with token
+10. Update AGENTS.md memory log
+11. Mark task `[X]` in tasks.md
+12. Create validation reports in 5 formats (markdown, sql, text, csv, pdf)
+13. Save prompt to `prompt-history_TXXX.md`
+
+### Documentation Structure
+- 16 markdown, 7 sql, 18 text, 15 csv, 20 pdf files
+- Index: `documentation/markdown/00-index.md`
+- Validation reports: `documentation/markdown/13-T001-validation-report.md` through `13-T006-validation-report.md`
+
+### Git Info
+- Remote: `https://github.com/Kirllos360/Meter-.git` (fork of Abady001/Meter-)
+- Current token: `ghp_3DuS44n...` (user provided 2026-05-26)
+- PRs: #1 (T006) open at `https://github.com/Kirllos360/Meter-/pull/1`
+- Port: backend 3001, PostgreSQL 5432
+- Commit style: `TXXX: short description` or `build(backend): message for TXXX`
+- Author: Kirllos Hany <kirllos.hany@epower.com.eg>
+
+### Key Files
+- `backend/.env` — gitignored, has DATABASE_URL
+- `backend/.env.example` — committed template
+- `backend/docker-compose.yml` — PostgreSQL service
+- `backend/prisma/schema.prisma` — generator + datasource, multiSchema, sim_system
+- `backend/src/main.ts` — port 3001, global exception filter registered
+- `backend/src/common/http/error-envelope.ts` — ErrorEnvelope + helpers
+- `backend/src/common/http/all-exceptions.filter.ts` — global @Catch filter
+- `backend/test/error-envelope.spec.ts` — 10 unit tests
+- `specs/001-metering-billing-platform/tasks.md` — 91 tasks, T001-T006 marked [X]
+
+### Next Unfinished Task
+- **T007**: Add correlation-ID middleware in `backend/src/common/http/correlation.middleware.ts`
+  - Dependencies: T006
+  - Every request gets/propagates a correlationId, surfaced in responses and error envelope
+
+### Stack
 - **Frontend** (`Frontend/`): Next.js 16 + React 19 + TypeScript + Tailwind v4 + shadcn/ui
 - **Backend** (planned, not yet created): NestJS + PostgreSQL + Prisma ORM
 - **Runtime**: Bun (not npm/yarn)
@@ -57,6 +111,24 @@ bun run db:generate      # Prisma generate
 - **Token**: Never used without explicit user permission
 - **Pre-commit**: Always run `git status` first; only stage intended files; check for secrets
 - **Never commit**: `.env`, `*.db`, `.next/`, `node_modules/`, `graphify-out/cache/`, workspace archives, tokens
+
+## T006 Memory Log (2026-05-26)
+
+- **Task**: T006 — Implement standard error envelope + global exception filter
+- **Status**: done
+- **Changed**: Created `error-envelope.ts`, `all-exceptions.filter.ts`, `error-envelope.spec.ts`; updated `main.ts`, `tsconfig.json`, `.eslintrc.cjs`
+- **Validation**: npm test -- error-envelope ✅ (10/10), tsc --noEmit ✅, eslint ✅
+- **Branch**: `feature/t006-error-envelope`
+- **Next**: T007
+- **Token note**: Push succeeded via credential manager, but PR creation via curl API failed (token expired for non-git calls). Used `git push` as workaround.
+
+## Token Expiry Rule
+
+- **Trigger**: At start of each session, or when a `git push` or API call fails with auth error, or when `T0XX` task count reaches ~80% of total (~72/91)
+- **Action**: Prompt user: "GitHub token may be expiring. Please provide a fresh token (repo scope) so git push + PR creation continue working."
+- **Fallback**: If push fails mid-task, stop and ask user for token before retrying
+- **Storage**: Token stored via `git credential-manager` — no raw token saved in files
+- **Never**: Hard-code tokens in code, docs, .env, or commit history
 
 ## On-Message Git Check
 Every time the user sends a message, run `git status --short` to detect any changes since last session. If changes exist, log them to the audit log and commit log. Keep local files in sync.
