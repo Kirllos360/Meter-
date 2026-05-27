@@ -112,7 +112,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd backend && npm test -- correlation`
   - **Risk**: Missing correlation IDs undermine audit traceability (FR-016).
 
-- [ ] T008 [P] Add Idempotency-Key interceptor in `backend/src/common/http/idempotency.interceptor.ts`
+- [X] T008 [P] Add Idempotency-Key interceptor in `backend/src/common/http/idempotency.interceptor.ts`
   - **Dependencies**: T002, T004
   - **Area/Files**: `backend/src/common/http/idempotency.interceptor.ts`, idempotency-key store table in `backend/prisma/schema.prisma`
   - **Acceptance**: Repeat mutation with same `Idempotency-Key` returns the original result without double-applying

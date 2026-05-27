@@ -3,6 +3,7 @@ import {
   NestInterceptor,
   ExecutionContext,
   CallHandler,
+  Logger,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { PrismaService } from '../database/prisma.service';
@@ -11,6 +12,7 @@ import * as crypto from 'crypto';
 
 @Injectable()
 export class IdempotencyInterceptor implements NestInterceptor {
+  private readonly logger = new Logger(IdempotencyInterceptor.name);
   private readonly mutationMethods = ['POST', 'PUT', 'PATCH', 'DELETE'];
 
   constructor(private readonly prisma: PrismaService) {}
@@ -101,8 +103,8 @@ export class IdempotencyInterceptor implements NestInterceptor {
           responseStatus: response.statusCode,
         },
       });
-    } catch {
-      // Cache write failure must not fail the original request
+    } catch (error) {
+      this.logger.error(`Idempotency cache write failed: ${error}`);
     }
   }
 }
