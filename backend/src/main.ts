@@ -22,6 +22,7 @@ async function bootstrap() {
 
   setupOpenApi(app);
 
+
   const port = Number(process.env.PORT ?? 3001);
   await app.listen(port);
 }

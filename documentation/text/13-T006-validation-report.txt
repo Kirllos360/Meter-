@@ -1,0 +1,38 @@
+T006 VALIDATION REPORT - ERROR ENVELOPE + EXCEPTION FILTER
+==========================================================
+
+Task:   T006 [P] Implement standard error envelope + global exception filter
+Date:   2026-05-26
+Author: Kirllos Hany
+Branch: feature/t006-error-envelope (f903370)
+Verdict: PASS (ALL CHECKS PASSED)
+
+SPECKIT PRE-REQUISITE CHECKS
+
+ 1. Feature branch ............ PASS - feature/t006-error-envelope
+ 2. plan.md exists ............ PASS - specs/.../plan.md
+ 3. spec.md exists ............ PASS - specs/.../spec.md
+ 4. tasks.md exists ........... PASS - specs/.../tasks.md
+ 5. T001 dependency ........... PASS - NestJS scaffold complete
+
+IMPLEMENTATION VALIDATION
+
+ 1. npm test -- error-envelope  PASS - 10/10 tests passed
+ 2. HttpException serialization  PASS - Correct code/message/correlationId
+ 3. Unknown error serialization  PASS - Safe InternalServerError code
+ 4. Thrown string/object ........ PASS - Safe fallback, no stack leak
+ 5. Envelope shape .............. PASS - { code, message, details?, correlationId }
+ 6. correlationId always present  PASS - From header or auto-generated UUID
+ 7. statusFromException ......... PASS - Correct HTTP status codes
+ 8. tsc --noEmit ................ PASS - Exit code 0
+ 9. eslint ...................... PASS - Exit code 0
+
+FILES CHANGED
+  backend/src/common/http/error-envelope.ts (created)
+  backend/src/common/http/all-exceptions.filter.ts (created)
+  backend/test/error-envelope.spec.ts (created)
+  backend/src/main.ts (updated)
+  backend/tsconfig.json (updated)
+  backend/.eslintrc.cjs (updated)
+
+OVERALL VERDICT: PASS
