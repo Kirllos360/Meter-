@@ -205,3 +205,41 @@ Every time the user sends a message, run `git status --short` to detect any chan
 
 ### Next Task
 - T012
+
+---
+
+## T015 Memory Log
+
+**Task**: T015 — Migration: Reading, ReadingReview, TariffPlan, BillingPeriod
+**Story**: Foundational — Phase 2
+**Status**: Complete
+**Date**: 2026-05-27
+**Branch**: feature/t015-readings-tariff-migration
+
+### What Changed
+- Added to `backend/prisma/schema.prisma`:
+  - Enums: ReadingSource, ReadingStatus, ReviewAction, TariffStatus, MeterType, BillingPeriodStatus
+  - Models: Reading (with meter_id FK, unique(meter_id,reading_at,source), raw_payload jsonb, Decimal(12,3)), ReadingReview, TariffPlan (MeterType reference, Decimal(12,3)), BillingPeriod (unique project_id+period_code)
+- Created migration `20260527114543_readings_tariff`:
+  - 5 new enum types, 4 new tables, 2 unique indexes
+  - NO duplicate audit_log/tables from T008/T013/T014
+  - NO duplicate meter_type type (already created by T014)
+- Manually applied migration SQL + registered in _prisma_migrations
+
+### Validation
+- `npx prisma validate` ✅
+- `npx prisma migrate status` — 4 migrations, DB up-to-date ✅
+- `npx prisma generate` ✅
+- `npm run build` — clean ✅
+- `npm test` — 69/69 passing (8 suites) ✅
+- SQL verification: all 4 tables created, unique index on (meter_id,reading_at,source), DECIMAL(12,3) on rate_per_unit, JSONB on raw_payload ✅
+
+### Key Decisions
+- Manual migration SQL approach (shadow DB unreachable) — wrote clean SQL with only T015 DDL
+- Removed AuditLog from migration SQL (already on main from T010)
+- Added MeterType enum for TariffPlan dependency (exists on T014)
+- Used `@db.Decimal(12, 3)` for all decimal fields — explicit precision
+- All FKs are scalar fields without `@relation` (T013/T014 not merged yet)
+
+### Next Task
+- T016

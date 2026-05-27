@@ -163,7 +163,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd backend && npx prisma migrate dev --name meter_sim && npx prisma migrate status`
   - **Risk**: Prisma partial unique indexes require raw SQL in migration; verify they actually apply in DB.
 
-- [ ] T015 [P] Migration — Reading, ReadingReview, TariffPlan, BillingPeriod in `backend/prisma/`
+- [X] T015 [P] Migration — Reading, ReadingReview, TariffPlan, BillingPeriod in `backend/prisma/`
   - **Dependencies**: T014
   - **Area/Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_readings_tariff/`
   - **Acceptance**: Reading has unique `(meter_id, reading_at, source)`, status enum, snapshots, `raw_payload` jsonb; TariffPlan + BillingPeriod created

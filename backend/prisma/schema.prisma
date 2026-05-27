@@ -25,3 +25,130 @@ model AuditLog {
   @@map("audit_log")
   @@schema("sim_system")
 }
+
+enum ReadingSource {
+  manual
+  import
+  automatic
+
+  @@map("reading_source")
+  @@schema("sim_system")
+}
+
+enum ReadingStatus {
+  valid
+  pending_review
+  estimated
+  suspicious
+  corrected
+  rejected
+
+  @@map("reading_status")
+  @@schema("sim_system")
+}
+
+enum ReviewAction {
+  approve
+  reject
+  correct
+
+  @@map("review_action")
+  @@schema("sim_system")
+}
+
+enum TariffStatus {
+  draft
+  active
+  retired
+
+  @@map("tariff_status")
+  @@schema("sim_system")
+}
+
+enum MeterType {
+  electricity
+  water_main
+  water_child
+
+  @@map("meter_type")
+  @@schema("sim_system")
+}
+
+enum BillingPeriodStatus {
+  open
+  in_review
+  closed
+
+  @@map("billing_period_status")
+  @@schema("sim_system")
+}
+
+model Reading {
+  id                    String        @id @default(uuid()) @map("id")
+  meterId               String        @map("meter_id")
+  projectId             String        @map("project_id")
+  customerIdSnapshot    String        @map("customer_id_snapshot")
+  unitIdSnapshot        String        @map("unit_id_snapshot")
+  readingValue          Decimal       @db.Decimal(12, 3) @map("reading_value")
+  readingAt             DateTime      @map("reading_at")
+  source                ReadingSource @map("source")
+  previousReadingValue  Decimal?      @db.Decimal(12, 3) @map("previous_reading_value")
+  consumptionValue      Decimal?      @db.Decimal(12, 3) @map("consumption_value")
+  status                ReadingStatus @default(pending_review) @map("status")
+  rawPayload            Json?         @map("raw_payload")
+  enteredBy             String        @map("entered_by")
+  notes                 String?       @map("notes")
+  createdAt             DateTime      @default(now()) @map("created_at")
+  updatedAt             DateTime      @updatedAt @map("updated_at")
+
+  @@unique([meterId, readingAt, source])
+  @@map("readings")
+  @@schema("sim_system")
+}
+
+model ReadingReview {
+  id           String       @id @default(uuid()) @map("id")
+  readingId    String       @map("reading_id")
+  reviewAction ReviewAction @map("review_action")
+  reviewedBy   String       @map("reviewed_by")
+  reviewedAt   DateTime     @map("reviewed_at")
+  reason       String       @map("reason")
+
+  @@map("reading_reviews")
+  @@schema("sim_system")
+}
+
+model TariffPlan {
+  id            String       @id @default(uuid()) @map("id")
+  projectId     String       @map("project_id")
+  meterType     MeterType    @map("meter_type")
+  ratePerUnit   Decimal      @db.Decimal(12, 3) @map("rate_per_unit")
+  currency      String       @map("currency")
+  effectiveFrom DateTime     @map("effective_from")
+  effectiveTo   DateTime?    @map("effective_to")
+  status        TariffStatus @default(draft) @map("status")
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+  createdBy     String       @map("created_by")
+  updatedBy     String       @map("updated_by")
+
+  @@map("tariff_plans")
+  @@schema("sim_system")
+}
+
+model BillingPeriod {
+  id          String              @id @default(uuid()) @map("id")
+  projectId   String              @map("project_id")
+  periodCode  String              @map("period_code")
+  startDate   DateTime            @map("start_date")
+  endDate     DateTime            @map("end_date")
+  status      BillingPeriodStatus @default(open) @map("status")
+  createdAt   DateTime            @default(now()) @map("created_at")
+  updatedAt   DateTime            @updatedAt @map("updated_at")
+  createdBy   String              @map("created_by")
+  updatedBy   String              @map("updated_by")
+
+  @@unique([projectId, periodCode])
+  @@map("billing_periods")
+  @@schema("sim_system")
+}
