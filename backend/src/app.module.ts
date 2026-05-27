@@ -6,6 +6,7 @@ import { DatabaseModule } from './common/database/database.module';
 import { AuthModule } from './auth/auth.module';
 import { AuditModule } from './audit/audit.module';
 import { AuditInterceptor } from './audit/audit.interceptor';
+import { IdempotencyInterceptor } from './common/http/idempotency.interceptor';
 import { CorrelationMiddleware } from './common/http/correlation.middleware';
 
 @Module({
@@ -15,6 +16,10 @@ import { CorrelationMiddleware } from './common/http/correlation.middleware';
     {
       provide: APP_INTERCEPTOR,
       useClass: AuditInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: IdempotencyInterceptor,
     },
   ],
 })
