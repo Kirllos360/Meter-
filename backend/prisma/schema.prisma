@@ -25,3 +25,90 @@ model AuditLog {
   @@map("audit_log")
   @@schema("sim_system")
 }
+
+enum PaymentMethod {
+  cash
+  bank_transfer
+  card
+  online
+  cheque
+  wallet
+
+  @@map("payment_method")
+  @@schema("sim_system")
+}
+
+enum PaymentStatus {
+  pending
+  confirmed
+  reversed
+  cancelled
+
+  @@map("payment_status")
+  @@schema("sim_system")
+}
+
+enum LedgerEntryType {
+  invoice_charge
+  adjustment_debit
+  adjustment_credit
+  payment_credit
+  payment_reversal
+
+  @@map("ledger_entry_type")
+  @@schema("sim_system")
+}
+
+enum ReferenceType {
+  invoice
+  payment
+  adjustment
+
+  @@map("reference_type")
+  @@schema("sim_system")
+}
+
+model Payment {
+  id            String        @id @default(uuid()) @map("id")
+  paymentNumber String        @unique @map("payment_number")
+  projectId     String        @map("project_id")
+  customerId    String        @map("customer_id")
+  paymentDate   DateTime      @map("payment_date")
+  method        PaymentMethod @map("method")
+  amount        Decimal       @db.Decimal(12, 3) @map("amount")
+  status        PaymentStatus @default(pending) @map("status")
+  collectedBy   String        @map("collected_by")
+  notes         String?       @map("notes")
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  @@map("payments")
+  @@schema("sim_system")
+}
+
+model PaymentAllocation {
+  id               String  @id @default(uuid()) @map("id")
+  paymentId        String  @map("payment_id")
+  invoiceId        String  @map("invoice_id")
+  allocatedAmount  Decimal @db.Decimal(12, 3) @map("allocated_amount")
+  allocationOrder  Int     @map("allocation_order")
+
+  @@map("payment_allocations")
+  @@schema("sim_system")
+}
+
+model CustomerLedgerEntry {
+  id             String          @id @default(uuid()) @map("id")
+  customerId     String          @map("customer_id")
+  projectId      String          @map("project_id")
+  entryType      LedgerEntryType @map("entry_type")
+  referenceType  ReferenceType   @map("reference_type")
+  referenceId    String          @map("reference_id")
+  amountDelta    Decimal         @db.Decimal(12, 3) @map("amount_delta")
+  runningBalance Decimal         @db.Decimal(12, 3) @map("running_balance")
+  entryAt        DateTime        @map("entry_at")
+  createdAt      DateTime        @default(now()) @map("created_at")
+
+  @@map("customer_ledger_entries")
+  @@schema("sim_system")
+}

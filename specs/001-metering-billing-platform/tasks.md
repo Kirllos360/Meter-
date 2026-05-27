@@ -177,7 +177,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd backend && npx prisma migrate dev --name invoices && npx prisma migrate status`
   - **Risk**: Decimal rounding policy must be consistent across invoice/line/adjustment.
 
-- [ ] T017 [P] Migration — Payment, PaymentAllocation, CustomerLedgerEntry in `backend/prisma/`
+- [X] T017 [P] Migration — Payment, PaymentAllocation, CustomerLedgerEntry in `backend/prisma/`
   - **Dependencies**: T016
   - **Area/Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_payments_ledger/`
   - **Acceptance**: Unique `payment_number`; allocation links payment→invoice with order; CustomerLedgerEntry append-only with `running_balance`

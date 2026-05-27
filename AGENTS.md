@@ -205,3 +205,54 @@ Every time the user sends a message, run `git status --short` to detect any chan
 
 ### Next Task
 - T012
+
+---
+
+## T016 Memory Log
+
+**Task**: T016 — Migration: Invoice, InvoiceLine, InvoiceAdjustment
+**Status**: Complete
+**Date**: 2026-05-27
+**Branch**: feature/t016-invoices-migration
+**Validation**: prisma validate ✅, migrate status ✅, generate ✅, build ✅, npm test 69/69 ✅
+**Migration**: 3 enums, 3 tables, 1 unique index — no duplicate DDL
+
+---
+
+## T017 Memory Log
+
+**Task**: T017 — Migration: Payment, PaymentAllocation, CustomerLedgerEntry
+**Status**: Complete
+**Date**: 2026-05-27
+**Branch**: feature/t017-payments-ledger-migration
+
+### What Changed
+- Added to `backend/prisma/schema.prisma`:
+  - Enums: PaymentMethod, PaymentStatus, LedgerEntryType, ReferenceType
+  - Models: Payment (unique payment_number, DECIMAL(12,3)), PaymentAllocation (allocation_order, DECIMAL(12,3)), CustomerLedgerEntry (running_balance, append-only)
+- Created migration `20260527124234_payments_ledger`:
+  - 4 enum types, 3 tables, 1 unique index
+  - DB-level append-only trigger on customer_ledger_entries (BEFORE UPDATE OR DELETE)
+
+### Append-Only Protection
+- DB trigger `trg_customer_ledger_append_only` on `customer_ledger_entries`
+- UPDATE blocked ✅ (verified)
+- DELETE blocked ✅ (verified)
+- INSERT allowed ✅ (verified)
+- Cannot be bypassed by application layer
+
+### Validation
+- `npx prisma validate` ✅
+- `npx prisma migrate status` — 6 migrations, DB up-to-date ✅
+- `npx prisma generate` ✅
+- `npm run build` — clean ✅
+- `npm test` — 69/69 passing (8 suites) ✅
+- SQL verification: 3 tables, unique payment_number, DECIMAL(12,3), append-only trigger ✅
+- Regression: T014 partial indexes, T015 unique/JSONB, T016 unique/immutable — all intact ✅
+
+### Key Decisions
+- DB-level trigger for append-only (preferred approach — cannot be bypassed)
+- All monetary fields use consistent @db.Decimal(12, 3)
+
+### Next Task
+- T018
