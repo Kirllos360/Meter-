@@ -149,7 +149,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
 
 ### PostgreSQL schema/migrations (all data-model entities)
 
-- [ ] T013 [P] Migration — Project, LocationNode, Customer, CustomerUnitAssignment in `backend/prisma/`
+- [X] T013 [P] Migration — Project, LocationNode, Customer, CustomerUnitAssignment in `backend/prisma/`
   - **Dependencies**: T004
   - **Area/Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_core_org/`
   - **Acceptance**: Tables created with enums + `(project_id,node_type,code)` uniqueness and one-active-row-per `(customer_id,unit_id)` partial unique where `end_at IS NULL`; Project includes `tax_enabled`/`tax_rate`/`reading_threshold_profile_id`/`water_difference_mode` columns

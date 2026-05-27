@@ -232,3 +232,14 @@ Every time the user sends a message, run `git status --short` to detect any chan
 - `npm test -- test/contract` — 26/26 passing
 - `npm run build` — clean
 - `npx eslint src/**/*.ts` — clean
+
+## T013 Memory Log (2026-05-27)
+
+- **Task**: T013 — Migration: Project, LocationNode, Customer, CustomerUnitAssignment
+- **Status**: done
+- **Changed**: Added 4 Prisma models + 5 enums to `schema.prisma`; created migration `20260527080245_core_org`; added partial unique index `customer_unit_assignments_customer_id_unit_id_active_key` via raw SQL
+- **Models**: Project (tax_enabled, tax_rate, reading_threshold_profile_id, water_difference_mode), LocationNode (self-FK hierarchy, node_type), Customer (customer_type), CustomerUnitAssignment (partial unique WHERE end_at IS NULL)
+- **Convention**: All mutable entities include `created_at`, `updated_at`, `created_by`, `updated_by` per data model spec
+- **Validation**: `prisma validate` ✅, `prisma generate` ✅, `prisma migrate status` ✅, 110/110 tests ✅, `tsc` build ✅
+- **Branch**: `feature/t012-contract-harness`
+- **Next**: T014 — Migration: Meter, SIMCard, MeterAssignment, SIMAssignment

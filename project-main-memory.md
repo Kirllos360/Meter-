@@ -1,9 +1,9 @@
 ---
 description: "Consolidated project memory — Meter Pulse: Utility Metering & Billing Platform"
 format: "claude-mem"
-version: "1.1"
+version: "1.2"
 last_updated: "2026-05-27"
-task_count: 12
+task_count: 13
 tests_total: 110
 tests_passing: 110
 build_status: "clean"
@@ -31,7 +31,7 @@ graph_communities: 159
 
 ---
 
-## Task Memory — Complete Log (T001–T012)
+## Task Memory — Complete Log (T001–T013)
 
 ### T001 — NestJS Backend Scaffold
 - **Status**: ✅ Complete | **Branch**: `main` | **Commit**: `e0fbcfa` | **Date**: 2026-05-26
@@ -127,6 +127,7 @@ graph_communities: 159
 | T010 | ❌ Unchecked | ✅ Complete | On `feature/t009-auth-rbac`, 21 tests, cherry-picked T006+T007 |
 | T011 | ❌ Unchecked | ✅ Complete | `feature/t011-api-versioning` branch, Swagger UI live |
 | T012 | ✅ Checked | ✅ Complete | `feature/t012-contract-harness` (current HEAD), 26 tests |
+| T013 | ❌ Unchecked | ✅ Complete | Prisma models + migration `core_org` applied; partial unique index on CustomerUnitAssignment |
 
 ---
 
@@ -167,6 +168,19 @@ graph_communities: 159
 - T012: **PASS** — YAML loading, $ref resolution, ajv validation, NestJS bootstrap all working
 
 **Validation sufficient per Speckit.**
+
+---
+
+### T013 — Migration: Project, LocationNode, Customer, CustomerUnitAssignment
+- **Status**: ✅ Complete | **Branch**: `feature/t012-contract-harness` | **Commit**: `65d96f4` | **Date**: 2026-05-27
+- **What**: Added Prisma models for core organizational entities:
+  - **Project** — `code` (unique), `status` (active/inactive), `tax_enabled`, `tax_rate`, `reading_threshold_profile_id`, `water_difference_mode` (billable/report_only)
+  - **LocationNode** — hierarchy via self-FK `parent_id`, `node_type` (zone/building/floor/unit), unique on `(project_id, node_type, code)`
+  - **Customer** — `customer_code` unique per project, `customer_type` (individual/company/tenant/owner)
+  - **CustomerUnitAssignment** — assignment history with nullable `end_at`, **partial unique index via raw SQL** on `(customer_id, unit_id) WHERE end_at IS NULL`
+- **Enums added**: `ProjectStatus`, `WaterDifferenceMode`, `NodeType`, `CustomerType`, `EntityStatus` — all under `@@schema("sim_system")`
+- **Fields**: All mutable entities include `created_at`, `updated_at`, `created_by`, `updated_by` (per data model convention)
+- **Validation**: `prisma validate` ✅, `prisma generate` ✅, `prisma migrate status` up-to-date ✅, 110/110 tests still passing ✅, `tsc` build clean ✅
 
 ---
 

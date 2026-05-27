@@ -41,3 +41,130 @@ model IdempotencyRecord {
   @@map("idempotency_records")
   @@schema("sim_system")
 }
+
+enum ProjectStatus {
+  active
+  inactive
+
+  @@map("project_status")
+  @@schema("sim_system")
+}
+
+enum WaterDifferenceMode {
+  billable
+  report_only
+
+  @@map("water_difference_mode")
+  @@schema("sim_system")
+}
+
+enum NodeType {
+  zone
+  building
+  floor
+  unit
+
+  @@map("node_type")
+  @@schema("sim_system")
+}
+
+enum CustomerType {
+  individual
+  company
+  tenant
+  owner
+
+  @@map("customer_type")
+  @@schema("sim_system")
+}
+
+enum EntityStatus {
+  active
+  inactive
+
+  @@map("entity_status")
+  @@schema("sim_system")
+}
+
+model Project {
+  id                        String              @id @default(uuid()) @map("id")
+  code                      String              @unique @map("code")
+  name                      String              @map("name")
+  status                    ProjectStatus       @default(active) @map("status")
+  taxEnabled                Boolean             @default(false) @map("tax_enabled")
+  taxRate                   Decimal?            @map("tax_rate")
+  readingThresholdProfileId String?             @map("reading_threshold_profile_id")
+  waterDifferenceMode       WaterDifferenceMode @default(report_only) @map("water_difference_mode")
+  createdAt                 DateTime            @default(now()) @map("created_at")
+  updatedAt                 DateTime            @updatedAt @map("updated_at")
+  createdBy                 String              @map("created_by")
+  updatedBy                 String              @map("updated_by")
+  locationNodes             LocationNode[]
+  customers                 Customer[]
+
+  @@map("projects")
+  @@schema("sim_system")
+}
+
+model LocationNode {
+  id        String     @id @default(uuid()) @map("id")
+  projectId String     @map("project_id")
+  parentId  String?    @map("parent_id")
+  nodeType  NodeType   @map("node_type")
+  code      String     @map("code")
+  name      String     @map("name")
+  status    EntityStatus @default(active) @map("status")
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+  createdBy String     @map("created_by")
+  updatedBy String     @map("updated_by")
+  project   Project    @relation(fields: [projectId], references: [id])
+  parent    LocationNode? @relation("LocationNodeHierarchy", fields: [parentId], references: [id])
+  children  LocationNode[] @relation("LocationNodeHierarchy")
+  customerAssignments CustomerUnitAssignment[] @relation("AssignedUnit")
+
+  @@unique([projectId, nodeType, code])
+  @@index([parentId])
+  @@map("location_nodes")
+  @@schema("sim_system")
+}
+
+model Customer {
+  id                     String       @id @default(uuid()) @map("id")
+  projectId              String       @map("project_id")
+  customerCode           String       @map("customer_code")
+  name                   String       @map("name")
+  phone                  String       @map("phone")
+  email                  String       @map("email")
+  customerType           CustomerType @map("customer_type")
+  nationalOrCommercialId String       @map("national_or_commercial_id")
+  status                 EntityStatus @default(active) @map("status")
+  createdAt              DateTime     @default(now()) @map("created_at")
+  updatedAt              DateTime     @updatedAt @map("updated_at")
+  createdBy              String       @map("created_by")
+  updatedBy              String       @map("updated_by")
+  project                Project      @relation(fields: [projectId], references: [id])
+  assignments            CustomerUnitAssignment[]
+
+  @@unique([projectId, customerCode])
+  @@map("customers")
+  @@schema("sim_system")
+}
+
+model CustomerUnitAssignment {
+  id         String       @id @default(uuid()) @map("id")
+  customerId String       @map("customer_id")
+  unitId     String       @map("unit_id")
+  startAt    DateTime     @map("start_at")
+  endAt      DateTime?    @map("end_at")
+  reason     String       @map("reason")
+  createdAt  DateTime     @default(now()) @map("created_at")
+  updatedAt  DateTime     @updatedAt @map("updated_at")
+  createdBy  String       @map("created_by")
+  updatedBy  String       @map("updated_by")
+  customer   Customer     @relation(fields: [customerId], references: [id])
+  unit       LocationNode @relation("AssignedUnit", fields: [unitId], references: [id])
+
+  @@map("customer_unit_assignments")
+  @@schema("sim_system")
+}
