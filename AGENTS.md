@@ -242,4 +242,5 @@ Every time the user sends a message, run `git status --short` to detect any chan
 - **Convention**: All mutable entities include `created_at`, `updated_at`, `created_by`, `updated_by` per data model spec
 - **Validation**: `prisma validate` ✅, `prisma generate` ✅, `prisma migrate status` ✅, 110/110 tests ✅, `tsc` build ✅
 - **Branch**: `feature/t012-contract-harness`
+- **Next**: T014
 - **Next**: T014 — Migration: Meter, SIMCard, MeterAssignment, SIMAssignment

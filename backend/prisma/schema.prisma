@@ -4,38 +4,38 @@ generator client {
 }
 
 datasource db {
-  provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  schemas           = ["sim_system"]
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["sim_system"]
 }
 
 model AuditLog {
-  id             String   @id @default(uuid()) @map("id")
-  actorId        String   @map("actor_id")
-  actorRole      String   @map("actor_role")
-  action         String   @map("action")
-  resourceType   String   @map("resource_type")
-  resourceId     String   @map("resource_id")
-  beforeState    Json?    @map("before_state")
-  afterState     Json?    @map("after_state")
-  reason         String?  @map("reason")
-  correlationId  String?  @map("correlation_id")
-  createdAt      DateTime @default(now()) @map("created_at")
+  id            String   @id @default(uuid()) @map("id")
+  actorId       String   @map("actor_id")
+  actorRole     String   @map("actor_role")
+  action        String   @map("action")
+  resourceType  String   @map("resource_type")
+  resourceId    String   @map("resource_id")
+  beforeState   Json?    @map("before_state")
+  afterState    Json?    @map("after_state")
+  reason        String?  @map("reason")
+  correlationId String?  @map("correlation_id")
+  createdAt     DateTime @default(now()) @map("created_at")
 
   @@map("audit_log")
   @@schema("sim_system")
 }
 
 model IdempotencyRecord {
-  id             String   @id @default(uuid())
-  key            String   @unique @map("scoped_key")
+  id             String    @id @default(uuid())
+  key            String    @unique @map("scoped_key")
   method         String
   route          String
   actor          String
-  requestHash    String?  @map("request_hash")
-  responseBody   Json?    @map("response_body")
-  responseStatus Int      @map("response_status")
-  createdAt      DateTime @default(now()) @map("created_at")
+  requestHash    String?   @map("request_hash")
+  responseBody   Json?     @map("response_body")
+  responseStatus Int       @map("response_status")
+  createdAt      DateTime  @default(now()) @map("created_at")
   expiredAt      DateTime? @map("expired_at")
 
   @@map("idempotency_records")
@@ -107,20 +107,20 @@ model Project {
 }
 
 model LocationNode {
-  id        String     @id @default(uuid()) @map("id")
-  projectId String     @map("project_id")
-  parentId  String?    @map("parent_id")
-  nodeType  NodeType   @map("node_type")
-  code      String     @map("code")
-  name      String     @map("name")
-  status    EntityStatus @default(active) @map("status")
-  createdAt DateTime   @default(now()) @map("created_at")
-  updatedAt DateTime   @updatedAt @map("updated_at")
-  createdBy String     @map("created_by")
-  updatedBy String     @map("updated_by")
-  project   Project    @relation(fields: [projectId], references: [id])
-  parent    LocationNode? @relation("LocationNodeHierarchy", fields: [parentId], references: [id])
-  children  LocationNode[] @relation("LocationNodeHierarchy")
+  id                  String                   @id @default(uuid()) @map("id")
+  projectId           String                   @map("project_id")
+  parentId            String?                  @map("parent_id")
+  nodeType            NodeType                 @map("node_type")
+  code                String                   @map("code")
+  name                String                   @map("name")
+  status              EntityStatus             @default(active) @map("status")
+  createdAt           DateTime                 @default(now()) @map("created_at")
+  updatedAt           DateTime                 @updatedAt @map("updated_at")
+  createdBy           String                   @map("created_by")
+  updatedBy           String                   @map("updated_by")
+  project             Project                  @relation(fields: [projectId], references: [id])
+  parent              LocationNode?            @relation("LocationNodeHierarchy", fields: [parentId], references: [id])
+  children            LocationNode[]           @relation("LocationNodeHierarchy")
   customerAssignments CustomerUnitAssignment[] @relation("AssignedUnit")
 
   @@unique([projectId, nodeType, code])
@@ -130,20 +130,20 @@ model LocationNode {
 }
 
 model Customer {
-  id                     String       @id @default(uuid()) @map("id")
-  projectId              String       @map("project_id")
-  customerCode           String       @map("customer_code")
-  name                   String       @map("name")
-  phone                  String       @map("phone")
-  email                  String       @map("email")
-  customerType           CustomerType @map("customer_type")
-  nationalOrCommercialId String       @map("national_or_commercial_id")
-  status                 EntityStatus @default(active) @map("status")
-  createdAt              DateTime     @default(now()) @map("created_at")
-  updatedAt              DateTime     @updatedAt @map("updated_at")
-  createdBy              String       @map("created_by")
-  updatedBy              String       @map("updated_by")
-  project                Project      @relation(fields: [projectId], references: [id])
+  id                     String                   @id @default(uuid()) @map("id")
+  projectId              String                   @map("project_id")
+  customerCode           String                   @map("customer_code")
+  name                   String                   @map("name")
+  phone                  String                   @map("phone")
+  email                  String                   @map("email")
+  customerType           CustomerType             @map("customer_type")
+  nationalOrCommercialId String                   @map("national_or_commercial_id")
+  status                 EntityStatus             @default(active) @map("status")
+  createdAt              DateTime                 @default(now()) @map("created_at")
+  updatedAt              DateTime                 @updatedAt @map("updated_at")
+  createdBy              String                   @map("created_by")
+  updatedBy              String                   @map("updated_by")
+  project                Project                  @relation(fields: [projectId], references: [id])
   assignments            CustomerUnitAssignment[]
 
   @@unique([projectId, customerCode])

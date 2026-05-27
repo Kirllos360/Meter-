@@ -81,7 +81,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd backend && npx prisma validate && npx prisma generate`
   - **Risk**: ORM choice locked per research Decision 3 — switching later is costly; confirm Prisma before proceeding.
 
-- [ ] T005 [P] Add local PostgreSQL via docker-compose in `backend/`
+- [X] T005 [P] Add local PostgreSQL via docker-compose in `backend/`
   - **Dependencies**: none
   - **Area/Files**: `backend/docker-compose.yml`, `backend/README.md` (DB run instructions)
   - **Acceptance**: `docker compose up -d db` exposes a reachable `meter_pulse` Postgres
@@ -119,21 +119,21 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd backend && npm test -- idempotency`
   - **Risk**: Incorrect keying double-bills/double-assigns; scope keys per route+actor.
 
-- [ ] T009 Implement Auth (JWT) + RBAC guard + role model in `backend/src/auth/`
+- [X] T009 Implement Auth (JWT) + RBAC guard + role model in `backend/src/auth/`
   - **Dependencies**: T002, T004
   - **Area/Files**: `backend/src/auth/auth.module.ts`, `backend/src/auth/jwt.strategy.ts`, `backend/src/auth/roles.guard.ts`, `backend/src/auth/roles.decorator.ts`
   - **Acceptance**: Roles `super_admin, project_admin, operator, technician, finance, support, customer` enforced at route + action level; project-scope claim respected (FR-015); all DTO request validation uses `class-validator` pipes (per research Decision 13)
   - **Validation**: `cd backend && npm test -- auth roles.guard`
   - **Risk**: Role names must match frontend `src/lib/navigation.ts`; mismatch breaks gating.
 
-- [ ] T010 [P] Implement append-only audit log service + interceptor in `backend/src/audit/`
+- [X] T010 [P] Implement append-only audit log service + interceptor in `backend/src/audit/`
   - **Dependencies**: T004, T007
   - **Area/Files**: `backend/src/audit/audit.service.ts`, `backend/src/audit/audit.interceptor.ts`
   - **Acceptance**: Sensitive actions write an `AuditLog` row (actor, role, action, resource, before/after, reason, correlationId); writes are append-only (FR-016)
   - **Validation**: `cd backend && npm test -- audit`
   - **Risk**: Missing before/after snapshots reduce dispute defensibility; capture both states in interceptor.
 
-- [ ] T011 Wire API versioning `/api/v1`, base routing, and OpenAPI serving in `backend/src/main.ts`
+- [X] T011 Wire API versioning `/api/v1`, base routing, and OpenAPI serving in `backend/src/main.ts`
   - **Dependencies**: T001, T006
   - **Area/Files**: `backend/src/main.ts`, `backend/src/common/openapi/openapi.setup.ts`
   - **Acceptance**: All routes mount under `/api/v1`; generated OpenAPI doc served at `/api/v1/docs`

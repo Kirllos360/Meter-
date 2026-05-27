@@ -8,9 +8,9 @@ tests_total: 110
 tests_passing: 110
 build_status: "clean"
 pr_merge_ready: true
-graph_nodes: 2017
-graph_edges: 3144
-graph_communities: 159
+graph_nodes: 2083
+graph_edges: 3212
+graph_communities: 156
 ---
 
 # Project Main Memory — Meter Pulse
@@ -119,15 +119,15 @@ graph_communities: 159
 | T002 | ✅ Checked | ✅ Complete | Merged to main |
 | T003 | ✅ Checked | ✅ Complete | Merged to main |
 | T004 | ✅ Checked | ✅ Complete | Merged to main |
-| T005 | ❌ Unchecked | ✅ Complete | `feature/t005-postgres-docker` branch exists, commit present |
+| T005 | ✅ Checked | ✅ Complete | `feature/t005-postgres-docker` branch exists, commit present |
 | T006 | ✅ Checked | ✅ Complete | `feature/t006-error-envelope` branch |
 | T007 | ✅ Checked | ✅ Complete | `feature/t007-correlation-middleware` branch |
-| T008 | ❌ Unchecked | ✅ Complete | Cherry-picked + fixed: AppModule wiring added, logger added |
-| T009 | ❌ Unchecked | ✅ Complete | `feature/t009-auth-rbac` branch, 31 tests passing |
-| T010 | ❌ Unchecked | ✅ Complete | On `feature/t009-auth-rbac`, 21 tests, cherry-picked T006+T007 |
-| T011 | ❌ Unchecked | ✅ Complete | `feature/t011-api-versioning` branch, Swagger UI live |
+| T008 | ✅ Checked | ✅ Complete | Cherry-picked + fixed: AppModule wiring added, logger added |
+| T009 | ✅ Checked | ✅ Complete | `feature/t009-auth-rbac` branch, 31 tests passing |
+| T010 | ✅ Checked | ✅ Complete | On `feature/t009-auth-rbac`, 21 tests, cherry-picked T006+T007 |
+| T011 | ✅ Checked | ✅ Complete | `feature/t011-api-versioning` branch, Swagger UI live |
 | T012 | ✅ Checked | ✅ Complete | `feature/t012-contract-harness` (current HEAD), 26 tests |
-| T013 | ❌ Unchecked | ✅ Complete | Prisma models + migration `core_org` applied; partial unique index on CustomerUnitAssignment |
+| T013 | ✅ Checked | ✅ Complete | Prisma models + migration `core_org` applied; partial unique index on CustomerUnitAssignment |
 
 ---
 
