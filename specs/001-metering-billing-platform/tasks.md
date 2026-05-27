@@ -170,7 +170,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd backend && npx prisma migrate dev --name readings_tariff && npx prisma migrate status`
   - **Risk**: jsonb defaults and decimal precision for consumption/rate must be explicit.
 
-- [ ] T016 [P] Migration — Invoice, InvoiceLine, InvoiceAdjustment in `backend/prisma/`
+- [X] T016 [P] Migration — Invoice, InvoiceLine, InvoiceAdjustment in `backend/prisma/`
   - **Dependencies**: T013
   - **Area/Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_invoices/`
   - **Acceptance**: Unique `invoice_number`; `utility_type` + status enums; amount columns (subtotal/tax/total/paid/remaining); `immutable_at` present

@@ -205,3 +205,50 @@ Every time the user sends a message, run `git status --short` to detect any chan
 
 ### Next Task
 - T012
+
+---
+
+## T015 Memory Log
+
+**Task**: T015 — Migration: Reading, ReadingReview, TariffPlan, BillingPeriod
+**Status**: Complete
+**Date**: 2026-05-27
+**Branch**: feature/t015-readings-tariff-migration
+**Validation**: prisma validate ✅, migrate status ✅, generate ✅, build ✅, npm test 69/69 ✅
+**Migration**: 5 enums, 4 tables, 2 unique indexes — no duplicate DDL
+
+---
+
+## T016 Memory Log
+
+**Task**: T016 — Migration: Invoice, InvoiceLine, InvoiceAdjustment
+**Status**: Complete
+**Date**: 2026-05-27
+**Branch**: feature/t016-invoices-migration
+
+### What Changed
+- Added to `backend/prisma/schema.prisma`:
+  - Enums: UtilityType, InvoiceStatus, AdjustmentType
+  - Models: Invoice (unique invoice_number, DECIMAL(12,3) amounts, immutable_at), InvoiceLine (DECIMAL(12,3) quantity/unit_price/line_amount), InvoiceAdjustment (DECIMAL(12,3) amount, adjustment_type enum)
+- Created migration `20260527153119_invoices`:
+  - 3 enum types, 3 tables, 1 unique index on invoice_number
+  - No duplicate DDL from previous migrations
+
+### Validation
+- `npx prisma validate` ✅
+- `npx prisma migrate status` — 5 migrations, DB up-to-date ✅
+- `npx prisma generate` ✅
+- `npm run build` — clean ✅
+- `npm test` — 69/69 passing (8 suites) ✅
+- SQL verification: 3 tables, unique invoice_number, DECIMAL(12,3) on all 9 amount columns, immutable_at nullable ✅
+- T014 regression: partial indexes intact ✅
+- T015 regression: readings unique index + JSONB raw_payload intact ✅
+
+### Key Decisions
+- All amount fields use consistent @db.Decimal(12, 3) precision
+- FKs are scalar fields (no @relation) — dependent models not yet merged
+- immutable_at is nullable (set when invoice becomes immutable after issue)
+- paid_amount defaults to 0 with explicit Decimal(12,3)
+
+### Next Task
+- T017
