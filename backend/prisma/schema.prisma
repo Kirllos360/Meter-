@@ -4,24 +4,160 @@ generator client {
 }
 
 datasource db {
-  provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  schemas           = ["sim_system"]
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["sim_system"]
 }
 
 model AuditLog {
-  id             String   @id @default(uuid()) @map("id")
-  actorId        String   @map("actor_id")
-  actorRole      String   @map("actor_role")
-  action         String   @map("action")
-  resourceType   String   @map("resource_type")
-  resourceId     String   @map("resource_id")
-  beforeState    Json?    @map("before_state")
-  afterState     Json?    @map("after_state")
-  reason         String?  @map("reason")
-  correlationId  String?  @map("correlation_id")
-  createdAt      DateTime @default(now()) @map("created_at")
+  id            String   @id @default(uuid()) @map("id")
+  actorId       String   @map("actor_id")
+  actorRole     String   @map("actor_role")
+  action        String   @map("action")
+  resourceType  String   @map("resource_type")
+  resourceId    String   @map("resource_id")
+  beforeState   Json?    @map("before_state")
+  afterState    Json?    @map("after_state")
+  reason        String?  @map("reason")
+  correlationId String?  @map("correlation_id")
+  createdAt     DateTime @default(now()) @map("created_at")
 
   @@map("audit_log")
+  @@schema("sim_system")
+}
+
+enum MeterType {
+  electricity
+  water_main
+  water_child
+
+  @@map("meter_type")
+  @@schema("sim_system")
+}
+
+enum MeterStatus {
+  available
+  assigned
+  active
+  offline
+  faulty
+  replaced
+  terminated
+  retired
+
+  @@map("meter_status")
+  @@schema("sim_system")
+}
+
+enum IpType {
+  static
+  dynamic
+
+  @@map("ip_type")
+  @@schema("sim_system")
+}
+
+enum SimStatus {
+  available
+  assigned
+  active
+  suspended
+  old
+  reusable
+  retired
+
+  @@map("sim_status")
+  @@schema("sim_system")
+}
+
+enum AssignmentStatus {
+  active
+  ended
+
+  @@map("assignment_status")
+  @@schema("sim_system")
+}
+
+model Meter {
+  id                String            @id @default(uuid()) @map("id")
+  serialNumber      String            @unique @map("serial_number")
+  meterType         MeterType         @map("meter_type")
+  brand             String            @map("brand")
+  model             String            @map("model")
+  status            MeterStatus       @default(available) @map("status")
+  installationDate  DateTime          @map("installation_date")
+  activationDate    DateTime          @map("activation_date")
+  terminationDate   DateTime?         @map("termination_date")
+  projectId         String            @map("project_id")
+  locationId        String?           @map("location_id")
+  parentMainMeterId String?           @map("parent_main_meter_id")
+  createdAt         DateTime          @default(now()) @map("created_at")
+  updatedAt         DateTime          @updatedAt @map("updated_at")
+  createdBy         String            @map("created_by")
+  updatedBy         String            @map("updated_by")
+  parentMainMeter   Meter?            @relation("MeterHierarchy", fields: [parentMainMeterId], references: [id])
+  childMeters       Meter[]           @relation("MeterHierarchy")
+  assignments       MeterAssignment[]
+  simAssignments    SIMAssignment[]
+
+  @@map("meters")
+  @@schema("sim_system")
+}
+
+model SIMCard {
+  id            String          @id @default(uuid()) @map("id")
+  iccid         String          @unique @map("iccid")
+  msisdn        String          @map("msisdn")
+  provider      String          @map("provider")
+  ipAddress     String          @map("ip_address")
+  ipType        IpType          @map("ip_type")
+  status        SimStatus       @default(available) @map("status")
+  cooldownUntil DateTime?       @map("cooldown_until")
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+  createdBy     String          @map("created_by")
+  updatedBy     String          @map("updated_by")
+  assignments   SIMAssignment[]
+
+  @@map("sim_cards")
+  @@schema("sim_system")
+}
+
+model MeterAssignment {
+  id           String           @id @default(uuid()) @map("id")
+  meterId      String           @map("meter_id")
+  customerId   String           @map("customer_id")
+  unitId       String           @map("unit_id")
+  projectId    String           @map("project_id")
+  startAt      DateTime         @map("start_at")
+  endAt        DateTime?        @map("end_at")
+  changeReason String           @map("change_reason")
+  status       AssignmentStatus @default(active) @map("status")
+  createdAt    DateTime         @default(now()) @map("created_at")
+  updatedAt    DateTime         @updatedAt @map("updated_at")
+  createdBy    String           @map("created_by")
+  updatedBy    String           @map("updated_by")
+  meter        Meter            @relation(fields: [meterId], references: [id])
+
+  @@map("meter_assignments")
+  @@schema("sim_system")
+}
+
+model SIMAssignment {
+  id           String           @id @default(uuid()) @map("id")
+  simId        String           @map("sim_id")
+  meterId      String           @map("meter_id")
+  startAt      DateTime         @map("start_at")
+  endAt        DateTime?        @map("end_at")
+  changeReason String           @map("change_reason")
+  status       AssignmentStatus @default(active) @map("status")
+  createdAt    DateTime         @default(now()) @map("created_at")
+  updatedAt    DateTime         @updatedAt @map("updated_at")
+  createdBy    String           @map("created_by")
+  updatedBy    String           @map("updated_by")
+  sim          SIMCard          @relation(fields: [simId], references: [id])
+  meter        Meter            @relation(fields: [meterId], references: [id])
+
+  @@map("sim_assignments")
   @@schema("sim_system")
 }

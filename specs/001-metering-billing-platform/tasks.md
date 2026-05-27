@@ -156,7 +156,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd backend && npx prisma migrate dev --name core_org && npx prisma migrate status`
   - **Risk**: Hierarchy self-FK on LocationNode; ensure `parent_id` nullable + indexed.
 
-- [ ] T014 [P] Migration — Meter, SIMCard, MeterAssignment, SIMAssignment in `backend/prisma/`
+- [X] T014 [P] Migration — Meter, SIMCard, MeterAssignment, SIMAssignment in `backend/prisma/`
   - **Dependencies**: T013
   - **Area/Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_meter_sim/`
   - **Acceptance**: Unique `serial_number`, unique `iccid`; **partial unique index on `(meter_id) WHERE end_at IS NULL`** and **`(sim_id) WHERE end_at IS NULL`** (FR-004/FR-005); `parent_main_meter_id` required for `water_child`

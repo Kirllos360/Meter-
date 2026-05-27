@@ -1,0 +1,31 @@
+Category,Step,Check,Result,Details
+Model,1,Meter model,CREATED,Table: meters
+Model,2,SIMCard model,CREATED,Table: sim_cards
+Model,3,MeterAssignment model,CREATED,Table: meter_assignments
+Model,4,SIMAssignment model,CREATED,Table: sim_assignments
+Enum,5,MeterType,CREATED,electricity, water_main, water_child
+Enum,6,MeterStatus,CREATED,available, assigned, active, offline, faulty, replaced, terminated, retired
+Enum,7,IpType,CREATED,static, dynamic
+Enum,8,SimStatus,CREATED,available, assigned, active, suspended, old, reusable, retired
+Enum,9,AssignmentStatus,CREATED,active, ended
+Constraint,10,Unique serial_number,CONFIRMED,meters_serial_number_key
+Constraint,11,Unique iccid,CONFIRMED,sim_cards_iccid_key
+Constraint,12,Partial unique (meter_id),CONFIRMED,WHERE end_at IS NULL (FR-004)
+Constraint,13,Partial unique (sim_id),CONFIRMED,WHERE end_at IS NULL (FR-005)
+Validation,14,npx prisma format,PASS,Schema formatted
+Validation,15,npx prisma validate,PASS,Schema valid
+Validation,16,npx prisma migrate dev,PASS,Migration: 20260527100316_meter_sim
+Validation,17,npx prisma migrate status,PASS,Database up-to-date
+Validation,18,npm test,PASS,69/69 tests passing (8 suites)
+Validation,19,npm run build,PASS,Exit code 0
+Validation,20,Partial index meter_assignments,PASS,CONFIRMED in pg_indexes
+Validation,21,Partial index sim_assignments,PASS,CONFIRMED in pg_indexes
+Acceptance,22,Unique serial_number,PASS,Unique index on meters
+Acceptance,23,Unique iccid,PASS,Unique index on sim_cards
+Acceptance,24,Partial unique (meter_id) WHERE end_at IS NULL,PASS,FR-004 satisfied
+Acceptance,25,Partial unique (sim_id) WHERE end_at IS NULL,PASS,FR-005 satisfied
+Acceptance,26,parent_main_meter_id nullable self-FK,PASS,FK with ON DELETE SET NULL
+Acceptance,27,All 5 enums created,PASS,meter_type, meter_status, ip_type, sim_status, assignment_status
+Acceptance,28,All 4 tables created,PASS,meters, sim_cards, meter_assignments, sim_assignments
+,,,,
+OVERALL VERDICT,PASS,,,,,

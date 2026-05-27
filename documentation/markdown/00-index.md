@@ -2,7 +2,7 @@
 
 > Complete index of all documentation files organized by format type.
 > Each content piece exists in multiple formats for different use cases.
-> Last updated: 2026-05-26
+> Last updated: 2026-05-27
 
 ---
 
@@ -10,10 +10,10 @@
 
 ```
 documentation/
-├── markdown/   ← Readable documentation (14 files)
-├── sql/        ← Database DDL scripts + validation queries (5 files)
-├── text/       ← Plain text versions (16 files)
-├── excel/      ← CSV/tabular data (13 files)
+├── markdown/   ← Readable documentation (15 files)
+├── sql/        ← Database DDL scripts + validation queries (6 files)
+├── text/       ← Plain text versions (17 files)
+├── excel/      ← CSV/tabular data (14 files)
 └── pdf/        ← Printable PDF versions (18 files)
 ```
 
@@ -36,7 +36,7 @@ documentation/
 | **10** | **Progress & Health Report** | `10-progress-health-report.md` | — | `10-progress-health-report.txt` | — | `10-progress-health-report.pdf` |
 | **11** | **Email Report Log** | `11-email-report-log.md` | — | `11-email-report-log.txt` | `11-email-report-log.csv` | `11-email-report-log.pdf` |
 | **12** | **T002-T003 Verification** | `12-T002-T003-verification-report.md` | — | — | — | — |
-| **13** | **Validation Reports** | `13-T001-validation-report.md`<br>`13-T002-validation-report.md`<br>`13-T003-validation-report.md`<br>`13-T004-validation-report.md`<br>`13-T009-validation-report.md`<br>`13-T010-validation-report.md`<br>`13-T011-validation-report.md` | `13-T001-validation-report.sql`<br>`13-T002-validation-report.sql`<br>`13-T003-validation-report.sql`<br>`13-T004-validation-report.sql`<br>`13-T009-validation-report.sql`<br>`13-T010-validation-report.sql`<br>`13-T011-validation-report.sql` | `13-T001-validation-report.txt`<br>`13-T002-validation-report.txt`<br>`13-T003-validation-report.txt`<br>`13-T004-validation-report.txt`<br>`13-T009-validation-report.txt`<br>`13-T010-validation-report.txt`<br>`13-T011-validation-report.txt` | `13-T001-validation-report.csv`<br>`13-T002-validation-report.csv`<br>`13-T003-validation-report.csv`<br>`13-T004-validation-report.csv`<br>`13-T009-validation-report.csv`<br>`13-T010-validation-report.csv`<br>`13-T011-validation-report.csv` | `13-T001-validation-report.pdf`<br>`13-T002-validation-report.pdf`<br>`13-T003-validation-report.pdf`<br>`13-T004-validation-report.pdf` |
+| **13** | **Validation Reports** | `13-T001-validation-report.md`<br>`13-T002-validation-report.md`<br>`13-T003-validation-report.md`<br>`13-T004-validation-report.md`<br>`13-T009-validation-report.md`<br>`13-T010-validation-report.md`<br>`13-T011-validation-report.md`<br>`13-T014-validation-report.md` | `13-T001-validation-report.sql`<br>`13-T002-validation-report.sql`<br>`13-T003-validation-report.sql`<br>`13-T004-validation-report.sql`<br>`13-T009-validation-report.sql`<br>`13-T010-validation-report.sql`<br>`13-T011-validation-report.sql`<br>`13-T014-validation-report.sql` | `13-T001-validation-report.txt`<br>`13-T002-validation-report.txt`<br>`13-T003-validation-report.txt`<br>`13-T004-validation-report.txt`<br>`13-T009-validation-report.txt`<br>`13-T010-validation-report.txt`<br>`13-T011-validation-report.txt`<br>`13-T014-validation-report.txt` | `13-T001-validation-report.csv`<br>`13-T002-validation-report.csv`<br>`13-T003-validation-report.csv`<br>`13-T004-validation-report.csv`<br>`13-T009-validation-report.csv`<br>`13-T010-validation-report.csv`<br>`13-T011-validation-report.csv`<br>`13-T014-validation-report.csv` | `13-T001-validation-report.pdf`<br>`13-T002-validation-report.pdf`<br>`13-T003-validation-report.pdf`<br>`13-T004-validation-report.pdf` |
 
 ---
 
@@ -60,6 +60,7 @@ documentation/
 | `13-T002-validation-report.md` | T002 validation: config + PostgreSQL checks (7 tests) |
 | `13-T003-validation-report.md` | T003 validation: lint/format/test tooling checks (5 tests) |
 | `13-T004-validation-report.md` | T004 validation: Prisma ORM checks (8 tests) |
+| `13-T014-validation-report.md` | T014 validation: Meter/SIMCard schema checks (10 tests) |
 
 ### `sql/` — Database Definition
 
@@ -70,6 +71,7 @@ documentation/
 | `13-T002-validation-report.sql` | T002 validation SQL queries |
 | `13-T003-validation-report.sql` | T003 validation SQL queries |
 | `13-T004-validation-report.sql` | T004 validation SQL queries |
+| `13-T014-validation-report.sql` | T014 validation SQL queries |
 
 ### `text/` — Plain Text (terminal, grep, scripts)
 
@@ -88,6 +90,7 @@ documentation/
 | `13-T002-validation-report.txt` | T002 validation plain text |
 | `13-T003-validation-report.txt` | T003 validation plain text |
 | `13-T004-validation-report.txt` | T004 validation plain text |
+| `13-T014-validation-report.txt` | T014 validation plain text |
 | `07-github-packages-needed.txt` | Compact GitHub packages (original) |
 | `08-required-apps.txt` | All required applications (original) |
 
@@ -108,6 +111,7 @@ documentation/
 | `13-T002-validation-report.csv` | T002 validation tabular |
 | `13-T003-validation-report.csv` | T003 validation tabular |
 | `13-T004-validation-report.csv` | T004 validation tabular |
+| `13-T014-validation-report.csv` | T014 validation tabular |
 
 ### `pdf/` — Printable Documents (reports, printing)
 
@@ -143,7 +147,7 @@ documentation/
 ├── markdown/03-database-schema-overview.md ← Data model reference
 ├── markdown/05-programming-languages.md  ← Tech stack
 ├── markdown/06-github-packages-needed.md ← GitHub tools
-├── markdown/13-T00*-validation-report.md ← T001-T004 validation reports
+├── markdown/13-T00*-validation-report.md ← T001-T004, T009-T011, T014 validation reports
 ├── markdown/12-T002-T003-verification-report.md ← Pre-T004 verification
 │
 ├── sql/03-database-schema.sql     ← PostgreSQL DDL (20 tables)

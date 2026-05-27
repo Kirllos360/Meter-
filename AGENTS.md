@@ -204,4 +204,33 @@ Every time the user sends a message, run `git status --short` to detect any chan
 - `curl /api/v1/docs` — HTTP 200
 
 ### Next Task
-- T012
+- T014
+
+---
+
+## T014 Memory Log
+
+**Task**: T014 — Migration: Meter, SIMCard, MeterAssignment, SIMAssignment
+**Story**: Foundational — Phase 2
+**Status**: Complete
+**Date**: 2026-05-27
+**Branch**: feature/t014-meter-sim-migration
+**Commit**: (not yet committed)
+
+### What Changed
+- Added 4 Prisma models to `backend/prisma/schema.prisma`: Meter, SIMCard, MeterAssignment, SIMAssignment
+- Added 5 enums: MeterType, MeterStatus, IpType, SimStatus, AssignmentStatus
+- FK relations: Meter self-FK (parent_main_meter_id), Meter → MeterAssignment, SIMCard → SIMAssignment, Meter → SIMAssignment
+- Created migration `20260527100316_meter_sim` with DDL + partial unique indexes via raw SQL
+- Added partial unique index `meter_assignments_meter_id_active_key` (FR-004)
+- Added partial unique index `sim_assignments_sim_id_active_key` (FR-005)
+
+### Validation
+- `npx prisma validate` ✅
+- `npx prisma migrate status` ✅
+- `npm test` — 69/69 ✅
+- `npm run build` (tsc) — clean ✅
+- Partial unique indexes confirmed in pg_indexes ✅
+
+### Next Task
+- T015

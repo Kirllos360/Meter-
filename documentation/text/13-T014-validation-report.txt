@@ -1,0 +1,101 @@
+T014 VALIDATION REPORT - MIGRATION: METER, SIMCARD, METERASSIGNMENT, SIMASSIGNMENT
+================================================================================
+
+Task:   T014 - Migration: Meter, SIMCard, MeterAssignment, SIMAssignment
+Date:   2026-05-27
+Author: Kirllos Hany
+Branch: feature/t014-meter-sim-migration
+Verdict: PASS (ALL CHECKS PASSED)
+
+------------------------------------------------------------------------------
+IMPLEMENTATION SUMMARY
+------------------------------------------------------------------------------
+
+  1. Meter model ................... CREATED - meters table
+  2. SIMCard model ................. CREATED - sim_cards table
+  3. MeterAssignment model ......... CREATED - meter_assignments table
+  4. SIMAssignment model ........... CREATED - sim_assignments table
+  5. MeterType enum ................ CREATED - meter_type
+  6. MeterStatus enum .............. CREATED - meter_status
+  7. IpType enum ................... CREATED - ip_type
+  8. SimStatus enum ................ CREATED - sim_status
+  9. AssignmentStatus enum ......... CREATED - assignment_status
+ 10. Unique serial_number .......... CONFIRMED - meters_serial_number_key
+ 11. Unique iccid .................. CONFIRMED - sim_cards_iccid_key
+ 12. Partial unique (meter_id) ..... CONFIRMED - WHERE end_at IS NULL (FR-004)
+ 13. Partial unique (sim_id) ....... CONFIRMED - WHERE end_at IS NULL (FR-005)
+
+------------------------------------------------------------------------------
+ENUMS
+------------------------------------------------------------------------------
+
+  meter_type .............. electricity, water_main, water_child
+  meter_status ............ available, assigned, active, offline, faulty,
+                           replaced, terminated, retired
+  ip_type ................. static, dynamic
+  sim_status .............. available, assigned, active, suspended, old,
+                           reusable, retired
+  assignment_status ....... active, ended
+
+------------------------------------------------------------------------------
+TABLES
+------------------------------------------------------------------------------
+
+  meters
+    Columns: id, serial_number (UNIQUE), meter_type, brand, model, status,
+             installation_date, activation_date, termination_date (?),
+             project_id, location_id (?), parent_main_meter_id (?),
+             created_at, updated_at, created_by, updated_by
+    FK: parent_main_meter_id -> meters (SET NULL)
+
+  sim_cards
+    Columns: id, iccid (UNIQUE), msisdn, provider, ip_address, ip_type,
+             status, cooldown_until (?), created_at, updated_at,
+             created_by, updated_by
+
+  meter_assignments
+    Columns: id, meter_id, customer_id, unit_id, project_id, start_at,
+             end_at (?), change_reason, status, created_at, updated_at,
+             created_by, updated_by
+    FK: meter_id -> meters (RESTRICT)
+    Partial unique index: (meter_id) WHERE end_at IS NULL
+
+  sim_assignments
+    Columns: id, sim_id, meter_id, start_at, end_at (?), change_reason,
+             status, created_at, updated_at, created_by, updated_by
+    FK: sim_id -> sim_cards (RESTRICT), meter_id -> meters (RESTRICT)
+    Partial unique index: (sim_id) WHERE end_at IS NULL
+
+------------------------------------------------------------------------------
+VALIDATION STEPS
+------------------------------------------------------------------------------
+
+  1. npx prisma format ............. PASS - Schema formatted
+  2. npx prisma validate ........... PASS - Schema valid
+  3. npx prisma migrate dev ........ PASS - 20260527100316_meter_sim applied
+  4. npx prisma migrate status ..... PASS - Database up-to-date
+  5. npm test ...................... PASS - 69/69 tests passing (8 suites)
+  6. npm run build (tsc) ........... PASS - Exit code 0
+  7. Partial index meter_assignments PASS - CONFIRMED in pg_indexes
+  8. Partial index sim_assignments.. PASS - CONFIRMED in pg_indexes
+  9. Unique serial_number .......... PASS - CONFIRMED
+ 10. Unique iccid .................. PASS - CONFIRMED
+
+------------------------------------------------------------------------------
+ACCEPTANCE CRITERIA
+------------------------------------------------------------------------------
+
+ [PASS] Unique serial_number on meters
+ [PASS] Unique iccid on sim_cards
+ [PASS] Partial unique (meter_id) WHERE end_at IS NULL (FR-004)
+ [PASS] Partial unique (sim_id) WHERE end_at IS NULL (FR-005)
+ [PASS] parent_main_meter_id nullable, self-FK
+ [PASS] All 5 enums created
+ [PASS] All 4 tables created
+ [PASS] FK constraints within T014
+ [PASS] Build stable
+ [PASS] Tests passing
+
+------------------------------------------------------------------------------
+OVERALL VERDICT: PASS
+------------------------------------------------------------------------------
