@@ -173,6 +173,31 @@
 - **GitHub**: https://github.com/nestjs/config
 - **Download**: https://www.npmjs.com/package/@nestjs/config
 
+
+### AJV (Another JSON Schema Validator)
+- **Version**: ^8.17.x
+- **Use**: JSON Schema validation for contract tests
+- **GitHub**: https://github.com/ajv-validator/ajv
+- **Download**: https://www.npmjs.com/package/ajv
+
+### ajv-formats
+- **Version**: ^3.0.x
+- **Use**: Format validators (date-time, uri, email) for AJV
+- **GitHub**: https://github.com/ajv-validator/ajv-formats
+- **Download**: https://www.npmjs.com/package/ajv-formats
+
+### js-yaml
+- **Version**: ^4.1.x
+- **Use**: YAML parsing for OpenAPI contract loading in tests
+- **GitHub**: https://github.com/nodeca/js-yaml
+- **Download**: https://www.npmjs.com/package/js-yaml
+
+### @nestjs/testing
+- **Version**: ^10.4.x
+- **Use**: NestJS test utilities for creating TestModule
+- **GitHub**: https://github.com/nestjs/testing
+- **Download**: https://www.npmjs.com/package/@nestjs/testing
+
 ### @nestjs/jwt / @nestjs/passport / @nestjs/swagger
 - **Use**: JWT auth, Passport integration, OpenAPI documentation
 - **GitHub**: https://github.com/nestjs/jwt, https://github.com/nestjs/passport, https://github.com/nestjs/swagger

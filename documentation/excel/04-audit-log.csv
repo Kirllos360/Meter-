@@ -49,3 +49,28 @@ Timestamp,Action,Category,Details,Files Affected,Status
 2026-05-26 13:25:00,Update .env.example,Backend,"Synced .env.example with actual Docker credentials (port 3001, meter_pulse user)",backend/.env.example,Completed
 2026-05-26 13:40:00,Implement T004 - Prisma ORM,T004,"Installed prisma v6.19.3, created schema.prisma (generator+datasource), PrismaService, updated DatabaseModule, added DATABASE_URL",backend/,Completed
 2026-05-26 13:42:00,T004 verification,T004,"prisma validate PASS, prisma generate PASS, tsc PASS, server boot with Prisma connected PASS",backend/,Completed
+2026-05-26 14:00:00,Implement T005 - Docker PostgreSQL,T005,"Created docker-compose.yml with postgres:16-alpine, healthcheck, env vars",backend/docker-compose.yml,Completed
+2026-05-26 14:05:00,T005 verification,T005,"docker compose up PASS, compose ps PASS, prisma validate PASS",backend/,Completed
+2026-05-26 14:10:00,Implement T006 - Error Envelope,T006,"Created ErrorEnvelope interface, AllExceptionsFilter, HttpExceptionFilter",backend/src/common/http/,Completed
+2026-05-26 14:15:00,T006 verification,T006,"npm test - error-envelope PASS (15 tests), build PASS",backend/,Completed
+2026-05-26 14:20:00,Implement T007 - Correlation Middleware,T007,"Created CorrelationMiddleware, request scoping, response header",backend/src/common/http/,Completed
+2026-05-26 14:25:00,T007 verification,T007,"npm test -- correlation PASS, correlationId on responses",backend/,Completed
+2026-05-26 14:30:00,Implement T008 - Idempotency Interceptor,T008,"Created IdempotencyInterceptor, idempotency-key store in Prisma, Redis fallback",backend/src/common/http/,Completed
+2026-05-26 14:35:00,T008 verification,T008,"npm test -- idempotency PASS (5 tests), build PASS",backend/,Completed
+2026-05-26 14:40:00,Implement T009 - Auth JWT + RBAC,T009,"Created auth module: JWT strategy, RolesGuard, Roles decorator, Role enum (7 roles), global ValidationPipe",backend/src/auth/,Completed
+2026-05-26 14:45:00,T009 verification,T009,"npm test PASS (31 tests, 3 suites), build PASS, lint PASS",backend/,Completed
+2026-05-26 14:50:00,Implement T010 - Audit Log,T010,"Created audit service, interceptor, decorator; AuditLog model in Prisma schema; global APP_INTERCEPTOR",backend/src/audit/,Completed
+2026-05-26 14:55:00,T010 verification,T010,"npm test PASS (69 tests, 8 suites), build PASS, lint PASS",backend/,Completed
+2026-05-26 15:00:00,Implement T011 - API Versioning + OpenAPI,T011,"Added global prefix /api/v1, Swagger/OpenAPI setup with JWT bearer",backend/src/main.ts,Completed
+2026-05-26 15:05:00,T011 verification,T011,"npm test 69/69 PASS, curl /api/v1/health PASS, curl /api/v1/docs PASS",backend/,Completed
+2026-05-26 15:10:00,Implement T012 - Contract Test Harness,T012,"Created setup.ts (YAML loading, custom $ref deref, AJV validation, supertest app factory) + 8 contract tests",backend/test/contract/,Completed
+2026-05-26 15:15:00,T012 verification,T012,"npm test PASS (77 tests, 9 suites), build PASS",backend/,Completed
+2026-05-27 10:00:00,Implement T013 - Core Org Migration,T013,"Created schema.prisma models: Project, LocationNode, Customer, CustomerUnitAssignment + migration SQL",backend/prisma/,Completed
+2026-05-27 10:30:00,Implement T014 - Meter/SIM Migration,T014,"Created Meter, SIMCard, MeterAssignment, SIMAssignment models + partial unique indexes via raw SQL",backend/prisma/,Completed
+2026-05-27 11:00:00,Implement T015 - Reading/Tariff Migration,T015,"Created Reading, ReadingReview, TariffPlan, BillingPeriod models + jsonb defaults + decimal precision",backend/prisma/,Completed
+2026-05-27 11:30:00,Implement T016 - Invoice Migration,T016,"Created Invoice, InvoiceLine, InvoiceAdjustment models + unique invoice_number + immutable_at",backend/prisma/,Completed
+2026-05-27 12:00:00,Implement T017 - Payment/Ledger Migration,T017,"Created Payment, PaymentAllocation, CustomerLedgerEntry + append-only DB trigger trg_customer_ledger_append_only",backend/prisma/,Completed
+2026-05-27 12:30:00,T013-T017 verification,T013-T017,"All migration SQLs verified, npm test 69/69 PASS, build PASS",backend/prisma/,Completed
+2026-05-28 07:00:00,Update documentation to 2026-05-28,Docs,"Updated index, git log, progress report, packages, conversation log, memory files, audit log, email log",documentation/,Completed
+2026-05-28 07:30:00,Graphify update,Docs,"Updated graph.json with 9 new T012 nodes (866 total, 2530 edges)",Frontend/graphify-out/,Completed
+2026-05-28 08:00:00,Tasks.md final update,Docs,"All T001-T017 marked [X], committed 336e0e0",specs/,Completed

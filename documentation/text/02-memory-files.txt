@@ -1,94 +1,109 @@
-Memory & Configuration Files — Meter Pulse
+# Memory Files — Meter Pulse
 
-All agent memory, skill definitions, and configuration files used by OpenCode, Speckit, and Graphify.
-Last updated: 2026-05-26
-  2. AGENTS.md (Frontend)
-  • Path: /Frontend/AGENTS.md
-  • Function: Graphify-specific instructions for frontend work — every frontend ticket must start with graphify query.
-  • Used by: OpenCode agent when working on frontend tasks
-  3. Speckit Constitution (Template)
-  • Path: .specify/memory/constitution.md
-  • Function: Project constitution defining core principles, governance rules, and quality gates. Currently a template with placeholder markers — must be ratified before implementation closeout (T085).
-  • Status: ⚠️ Template — not yet ratified
-  • Required fields: Core Principles (4+), Governance rules, Version, Ratification date
-  4. Speckit Feature Configuration
-  • Path: .specify/feature.json
-  • Function: Maps the active feature directory: specs/001-metering-billing-platform
-  • Used by: Speckit workflow to locate spec files
-  5. Speckit Integration Config
-  • Path: .specify/integration.json
-  • Function: Speckit integration settings — currently configured for codex integration, version 0.8.13
-  6. Agent Skills (.agents/skills/)
+> All agent memory files: AGENTS.md, Speckit constitution, skills, OpenCode config, Graphify.
+> Last updated: 2026-05-28
 
-  Skill File  |  Function  
+---
 
-  speckit-analyze/SKILL.md  |  Analyze specifications for completeness and quality  
-  speckit-checklist/SKILL.md  |  Generate and validate specification checklists  
-  speckit-clarify/SKILL.md  |  Identify and resolve ambiguous requirements  
-  speckit-constitution/SKILL.md  |  Create and manage project constitution  
-  speckit-implement/SKILL.md  |  Guide implementation of planned tasks  
-  speckit-plan/SKILL.md  |  Generate implementation plans from specs  
-  speckit-specify/SKILL.md  |  Create feature specifications  
-  speckit-tasks/SKILL.md  |  Break plans into actionable tasks  
-  speckit-taskstoissues/SKILL.md  |  Convert tasks to GitHub issues  
-  7. OpenCode Configuration
+## Key Memory Files
 
-  Path  |  Function  
+| File | Purpose | Last Updated |
+|------|---------|-------------|
+| `AGENTS.md` | Agent session memory log | 2026-05-28 (T017) |
+| `prompt-history_T009.md` | T009 implementation prompt | 2026-05-26 |
+| `prompt-history_T012.md` | T012 contract harness prompt | 2026-05-28 |
+| `.specify/memory/constitution.md` | Speckit constitution (template) | N/A |
 
-  .opencode/commands/speckit.constitution.md  |  OpenCode command for constitution workflow  
-  Frontend/.opencode/opencode.json  |  OpenCode plugin config — registers Graphify plugin  
-  Frontend/.opencode/plugins/graphify.js  |  Graphify plugin — injects knowledge graph reminders before bash calls  
-  8. Speckit Templates (.specify/templates/)
+---
 
-  Template  |  Used For  
+## AGENTS.md Contents
 
-  checklist-template.md  |  Specification quality checklists  
-  constitution-template.md  |  Project constitution documents  
-  plan-template.md  |  Implementation plans  
-  spec-template.md  |  Feature specifications  
-  tasks-template.md  |  Task breakdown lists  
-  9. Speckit Workflows
+### T009 — Implement Auth (JWT) + RBAC guard + role model
 
-  Path  |  Function  
+- **Story**: Foundational
+- **Status**: Complete
+- **What changed**: Created auth module with JWT strategy, RolesGuard, Roles decorator, role enum (7 roles), JWT payload interfaces, global validation pipe
+- **Files**: `src/auth/*.ts`, `test/auth/*.ts`, `src/main.ts`, `src/app.module.ts`, `package.json`, `tsconfig.json`, `.eslintrc.cjs`, `.env`, `.env.example`
+- **Validation**: 31 tests passing, tsc clean, eslint clean
+- **Frontend roles verified**: super_admin, project_admin, operator, technician, finance, support, customer
+- **Next task**: T010
 
-  .specify/workflows/workflow-registry.json  |  Registers available workflows (Speckit: specify → plan → tasks → implement)  
-  .specify/workflows/speckit/workflow.yml  |  Full SDD cycle workflow definition with review gates  
-  10. Speckit Scripts
+---
 
-  Script  |  Function  
+### T010 — Implement Append-Only Audit Log
 
-  check-prerequisites.sh  |  Verify environment meets requirements  
-  common.sh  |  Shared utility functions  
-  create-new-feature.sh  |  Bootstrap new feature directory  
-  setup-plan.sh  |  Initialize plan artifacts  
-  setup-tasks.sh  |  Initialize task artifacts  
-  11. Graphify Knowledge Graph
-  • Path: Frontend/graphify-out/
-  • Function: Stores auto-generated knowledge graph of the codebase (AST extraction + community detection)
-  • Key files:
-  • graph.json — Queryable graph data (GraphRAG-ready JSON)
-  • graph.html — Interactive HTML visualization
-  • GRAPH_REPORT.md — Plain-language architecture report
-  • manifest.json — Graph metadata and versioning
+- **Story**: Foundational
+- **Status**: Complete
+- **What changed**: Created AuditLog model, AuditService (injectable, fail-safe), AuditInterceptor (global), AuditDecorator. Cherry-picked T006+T007.
+- **Files**: `src/audit/*.ts`, `prisma/schema.prisma`, `src/app.module.ts`
+- **Validation**: 69 tests passing, tsc clean, eslint clean
+- **Next task**: T011
 
-File Dependency Diagram
+---
 
-.specify/memory/constitution.md
-  ├── Defines quality gates for all work
-  ├── Referenced by plan.md (Gate 4)
-  └── Must be ratified before T085 closeout
+### T011 — Wire API Versioning + OpenAPI
 
-.agents/skills/*.md
-  ├── Provide slash commands (/speckit-*)
-  ├── Used by OpenCode to run Speckit workflow
-  └── Invoked via .specify/workflows/speckit/workflow.yml
+- **Story**: Foundational
+- **Status**: Complete
+- **What changed**: Global prefix /api/v1, Swagger/OpenAPI setup with JWT bearer
+- **Files**: `src/main.ts`, `src/common/openapi/openapi.setup.ts`
+- **Validation**: 69 tests passing, /api/v1/health returns ok, /api/v1/docs returns 200
+- **Next task**: T012
 
-AGENTS.md (root)
-  ├── Loaded by OpenCode at session start
-  ├── Points to specs/001-metering-billing-platform/plan.md
-  └── Contains project-specific agent instructions
+---
 
-Frontend/AGENTS.md
-  ├── Loaded when working in Frontend/
-  ├── Enforces Graphify-first rule for frontend tasks
-  └── References Frontend/graphify-out/ knowledge graph
+### T012 — Build Contract Test Harness
+
+- **Story**: Foundational
+- **Status**: Complete
+- **What changed**: Created setup.ts (YAML loading, custom $ref deref, AJV validation, supertest app factory), 8 contract tests, added GET /health to OpenAPI spec
+- **Files**: `test/contract/setup.ts`, `test/contract/setup.spec.ts`, `specs/*/contracts/meter-pulse-api.yaml`
+- **Packages**: supertest, ajv, ajv-formats, js-yaml (@apidevtools/swagger-parser removed — ESM-only)
+- **Validation**: 77 tests passing, build clean
+- **Next task**: T013
+
+---
+
+### T013 — Migration: Project, LocationNode, Customer, CustomerUnitAssignment
+
+- **Story**: Phase 2 (schema)
+- **Status**: Complete
+- **What changed**: Core org models in Prisma schema with enums, self-FK hierarchy, partial unique indexes, project config columns
+- **Next task**: T014
+
+---
+
+### T014 — Migration: Meter, SIMCard, MeterAssignment, SIMAssignment
+
+- **Story**: Phase 2 (schema)
+- **Status**: Complete
+- **What changed**: Meter/SIM models with unique serial_number/iccid, partial unique indexes via raw SQL WHERE end_at IS NULL
+- **Next task**: T015
+
+---
+
+### T015 — Migration: Reading, ReadingReview, TariffPlan, BillingPeriod
+
+- **Story**: Phase 2 (schema)
+- **Status**: Complete
+- **What changed**: Reading with unique (meter_id, reading_at, source), jsonb defaults, DECIMAL(12,3)
+- **Next task**: T016
+
+---
+
+### T016 — Migration: Invoice, InvoiceLine, InvoiceAdjustment
+
+- **Story**: Phase 2 (schema)
+- **Status**: Complete
+- **What changed**: Invoice with unique invoice_number, utility_type/status enums, immutable_at, consistent DECIMAL(12,3)
+- **Next task**: T017
+
+---
+
+### T017 — Migration: Payment, PaymentAllocation, CustomerLedgerEntry
+
+- **Story**: Phase 2 (schema)
+- **Status**: Complete
+- **What changed**: Payment with unique payment_number, PaymentAllocation with order, CustomerLedgerEntry append-only with DB trigger trg_customer_ledger_append_only
+- **Validation**: DB-level trigger verified — UPDATE/DELETE raise exception
+- **Next task**: T018

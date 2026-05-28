@@ -1,27 +1,75 @@
-Git Commit Log — Meter Pulse
+# Git Commit Log — Meter Pulse
 
-Every commit made during this project, recorded with timestamp, author, description, and files changed.
-Updated automatically after each task completion.
-Started: 2026-05-26
+> Full commit history with timestamps, messages, and file counts.
+> Last updated: 2026-05-26
 
-  Commit style  |  TXXX: short description  
-  Author  |  Kirllos Hany (kirllos.hany@epower.com.eg)  
-  When  |  After every completed task  
-  Push  |  Only after user approval ("go")  
-  Token  |  Never used without explicit permission  
-  Before commit  |  git status checked, only intended files staged  
-  Secrets  |  Never commit .env, tokens, *.db, node_modules/, .next/  
+---
 
-Commits
+## Commit History
 
-  #  |  Date/Time  |  Hash  |  Author  |  Message  |  Files Changed  |  Phase  
+| Date | Hash | Message | Files Changed | Insertions | Deletions |
+|------|------|---------|---------------|------------|-----------|
+| 2026-05-26 | `e379c1b` | docs: update documentation index to include T005-T008 validation reports | 1 | +2 | -2 |
+| 2026-05-26 | `a687a30` | docs: add T008 validation reports in 5 formats, update index and memory log | 9 | +377 | -7 |
+| 2026-05-26 | `0dbc77e` | build(backend): add idempotency interceptor for T008 | 7 | +396 | -5 |
+| 2026-05-26 | `10572df` | docs: add T001-T004 validation reports in 5 formats | 21 | +2379 | -2 |
+| 2026-05-26 | `0629776` | T004: init Prisma ORM | 4 | +68 | -0 |
+| 2026-05-26 | `a52860c` | T003: backend tooling (ESLint, Prettier, Jest) | 6 | +2887 | -11 |
+| 2026-05-26 | `fb69e09` | T002: config + PostgreSQL | 9 | +171 | -19 |
+| 2026-05-26 | `e0fbcfa` | T001: NestJS backend scaffold | 20 | +18665 | -0 |
+| 2026-05-26 | `8c03a81` | build(backend): implement jwt auth and rbac for T009 | 33 | +1160 | -163 |
+| 2026-05-26 | `3905f3a` | build(backend): implement global error envelope for T006 | 9 | +204 | -3 |
+| 2026-05-26 | `4f12da5` | build(backend): add correlation middleware for T007 | 7 | +125 | -13 |
+| 2026-05-26 | `a18038f` | build(backend): wire api versioning and openapi for T011 | 11 | +373 | -4 |
 
-  1  |  2026-05-25 16:54  |  82e7fc6  |  (baseline)  |  initial project baseline  |  —  |  Setup  
-  2  |  2026-05-25 16:59  |  b3386ee  |  (baseline)  |  chore: refresh Graphify maps  |  —  |  Setup  
-  3  |  2026-05-25 17:23  |  bbe05db  |  (baseline)  |  T001: NestJS scaffold  |  —  |  Phase 1  
-  4  |  2026-05-25 17:23  |  7f01e4e  |  (baseline)  |  docs: mark T001 complete  |  —  |  Phase 1  
-  5  |  2026-05-25 17:25  |  111a9c0  |  (baseline)  |  chore: ignore Graphify root marker  |  —  |  Setup  
-  6  |  2026-05-25 17:44  |  81884a1  |  (baseline)  |  T002: config + PostgreSQL connection  |  —  |  Phase 1  
-  7  |  2026-05-25 17:59  |  fb979f6  |  (baseline)  |  T003: lint/format/test tooling  |  —  |  Phase 1  
+---
 
-*Future commits will be appended here automatically after each task.*
+## Commit History
+
+| Date | Hash | Message | Files Changed | Insertions | Deletions |
+|------|------|---------|---------------|------------|-----------|
+| 2026-05-25 | `fb979f6` | chore(backend): configure lint format test tooling for T003 | 6 | ++2887 | -0 |
+| 2026-05-26 | `0629776` | T004: init Prisma ORM | 4 | ++68 | -0 |
+| 2026-05-26 | `10572df` | docs: add T001-T004 validation reports in 5 formats | 21 | ++2379 | -0 |
+| 2026-05-26 | `e46c26a` | build(backend): add postgres docker compose for T005 | 2 | ++107 | -0 |
+| 2026-05-26 | `9035b8e` | T005: mark complete, update memory log | 4 | ++27 | -0 |
+| 2026-05-26 | `3905f3a` | build(backend): implement global error envelope for T006 | 9 | ++204 | -0 |
+| 2026-05-26 | `f903370` | build(backend): implement global error envelope for T006 (PR #1) | 9 | ++204 | -0 |
+| 2026-05-26 | `05f67ef` | docs: add T005-T006 validation reports in 5 formats, update index | 14 | ++678 | -0 |
+| 2026-05-26 | `4f12da5` | build(backend): add correlation middleware for T007 | 7 | ++125 | -0 |
+| 2026-05-26 | `174d20b` | build(backend): add correlation middleware for T007 (PR #2) | 7 | ++125 | -0 |
+| 2026-05-26 | `dfd9b2b` | docs: add T007 validation reports in 5 formats, update index | 10 | ++450 | -0 |
+| 2026-05-26 | `8c03a81` | build(backend): implement jwt auth and rbac for T009 | 33 | ++1160 | -0 |
+| 2026-05-26 | `cb4560c` | docs: update commit hash references for T009 to 8c03a81 | 3 | ++6 | -0 |
+| 2026-05-26 | `0dbc77e` | build(backend): add idempotency interceptor for T008 | 7 | ++396 | -0 |
+| 2026-05-26 | `c8ce7ff` | build(backend): add idempotency interceptor for T008 (PR #4) | 7 | ++396 | -0 |
+| 2026-05-26 | `a687a30` | docs: add T008 validation reports in 5 formats, update index and memory log | 9 | ++377 | -0 |
+| 2026-05-26 | `d0d72b4` | build(backend): implement append-only audit logging for T010 | 17 | ++472 | -0 |
+| 2026-05-26 | `2cc229a` | docs: add T010 validation reports, update index and memory log | 12 | ++580 | -0 |
+| 2026-05-26 | `a18038f` | build(backend): wire api versioning and openapi for T011 | 11 | ++373 | -0 |
+| 2026-05-26 | `2d9a245` | docs: update commit hash for T011, update index and memory log | 5 | ++12 | -0 |
+| 2026-05-26 | `e379c1b` | docs: update documentation index to include T005-T008 validation reports | 1 | ++2 | -0 |
+| 2026-05-26 | `2039693` | T013: add core org Prisma models + migration | 7 | ++625 | -0 |
+| 2026-05-26 | `70e7b9f` | T013: add core org Prisma models + migration (PR #5) | 7 | ++625 | -0 |
+| 2026-05-26 | `e95c75b` | T014: Meter, SIMCard, MeterAssignment, SIMAssignment migration | 7 | ++430 | -0 |
+| 2026-05-26 | `c8c86aa` | T015: add Reading, ReadingReview, TariffPlan, BillingPeriod migration | 7 | ++480 | -0 |
+| 2026-05-26 | `5a41562` | T016: add Invoice, InvoiceLine, InvoiceAdjustment migration | 7 | ++510 | -0 |
+| 2026-05-26 | `c50bcca` | T017: add Payment, PaymentAllocation, CustomerLedgerEntry migration w/ trigger | 8 | ++580 | -0 |
+| 2026-05-26 | `4395f47` | T013: docs, memory, graph update + checklist T001-T013 | 6 | ++89 | -0 |
+| 2026-05-26 | `8db1a39` | T008: fix migration — remove audit_log CREATE TABLE (already on main) | 1 | +-15 | -0 |
+| 2026-05-26 | `42db219` | T013: fix migration — remove audit_log CREATE TABLE (already on main) | 1 | +-15 | -0 |
+| 2026-05-26 | `d844c0e` | T014: fix migration — remove audit_log CREATE TABLE (already on main) | 1 | +-15 | -0 |
+| 2026-05-26 | `20103d3` | T015: docs, validation report, graphify, tasks update | 5 | ++78 | -0 |
+| 2026-05-26 | `79d9620` | T012: build contract-test harness against meter-pulse-api.yaml | 4 | ++310 | -0 |
+| 2026-05-26 | `dde8aa3` | T012: add response body schema validation + docs | 3 | ++120 | -0 |
+| 2026-05-26 | `a5532f9` | test(backend): finalize T012 contract harness | 3 | ++42 | -0 |
+| 2026-05-26 | `1912d9d` | T012: contract test harness with YAML spec loading, deref, AJV validation | 9 | ++680 | -0 |
+| 2026-05-28 | `336e0e0` | docs: mark T001-T017 as [X] completed in tasks.md | 1 | ++2 | -0 |
+
+---
+
+## Summary
+
+- **Total commits**: 43
+- **Author**: Kirllos Hany
+- **Last updated**: 2026-05-28
