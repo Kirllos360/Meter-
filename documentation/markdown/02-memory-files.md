@@ -107,3 +107,23 @@
 - **What changed**: Payment with unique payment_number, PaymentAllocation with order, CustomerLedgerEntry append-only with DB trigger trg_customer_ledger_append_only
 - **Validation**: DB-level trigger verified — UPDATE/DELETE raise exception
 - **Next task**: T018
+
+---
+
+### T018 — Migration: AuditLog index + ReportJob
+
+- **Story**: Phase 2 (schema)
+- **Status**: Complete
+- **What changed**: AuditLog @@index([createdAt]), ReportJobStatus/ReportFormat enums, ReportJob model
+- **Next task**: T019
+
+---
+
+### T019 — Migration: Derived Views
+
+- **Story**: Phase 2 (schema)
+- **Status**: Complete
+- **What changed**: 3 views — meter_assignment_active_view (7 cols), sim_assignment_active_view (6 cols), customer_statement_view (8 cols with debit/credit from amount_delta, running_balance)
+- **Dependencies**: T014 (meter_assignments, sim_assignments), T017 (customer_ledger_entries)
+- **Risks**: Views break if source tables/columns renamed; document dependency chain
+- **Next task**: T020

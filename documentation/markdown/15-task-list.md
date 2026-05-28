@@ -39,8 +39,8 @@
 | T015 | Reading, ReadingReview, TariffPlan, BillingPeriod | ✅ Done | High |
 | T016 | Invoice, InvoiceLine, InvoiceAdjustment | ✅ Done | High |
 | T017 | Payment, PaymentAllocation, CustomerLedgerEntry | ✅ Done | High |
-| T018 | AuditLog, ReportJob | 🔲 Pending | Medium |
-| T019 | Derived views (customer_statement_view, meter_assignment_active_view, sim_assignment_active_view) | 🔲 Pending | Medium |
+| T018 | AuditLog, ReportJob | ✅ Done | Medium |
+| T019 | Derived views (customer_statement_view, meter_assignment_active_view, sim_assignment_active_view) | ✅ Done | Medium |
 
 ### Frontend Sprint 0 Foundation
 

@@ -191,7 +191,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd backend && npx prisma migrate dev --name audit_reports && npx prisma migrate status`
   - **Risk**: AuditLog volume growth; add created_at index for retention queries.
 
-- [ ] T019 Migration — derived views (`customer_statement_view`, `meter_assignment_active_view`, `sim_assignment_active_view`)
+- [X] T019 Migration — derived views (`customer_statement_view`, `meter_assignment_active_view`, `sim_assignment_active_view`)
   - **Dependencies**: T014, T017
   - **Area/Files**: `backend/prisma/migrations/*_views/migration.sql`
   - **Acceptance**: Views return one active row per meter/SIM and a running-balance statement projection

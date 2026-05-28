@@ -205,3 +205,36 @@ Every time the user sends a message, run `git status --short` to detect any chan
 
 ### Next Task
 - T012
+
+---
+
+## T019 Memory Log
+
+**Task**: T019 — Migration: Derived Views
+**Story**: Phase 2 (schema)
+**Status**: Complete
+**Date**: 2026-05-28
+**Branch**: feature/t018-audit-reports
+
+### What Changed
+- Created `backend/prisma/migrations/20260528000200_views/migration.sql` with 3 views:
+  - `meter_assignment_active_view` — active meter assignments (7 cols, filter `end_at IS NULL`)
+  - `sim_assignment_active_view` — active SIM assignments (6 cols, filter `end_at IS NULL`)
+  - `customer_statement_view` — financial statement with debit/credit/running_balance (8 cols)
+- All views use `CREATE OR REPLACE VIEW` with `sim_system` schema qualification
+- Debit/credit derived from `amount_delta` signed value via CASE expressions
+- Running balance uses stored `running_balance` from append-only ledger
+
+### Dependencies
+- T014 (meter_assignments, sim_assignments tables)
+- T017 (customer_ledger_entries table)
+
+### Validation
+- `npx prisma validate` — ✅ Valid
+- `npx prisma migrate status` — ✅ Up to date
+- `npm run build` — ✅ Clean
+- `npm test` — ✅ 77/77 passing
+- Column definitions verified for all 3 views via `information_schema.columns`
+
+### Next Task
+- T020
