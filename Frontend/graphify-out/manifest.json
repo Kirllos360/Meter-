@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "D:\\meter\\Meter-\\Frontend\\package.json": {
-    "mtime": 1779718058.7413971,
-    "ast_hash": "877e91ac49725202d930aed2b845965f",
+    "mtime": 1779965527.3046799,
+    "ast_hash": "3e27bb5a40017aa45d4a6d283eac9ed1",
     "semantic_hash": ""
   },
   "D:\\meter\\Meter-\\Frontend\\postcss.config.mjs": {
@@ -580,8 +580,8 @@
     "semantic_hash": ""
   },
   "D:\\meter\\Meter-\\Frontend\\FRONTEND_SPRINT_BACKLOG.md": {
-    "mtime": 1779718058.7213967,
-    "ast_hash": "db235097f90649f748257fcd52c8e4c7",
+    "mtime": 1779962460.33157,
+    "ast_hash": "afc1eee6d45264888f8d6084e272b900",
     "semantic_hash": ""
   },
   "D:\\meter\\Meter-\\Frontend\\worklog.md": {
@@ -627,6 +627,11 @@
   "D:\\meter\\Meter-\\Frontend\\src\\lib\\api\\index.ts": {
     "mtime": 1779957731.5581396,
     "ast_hash": "1ce7dd0d1c419d5c5974a0ae33be5a30",
+    "semantic_hash": ""
+  },
+  "D:\\meter\\Meter-\\Frontend\\scripts\\copy-standalone.mjs": {
+    "mtime": 1779965521.0553353,
+    "ast_hash": "0314e05bddb02ecba7fba58516d3d860",
     "semantic_hash": ""
   }
 }
