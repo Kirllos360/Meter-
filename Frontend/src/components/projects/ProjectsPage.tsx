@@ -12,10 +12,14 @@ import SmartTable from '@/components/smart-table/SmartTable';
 import { StatusBadge } from '@/components/shared/StatusBadge';
 import { PageHeader } from '@/components/shared/PageHelpers';
 import { formatDate } from '@/components/shared/PageHelpers';
+import { QueryBoundary } from '@/components/shared/QueryBoundary';
+import { useProjectsList } from '@/hooks/use-projects';
 
 export default function ProjectsPage() {
   const { navigate } = usePageStore();
-  const areas = [...new Set(mockProjects.map((p) => p.area))];
+  const { data: apiProjects, isLoading, isError, error } = useProjectsList();
+  const projects = apiProjects ?? mockProjects;
+  const areas = [...new Set(projects.map((p) => p.area))];
 
   const columns = [
     { key: 'code', label: 'Code', sortable: true, width: '100px' },
@@ -70,8 +74,9 @@ export default function ProjectsPage() {
           </Button>
         }
       />
+      <QueryBoundary isLoading={isLoading} isError={isError} error={error} isEmpty={!isLoading && projects.length === 0} emptyMessage="No projects found">
       <SmartTable
-        data={mockProjects}
+        data={projects}
         columns={columns}
         filters={[
           {
@@ -92,6 +97,7 @@ export default function ProjectsPage() {
         searchKeys={['name', 'code', 'location', 'area']}
         searchPlaceholder="Search projects..."
       />
+      </QueryBoundary>
     </div>
   );
 }

@@ -238,3 +238,42 @@ Every time the user sends a message, run `git status --short` to detect any chan
 
 ### Next Task
 - T020
+
+---
+
+## T021 Memory Log
+
+**Task**: T021 — FE-002 React Query Integration Pattern
+**Story**: Sprint 0 — Foundations (frontend)
+**Status**: Complete
+**Date**: 2026-05-29
+**Branch**: feature/t021-react-query
+**Commit**: (pending commit)
+
+### What Changed
+- Created `Frontend/src/lib/api/query-client.tsx` — SSR-safe QueryClient + QueryProvider (staleTime: 30s, gcTime: 5min, retry: 1)
+- Created `Frontend/src/hooks/use-projects.ts` — `useProjectsList()`, `useProjectDetail(id)`, `useCustomersList()`
+- Created `Frontend/src/components/shared/QueryBoundary.tsx` — standardized loading/error/empty consuming T020 ApiError
+- Modified `Frontend/src/lib/api/index.ts` — added QueryProvider export
+- Modified `Frontend/src/app/layout.tsx` — wrapped children with `<QueryProvider>` inside `<ThemeProvider>`
+- Modified `Frontend/src/components/projects/ProjectsPage.tsx` — integrated `useProjectsList` + `QueryBoundary`, mock fallback preserved
+- Modified `Frontend/src/components/projects/ProjectDetailPage.tsx` — integrated `useProjectDetail` + `QueryBoundary`, mock fallback preserved
+
+### Dependencies Satisfied
+- T020 (API client foundation) — consumes `apiGet<T>()`, `ApiError`
+
+### Validation
+- `bun run lint --no-cache --max-warnings 0` — ✅ 0 errors, 0 warnings
+- `bun run build` — ✅ Next.js 16.2.6, Turbopack
+- `bun run test:smoke` — Build ✅, Playwright infra fails on Windows (pre-existing)
+- `graphify query "react query hooks + loading/error/empty standards"` — ✅ Graph updated (1039 nodes, 2770 edges, 64 communities)
+
+### SSQ/Pattern Decisions
+- SSR-safe: server creates fresh QueryClient per request, client uses singleton pattern via `getQueryClient()`
+- Provider inside `<ThemeProvider>` in layout.tsx — matches existing provider hierarchy
+- Hook naming: camelCase (`useProjectsList`) with queryKey convention `['resource']` and `['resource', id]`
+- QueryBoundary delegates empty state to existing `<EmptyState>` from `PageHelpers.tsx`
+- Mock fallback: `const data = apiData ?? mockData` — preserves existing UX when API is unavailable
+
+### Next Task
+- T022 (FE-003 Feature Flag Toggles)

@@ -5,21 +5,26 @@ import { mockProjects, mockBuildings, mockUnits, mockCustomers, mockMeters, mock
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BackButton, StatCard } from '@/components/shared/PageHelpers';
 import { StatusBadge } from '@/components/shared/StatusBadge';
+import { QueryBoundary } from '@/components/shared/QueryBoundary';
 import SmartTable from '@/components/smart-table/SmartTable';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { Building2, Users, Gauge, FileText, Zap, Droplets } from 'lucide-react';
+import { Building2, Users, Gauge, FileText, Zap } from 'lucide-react';
 import { formatDate } from '@/components/shared/PageHelpers';
+import { useProjectDetail } from '@/hooks/use-projects';
 
 export default function ProjectDetailPage() {
   const { pageParams } = usePageStore();
-  const project = mockProjects.find((p) => p.id === pageParams.id);
+  const { data: apiProject, isLoading, isError, error } = useProjectDetail(pageParams.id ?? '');
+  const project = apiProject ?? mockProjects.find((p) => p.id === pageParams.id);
 
-  if (!project) {
+  if (!project && !isLoading) {
     return (
       <div>
         <BackButton fallback="projects" />
-        <p className="text-muted-foreground">Project not found.</p>
+        <QueryBoundary isLoading={isLoading} isError={isError} error={error}>
+          <p className="text-muted-foreground">Project not found.</p>
+        </QueryBoundary>
       </div>
     );
   }
@@ -39,6 +44,7 @@ export default function ProjectDetailPage() {
   return (
     <div>
       <BackButton fallback="projects" />
+      <QueryBoundary isLoading={isLoading} isError={isError} error={error}>
 
       {/* Header */}
       <div className="glass-card rounded-xl p-6 mb-6">
@@ -195,6 +201,7 @@ export default function ProjectDetailPage() {
           />
         </TabsContent>
       </Tabs>
+      </QueryBoundary>
     </div>
   );
 }

@@ -1,3 +1,8 @@
+# Meter Pulse — Project Tree
+> Last updated: 2026-05-29 — For full architecture + tree see `PROJECT_ARCHITECTURE_AND_TREE.md`
+> For AI handoff/restore see `AI_HANDOFF.md` and `RESTORE_POINT.md`
+> Completed: T001-T021 (21/85 tasks)
+
 .
 ├── .agents
 │   └── skills

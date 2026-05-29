@@ -1,8 +1,8 @@
-# Finished Tasks — T001 to T020
+# Finished Tasks — T001 to T021
 
-> Generated: 2026-05-28 | Attach to next section to continue work
+> Generated: 2026-05-29 | Attach to next section to continue work
 
-## All Tasks Complete (20/20)
+## All Tasks Complete (21/21)
 
 ### Phase 1 — Setup (T001-T005)
 - [X] T001 NestJS backend scaffold
@@ -29,8 +29,14 @@
 - [X] T018 AuditLog, ReportJob
 - [X] T019 Derived views (3 views)
 
-### Frontend Sprint 0 (T020)
+### Frontend Sprint 0 (T020-T021)
 - [X] T020 FE-001 API client foundation
+- [X] T021 FE-002 React Query integration pattern
+
+### T021 Details
+- **Files created**: `query-client.tsx`, `use-projects.ts`, `QueryBoundary.tsx`
+- **Files modified**: `index.ts`, `layout.tsx`, `ProjectsPage.tsx`, `ProjectDetailPage.tsx`
+- **Validation**: lint ✅ build ✅ graphify ✅
 
 ### Validation Status
 | Check | Result |
@@ -40,8 +46,8 @@
 | Backend lint | ✅ |
 | Prisma schema | ✅ Valid |
 | Prisma migrations | ✅ 7 applied |
-| Frontend lint | ✅ |
-| Frontend build | ✅ |
-| Graphify | ✅ 1025 nodes |
+| Frontend lint | ✅ 0 errors, 0 warnings |
+| Frontend build | ✅ Next.js 16.2.6 |
+| Graphify | ✅ 1039 nodes, 2770 edges |
 | PDF report | ✅ Desktop |
 | PRs (Abady) | ✅ 10 open, MERGEABLE |

@@ -1,16 +1,16 @@
-# Graph Report - Frontend  (2026-05-28)
+# Graph Report - Frontend  (2026-05-29)
 
 ## Corpus Check
-- 125 files · ~51,654 words
+- 128 files · ~52,068 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1027 nodes · 2736 edges · 70 communities (61 shown, 9 thin omitted)
+- 1039 nodes · 2770 edges · 64 communities (54 shown, 10 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 4 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1b73182a`
+- Built from commit: `8db1f3af`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -37,7 +37,6 @@
 - [[_COMMUNITY_Community 19|Community 19]]
 - [[_COMMUNITY_Community 20|Community 20]]
 - [[_COMMUNITY_Community 21|Community 21]]
-- [[_COMMUNITY_Community 22|Community 22]]
 - [[_COMMUNITY_Community 23|Community 23]]
 - [[_COMMUNITY_Community 24|Community 24]]
 - [[_COMMUNITY_Community 25|Community 25]]
@@ -71,14 +70,9 @@
 - [[_COMMUNITY_Community 57|Community 57]]
 - [[_COMMUNITY_Community 58|Community 58]]
 - [[_COMMUNITY_Community 59|Community 59]]
-- [[_COMMUNITY_Community 61|Community 61]]
 - [[_COMMUNITY_Community 62|Community 62]]
 - [[_COMMUNITY_Community 63|Community 63]]
-- [[_COMMUNITY_Community 64|Community 64]]
 - [[_COMMUNITY_Community 65|Community 65]]
-- [[_COMMUNITY_Community 66|Community 66]]
-- [[_COMMUNITY_Community 67|Community 67]]
-- [[_COMMUNITY_Community 68|Community 68]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 276 edges
@@ -104,35 +98,35 @@
 - `dev.sh script` --calls--> `wait_for_service()`  [EXTRACTED]
   /home/abady/Downloads/09/workspace-12a9edc7-18ef-424c-a245-17e0c2b89877/.zscripts/dev.sh → .zscripts/dev.sh
 
-## Communities (70 total, 9 thin omitted)
+## Communities (64 total, 10 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.13
-Nodes (63): AlertsPage(), BalancesPage(), ConsumptionPage(), highConsumption, missingReadings, zeroConsumption, InvoiceDetailPage(), InvoicesPage() (+55 more)
+Nodes (69): AlertsPage(), BalancesPage(), ConsumptionPage(), highConsumption, missingReadings, zeroConsumption, InvoiceDetailPage(), PaymentsPage() (+61 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.03
 Nodes (67): dependencies, class-variance-authority, clsx, cmdk, date-fns, @dnd-kit/core, @dnd-kit/sortable, @dnd-kit/utilities (+59 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.10
-Nodes (30): AppSidebar(), AppSidebarProps, hrefToPageKey, iconMap, pageKeyToHref, SidebarContentProps, SidebarItem(), SidebarItemProps (+22 more)
+Cohesion: 0.07
+Nodes (48): AppSidebar(), AppSidebarProps, hrefToPageKey, iconMap, pageKeyToHref, SidebarContent(), SidebarContentProps, SidebarItem() (+40 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.22
-Nodes (17): activityColorMap, activityIconMap, ChartTooltip(), DashboardPage(), formatTime(), getAlertSummary(), getMeterStatusData(), iconMap (+9 more)
+Cohesion: 0.13
+Nodes (39): InvoicesPage(), CustomersPage(), useProjectsList(), mockProjects, history, RouterState, usePageStore, MetersPage() (+31 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.09
-Nodes (40): useIsMobile(), cn(), CardAction(), CardDescription(), CardFooter(), Separator(), Sheet(), SheetContent() (+32 more)
+Cohesion: 0.06
+Nodes (39): useIsMobile(), Separator(), Sheet(), SheetContent(), SheetDescription(), SheetFooter(), SheetHeader(), SheetOverlay() (+31 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.07
-Nodes (38): mockBalances, mockWaterBalanceData, ActivityItem, Alert, AlertSeverity, AlertType, Balance, Building (+30 more)
+Cohesion: 0.06
+Nodes (57): activityColorMap, activityIconMap, ChartTooltip(), DashboardPage(), formatTime(), getAlertSummary(), getMeterStatusData(), iconMap (+49 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.07
-Nodes (36): geistMono, geistSans, metadata, Action, ActionType, actionTypes, addToRemoveQueue(), dispatch() (+28 more)
+Cohesion: 0.06
+Nodes (39): getQueryClient(), makeQueryClient(), QueryProvider(), geistMono, geistSans, metadata, Action, ActionType (+31 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.29
@@ -147,8 +141,8 @@ Cohesion: 0.15
 Nodes (13): 10) Current Frontend Status, 1) App Architecture, 2) State Management, 3) Type System and Mock Data, 5) Role-Based Access Model (Frontend), 6) UX and Interaction Capabilities, 8) Recent Stability Fixes Applied, 9) Commands for Frontend Workflow (+5 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.23
-Nodes (14): AlertDialog(), AlertDialogAction(), AlertDialogCancel(), AlertDialogContent(), AlertDialogDescription(), AlertDialogFooter(), AlertDialogHeader(), AlertDialogOverlay() (+6 more)
+Cohesion: 0.14
+Nodes (22): AlertDialog(), AlertDialogAction(), AlertDialogCancel(), AlertDialogContent(), AlertDialogDescription(), AlertDialogFooter(), AlertDialogHeader(), AlertDialogOverlay() (+14 more)
 
 ### Community 11 - "Community 11"
 Cohesion: 0.07
@@ -186,17 +180,9 @@ Nodes (8): ChartConfig, ChartContainer(), ChartContext, ChartContextProps, Chart
 Cohesion: 0.03
 Nodes (67): dependencies, class-variance-authority, clsx, cmdk, date-fns, @dnd-kit/core, @dnd-kit/sortable, @dnd-kit/utilities (+59 more)
 
-### Community 20 - "Community 20"
-Cohesion: 0.25
-Nodes (7): Breadcrumb(), BreadcrumbEllipsis(), BreadcrumbItem(), BreadcrumbLink(), BreadcrumbList(), BreadcrumbPage(), BreadcrumbSeparator()
-
 ### Community 21 - "Community 21"
 Cohesion: 0.18
 Nodes (6): DrawerContent(), DrawerDescription(), DrawerFooter(), DrawerHeader(), DrawerOverlay(), DrawerTitle()
-
-### Community 22 - "Community 22"
-Cohesion: 0.20
-Nodes (12): PageHeader(), PageHeaderProps, pageHrefMap, parentMap, pageHrefMap, PagePlaceholder(), PagePlaceholderProps, allNavItems (+4 more)
 
 ### Community 23 - "Community 23"
 Cohesion: 0.20
@@ -215,16 +201,16 @@ Cohesion: 0.64
 Nodes (7): dev.sh script, dev.sh script, cleanup(), log_step_end(), log_step_start(), start_mini_services(), wait_for_service()
 
 ### Community 27 - "Community 27"
-Cohesion: 0.09
-Nodes (59): PaymentsPage(), SidebarContent(), RoleSwitcher(), TopNav(), getRoleColor(), getRoleLabel(), useAuthStore, mockCustomers (+51 more)
+Cohesion: 0.06
+Nodes (40): cn(), AccordionContent(), AccordionItem(), AccordionTrigger(), Breadcrumb(), BreadcrumbEllipsis(), BreadcrumbItem(), BreadcrumbLink() (+32 more)
 
 ### Community 28 - "Community 28"
 Cohesion: 0.18
 Nodes (11): devDependencies, bun-types, eslint, eslint-config-next, playwright, tailwindcss, @tailwindcss/postcss, tw-animate-css (+3 more)
 
 ### Community 29 - "Community 29"
-Cohesion: 0.13
-Nodes (22): clearToken(), getAuthHeaders(), getRefreshToken(), getToken(), hasToken(), refreshToken(), setRefreshToken(), setToken() (+14 more)
+Cohesion: 0.10
+Nodes (26): clearToken(), getAuthHeaders(), getRefreshToken(), getToken(), hasToken(), refreshToken(), setRefreshToken(), setToken() (+18 more)
 
 ### Community 31 - "Community 31"
 Cohesion: 0.50
@@ -294,57 +280,37 @@ Nodes (4): FE-060: Contract and integration tests, FE-061: E2E coverage expansio
 Cohesion: 0.20
 Nodes (10): scripts, build, db:generate, db:migrate, db:push, db:reset, dev, lint (+2 more)
 
-### Community 61 - "Community 61"
-Cohesion: 0.36
-Nodes (8): Pagination(), PaginationContent(), PaginationEllipsis(), PaginationItem(), PaginationLink(), PaginationLinkProps, PaginationNext(), PaginationPrevious()
-
 ### Community 62 - "Community 62"
-Cohesion: 0.12
-Nodes (15): HoverCard(), HoverCardContent(), HoverCardTrigger(), Progress(), RadioGroup(), RadioGroupItem(), ScrollArea(), ScrollBar() (+7 more)
+Cohesion: 0.52
+Nodes (5): ToggleGroup(), ToggleGroupContext, ToggleGroupItem(), Toggle(), toggleVariants
 
 ### Community 63 - "Community 63"
 Cohesion: 0.23
 Nodes (10): FormControl(), FormDescription(), FormFieldContext, FormFieldContextValue, FormItem(), FormItemContext, FormItemContextValue, FormLabel() (+2 more)
 
-### Community 64 - "Community 64"
-Cohesion: 0.36
-Nodes (7): LoginPage(), AuthState, ROLES, mockUsers, User, UserRole, Label()
-
 ### Community 65 - "Community 65"
 Cohesion: 0.32
 Nodes (6): name, private, version, name, private, version
 
-### Community 66 - "Community 66"
-Cohesion: 0.40
-Nodes (3): AccordionContent(), AccordionItem(), AccordionTrigger()
-
-### Community 67 - "Community 67"
-Cohesion: 0.40
-Nodes (3): InputOTP(), InputOTPGroup(), InputOTPSlot()
-
-### Community 68 - "Community 68"
-Cohesion: 0.50
-Nodes (3): ResizableHandle(), ResizablePanel(), ResizablePanelGroup()
-
 ## Knowledge Gaps
-- **371 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+366 more)
+- **372 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+367 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cn()` connect `Community 4` to `Community 0`, `Community 2`, `Community 3`, `Community 6`, `Community 7`, `Community 10`, `Community 12`, `Community 15`, `Community 18`, `Community 20`, `Community 21`, `Community 22`, `Community 23`, `Community 27`, `Community 30`, `Community 31`, `Community 61`, `Community 62`, `Community 63`, `Community 64`, `Community 66`, `Community 67`, `Community 68`?**
-  _High betweenness centrality (0.196) - this node is a cross-community bridge._
+- **Why does `cn()` connect `Community 27` to `Community 0`, `Community 2`, `Community 3`, `Community 4`, `Community 5`, `Community 6`, `Community 7`, `Community 10`, `Community 12`, `Community 15`, `Community 18`, `Community 21`, `Community 23`, `Community 62`, `Community 63`, `Community 30`, `Community 31`?**
+  _High betweenness centrality (0.197) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `Community 19` to `Community 65`?**
   _High betweenness centrality (0.028) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `Community 1` to `Community 65`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
 - **What connects `$schema`, `style`, `rsc` to the rest of the system?**
-  _372 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _373 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.12894736842105264 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.12890142831952037 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.029850746268656716 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.10420168067226891 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07355769230769231 - nodes in this community are weakly interconnected._
