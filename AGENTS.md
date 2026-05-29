@@ -329,3 +329,35 @@ const source = getModuleSource('projects'); // returns 'mock' or 'api'
 
 ### Next Task
 - T023 (US1 Contract Tests)
+
+---
+
+## T023 Memory Log
+
+**Task**: T023 — US1 Contract Tests: assignMeter
+**Story**: Phase 3 — User Story 1: Manage Meter and Location Assignments
+**Status**: Complete
+**Date**: 2026-05-29
+**Branch**: feature/t023-contract-assign-meter
+
+### What Changed
+- Created `backend/test/contract/meter-assign.contract.spec.ts` — 15 tests covering:
+  - Contract definition (6): operationId, status codes, MeterAssignRequest, MeterAssignment, ConflictError schemas
+  - Request schema validation (4): valid body, optional reason, missing fields, wrong types
+  - Response schema validation (3): MeterAssignment (200), ErrorEnvelope (409), without optional details
+  - HTTP endpoint (2): status code validation, response body schema (TDD — expected to fail)
+- Created `documentation/markdown/deep-coverage/12-task-analysis-report.md` through `17-hidden-requirement-report.md` (6 reports)
+- Created `documentation/markdown/13-T023-validation-report.md`
+
+### TDD Results
+- 14 tests PASS (spec validation, schema assertions)
+- 1 test FAILS (HTTP endpoint — returns 404, expected [200,409])
+- Proof: endpoint doesn't exist yet; T031/T032 will implement it
+
+### Validation
+- `npm test` — 96 pass + 1 TDD fail = 97 total (10 existing suites pass)
+- `npm run build` — Clean
+- No existing tests broken
+
+### Next Task
+- T024 (US1 Contract Tests: terminateMeter)
