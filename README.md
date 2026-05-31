@@ -23,21 +23,62 @@
 
 | Tool | Version | Download | Purpose |
 |------|---------|----------|---------|
-| **Node.js** | >= 20 | [nodejs.org](https://nodejs.org/) | Backend runtime |
-| **Bun** | 1.x | [bun.sh](https://bun.sh/) | Frontend runtime |
-| **Docker Desktop** | Latest | [docker.com](https://www.docker.com/products/docker-desktop/) | PostgreSQL container |
-| **Git** | Latest | [git-scm.com](https://git-scm.com/) | Version control |
-| **PostgreSQL** | 16 | Via Docker (see above) | Database |
+| **Node.js** | >= 20 | [nodejs.org](https://nodejs.org/) | Backend runtime — NestJS, Prisma, all npm packages |
+| **Bun** | 1.x | [bun.sh](https://bun.sh/) | Frontend runtime — Next.js, React, Tailwind |
+| **Docker Desktop** | Latest | [docker.com](https://www.docker.com/products/docker-desktop/) | PostgreSQL container for local database |
+| **Git** | Latest | [git-scm.com](https://git-scm.com/) | Version control, push/pull to GitHub |
+| **PostgreSQL** | 16 | Via Docker (see Quick Start) | Production-target database (Docker for dev) |
 
-### Optional Tools
+### All Tools (Test Agent Inventory)
 
-| Tool | Version | Download | Purpose |
-|------|---------|----------|---------|
-| **Python** | 3.11+ | [python.org](https://www.python.org/) | Graphify knowledge graph |
-| **Trivy** | Latest | [github.com/aquasecurity/trivy](https://github.com/aquasecurity/trivy) | Container vulnerability scanning |
-| **Semgrep** | Latest | [semgrep.dev](https://semgrep.dev/) | SAST code analysis |
-| **Playwright** | 1.60+ | Via `npx playwright install` | E2E browser tests |
-| **Spectral** | 6.x | [stoplight.io/spectral](https://stoplight.io/open-source/spectral) | OpenAPI linting |
+Every tool below is saved in `test-agent/configs/` so it NEVER needs re-download. Run `.\test-agent\run.ps1 -Mode full` to invoke all at once.
+
+| Tool | Installed In | Download / Install | Why Used |
+|------|-------------|-------------------|----------|
+| **jest** | `backend/node_modules` | `npm install` (automatic) | Backend test runner — 316 tests across 38 suites |
+| **ESLint** | `backend/node_modules` | `npm install` (automatic) | TypeScript/JavaScript linting with security plugin (9 rules) |
+| **Prettier** | `backend/node_modules` | `npm install` (automatic) | Code formatter — ensures consistent style across 500+ files |
+| **Prisma** | `backend/node_modules` | `npm install` (automatic) | ORM + migration tool — 20+ models, 8 migrations, PostgreSQL |
+| **depcruise** | `backend/node_modules` | `npm install` (automatic) | Dependency graph validation — prevents circular imports |
+| **supertest** | `backend/node_modules` | `npm install` (automatic) | HTTP assertion library for API contract tests |
+| **Playwright** | `Frontend/node_modules` | `npm install` (automatic) | E2E browser tests — smoke traversal of all pages |
+| **Husky** | Root `node_modules` | `npm install` (automatic) | Pre-commit hooks — runs eslint+tests+build before every commit |
+| **lint-staged** | Root `node_modules` | `npm install` (automatic) | Runs linters only on staged files — saves time |
+| **Python** | System-wide | [python.org](https://www.python.org/) | Graphify runtime — AST extraction + knowledge graph (3175 nodes) |
+| **Semgrep** | System-wide (pip) | `pip install semgrep` | SAST code analysis — detects hardcoded secrets, eval(), XSS patterns |
+| **Trivy** | System-wide | [trivy.dev](https://trivy.dev/) | Vulnerability scanner — checks dependencies for CVEs (0 HIGH found) |
+| **Spectral** | Via npx | `npm install -g @stoplight/spectral-cli` | OpenAPI linter — validates API spec against standards (0 warnings) |
+| **TruffleHog** | System-wide (pip) | `pip install trufflehog` | Secret scanner — detects passwords, tokens, keys in git history |
+| **cyclonedx-npm** | Via npx | `npm install -g @cyclonedx/cyclonedx-npm` | SBOM generator — creates software bill of materials in CI |
+| **TypeDoc** | `backend/node_modules` | `npm install` (automatic) | API documentation generator — docs at `docs/api/` |
+| **Graphify** | System-wide (pip) | `pip install graphify` | Knowledge graph engine — maps all 321 source files into 109 communities |
+
+### Install All Global Tools At Once
+
+```bash
+# Windows (PowerShell)
+pip install semgrep trufflehog graphify
+npm install -g @cyclonedx/cyclonedx-npm @stoplight/spectral-cli
+# Download Trivy from: https://github.com/aquasecurity/trivy/releases
+
+# Linux/Mac
+pip3 install semgrep trufflehog graphify
+npm install -g @cyclonedx/cyclonedx-npm @stoplight/spectral-cli
+# Install Trivy: https://aquasecurity.github.io/trivy/latest/getting-started/installation/
+```
+
+### How to Run the Test Agent
+
+```powershell
+# Quick check (60 seconds): prettier + eslint + build + prisma + tests
+.\test-agent\run.ps1 -Mode fast
+
+# Full check (3 minutes): + depcruise + spectral
+.\test-agent\run.ps1 -Mode full
+
+# Deploy check (10 minutes): + trivy + trufflehog
+.\test-agent\run.ps1 -Mode deploy
+```
 
 ---
 
