@@ -45,6 +45,21 @@ if ($Mode -ne "fast") {
     Check "Spectral" "cd $ProjectDir; npx spectral lint 'specs/001-metering-billing-platform/contracts/meter-pulse-api.yaml' --ruleset=test-agent/configs/.spectral.yaml --quiet 2>`$null"
 }
 
+# Stage 4: Deep scan (full mode only)
+if ($Mode -eq "full") {
+    Write-Host "--- Stage 4: Deep Scan ---" -ForegroundColor Cyan
+    Check "Njsscan" "njsscan $ProjectDir\backend\src $ProjectDir\Frontend\src --json 2>`$null | Out-Null"
+    Check "Codespell" "codespell $ProjectDir\backend\src $ProjectDir\Frontend\src --quiet-level=3 2>`$null"
+}
+
+# Stage 5: Security scan (deploy mode only)
+if ($Mode -eq "deploy") {
+    Write-Host "--- Stage 5: Security ---" -ForegroundColor Cyan
+    Check "Snyk" "cd $ProjectDir\backend; snyk test --json 2>`$null | Out-Null"
+    Check "Trivy" "trivy fs --severity CRITICAL,HIGH --quiet --no-progress --skip-dirs 'node_modules' --skip-dirs '.next' $ProjectDir\backend\ 2>`$null"
+    Check "TruffleHog" "trufflehog filesystem --no-verification $ProjectDir 2>`$null"
+}
+
 # Summary
 "" | Out-File $ReportFile -Append
 Write-Host "=== RESULTS ===" -ForegroundColor Cyan

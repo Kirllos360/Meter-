@@ -42,11 +42,14 @@ npm install -g @cyclonedx/cyclonedx-npm
 | trivy | `trivy fs --severity CRITICAL,HIGH --quiet --no-progress` |
 | spectral | `npx spectral --ruleset=test-agent/configs/.spectral.yaml` |
 | depcruise | `cd backend && npx depcruise` |
+| njsscan | `njsscan backend/src Frontend/src` |
+| codespell | `codespell backend/src Frontend/src` |
+| snyk | `cd backend && snyk test` |
 | trufflehog | `trufflehog filesystem --no-verification .` |
 | cyclonedx | `npx @cyclonedx/cyclonedx-npm` |
 
 | CodeQL | latest | GitHub workflow | .github/workflows/codeql.yml | GitHub-native security analysis (zero config)
-| OSV Scanner | latest | pip | — | Open source dependency vulnerability scanner
+| OSV Scanner | latest | pip | ï¿½ | Open source dependency vulnerability scanner
 
 ## Token Optimization Configs
 - Test output: `--silent --bail` (stop on first failure)

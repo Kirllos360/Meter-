@@ -328,3 +328,4 @@ export const mockReports: Report[] = [
   { id: 'RPT-011', name: 'Missing Readings Report', description: 'Meters with missing or delayed readings', category: 'Operations', icon: 'AlertTriangle' },
   { id: 'RPT-012', name: 'Audit Report', description: 'System audit trail with user actions', category: 'System', icon: 'Shield' },
 ];
+
