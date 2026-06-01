@@ -12,7 +12,7 @@
     "start": "node dist/main.js",
     "start:dev": "nest start --watch",
     "test": "jest --config jest.config.ts --passWithNoTests",
-    "prepare": "husky"
+    "prepare": "node -e \"try{require('husky')}catch(e){}\""
   },
   "dependencies": {
     "@nestjs/common": "^10.4.2",
