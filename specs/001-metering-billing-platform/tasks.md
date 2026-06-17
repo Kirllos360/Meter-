@@ -1007,7 +1007,7 @@ T027 Projects  T028 Locations  T029 Customers  T030 Meters  T031 SIM
   - **Validation**: `npx prisma validate && npx prisma migrate status && npm test`
   - **Risk**: Tariff model must support 5 charge modes (STEPS/FLAT/STATIC/PER_UNIT/ZERO) and settlement types (FIXED/PERCENTAGE/ONE_TIME)
 
-- [ ] T088 Create Area DB template (45 tables)
+- [X] T088 Create Area DB template (45 tables)
   - **Dependencies**: T087
   - **Area/Files**: `backend/prisma/schema.prisma` (area template), migration script per area
   - **Acceptance**: 45 tables per area: `Customer`, `CustomerMeter`, `MeterReading`, `Transaction`, `InvoiceDetail`, `PaymentAllocation`, `CustomerLedgerEntry`, `Alert`, `ChatMessage`, `Task`, `Approval`, `Attachment`, `TroubleTicket`, `WaterBalance`, `SolarWalletTransaction`, `ChilledWaterSettlement`, `SIMCard`, `SIMAssignment`, `MeterStatusLog`, `ReadingReview`, `ReadingThreshold`, `JournalEntry`, etc.

@@ -5,7 +5,7 @@ generator client {
 datasource db {
   provider          = "postgresql"
   url               = env("DATABASE_URL")
-  schemas           = ["sim_system", "core", "features"]
+  schemas           = ["sim_system", "core", "features", "area"]
 }
 
 // ===== Enums =====
@@ -1817,4 +1817,1011 @@ model InvoiceGenerationBatch {
   @@index([status])
   @@map("invoice_generation_batches")
   @@schema("features")
+}
+
+// ===== Area Schema Enums (v2.0.0) =====
+
+enum AreaCustomerStatus {
+  active
+  suspended
+  closed
+  @@map("area_customer_status")
+  @@schema("area")
+}
+
+enum AreaTransactionType {
+  invoice
+  payment
+  adjustment
+  reversal
+  @@map("area_transaction_type")
+  @@schema("area")
+}
+
+enum AreaLedgerEntryType {
+  debit
+  credit
+  @@map("area_ledger_entry_type")
+  @@schema("area")
+}
+
+enum AreaInvoiceStatus {
+  draft
+  issued
+  paid
+  overdue
+  cancelled
+  @@map("area_invoice_status")
+  @@schema("area")
+}
+
+enum AreaAlertSeverity {
+  info
+  warning
+  critical
+  @@map("area_alert_severity")
+  @@schema("area")
+}
+
+enum AreaTaskPriority {
+  low
+  normal
+  high
+  urgent
+  @@map("area_task_priority")
+  @@schema("area")
+}
+
+enum AreaTaskStatus {
+  open
+  in_progress
+  pending
+  resolved
+  closed
+  @@map("area_task_status")
+  @@schema("area")
+}
+
+enum AreaApprovalStatus {
+  pending
+  approved
+  rejected
+  @@map("area_approval_status")
+  @@schema("area")
+}
+
+enum AreaTicketCategory {
+  billing
+  meter
+  technical
+  other
+  @@map("area_ticket_category")
+  @@schema("area")
+}
+
+enum AreaTicketPriority {
+  low
+  normal
+  high
+  critical
+  @@map("area_ticket_priority")
+  @@schema("area")
+}
+
+enum AreaTicketStatus {
+  open
+  in_progress
+  pending
+  resolved
+  closed
+  @@map("area_ticket_status")
+  @@schema("area")
+}
+
+enum AreaSimStatus {
+  available
+  assigned
+  activated
+  deactivated
+  @@map("area_sim_status")
+  @@schema("area")
+}
+
+enum AreaMeterType {
+  water
+  electric
+  gas
+  steam
+  chilled_water
+  @@map("area_meter_type")
+  @@schema("area")
+}
+
+enum AreaReadingSource {
+  manual
+  ami
+  import
+  @@map("area_reading_source")
+  @@schema("area")
+}
+
+enum AreaReadingStatus {
+  pending
+  verified
+  rejected
+  @@map("area_reading_status")
+  @@schema("area")
+}
+
+enum AreaSettlementStatus {
+  pending
+  approved
+  cancelled
+  @@map("area_settlement_status")
+  @@schema("area")
+}
+
+enum AreaPaymentPlanStatus {
+  active
+  completed
+  defaulted
+  cancelled
+  @@map("area_payment_plan_status")
+  @@schema("area")
+}
+
+enum AreaCollectionActionType {
+  call
+  visit
+  notice
+  legal
+  write_off
+  @@map("area_collection_action_type")
+  @@schema("area")
+}
+
+enum AreaDepositType {
+  security
+  guarantee
+  advance
+  @@map("area_deposit_type")
+  @@schema("area")
+}
+
+enum AreaContractStatus {
+  active
+  expired
+  terminated
+  suspended
+  @@map("area_contract_status")
+  @@schema("area")
+}
+
+enum AreaWorkOrderStatus {
+  scheduled
+  in_progress
+  completed
+  cancelled
+  @@map("area_work_order_status")
+  @@schema("area")
+}
+
+// ===== Area Schema Models (v2.0.0) =====
+// ===== Domain: Customer & Meter =====
+
+model AreaCustomer {
+  id                 String            @id @default(uuid()) @map("id")
+  customerCode       String            @unique @map("customer_code")
+  fullName           String            @map("full_name")
+  phoneNumber        String?           @map("phone_number")
+  email              String?           @map("email")
+  nationalId         String?           @map("national_id")
+  address            String?           @map("address")
+  unitId             String?           @map("unit_id")
+  unitTypeId         String?           @map("unit_type_id")
+  groupId            String?           @map("group_id")
+  status             AreaCustomerStatus @default(active) @map("status")
+  currentBalance     Decimal           @default(0) @db.Decimal(14, 3) @map("current_balance")
+  creditLimit        Decimal           @default(0) @db.Decimal(14, 3) @map("credit_limit")
+  isExemptFromLateFee Boolean          @default(false) @map("is_exempt_from_late_fee")
+  notes              String?           @map("notes")
+  createdBy          String            @map("created_by")
+  updatedBy          String            @map("updated_by")
+  createdAt          DateTime          @default(now()) @map("created_at")
+  updatedAt          DateTime          @updatedAt @map("updated_at")
+
+  customerMeters             AreaCustomerMeter[]
+  invoices                   AreaInvoiceDetail[]
+  transactions               AreaTransaction[]
+  ledgerEntries              AreaCustomerLedgerEntry[]
+  alerts                     AreaAlert[]
+  chatMessages               AreaChatMessage[]
+  tasks                      AreaTask[]
+  troubleTickets             AreaTroubleTicket[]
+  waterBalances              AreaWaterBalance[]
+  solarWalletTransactions    AreaSolarWalletTransaction[]
+  chilledWaterSettlements    AreaChilledWaterSettlement[]
+  journalEntries             AreaJournalEntry[]
+  paymentPlans               AreaPaymentPlan[]
+  lateFees                   AreaLateFee[]
+  deposits                   AreaDeposit[]
+  refunds                    AreaRefund[]
+  disputes                   AreaDispute[]
+  contracts                  AreaContract[]
+  subscriptions              AreaSubscription[]
+  collectionActions          AreaCollectionAction[]
+  meterTransfersAsFrom       AreaMeterTransfer[]   @relation("MeterTransferFrom")
+  meterTransfersAsTo         AreaMeterTransfer[]   @relation("MeterTransferTo")
+
+  @@index([status])
+  @@index([unitId])
+  @@index([currentBalance])
+  @@map("customers")
+  @@schema("area")
+}
+
+model AreaCustomerMeter {
+  id                String          @id @default(uuid()) @map("id")
+  customerId        String          @map("customer_id")
+  meterNumber       String          @unique @map("meter_number")
+  meterType         AreaMeterType   @map("meter_type")
+  model             String?         @map("model")
+  status            String          @default("installed") @map("status")
+  installationDate  DateTime?       @map("installation_date")
+  lastReadingDate   DateTime?       @map("last_reading_date")
+  lastReadingValue  Decimal?        @db.Decimal(18, 4) @map("last_reading_value")
+  latitude          Decimal?        @db.Decimal(9, 6) @map("latitude")
+  longitude         Decimal?        @db.Decimal(9, 6) @map("longitude")
+  isSmartMeter      Boolean         @default(false) @map("is_smart_meter")
+  firmwareVersion   String?         @map("firmware_version")
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
+  customer          AreaCustomer    @relation(fields: [customerId], references: [id])
+
+  metersReadings        AreaMeterReading[]
+  simAssignments        AreaSIMAssignment[]
+  meterStatusLogs       AreaMeterStatusLog[]
+  calibrations          AreaMeterCalibration[]
+  transfers             AreaMeterTransfer[]
+  usageSummaries        AreaUsageSummary[]
+  workOrders            AreaWorkOrder[]
+
+  @@index([customerId])
+  @@index([status])
+  @@map("customer_meters")
+  @@schema("area")
+}
+
+model AreaMeterReading {
+  id              BigInt            @id @default(autoincrement()) @map("id")
+  customerMeterId String            @map("customer_meter_id")
+  readingValue    Decimal           @db.Decimal(18, 4) @map("reading_value")
+  consumption     Decimal?          @db.Decimal(18, 4) @map("consumption")
+  readingDate     DateTime          @map("reading_date")
+  source          AreaReadingSource @map("source")
+  status          AreaReadingStatus @default(pending) @map("status")
+  isEstimated     Boolean           @default(false) @map("is_estimated")
+  readBy          String?           @map("read_by")
+  notes           String?           @map("notes")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  customerMeter   AreaCustomerMeter @relation(fields: [customerMeterId], references: [id])
+
+  reviews AreaReadingReview[]
+
+  @@index([customerMeterId])
+  @@index([readingDate])
+  @@index([status])
+  @@index([source])
+  @@map("meter_readings")
+  @@schema("area")
+}
+
+model AreaSIMCard {
+  id              String         @id @default(uuid()) @map("id")
+  iccid           String         @unique @map("iccid")
+  phoneNumber     String?        @map("phone_number")
+  networkProvider String?        @map("network_provider")
+  status          AreaSimStatus  @default(available) @map("status")
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+
+  assignments AreaSIMAssignment[]
+
+  @@map("sim_cards")
+  @@schema("area")
+}
+
+model AreaSIMAssignment {
+  id              String            @id @default(uuid()) @map("id")
+  simId           String            @map("sim_id")
+  customerMeterId String            @map("customer_meter_id")
+  assignedAt      DateTime          @default(now()) @map("assigned_at")
+  returnedAt      DateTime?         @map("returned_at")
+  sim             AreaSIMCard       @relation(fields: [simId], references: [id])
+  customerMeter   AreaCustomerMeter @relation(fields: [customerMeterId], references: [id])
+
+  @@index([simId])
+  @@index([customerMeterId])
+  @@map("sim_assignments")
+  @@schema("area")
+}
+
+model AreaMeterStatusLog {
+  id              BigInt            @id @default(autoincrement()) @map("id")
+  customerMeterId String            @map("customer_meter_id")
+  fromStatus      String?           @map("from_status")
+  toStatus        String            @map("to_status")
+  actionType      String            @map("action_type")
+  changedBy       String            @map("changed_by")
+  notes           String?           @map("notes")
+  changedAt       DateTime          @default(now()) @map("changed_at")
+  customerMeter   AreaCustomerMeter @relation(fields: [customerMeterId], references: [id])
+
+  @@index([customerMeterId])
+  @@index([changedAt])
+  @@map("meter_status_logs")
+  @@schema("area")
+}
+
+model AreaReadingReview {
+  id               BigInt           @id @default(autoincrement()) @map("id")
+  meterReadingId   BigInt           @map("meter_reading_id")
+  deviationPercent Decimal          @db.Decimal(10, 2) @map("deviation_percent")
+  triggeredByRule  String           @map("triggered_by_rule")
+  status           AreaReadingStatus @default(pending) @map("status")
+  reviewedBy       String?          @map("reviewed_by")
+  reviewComment    String?          @map("review_comment")
+  reviewedAt       DateTime?        @map("reviewed_at")
+  createdAt        DateTime         @default(now()) @map("created_at")
+  meterReading     AreaMeterReading @relation(fields: [meterReadingId], references: [id])
+
+  @@index([meterReadingId])
+  @@index([status])
+  @@map("reading_reviews")
+  @@schema("area")
+}
+
+model AreaReadingThreshold {
+  id                  String   @id @default(uuid()) @map("id")
+  meterType           String   @map("meter_type")
+  ruleName            String   @map("rule_name")
+  comparisonOperator  String   @map("comparison_operator")
+  thresholdValue      Decimal  @db.Decimal(18, 4) @map("threshold_value")
+  action              String   @map("action")
+  isActive            Boolean  @default(true) @map("is_active")
+  createdAt           DateTime @default(now()) @map("created_at")
+
+  @@map("reading_thresholds")
+  @@schema("area")
+}
+
+model AreaMeterCalibration {
+  id              BigInt            @id @default(autoincrement()) @map("id")
+  customerMeterId String            @map("customer_meter_id")
+  beforeValue     Decimal           @db.Decimal(18, 4) @map("before_value")
+  afterValue      Decimal           @db.Decimal(18, 4) @map("after_value")
+  calibratedBy    String            @map("calibrated_by")
+  notes           String?           @map("notes")
+  calibratedAt    DateTime          @default(now()) @map("calibrated_at")
+  customerMeter   AreaCustomerMeter @relation(fields: [customerMeterId], references: [id])
+
+  @@index([customerMeterId])
+  @@map("meter_calibrations")
+  @@schema("area")
+}
+
+model AreaMeterTransfer {
+  id                BigInt            @id @default(autoincrement()) @map("id")
+  customerMeterId   String            @map("customer_meter_id")
+  fromCustomerId    String            @map("from_customer_id")
+  toCustomerId      String            @map("to_customer_id")
+  reason            String?           @map("reason")
+  transferredAt     DateTime          @default(now()) @map("transferred_at")
+  customerMeter     AreaCustomerMeter @relation(fields: [customerMeterId], references: [id])
+  fromCustomer      AreaCustomer      @relation("MeterTransferFrom", fields: [fromCustomerId], references: [id])
+  toCustomer        AreaCustomer      @relation("MeterTransferTo", fields: [toCustomerId], references: [id])
+
+  @@index([customerMeterId])
+  @@index([fromCustomerId])
+  @@index([toCustomerId])
+  @@map("meter_transfers")
+  @@schema("area")
+}
+
+// ===== Domain: Billing =====
+
+model AreaInvoiceDetail {
+  id                  String             @id @default(uuid()) @map("id")
+  invoiceNumber       String             @unique @map("invoice_number")
+  customerId          String             @map("customer_id")
+  billingPeriodStart  DateTime           @map("billing_period_start")
+  billingPeriodEnd    DateTime           @map("billing_period_end")
+  issueDate           DateTime           @map("issue_date")
+  dueDate             DateTime           @map("due_date")
+  totalAmount         Decimal            @db.Decimal(14, 3) @map("total_amount")
+  vatAmount           Decimal            @db.Decimal(14, 3) @map("vat_amount")
+  netAmount           Decimal            @db.Decimal(14, 3) @map("net_amount")
+  paidAmount          Decimal            @default(0) @db.Decimal(14, 3) @map("paid_amount")
+  balanceDue          Decimal            @default(0) @db.Decimal(14, 3) @map("balance_due")
+  status              AreaInvoiceStatus  @default(draft) @map("status")
+  isImmutable         Boolean            @default(false) @map("is_immutable")
+  signedDocumentHash  String?            @map("signed_document_hash")
+  adjustmentOfInvoiceId String?          @map("adjustment_of_invoice_id")
+  adjustmentType      String?            @map("adjustment_type")
+  createdBy           String             @map("created_by")
+  updatedBy           String             @map("updated_by")
+  createdAt           DateTime           @default(now()) @map("created_at")
+  updatedAt           DateTime           @updatedAt @map("updated_at")
+  customer            AreaCustomer       @relation(fields: [customerId], references: [id])
+
+  paymentAllocations    AreaPaymentAllocation[]
+  journalEntries        AreaJournalEntry[]
+  lateFees              AreaLateFee[]
+  disputes              AreaDispute[]
+  adjustmentOfInvoice   AreaInvoiceDetail?  @relation("InvoiceAdjustment", fields: [adjustmentOfInvoiceId], references: [id])
+  adjustmentInvoices    AreaInvoiceDetail[]  @relation("InvoiceAdjustment")
+
+  @@index([customerId])
+  @@index([status])
+  @@index([dueDate])
+  @@map("invoice_details")
+  @@schema("area")
+}
+
+model AreaTransaction {
+  id               BigInt               @id @default(autoincrement()) @map("id")
+  customerId       String               @map("customer_id")
+  transactionType  AreaTransactionType   @map("transaction_type")
+  referenceNumber  String               @map("reference_number")
+  amount           Decimal              @db.Decimal(14, 3) @map("amount")
+  transactionDate  DateTime             @map("transaction_date")
+  description      String?              @map("description")
+  createdBy        String               @map("created_by")
+  createdAt        DateTime             @default(now()) @map("created_at")
+  customer         AreaCustomer         @relation(fields: [customerId], references: [id])
+
+  paymentAllocations   AreaPaymentAllocation[]
+  ledgerEntries        AreaCustomerLedgerEntry[]
+  paymentGatewayLogs   AreaPaymentGatewayLog[]
+
+  @@index([customerId])
+  @@index([transactionDate])
+  @@map("transactions")
+  @@schema("area")
+}
+
+model AreaPaymentAllocation {
+  id               String            @id @default(uuid()) @map("id")
+  paymentId        BigInt            @map("payment_id")
+  invoiceId        String            @map("invoice_id")
+  allocatedAmount  Decimal           @db.Decimal(14, 3) @map("allocated_amount")
+  allocatedAt      DateTime          @default(now()) @map("allocated_at")
+  payment          AreaTransaction   @relation(fields: [paymentId], references: [id])
+  invoice          AreaInvoiceDetail @relation(fields: [invoiceId], references: [id])
+
+  @@index([paymentId])
+  @@index([invoiceId])
+  @@map("payment_allocations")
+  @@schema("area")
+}
+
+model AreaCustomerLedgerEntry {
+  id              BigInt               @id @default(autoincrement()) @map("id")
+  customerId      String               @map("customer_id")
+  transactionId   BigInt               @map("transaction_id")
+  entryType       AreaLedgerEntryType  @map("entry_type")
+  amount          Decimal              @db.Decimal(14, 3) @map("amount")
+  runningBalance  Decimal              @db.Decimal(14, 3) @map("running_balance")
+  entryDate       DateTime             @default(now()) @map("entry_date")
+  description     String?              @map("description")
+  customer        AreaCustomer         @relation(fields: [customerId], references: [id])
+  transaction     AreaTransaction      @relation(fields: [transactionId], references: [id])
+
+  @@index([customerId])
+  @@index([entryDate])
+  @@map("customer_ledger_entries")
+  @@schema("area")
+}
+
+model AreaJournalEntry {
+  id              BigInt            @id @default(autoincrement()) @map("id")
+  customerId      String            @map("customer_id")
+  invoiceId       String?           @map("invoice_id")
+  accountCode     String            @map("account_code")
+  debit           Decimal           @default(0) @db.Decimal(14, 3) @map("debit")
+  credit          Decimal           @default(0) @db.Decimal(14, 3) @map("credit")
+  entryDate       DateTime          @default(now()) @map("entry_date")
+  description     String?           @map("description")
+  createdBy       String            @map("created_by")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  customer        AreaCustomer      @relation(fields: [customerId], references: [id])
+  invoice         AreaInvoiceDetail? @relation(fields: [invoiceId], references: [id])
+
+  @@index([customerId])
+  @@index([invoiceId])
+  @@index([entryDate])
+  @@map("journal_entries")
+  @@schema("area")
+}
+
+model AreaPaymentPlan {
+  id             String                 @id @default(uuid()) @map("id")
+  customerId     String                 @map("customer_id")
+  totalAmount    Decimal                @db.Decimal(14, 3) @map("total_amount")
+  installmentAmount Decimal              @db.Decimal(14, 3) @map("installment_amount")
+  totalInstallments Int                 @map("total_installments")
+  paidInstallments Int                  @default(0) @map("paid_installments")
+  frequency      String                 @map("frequency")
+  status         AreaPaymentPlanStatus  @default(active) @map("status")
+  startedAt      DateTime               @map("started_at")
+  completedAt    DateTime?              @map("completed_at")
+  createdAt      DateTime               @default(now()) @map("created_at")
+  updatedAt      DateTime               @updatedAt @map("updated_at")
+  customer       AreaCustomer           @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([status])
+  @@map("payment_plans")
+  @@schema("area")
+}
+
+model AreaLateFee {
+  id              BigInt            @id @default(autoincrement()) @map("id")
+  invoiceId       String            @map("invoice_id")
+  customerId      String            @map("customer_id")
+  feeAmount       Decimal           @db.Decimal(14, 3) @map("fee_amount")
+  calculatedDate  DateTime          @map("calculated_date")
+  appliedStatus   String            @default("pending") @map("applied_status")
+  appliedAt       DateTime?         @map("applied_at")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  invoice         AreaInvoiceDetail @relation(fields: [invoiceId], references: [id])
+  customer        AreaCustomer      @relation(fields: [customerId], references: [id])
+
+  @@index([invoiceId])
+  @@index([customerId])
+  @@map("late_fees")
+  @@schema("area")
+}
+
+model AreaDeposit {
+  id              String           @id @default(uuid()) @map("id")
+  customerId      String           @map("customer_id")
+  amount          Decimal          @db.Decimal(14, 3) @map("amount")
+  depositType     AreaDepositType  @map("deposit_type")
+  status          String           @default("held") @map("status")
+  heldAt          DateTime         @default(now()) @map("held_at")
+  releasedAt      DateTime?        @map("released_at")
+  notes           String?          @map("notes")
+  createdAt       DateTime         @default(now()) @map("created_at")
+  updatedAt       DateTime         @updatedAt @map("updated_at")
+  customer        AreaCustomer     @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([status])
+  @@map("deposits")
+  @@schema("area")
+}
+
+model AreaRefund {
+  id              String        @id @default(uuid()) @map("id")
+  customerId      String        @map("customer_id")
+  amount          Decimal       @db.Decimal(14, 3) @map("amount")
+  reason          String        @map("reason")
+  status          String        @default("pending") @map("status")
+  approvedBy      String?       @map("approved_by")
+  processedAt     DateTime?     @map("processed_at")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+  customer        AreaCustomer  @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([status])
+  @@map("refunds")
+  @@schema("area")
+}
+
+model AreaDispute {
+  id              String            @id @default(uuid()) @map("id")
+  invoiceId       String            @map("invoice_id")
+  customerId      String            @map("customer_id")
+  reason          String            @map("reason")
+  status          String            @default("open") @map("status")
+  resolution      String?           @map("resolution")
+  openedAt        DateTime          @default(now()) @map("opened_at")
+  closedAt        DateTime?         @map("closed_at")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+  invoice         AreaInvoiceDetail @relation(fields: [invoiceId], references: [id])
+  customer        AreaCustomer      @relation(fields: [customerId], references: [id])
+
+  @@index([invoiceId])
+  @@index([customerId])
+  @@index([status])
+  @@map("disputes")
+  @@schema("area")
+}
+
+// ===== Domain: Energy-Specific =====
+
+model AreaWaterBalance {
+  id                  BigInt        @id @default(autoincrement()) @map("id")
+  customerId          String        @map("customer_id")
+  periodStart         DateTime      @map("period_start")
+  periodEnd           DateTime      @map("period_end")
+  openingBalance      Decimal       @db.Decimal(14, 3) @map("opening_balance")
+  consumptionCharges  Decimal       @db.Decimal(14, 3) @map("consumption_charges")
+  paymentsReceived    Decimal       @db.Decimal(14, 3) @map("payments_received")
+  adjustments         Decimal       @default(0) @db.Decimal(14, 3) @map("adjustments")
+  closingBalance      Decimal       @db.Decimal(14, 3) @map("closing_balance")
+  calculatedAt        DateTime      @default(now()) @map("calculated_at")
+  customer            AreaCustomer  @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([periodStart, periodEnd])
+  @@map("water_balances")
+  @@schema("area")
+}
+
+model AreaSolarWalletTransaction {
+  id                  String        @id @default(uuid()) @map("id")
+  customerId          String        @map("customer_id")
+  transactionType     String        @map("transaction_type")
+  amount              Decimal       @db.Decimal(14, 3) @map("amount")
+  referenceType       String?       @map("reference_type")
+  referenceId         String?       @map("reference_id")
+  walletBalanceBefore Decimal       @db.Decimal(14, 3) @map("wallet_balance_before")
+  walletBalanceAfter  Decimal       @db.Decimal(14, 3) @map("wallet_balance_after")
+  createdAt           DateTime      @default(now()) @map("created_at")
+  customer            AreaCustomer  @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([createdAt])
+  @@map("solar_wallet_transactions")
+  @@schema("area")
+}
+
+model AreaChilledWaterSettlement {
+  id              BigInt               @id @default(autoincrement()) @map("id")
+  customerId      String               @map("customer_id")
+  periodStart     DateTime             @map("period_start")
+  periodEnd       DateTime             @map("period_end")
+  totalBTU        Decimal              @db.Decimal(18, 4) @map("total_btu")
+  ratePerBTU      Decimal              @db.Decimal(18, 6) @map("rate_per_btu")
+  totalAmount     Decimal              @db.Decimal(14, 3) @map("total_amount")
+  status          AreaSettlementStatus @default(pending) @map("status")
+  createdAt       DateTime             @default(now()) @map("created_at")
+  updatedAt       DateTime             @updatedAt @map("updated_at")
+  customer        AreaCustomer         @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([status])
+  @@map("chilled_water_settlements")
+  @@schema("area")
+}
+
+model AreaUsageSummary {
+  id                BigInt            @id @default(autoincrement()) @map("id")
+  customerMeterId   String            @map("customer_meter_id")
+  periodStart       DateTime          @map("period_start")
+  periodEnd         DateTime          @map("period_end")
+  totalConsumption  Decimal           @db.Decimal(18, 4) @map("total_consumption")
+  peakUsage         Decimal?          @db.Decimal(18, 4) @map("peak_usage")
+  avgDaily          Decimal?          @db.Decimal(18, 4) @map("avg_daily")
+  createdAt         DateTime          @default(now()) @map("created_at")
+  customerMeter     AreaCustomerMeter @relation(fields: [customerMeterId], references: [id])
+
+  @@index([customerMeterId])
+  @@index([periodStart, periodEnd])
+  @@map("usage_summaries")
+  @@schema("area")
+}
+
+// ===== Domain: Support =====
+
+model AreaAlert {
+  id          BigInt            @id @default(autoincrement()) @map("id")
+  customerId  String?           @map("customer_id")
+  alertType   String            @map("alert_type")
+  severity    AreaAlertSeverity @map("severity")
+  title       String            @map("title")
+  message     String            @map("message")
+  isResolved  Boolean           @default(false) @map("is_resolved")
+  resolvedAt  DateTime?         @map("resolved_at")
+  createdAt   DateTime          @default(now()) @map("created_at")
+  customer    AreaCustomer?     @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([severity])
+  @@index([isResolved])
+  @@map("alerts")
+  @@schema("area")
+}
+
+model AreaChatMessage {
+  id            BigInt       @id @default(autoincrement()) @map("id")
+  customerId    String       @map("customer_id")
+  senderUserId  String       @map("sender_user_id")
+  messageType   String       @default("text") @map("message_type")
+  content       String       @map("content")
+  isInternal    Boolean      @default(false) @map("is_internal")
+  sentAt        DateTime     @default(now()) @map("sent_at")
+  customer      AreaCustomer @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([sentAt])
+  @@map("chat_messages")
+  @@schema("area")
+}
+
+model AreaTask {
+  id          String           @id @default(uuid()) @map("id")
+  customerId  String?          @map("customer_id")
+  assignedTo  String           @map("assigned_to")
+  title       String           @map("title")
+  description String?          @map("description")
+  priority    AreaTaskPriority @default(normal) @map("priority")
+  status      AreaTaskStatus   @default(open) @map("status")
+  dueDate     DateTime?        @map("due_date")
+  completedAt DateTime?        @map("completed_at")
+  createdAt   DateTime         @default(now()) @map("created_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+  customer    AreaCustomer?    @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([assignedTo])
+  @@index([status])
+  @@map("tasks")
+  @@schema("area")
+}
+
+model AreaApproval {
+  id            String              @id @default(uuid()) @map("id")
+  entityType    String              @map("entity_type")
+  entityId      String              @map("entity_id")
+  requestedBy   String              @map("requested_by")
+  approvedBy    String?             @map("approved_by")
+  status        AreaApprovalStatus  @default(pending) @map("status")
+  comment       String?             @map("comment")
+  requestedAt   DateTime            @default(now()) @map("requested_at")
+  decidedAt     DateTime?           @map("decided_at")
+
+  @@index([entityType, entityId])
+  @@index([status])
+  @@map("approvals")
+  @@schema("area")
+}
+
+model AreaAttachment {
+  id              String   @id @default(uuid()) @map("id")
+  entityType      String   @map("entity_type")
+  entityId        String   @map("entity_id")
+  fileName        String   @map("file_name")
+  filePath        String   @map("file_path")
+  contentType     String   @map("content_type")
+  fileSizeBytes   Int      @map("file_size_bytes")
+  uploadedBy      String   @map("uploaded_by")
+  uploadedAt      DateTime @default(now()) @map("uploaded_at")
+
+  @@index([entityType, entityId])
+  @@map("attachments")
+  @@schema("area")
+}
+
+model AreaTroubleTicket {
+  id              String             @id @default(uuid()) @map("id")
+  ticketNumber    String             @unique @map("ticket_number")
+  customerId      String             @map("customer_id")
+  subject         String             @map("subject")
+  description     String?            @map("description")
+  category        AreaTicketCategory @map("category")
+  priority        AreaTicketPriority @default(normal) @map("priority")
+  status          AreaTicketStatus   @default(open) @map("status")
+  assignedTo      String?            @map("assigned_to")
+  slaDeadline     DateTime?          @map("sla_deadline")
+  resolvedAt      DateTime?          @map("resolved_at")
+  createdAt       DateTime           @default(now()) @map("created_at")
+  updatedAt       DateTime           @updatedAt @map("updated_at")
+  customer        AreaCustomer       @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([assignedTo])
+  @@index([status])
+  @@index([priority])
+  @@map("trouble_tickets")
+  @@schema("area")
+}
+
+model AreaCollectionAction {
+  id              BigInt                  @id @default(autoincrement()) @map("id")
+  customerId      String                  @map("customer_id")
+  actionType      AreaCollectionActionType @map("action_type")
+  status          String                  @default("pending") @map("status")
+  result          String?                 @map("result")
+  takenBy         String?                 @map("taken_by")
+  takenAt         DateTime?               @map("taken_at")
+  notes           String?                 @map("notes")
+  createdAt       DateTime                @default(now()) @map("created_at")
+  customer        AreaCustomer            @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([status])
+  @@map("collection_actions")
+  @@schema("area")
+}
+
+model AreaContract {
+  id              String              @id @default(uuid()) @map("id")
+  customerId      String              @map("customer_id")
+  contractNumber  String              @unique @map("contract_number")
+  startDate       DateTime            @map("start_date")
+  endDate         DateTime?           @map("end_date")
+  terms           String?             @map("terms")
+  status          AreaContractStatus  @default(active) @map("status")
+  createdAt       DateTime            @default(now()) @map("created_at")
+  updatedAt       DateTime            @updatedAt @map("updated_at")
+  customer        AreaCustomer        @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([status])
+  @@map("contracts")
+  @@schema("area")
+}
+
+model AreaSubscription {
+  id              String        @id @default(uuid()) @map("id")
+  customerId      String        @map("customer_id")
+  serviceType     String        @map("service_type")
+  startDate       DateTime      @map("start_date")
+  endDate         DateTime?     @map("end_date")
+  status          String        @default("active") @map("status")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+  customer        AreaCustomer  @relation(fields: [customerId], references: [id])
+
+  @@index([customerId])
+  @@index([status])
+  @@map("subscriptions")
+  @@schema("area")
+}
+
+model AreaWorkOrder {
+  id              String               @id @default(uuid()) @map("id")
+  customerMeterId String               @map("customer_meter_id")
+  workType        String               @map("work_type")
+  status          AreaWorkOrderStatus  @default(scheduled) @map("status")
+  assignedTo      String?              @map("assigned_to")
+  scheduledDate   DateTime?            @map("scheduled_date")
+  completedAt     DateTime?            @map("completed_at")
+  notes           String?              @map("notes")
+  createdAt       DateTime             @default(now()) @map("created_at")
+  updatedAt       DateTime             @updatedAt @map("updated_at")
+  customerMeter   AreaCustomerMeter    @relation(fields: [customerMeterId], references: [id])
+
+  @@index([customerMeterId])
+  @@index([assignedTo])
+  @@index([status])
+  @@map("work_orders")
+  @@schema("area")
+}
+
+// ===== Domain: Security & Integration =====
+
+model AreaOTPCode {
+  id        BigInt   @id @default(autoincrement()) @map("id")
+  userId    String   @map("user_id")
+  code      String   @map("code")
+  purpose   String   @map("purpose")
+  expiresAt DateTime @map("expires_at")
+  isUsed    Boolean  @default(false) @map("is_used")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([userId, purpose])
+  @@index([code])
+  @@map("otp_codes")
+  @@schema("area")
+}
+
+model AreaApiKey {
+  id          String    @id @default(uuid()) @map("id")
+  userId      String    @map("user_id")
+  keyHash     String    @map("key_hash")
+  name        String    @map("name")
+  expiresAt   DateTime? @map("expires_at")
+  lastUsedAt  DateTime? @map("last_used_at")
+  isActive    Boolean   @default(true) @map("is_active")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([keyHash])
+  @@map("api_keys")
+  @@schema("area")
+}
+
+model AreaWebhookSubscription {
+  id              String    @id @default(uuid()) @map("id")
+  url             String    @map("url")
+  events          Json      @map("events")
+  secretKey       String    @map("secret_key")
+  isActive        Boolean   @default(true) @map("is_active")
+  lastTriggeredAt DateTime? @map("last_triggered_at")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  @@index([isActive])
+  @@map("webhook_subscriptions")
+  @@schema("area")
+}
+
+model AreaPaymentGatewayLog {
+  id                    BigInt          @id @default(autoincrement()) @map("id")
+  paymentTransactionId  BigInt          @map("payment_transaction_id")
+  gatewayResponse       Json?           @map("gateway_response")
+  statusCode            String?         @map("status_code")
+  loggedAt              DateTime        @default(now()) @map("logged_at")
+  paymentTransaction    AreaTransaction @relation(fields: [paymentTransactionId], references: [id])
+
+  @@index([paymentTransactionId])
+  @@map("payment_gateway_logs")
+  @@schema("area")
+}
+
+model AreaIntegrationLog {
+  id                BigInt   @id @default(autoincrement()) @map("id")
+  integrationName   String   @map("integration_name")
+  direction         String   @map("direction")
+  payload           Json?    @map("payload")
+  status            String   @map("status")
+  errorMessage      String?  @map("error_message")
+  loggedAt          DateTime @default(now()) @map("logged_at")
+
+  @@index([integrationName, loggedAt])
+  @@index([status])
+  @@map("integration_logs")
+  @@schema("area")
+}
+
+model AreaDataSyncTracker {
+  id                String   @id @default(uuid()) @map("id")
+  entityType        String   @map("entity_type")
+  lastSyncAt        DateTime @map("last_sync_at")
+  status            String   @map("status")
+  recordsProcessed  Int      @default(0) @map("records_processed")
+  errorCount        Int      @default(0) @map("error_count")
+  errorLog          Json?    @map("error_log")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  @@unique([entityType])
+  @@map("data_sync_tracker")
+  @@schema("area")
+}
+
+// ===== Domain: Infrastructure =====
+
+model AreaSchemaVersion {
+  id              BigInt   @id @default(autoincrement()) @map("id")
+  versionNumber   String   @map("version_number")
+  appliedAt       DateTime @default(now()) @map("applied_at")
+  scriptName      String   @map("script_name")
+  checksum        String   @map("checksum")
+  description     String?  @map("description")
+
+  @@unique([versionNumber])
+  @@map("schema_versions")
+  @@schema("area")
+}
+
+model AreaUserSession {
+  id                String    @id @default(uuid()) @map("id")
+  userId            String    @map("user_id")
+  refreshTokenHash  String    @map("refresh_token_hash")
+  ipAddress         String?   @map("ip_address")
+  userAgent         String?   @map("user_agent")
+  expiresAt         DateTime  @map("expires_at")
+  createdAt         DateTime  @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("user_sessions")
+  @@schema("area")
 }
