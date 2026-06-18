@@ -58,7 +58,7 @@ export default function InvoiceDetailPage() {
               <Button size="sm" className="gap-1" onClick={() => issueMutation.mutate(invoice.id, { onSuccess: () => toast.success('Invoice issued'), onError: () => toast.error('Failed to issue invoice') })}><CreditCard className="h-3.5 w-3.5" /> Issue</Button>
             )}
             <Button variant="outline" size="sm" className="gap-1" onClick={() => toast.info('Record payment')}><CreditCard className="h-3.5 w-3.5" /> Record Payment</Button>
-            <Button variant="outline" size="sm" className="gap-1" onClick={() => toast.info('Download PDF')}><Download className="h-3.5 w-3.5" /> {t('billing.invoices.download')}</Button>
+            <Button variant="outline" size="sm" className="gap-1" onClick={() => window.open(`/api/v1/downloads/invoices/${invoice.id}/pdf`, '_blank')}><Download className="h-3.5 w-3.5" /> {t('billing.invoices.download')}</Button>
             {invoice.status === 'draft' && (
               <Button variant="outline" size="sm" className="gap-1 text-red-500" onClick={() => toast.info('Cancel invoice')}><XCircle className="h-3.5 w-3.5" /> Cancel</Button>
             )}

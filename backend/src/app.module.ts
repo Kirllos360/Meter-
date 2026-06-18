@@ -22,6 +22,7 @@ import { WaterBalanceModule } from './readings/water-balance/water-balance.modul
 import { BillingModule } from './billing/billing.module';
 import { PaymentsModule } from './payments/payments.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { DownloadsModule } from './downloads/downloads.module';
 import { CorrelationMiddleware } from './common/http/correlation.middleware';
 
 @Module({
@@ -42,7 +43,8 @@ import { CorrelationMiddleware } from './common/http/correlation.middleware';
     WaterBalanceModule,
     BillingModule,
     PaymentsModule,
-    NotificationsModule
+    NotificationsModule,
+    DownloadsModule
   ],
   controllers: [AppController],
   providers: [
