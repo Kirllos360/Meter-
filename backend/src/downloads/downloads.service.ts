@@ -4,6 +4,34 @@ import * as PDFDocument from 'pdfkit';
 
 @Injectable()
 export class DownloadsService {
+  async generateTablePdf(title: string, columns: string[], rows: any[][], res: Response, filename = 'export') {
+    const doc = new PDFDocument({ margin: 50 });
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename=${filename}.pdf`);
+    doc.pipe(res);
+    doc.fontSize(18).text(title, { align: 'center' });
+    doc.moveDown();
+    const colW = (doc.page.width - 100) / columns.length;
+    doc.fontSize(10).font('Helvetica-Bold');
+    columns.forEach((c, i) => doc.text(c, 50 + i * colW, doc.y, { width: colW }));
+    doc.moveDown(0.5);
+    doc.font('Helvetica');
+    for (const row of rows) {
+      if (doc.y > doc.page.height - 50) doc.addPage();
+      row.forEach((v, i) => doc.text(String(v ?? ''), 50 + i * colW, doc.y, { width: colW }));
+      doc.moveDown(0.5);
+    }
+    doc.end();
+  }
+
+  async generateCsv(columns: string[], rows: any[][], filename: string, res: Response) {
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename=${filename}.csv`);
+    const head = columns.map((c) => `"${c}"`).join(',') + '\n';
+    const data = rows.map((r) => r.map((v) => `"${String(v ?? '')}"`).join(',')).join('\n');
+    res.send('\uFEFF' + head + data);
+  }
+
   async generateInvoicePdf(invoice: any, lines: any[], res: Response) {
     const doc = new PDFDocument({ margin: 50 });
     res.setHeader('Content-Type', 'application/pdf');
@@ -33,11 +61,4 @@ export class DownloadsService {
     doc.end();
   }
 
-  async generateCsv(data: any[], headers: string[], filename: string, res: Response) {
-    res.setHeader('Content-Type', 'text/csv');
-    res.setHeader('Content-Disposition', `attachment; filename=${filename}.csv`);
-    const headerLine = headers.join(',') + '\n';
-    const rows = data.map((row) => headers.map((h) => `"${String(row[h] ?? '')}"`).join(',')).join('\n');
-    res.send(headerLine + rows);
-  }
 }
