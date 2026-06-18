@@ -1,9 +1,11 @@
 import {
   Controller,
   Post,
+  Get,
+  Patch,
+  Delete,
   Param,
   Body,
-  Get,
   Query,
   Req,
   ParseUUIDPipe,
@@ -180,6 +182,41 @@ export class BillingController {
     });
 
     return { status: 'issued', immutableAt: now.toISOString() };
+  }
+
+  @Patch('invoices/:id')
+  @Roles(Role.OPERATOR, Role.ADMIN, Role.SUPER_ADMIN)
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Update invoice metadata' })
+  async updateInvoice(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() dto: { dueAt?: string; notes?: string }
+  ) {
+    const invoice = await this.prisma.invoice.findUnique({ where: { id } });
+    if (!invoice) return { status: 'not_found' };
+    const data: any = {};
+    if (dto.dueAt) data.dueAt = new Date(dto.dueAt);
+    if (dto.notes !== undefined) data.notes = dto.notes;
+    await this.prisma.invoice.update({ where: { id }, data });
+    return { status: 'updated' };
+  }
+
+  @Post('invoices/:id/cancel')
+  @Roles(Role.OPERATOR, Role.ADMIN, Role.SUPER_ADMIN)
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Cancel an invoice' })
+  async cancelInvoice(@Param('id', ParseUUIDPipe) id: string) {
+    const invoice = await this.prisma.invoice.findUnique({ where: { id } });
+    if (!invoice) return { status: 'not_found' };
+    if (invoice.status === 'cancelled') return { status: 'already_cancelled' };
+    if (invoice.status === 'paid') return { status: 'cannot_cancel_paid' };
+
+    await this.prisma.invoice.update({
+      where: { id },
+      data: { status: 'cancelled', immutableAt: new Date() }
+    });
+
+    return { status: 'cancelled' };
   }
 
   @Post('invoices/:id/adjustments')
