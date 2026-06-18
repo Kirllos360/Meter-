@@ -1,11 +1,14 @@
 'use client';
 
+import { useState } from 'react';
 import { Plus, MoreHorizontal, Eye, Pencil, Trash2, Zap, Droplets } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { toast } from 'sonner';
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { usePageStore } from '@/lib/router-store';
-import { useMetersList } from '@/hooks/use-meters';
+import { useMetersList, useDeleteMeter } from '@/hooks/use-meters';
 import { useProjectsList } from '@/hooks/use-projects';
 import { QueryBoundary } from '@/components/shared/QueryBoundary';
 import SmartTable from '@/components/smart-table/SmartTable';
@@ -19,6 +22,8 @@ export default function MetersPage() {
   const metersQuery = useMetersList();
   const meters = metersQuery.data ?? [];
   const { data: apiProjects } = useProjectsList();
+  const deleteMutation = useDeleteMeter();
+  const [deleteTarget, setDeleteTarget] = useState<any>(null);
 
   const columns = [
     {
@@ -58,10 +63,10 @@ export default function MetersPage() {
             <DropdownMenuItem onClick={(e) => { e.stopPropagation(); navigate('meter-detail', { id: row.id }); }}>
               <Eye className="h-4 w-4 mr-2" /> {t('meters.actions.view')}
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={(e) => { e.stopPropagation(); toast.info('Edit meter: ' + row.serialNumber); }}>
+            <DropdownMenuItem onClick={(e) => { e.stopPropagation(); navigate('meter-detail', { id: row.id }); }}>
               <Pencil className="h-4 w-4 mr-2" /> {t('meters.actions.edit')}
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={(e) => { e.stopPropagation(); toast.info('Delete meter: ' + row.serialNumber); }} className="text-red-500">
+            <DropdownMenuItem onClick={(e) => { e.stopPropagation(); setDeleteTarget(row); }} className="text-red-500">
               <Trash2 className="h-4 w-4 mr-2" /> {t('meters.actions.delete')}
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -76,7 +81,7 @@ export default function MetersPage() {
         title={t('meters.title')}
         subtitle="Manage water and electricity meters"
         action={
-          <Button className="gap-2" onClick={() => toast.info('Add Meter dialog would open')}>
+          <Button className="gap-2" onClick={() => navigate('meter-detail', { id: 'new' })}>
             <Plus className="h-4 w-4" /> {t('meters.add')}
           </Button>
         }
@@ -117,6 +122,23 @@ export default function MetersPage() {
         onRowClick={(row) => navigate('meter-detail', { id: row.id })}
       />
       </QueryBoundary>
+
+      <AlertDialog open={!!deleteTarget} onOpenChange={() => setDeleteTarget(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Meter</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete meter <strong>{deleteTarget?.serialNumber}</strong>?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction className="bg-red-500 hover:bg-red-600" onClick={() => { if (deleteTarget) { deleteMutation.mutate(deleteTarget.id); setDeleteTarget(null); } }}>
+              {deleteMutation.isPending ? 'Deleting...' : 'Delete'}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
