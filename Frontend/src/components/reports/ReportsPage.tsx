@@ -1,93 +1,47 @@
 'use client';
-
 import { useState } from 'react';
-import { mockReports } from '@/lib/mock-data';
-import { PageHeader } from '@/components/shared/PageHelpers';
-import { StatusBadge } from '@/components/shared/StatusBadge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-  FileText, Gauge, Activity, Zap, Droplets, GitBranch, Receipt, Banknote,
-  Scale, WifiOff, AlertTriangle, Shield, Filter, Download, Eye,
-} from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { PageHeader } from '@/components/shared/PageHelpers';
 import { toast } from 'sonner';
+import { FileText, Download, Eye, Filter } from 'lucide-react';
 import { useT } from '@/lib/i18n/context';
-
-const iconMap: Record<string, React.ReactNode> = {
-  FileText: <FileText className="h-6 w-6" />,
-  Gauge: <Gauge className="h-6 w-6" />,
-  Activity: <Activity className="h-6 w-6" />,
-  Zap: <Zap className="h-6 w-6" />,
-  Droplets: <Droplets className="h-6 w-6" />,
-  GitBranch: <GitBranch className="h-6 w-6" />,
-  Receipt: <Receipt className="h-6 w-6" />,
-  Banknote: <Banknote className="h-6 w-6" />,
-  Scale: <Scale className="h-6 w-6" />,
-  WifiOff: <WifiOff className="h-6 w-6" />,
-  AlertTriangle: <AlertTriangle className="h-6 w-6" />,
-  Shield: <Shield className="h-6 w-6" />,
-};
-
-const categoryColors: Record<string, string> = {
-  Billing: 'bg-emerald-500/15 text-emerald-500',
-  Operations: 'bg-blue-500/15 text-blue-500',
-  System: 'bg-violet-500/15 text-violet-500',
-};
+import { useQuery } from '@tanstack/react-query';
+import { apiGet } from '@/lib/api';
 
 export default function ReportsPage() {
   const t = useT();
   const [activeCategory, setActiveCategory] = useState('all');
-  const categories = ['all', ...new Set(mockReports.map((r) => r.category))];
-  const filtered = activeCategory === 'all' ? mockReports : mockReports.filter((r) => r.category === activeCategory);
+  const { data: reportsData } = useQuery({ queryKey: ['reports'], queryFn: () => apiGet<any[]>('/reports') });
+  const reports = reportsData ?? [];
+  const categories = ['all', ...new Set(reports.map((r: any) => r.category))];
+  const filtered = activeCategory === 'all' ? reports : reports.filter((r: any) => r.category === activeCategory);
 
   return (
     <div>
-      <PageHeader title={t('reports.title')} subtitle="Generate, view, and export reports" />
-
-      {/* Category Tabs */}
-      <div className="flex gap-2 mb-6 flex-wrap">
+      <PageHeader title={t('reports.title')} subtitle={t('reports.subtitle')} />
+      <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
         {categories.map((cat) => (
-          <Button
-            key={cat}
-            variant={activeCategory === cat ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setActiveCategory(cat)}
-          >
-            {cat === 'all' ? t('common.all') : cat}
-          </Button>
+          <Button key={cat} variant={activeCategory === cat ? 'default' : 'outline'} size="sm" onClick={() => setActiveCategory(cat)} className="capitalize">{cat}</Button>
         ))}
       </div>
-
-      {/* Report Cards Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filtered.map((report) => (
+        {filtered.map((report: any) => (
           <Card key={report.id} className="glass-card border-border/50 hover:border-primary/30 transition-colors">
-            <CardContent className="p-5">
-              <div className="flex items-start justify-between mb-3">
-                <div className="text-primary">{iconMap[report.icon] || <FileText className="h-6 w-6" />}</div>
-                <span className={categoryColors[report.category] || ''}>
-                  <StatusBadge status={report.category.toLowerCase()} label={report.category} />
-                </span>
+            <CardHeader className="pb-3">
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-primary" />
+                  <CardTitle className="text-sm">{report.name}</CardTitle>
+                </div>
               </div>
-              <h3 className="font-semibold text-sm mb-1">{report.name}</h3>
-              <p className="text-xs text-muted-foreground mb-4 line-clamp-2">{report.description}</p>
-              {report.lastGenerated && (
-                <p className="text-xs text-muted-foreground mb-3">Last generated: {report.lastGenerated}</p>
-              )}
-              <div className="flex gap-2 flex-wrap">
-                <Button variant="outline" size="sm" className="h-7 text-xs gap-1" onClick={() => toast.info('Filters dialog would open')}>
-                  <Filter className="h-3 w-3" /> Filters
-                </Button>
-                <Button variant="outline" size="sm" className="h-7 text-xs gap-1" onClick={() => toast.info('Export CSV placeholder')}>
-                  <Download className="h-3 w-3" /> CSV
-                </Button>
-                <Button variant="outline" size="sm" className="h-7 text-xs gap-1" onClick={() => toast.info('Export XLSX placeholder')}>
-                  <Download className="h-3 w-3" /> XLSX
-                </Button>
-                <Button variant="outline" size="sm" className="h-7 text-xs gap-1" onClick={() => toast.info('Preview report')}>
-                  <Eye className="h-3 w-3" /> Preview
-                </Button>
+              {report.description && <CardDescription className="text-xs">{report.description}</CardDescription>}
+            </CardHeader>
+            <CardContent>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm" className="h-7 text-xs gap-1" onClick={() => toast.info('Preview report')}><Eye className="h-3 w-3" /> Preview</Button>
+                <Button variant="outline" size="sm" className="h-7 text-xs gap-1" onClick={() => toast.info('Export CSV placeholder')}><Download className="h-3 w-3" /> CSV</Button>
+                <Button variant="outline" size="sm" className="h-7 text-xs gap-1" onClick={() => toast.info('Export XLSX placeholder')}><Download className="h-3 w-3" /> XLSX</Button>
               </div>
             </CardContent>
           </Card>
