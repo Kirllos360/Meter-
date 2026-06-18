@@ -17,19 +17,25 @@ import { Roles } from '../auth/roles.decorator';
 import { Role } from '../auth/types/role.enum';
 import { Audit } from '../audit/audit.decorator';
 import { ReadingsService } from './readings.service';
+import { NotificationsService } from '../notifications/notifications.service';
 import { CreateReadingDto } from './dto/create-reading.dto';
 
 @Controller('readings')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 export class ReadingsController {
-  constructor(private readonly readingsService: ReadingsService) {}
+  constructor(
+    private readonly readingsService: ReadingsService,
+    private readonly notificationsService: NotificationsService,
+  ) {}
 
   @Post()
   @Roles(Role.OPERATOR, Role.TECHNICIAN, Role.ADMIN, Role.SUPER_ADMIN)
   @Audit('reading', 'create')
   @HttpCode(HttpStatus.CREATED)
   async create(@Body() dto: CreateReadingDto, @Req() req: { user: { userId: string } }) {
-    return this.readingsService.createReading(dto, req.user.userId);
+    const reading = await this.readingsService.createReading(dto, req.user.userId);
+    this.notificationsService.create({ userId: req.user.userId, title: `Reading submitted: ${reading.meterSerial}`, body: `${reading.consumption} units`, type: 'reading', referenceType: 'reading', referenceId: reading.id }).catch(() => {});
+    return reading;
   }
 
   @Get()

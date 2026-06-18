@@ -21,6 +21,7 @@ import { Audit } from '../audit/audit.decorator';
 import { ApiOperation } from '@nestjs/swagger';
 import { CustomersService } from './customers.service';
 import { PrismaService } from '../common/database/prisma.service';
+import { NotificationsService } from '../notifications/notifications.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 
@@ -29,7 +30,8 @@ import { UpdateCustomerDto } from './dto/update-customer.dto';
 export class CustomersController {
   constructor(
     private readonly customersService: CustomersService,
-    private readonly prisma: PrismaService
+    private readonly prisma: PrismaService,
+    private readonly notificationsService: NotificationsService,
   ) {}
 
   @Post()
@@ -41,7 +43,9 @@ export class CustomersController {
     @Body() dto: CreateCustomerDto,
     @Req() req: { user: { userId: string } }
   ) {
-    return this.customersService.create(projectId, dto, req.user.userId);
+    const customer = await this.customersService.create(projectId, dto, req.user.userId);
+    this.notificationsService.create({ userId: req.user.userId, title: `Customer created: ${customer.name}`, type: 'customer', referenceType: 'customer', referenceId: customer.id }).catch(() => {});
+    return customer;
   }
 
   @Get()

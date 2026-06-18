@@ -19,6 +19,7 @@ import { Roles } from '../auth/roles.decorator';
 import { Role } from '../auth/types/role.enum';
 import { Audit } from '../audit/audit.decorator';
 import { MetersService } from './meters.service';
+import { NotificationsService } from '../notifications/notifications.service';
 import { AssignMeterDto } from './dto/assign-meter.dto';
 import { TerminateMeterDto } from './dto/terminate-meter.dto';
 import { CreateMeterDto } from './dto/create-meter.dto';
@@ -28,7 +29,10 @@ import { QueryMeterDto } from './dto/query-meter.dto';
 @Controller('meters')
 @UseGuards(AuthGuard('jwt'), RolesGuard)
 export class MetersController {
-  constructor(private readonly metersService: MetersService) {}
+  constructor(
+    private readonly metersService: MetersService,
+    private readonly notificationsService: NotificationsService,
+  ) {}
 
   @Post()
   @Roles(Role.OPERATOR, Role.ADMIN, Role.SUPER_ADMIN)
@@ -92,7 +96,9 @@ export class MetersController {
     @Body() dto: AssignMeterDto,
     @Req() req: { user: { userId: string } }
   ) {
-    return this.metersService.assignMeter(meterId, dto, req.user.userId);
+    const result = await this.metersService.assignMeter(meterId, dto, req.user.userId);
+    this.notificationsService.create({ userId: req.user.userId, title: `Meter assigned: ${meterId.substring(0,8)}`, type: 'meter', referenceType: 'assignment', referenceId: meterId }).catch(() => {});
+    return result;
   }
 
   @Post(':meterId/terminate')
