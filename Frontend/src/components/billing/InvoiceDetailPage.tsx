@@ -1,7 +1,7 @@
 'use client';
 
 import { usePageStore } from '@/lib/router-store';
-import { useInvoiceDetail } from '@/hooks/use-invoices';
+import { useInvoiceDetail, useIssueInvoice } from '@/hooks/use-invoices';
 import { BackButton, formatCurrency, formatDate } from '@/components/shared/PageHelpers';
 import { StatusBadge } from '@/components/shared/StatusBadge';
 import { Button } from '@/components/ui/button';
@@ -15,6 +15,7 @@ export default function InvoiceDetailPage() {
   const { pageParams } = usePageStore();
   const { data: apiInvoice } = useInvoiceDetail(pageParams.id ?? '');
   const invoice = apiInvoice ?? undefined;
+  const issueMutation = useIssueInvoice();
 
   if (!invoice) {
     return (
@@ -54,7 +55,7 @@ export default function InvoiceDetailPage() {
               <Button variant="outline" size="sm" className="gap-1" onClick={() => toast.info('Edit invoice')}><Pencil className="h-3.5 w-3.5" /> Edit</Button>
             )}
             {invoice.status === 'draft' && (
-              <Button size="sm" className="gap-1" onClick={() => toast.info('Invoice issued')}><CreditCard className="h-3.5 w-3.5" /> Issue</Button>
+              <Button size="sm" className="gap-1" onClick={() => issueMutation.mutate(invoice.id, { onSuccess: () => toast.success('Invoice issued'), onError: () => toast.error('Failed to issue invoice') })}><CreditCard className="h-3.5 w-3.5" /> Issue</Button>
             )}
             <Button variant="outline" size="sm" className="gap-1" onClick={() => toast.info('Record payment')}><CreditCard className="h-3.5 w-3.5" /> Record Payment</Button>
             <Button variant="outline" size="sm" className="gap-1" onClick={() => toast.info('Download PDF')}><Download className="h-3.5 w-3.5" /> {t('billing.invoices.download')}</Button>

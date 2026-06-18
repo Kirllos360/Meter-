@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import { apiGet } from '@/lib/api';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiGet, apiPost } from '@/lib/api';
 import type { Invoice } from '@/lib/types';
 import { mockCustomers, mockMeters, mockProjects } from '@/lib/mock-data';
 
@@ -79,6 +79,16 @@ export function useInvoicesList(projectId?: string, customerId?: string, status?
       return data.map(mapInvoice);
     },
     staleTime: 30_000,
+  });
+}
+
+export function useIssueInvoice() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: string) => apiPost<{ status: string }>(`/invoices/${id}/issue`),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['invoices'] });
+    },
   });
 }
 

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { toast } from 'sonner';
 import { usePageStore } from '@/lib/router-store';
-import { useInvoicesList } from '@/hooks/use-invoices';
+import { useInvoicesList, useIssueInvoice } from '@/hooks/use-invoices';
 import { useProjectsList } from '@/hooks/use-projects';
 import SmartTable from '@/components/smart-table/SmartTable';
 import { StatusBadge } from '@/components/shared/StatusBadge';
@@ -20,6 +20,7 @@ export default function InvoicesPage() {
   const { data: apiInvoices } = useInvoicesList();
   const invoices = apiInvoices ?? [];
   const { data: apiProjects } = useProjectsList();
+  const issueMutation = useIssueInvoice();
 
   const columns = [
     { key: 'invoiceNumber', label: t('billing.invoices.invoiceNumber'), sortable: true },
@@ -70,7 +71,7 @@ export default function InvoicesPage() {
               {row.status === 'draft' && <DropdownMenuItem onClick={(e) => { e.stopPropagation(); toast.info('Edit invoice'); }}><Pencil className="h-4 w-4 mr-2" /> Edit</DropdownMenuItem>}
             </ProtectedAction>
             <ProtectedAction action="invoice:issue">
-              {row.status === 'draft' && <DropdownMenuItem onClick={(e) => { e.stopPropagation(); toast.info('Invoice issued'); }}><CreditCard className="h-4 w-4 mr-2" /> Issue</DropdownMenuItem>}
+              {row.status === 'draft' && <DropdownMenuItem onClick={(e) => { e.stopPropagation(); issueMutation.mutate(row.id, { onSuccess: () => toast.success('Invoice issued'), onError: () => toast.error('Failed to issue invoice') }); }}><CreditCard className="h-4 w-4 mr-2" /> Issue</DropdownMenuItem>}
             </ProtectedAction>
             <ProtectedAction action="payment:record">
               <DropdownMenuItem onClick={(e) => { e.stopPropagation(); toast.info('Record payment'); }}><CreditCard className="h-4 w-4 mr-2" /> Record Payment</DropdownMenuItem>
