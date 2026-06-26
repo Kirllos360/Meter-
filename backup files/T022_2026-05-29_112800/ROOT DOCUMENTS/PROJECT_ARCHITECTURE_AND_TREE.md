@@ -1,4 +1,4 @@
-# Meter Pulse — Project Architecture & Directory Tree
+# Meter Verse — Project Architecture & Directory Tree
 
 > Generated: 2026-05-29 | Last Task: T021 (FE-002 React Query)
 
@@ -6,7 +6,7 @@
 
 | Field | Value |
 |---|---|
-| Name | Meter Pulse — Utility Metering & Billing Platform |
+| Name | Meter Verse — Utility Metering & Billing Platform |
 | Stack (Backend) | NestJS + PostgreSQL + Prisma ORM |
 | Stack (Frontend) | Next.js 16 + React 19 + TypeScript + Tailwind v4 + shadcn/ui |
 | Runtime (Frontend) | Bun |
@@ -27,7 +27,7 @@ Meter-/
 │       ├── data-model.md           # 20 entities, state transitions
 │       ├── tasks.md                # 85 tasks (T001-T085)
 │       ├── quickstart.md           # Pre-flight checklist
-│       └── contracts/meter-pulse-api.yaml  # OpenAPI contract
+│       └── contracts/meter-verse-api.yaml  # OpenAPI contract
 ├── backend/                        # NestJS modular monolith
 │   ├── src/
 │   │   ├── main.ts                # Entry, /api/v1 prefix, global pipes
@@ -340,7 +340,7 @@ Meter-/
 ├── specs/
 │   └── 001-metering-billing-platform/
 │       ├── checklists/requirements.md
-│       ├── contracts/meter-pulse-api.yaml
+│       ├── contracts/meter-verse-api.yaml
 │       ├── data-model.md
 │       ├── plan.md
 │       ├── quickstart.md
@@ -416,7 +416,7 @@ Meter-/
 | Spec | `specs/001-metering-billing-platform/spec.md` |
 | Plan | `specs/001-metering-billing-platform/plan.md` |
 | Data Model | `specs/001-metering-billing-platform/data-model.md` |
-| API Contract | `specs/001-metering-billing-platform/contracts/meter-pulse-api.yaml` |
+| API Contract | `specs/001-metering-billing-platform/contracts/meter-verse-api.yaml` |
 | Agent Instructions | `AGENTS.md` |
 | Deployment Guide | `MASTER-DEPLOYMENT-GUIDE.md` |
 | Frontend Build | `Frontend/FRONTEND_BUILD.md` |

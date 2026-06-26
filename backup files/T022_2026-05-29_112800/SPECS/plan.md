@@ -26,7 +26,7 @@ existing backlog and Graphify-first execution for every frontend ticket.
 - Frontend (existing): Tailwind v4, shadcn/ui, Zustand, React Query pattern
 
 **Storage**:
-- PostgreSQL (`meter_pulse` DB, `sim_system` schema target)
+- PostgreSQL (`Meter_Verse_pulse` DB, `sim_system` schema target)
 - Object storage optional for async report export artifacts
 
 **Testing**:
@@ -111,7 +111,7 @@ quickstart validation workflow, and governance-sensitive rules).
 
 ## API Contract Plan
 
-- Contracts in `specs/001-metering-billing-platform/contracts/meter-pulse-api.yaml`.
+- Contracts in `specs/001-metering-billing-platform/contracts/meter-verse-api.yaml`.
 - Contract groups:
   - Meter/SIM assignment and lifecycle commands
   - Reading ingest/validation/review
@@ -140,7 +140,7 @@ quickstart validation workflow, and governance-sensitive rules).
 ## Testing Plan
 
 - **Contract tests**: validate all API schemas, status codes, and domain errors
-  against `contracts/meter-pulse-api.yaml`.
+  against `contracts/meter-verse-api.yaml`.
 - **Domain integration tests**:
   - Assignment conflict detection
   - SIM reuse after termination
@@ -191,7 +191,7 @@ specs/001-metering-billing-platform/
 ├── data-model.md
 ├── quickstart.md
 ├── contracts/
-│   └── meter-pulse-api.yaml
+│   └── meter-verse-api.yaml
 └── tasks.md
 ```
 

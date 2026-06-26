@@ -1,4 +1,4 @@
-# Meter Pulse — Backend
+# Meter Verse — Backend
 
 NestJS + PostgreSQL + Prisma ORM
 
@@ -26,7 +26,7 @@ Expected output:
 
 ```
 NAME              IMAGE               COMMAND                  SERVICE   STATUS        PORTS
-meter-pulse-db    postgres:16-alpine  "docker-entrypoint.s…"   db        running (healthy)   0.0.0.0:5432->5432/tcp
+meter-verse-db    postgres:16-alpine  "docker-entrypoint.s…"   db        running (healthy)   0.0.0.0:5432->5432/tcp
 ```
 
 ### Stop PostgreSQL
@@ -47,9 +47,9 @@ docker compose up -d db
 ```
 Host:     127.0.0.1
 Port:     5432
-Database: meter_pulse
-User:     meter_pulse
-Password: meter_pulse_dev
+Database: Meter_Verse_pulse
+User:     Meter_Verse_pulse
+Password: Meter_Verse_pulse_dev
 Schema:   sim_system
 ```
 

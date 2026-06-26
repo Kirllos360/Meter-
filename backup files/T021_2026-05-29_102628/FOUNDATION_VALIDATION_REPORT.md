@@ -1,4 +1,4 @@
-# Meter Pulse Foundation Checkpoint Review
+# Meter Verse Foundation Checkpoint Review
 > Generated: 2026-05-29 | Branch: `feature/t021-react-query` | HEAD: `f432342`
 
 ---
@@ -15,7 +15,7 @@
 | Contract Test Harness | T012 | ⚠️ **CONDITIONAL PASS** | YAML loading, AJV validation, `$ref` resolution, and test app factory all correctly implemented. BUT 8 tests time out at Jest's 5000ms default. Needs `jest.setTimeout(30000)`. |
 | Prisma Migrations | T013-T017 | ❌ **FAIL** | Only 2 of 19+ models exist (AuditLog, ReportJob). **17 business entities missing** (Project, Location, Customer, Meter, SIMCard, MeterAssignment, SIMAssignment, Reading, ReadingReview, TariffPlan, BillingPeriod, Invoice, InvoiceLine, InvoiceAdjustment, Payment, PaymentAllocation, CustomerLedgerEntry). No `migration_lock.toml`. Business module directories are empty (only `.gitkeep`). |
 | Audit Framework | T018 | ✅ **PASS** | Append-only design (only `create()` method). Captures userId, role, resource, action, correlationId, before/after snapshots. Fail-safe error handling. 20 tests pass. |
-| Database Views | T019 | ⚠️ **CONDITIONAL PASS** | All 3 views correctly defined using `CREATE OR REPLACE VIEW` with `sim_system` schema. But depend on tables that **DO NOT EXIST** in the schema (`meter_assignments`, `sim_assignments`, `customer_ledger_entries`). Will fail when applied. |
+| Database Views | T019 | ⚠️ **CONDITIONAL PASS** | All 3 views correctly defined using `CREATE OR REPLACE VIEW` with `sim_system` schema. But depend on tables that **DO NOT EXIST** in the schema (`Meter_Verse_assignments`, `sim_assignments`, `customer_ledger_entries`). Will fail when applied. |
 | Backend Build | — | ✅ **PASS** | `tsc` compiles cleanly with zero errors |
 | Backend Tests | — | ⚠️ **CONDITIONAL FAIL** | 69/77 pass. 8 fail (contract suite timeout — pre-existing config issue) |
 

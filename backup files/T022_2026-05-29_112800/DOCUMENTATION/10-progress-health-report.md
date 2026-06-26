@@ -1,4 +1,4 @@
-# Progress & Health Report — Meter Pulse
+# Progress & Health Report — Meter Verse
 
 > Generated: 2026-05-28
 > Prepared for: Kirllos Hany (kirllos.hany@epower.com.eg)
@@ -47,7 +47,7 @@
 - ✅ **T009** — JWT Auth + RBAC guard + role model
 - ✅ **T010** — Append-only audit log service + interceptor
 - ✅ **T011** — API versioning + OpenAPI serving
-- ✅ **T012** — Contract test harness against meter-pulse-api.yaml
+- ✅ **T012** — Contract test harness against meter-verse-api.yaml
 - ✅ **T013** — Migration: Project, LocationNode, Customer, CustomerUnitAssignment
 - ✅ **T014** — Migration: Meter, SIMCard, MeterAssignment, SIMAssignment
 - ✅ **T015** — Migration: Reading, ReadingReview, TariffPlan, BillingPeriod

@@ -5,6 +5,12 @@ import { create } from 'zustand';
 export type PageKey =
   | 'login'
   | 'dashboard'
+  | 'executive-dashboard'
+  | 'operations-dashboard'
+  | 'billing-dashboard'
+  | 'collections-dashboard-plus'
+  | 'utility-dashboard'
+  | 'solar-dashboard'
   | 'projects'
   | 'project-detail'
   | 'locations'
@@ -28,7 +34,17 @@ export type PageKey =
   | 'alerts'
   | 'tickets'
   | 'support'
-  | 'settings';
+  | 'settings'
+  | 'upload-center'
+  | 'tariff-studio'
+  | 'settlements'
+  | 'workplace'
+  | 'kpi-executive'
+  | 'kpi-collections'
+  | 'kpi-utilities'
+  | 'sync-gateway'
+  | 'admin-portal'
+  | 'bill-cycle';
 
 interface RouterState {
   currentPage: PageKey;
@@ -40,7 +56,7 @@ interface RouterState {
 const history: PageKey[] = [];
 
 export const usePageStore = create<RouterState>((set, get) => ({
-  currentPage: 'login',
+  currentPage: 'dashboard',
   pageParams: {},
 
   navigate: (page: PageKey, params = {}) => {

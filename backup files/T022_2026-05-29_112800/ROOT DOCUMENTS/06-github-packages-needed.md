@@ -1,8 +1,8 @@
-# Required Tools & Services — Meter Pulse
+# Required Tools & Services — Meter Verse
 
 > **Single Source of Truth** — All applications, packages, services, and tools used in this project.
 > Includes download URLs, installation steps, and what each is used for.
-> Last updated: 2026-05-29 | Project: Meter Pulse (Metering & Billing Platform)
+> Last updated: 2026-05-29 | Project: Meter Verse (Metering & Billing Platform)
 
 ---
 
@@ -210,7 +210,7 @@ All installed via `backend/package.json`. Run `cd backend && npm install`.
 | **prisma** | ^6.19.3 | Prisma CLI (migrations, generate, validate) | https://github.com/prisma/prisma |
 | **eslint** + **@typescript-eslint/* + eslint-config-prettier** | Latest | Backend linting | https://github.com/eslint/eslint |
 | **prettier** | ^3.8.3 | Code formatter | https://github.com/prettier/prettier |
-| **js-yaml** | Latest | YAML parsing (contract tests read meter-pulse-api.yaml) | https://github.com/nodeca/js-yaml |
+| **js-yaml** | Latest | YAML parsing (contract tests read meter-verse-api.yaml) | https://github.com/nodeca/js-yaml |
 | **ajv** + **ajv-formats** | ^8.17.x | JSON Schema validation for contract tests | https://github.com/ajv-validator/ajv |
 | **@types/jest** | Latest | Jest type definitions | https://github.com/DefinitelyTyped/DefinitelyTyped |
 | **@types/node** | Latest | Node.js type definitions | https://github.com/DefinitelyTyped/DefinitelyTyped |
@@ -227,11 +227,11 @@ All installed via `backend/package.json`. Run `cd backend && npm install`.
 
 ### PostgreSQL
 - **Version**: 16 (Docker image: `postgres:16-alpine`)
-- **Use**: Primary database (database `meter_pulse`, schema `sim_system`)
+- **Use**: Primary database (database `Meter_Verse_pulse`, schema `sim_system`)
 - **GitHub**: https://github.com/postgres/postgres
 - **Download**: Docker image — `postgres:16-alpine`
 - **Run**: `cd backend && docker compose up -d db`
-- **Connection**: `postgresql://meter_pulse:meter_pulse_dev@127.0.0.1:5432/meter_pulse?schema=sim_system`
+- **Connection**: `postgresql://Meter_Verse_pulse:Meter_Verse_pulse_dev@127.0.0.1:5432/Meter_Verse_pulse?schema=sim_system`
 - **Config**: `backend/docker-compose.yml`, `backend/.env`
 
 ### pg (PostgreSQL Driver)
@@ -285,7 +285,7 @@ All installed via `backend/package.json`. Run `cd backend && npm install`.
 
 ### AJV (contract testing)
 - **Version**: ^8.17.x
-- **Use**: JSON Schema validation for contract tests against `meter-pulse-api.yaml`
+- **Use**: JSON Schema validation for contract tests against `meter-verse-api.yaml`
 - **GitHub**: https://github.com/ajv-validator/ajv
 - **Install**: Via npm — `backend/package.json`
 - **Related**: `ajv-formats` (format validators), `js-yaml` (YAML parsing)

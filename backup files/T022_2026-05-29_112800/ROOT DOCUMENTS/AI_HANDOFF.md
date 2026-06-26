@@ -1,4 +1,4 @@
-# AI Handoff — Meter Pulse
+# AI Handoff — Meter Verse
 
 > **Purpose**: Single file containing EVERYTHING an AI agent needs to continue work on this project.
 > **Generated**: 2026-05-29 | **Last Updated**: 2026-05-29 (T022)
@@ -11,7 +11,7 @@
 
 | Field | Value |
 |---|---|
-| Name | Meter Pulse — Utility Metering & Billing Platform |
+| Name | Meter Verse — Utility Metering & Billing Platform |
 | Stack (Backend) | NestJS + PostgreSQL + Prisma ORM |
 | Stack (Frontend) | Next.js 16 + React 19 + TypeScript + Tailwind v4 + shadcn/ui |
 | Runtime (Frontend) | Bun (NOT npm/yarn — use `bun` commands) |
@@ -341,11 +341,11 @@ After merge: `cd backend && npx prisma migrate deploy && npx prisma generate`
 PORT=3001
 DB_HOST=127.0.0.1
 DB_PORT=5432
-DB_NAME=meter_pulse
+DB_NAME=Meter_Verse_pulse
 DB_SCHEMA=sim_system
-DB_USER=meter_pulse
-DB_PASSWORD=meter_pulse_dev
-DATABASE_URL=postgresql://meter_pulse:meter_pulse_dev@127.0.0.1:5432/meter_pulse?schema=sim_system
+DB_USER=Meter_Verse_pulse
+DB_PASSWORD=Meter_Verse_pulse_dev
+DATABASE_URL=postgresql://Meter_Verse_pulse:Meter_Verse_pulse_dev@127.0.0.1:5432/Meter_Verse_pulse?schema=sim_system
 JWT_SECRET=dev-jwt-secret-do-not-use-in-production
 JWT_EXPIRES_IN=3600
 
@@ -375,7 +375,7 @@ NEXT_PUBLIC_API_URL=http://localhost:3001/api/v1
 | Spec (FRs) | `specs/001-metering-billing-platform/spec.md` |
 | Implementation Plan | `specs/001-metering-billing-platform/plan.md` |
 | Data Model | `specs/001-metering-billing-platform/data-model.md` |
-| API Contract | `specs/001-metering-billing-platform/contracts/meter-pulse-api.yaml` |
+| API Contract | `specs/001-metering-billing-platform/contracts/meter-verse-api.yaml` |
 | Agent Instructions | `AGENTS.md` |
 | Deployment Guide | `MASTER-DEPLOYMENT-GUIDE.md` |
 | Frontend Build | `Frontend/FRONTEND_BUILD.md` |

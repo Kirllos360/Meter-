@@ -1,4 +1,4 @@
-# Meter Pulse — Utility Metering & Billing Platform
+# Meter Verse — Utility Metering & Billing Platform
 
 ## Stack
 - **Frontend** (`Frontend/`): Next.js 16 + React 19 + TypeScript + Tailwind v4 + shadcn/ui
@@ -26,7 +26,7 @@ bun run db:generate      # Prisma generate
 
 ## Spec workflow (Speckit)
 - Feature specs live in `specs/<feature-id>/` — currently `001-metering-billing-platform/`.
-- Key files: `spec.md` (requirements), `plan.md` (impl plan), `data-model.md`, `contracts/meter-pulse-api.yaml`, `tasks.md`.
+- Key files: `spec.md` (requirements), `plan.md` (impl plan), `data-model.md`, `contracts/meter-verse-api.yaml`, `tasks.md`.
 - `.specify/` contains workflow config, skill templates, and Speckit pipeline scripts.
 - Run `quickstart.md` checks before kicking off `/speckit-tasks`.
 
@@ -190,7 +190,7 @@ Every time the user sends a message, run `git status --short` to detect any chan
 - `/api/v1/docs-json` — OpenAPI JSON spec
 
 ### OpenAPI Configuration
-- Title: Meter Pulse API
+- Title: Meter Verse API
 - Version: 1.0
 - Server: /api/v1
 - JWT bearer auth scheme pre-configured
@@ -218,7 +218,7 @@ Every time the user sends a message, run `git status --short` to detect any chan
 
 ### What Changed
 - Created `backend/prisma/migrations/20260528000200_views/migration.sql` with 3 views:
-  - `meter_assignment_active_view` — active meter assignments (7 cols, filter `end_at IS NULL`)
+  - `Meter_Verse_assignment_active_view` — active meter assignments (7 cols, filter `end_at IS NULL`)
   - `sim_assignment_active_view` — active SIM assignments (6 cols, filter `end_at IS NULL`)
   - `customer_statement_view` — financial statement with debit/credit/running_balance (8 cols)
 - All views use `CREATE OR REPLACE VIEW` with `sim_system` schema qualification
@@ -226,7 +226,7 @@ Every time the user sends a message, run `git status --short` to detect any chan
 - Running balance uses stored `running_balance` from append-only ledger
 
 ### Dependencies
-- T014 (meter_assignments, sim_assignments tables)
+- T014 (Meter_Verse_assignments, sim_assignments tables)
 - T017 (customer_ledger_entries table)
 
 ### Validation

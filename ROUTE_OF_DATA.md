@@ -1,4 +1,4 @@
-# Route of Data — Meter Pulse Architecture & Data Flow Map
+# Route of Data — Meter Verse Architecture & Data Flow Map
 
 > **Generated**: 2026-05-29 | **Last Completed**: T022 (Multi-Tool Validation)
 > **Purpose**: Complete architectural map showing every file, its data flow connections, and dependency relationships.
@@ -9,7 +9,7 @@
 
 | Field | Value |
 |---|---|
-| Name | Meter Pulse — Utility Metering & Billing Platform |
+| Name | Meter Verse — Utility Metering & Billing Platform |
 | Repo Root | `D:\meter\Meter-\` |
 | Backend Stack | NestJS + PostgreSQL + Prisma ORM (Node 20+) |
 | Frontend Stack | Next.js 16 + React 19 + TypeScript + Tailwind v4 + shadcn/ui (Bun) |
@@ -72,7 +72,7 @@ Meter-/
 │   │   └── migrations/                 # 8 migrations (T013-T019)
 │   │       ├── 20260527092641_core_org/
 │   │       ├── 20260527094338_add_idempotency_record/
-│   │       ├── 20260527100316_meter_sim/
+│   │       ├── 20260527100316_Meter_Verse_sim/
 │   │       ├── 20260527114543_readings_tariff/
 │   │       ├── 20260527124234_payments_ledger/
 │   │       ├── 20260527153119_invoices/
@@ -230,7 +230,7 @@ Meter-/
 │       ├── tasks.md                    # 85 tasks (T001-T085)
 │       ├── quickstart.md               # Pre-flight checklist
 │       ├── checklists/requirements.md  # Requirements checklist
-│       └── contracts/meter-pulse-api.yaml  # OpenAPI 3.0 contract
+│       └── contracts/meter-verse-api.yaml  # OpenAPI 3.0 contract
 ├── documentation/                      # Multi-format documentation
 │   ├── markdown/                       # 45+ readable docs
 │   │   ├── 00-index.md                # Entry point
@@ -561,11 +561,11 @@ See `specs/001-metering-billing-platform/tasks.md` or `AI_HANDOFF.md` for full b
 
 | Source | OneDrive Target |
 |---|---|
-| `D:\meter\Meter-\` | `OneDrive\Projects\Meter Pulse\meter-\` |
-| `D:\meter\Meter-\backup files\` | `OneDrive\Projects\Meter Pulse\backups\` |
-| `D:\meter\Meter-\documentation\` | `OneDrive\Projects\Meter Pulse\docs\` |
-| `D:\meter\Meter-\A*.md` (handoff files) | `OneDrive\Projects\Meter Pulse\ai-handoff\` |
-| `D:\meter\Meter-\ROUTE_OF_DATA.md` | `OneDrive\Projects\Meter Pulse\reference\` |
+| `D:\meter\Meter-\` | `OneDrive\Projects\Meter Verse\meter-\` |
+| `D:\meter\Meter-\backup files\` | `OneDrive\Projects\Meter Verse\backups\` |
+| `D:\meter\Meter-\documentation\` | `OneDrive\Projects\Meter Verse\docs\` |
+| `D:\meter\Meter-\A*.md` (handoff files) | `OneDrive\Projects\Meter Verse\ai-handoff\` |
+| `D:\meter\Meter-\ROUTE_OF_DATA.md` | `OneDrive\Projects\Meter Verse\reference\` |
 
 ---
 

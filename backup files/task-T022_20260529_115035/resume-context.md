@@ -1,9 +1,9 @@
-# Resume Context — Meter Pulse
+# Resume Context — Meter Verse
 
 > **Self-contained** — Any AI system can read this file and continue work immediately.
 
 ## Project Overview
-- **Name**: Meter Pulse — Utility Metering & Billing Platform
+- **Name**: Meter Verse — Utility Metering & Billing Platform
 - **Stack**: Frontend: Next.js 16 + React 19 + TypeScript + Tailwind v4 + shadcn/ui (Bun)
 - **Stack**: Backend: NestJS + PostgreSQL + Prisma ORM (Node 20+, npm)
 - **Testing**: Jest (backend, 82 tests), Playwright (frontend smoke)

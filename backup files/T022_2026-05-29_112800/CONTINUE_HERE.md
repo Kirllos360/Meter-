@@ -1,4 +1,4 @@
-# Continue Here — Meter Pulse
+# Continue Here — Meter Verse
 
 > **Start with**: `LAST_SESSION_CHECKPOINT.md` (comprehensive restore document)
 > **Quick**: Read this file for essential info

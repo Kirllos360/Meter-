@@ -1,4 +1,4 @@
-# Restore Point — Meter Pulse
+# Restore Point — Meter Verse
 
 > **ID**: RP-2026-05-29 | **Task**: T021 (FE-002 React Query Integration Pattern) | **Status**: VALIDATED ✅
 

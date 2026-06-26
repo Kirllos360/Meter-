@@ -1,8 +1,8 @@
 {
-  "name": "meter-pulse-backend",
+  "name": "meter-verse-backend",
   "version": "0.1.0",
   "private": true,
-  "description": "Meter Pulse backend service",
+  "description": "Meter Verse backend service",
   "engines": {
     "node": ">=20"
   },

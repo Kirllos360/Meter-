@@ -1,8 +1,8 @@
-# Meter Pulse Frontend Build Documentation
+# Meter Verse Frontend Build Documentation
 
 ## Overview
 
-This document describes what has been built on the frontend for the **Meter Pulse** application.
+This document describes what has been built on the frontend for the **Meter Verse** application.
 
 - Stack: **Next.js 16 + React 19 + TypeScript + Tailwind CSS v4 + shadcn/ui**
 - UI style: Dark SaaS dashboard with neon accents, glassmorphism cards, responsive layout

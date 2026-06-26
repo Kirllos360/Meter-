@@ -1,4 +1,4 @@
-# Meter Pulse — Project Tree
+# Meter Verse — Project Tree
 > **Last updated**: 2026-05-29 (T022) — For full architecture see `ROUTE_OF_DATA.md`
 > For AI handoff/restore see `AI_HANDOFF.md` and `RESTORE_POINT.md`
 > Completed: T001-T022 (22/85 tasks)

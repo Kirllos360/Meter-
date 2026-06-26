@@ -1,4 +1,4 @@
-# Checkpoint Report — Meter Pulse Platform
+# Checkpoint Report — Meter Verse Platform
 
 **Date**: 2026-05-29
 **Branch**: `feature/t021-react-query` (HEAD `f432342`)
@@ -17,7 +17,7 @@
 | Server startup | ✅ Running | `node dist/src/main.js` boots clean |
 | Health endpoint | ✅ `{"status":"ok"}` | `GET /api/v1/health` returns 200 |
 | OpenAPI docs | ✅ Served at `/api/v1/docs` | Valid OpenAPI 3.0 JSON, Swagger UI at 200 |
-| PostgreSQL | ✅ Connected (docker) | `meter_pulse` DB, `sim_system` schema, healthy |
+| PostgreSQL | ✅ Connected (docker) | `Meter_Verse_pulse` DB, `sim_system` schema, healthy |
 | Prisma migrate status | ✅ Up to date | 8 migrations applied |
 | Custom SQL constructs | ✅ All applied | 3 partial unique indexes, append-only trigger, 3 views |
 
@@ -60,7 +60,7 @@
 | T009 Auth (JWT + RBAC) | ✅ | `auth/` module (23 tests) |
 | T010 Audit Log | ✅ | `audit/` module (append-only, 20 tests) |
 | T011 API Versioning | ✅ | `/api/v1` prefix, OpenAPI at `/api/v1/docs` |
-| T012 Contract Harness | ✅ | `test/contract/` (7 tests, loads meter-pulse-api.yaml) |
+| T012 Contract Harness | ✅ | `test/contract/` (7 tests, loads meter-verse-api.yaml) |
 
 ### PostgreSQL Schema (T013-T019) — ALL COMPLETE ✅
 
@@ -68,7 +68,7 @@
 |---|---|---|
 | T013 Core Org | projects, location_nodes, customers, customer_unit_assignments | 5 |
 | T008 Idempotency | idempotency_records | 0 |
-| T014 Meter/SIM | meters, sim_cards, meter_assignments, sim_assignments | 7 |
+| T014 Meter/SIM | meters, sim_cards, Meter_Verse_assignments, sim_assignments | 7 |
 | T015 Readings/Tariff | readings, reading_reviews, tariff_plans, billing_periods | 5 |
 | T017 Payments/Ledger | payments, payment_allocations, customer_ledger_entries | 4 |
 | T016 Invoices | invoices, invoice_lines, invoice_adjustments | 3 |
@@ -80,9 +80,9 @@
 | Check | Result | Detail |
 |---|---|---|
 | Tables in `sim_system` | ✅ 22 tables | All 22 models materialized |
-| Partial unique indexes (end_at IS NULL) | ✅ 3 | `customer_unit_assignments`, `meter_assignments`, `sim_assignments` |
+| Partial unique indexes (end_at IS NULL) | ✅ 3 | `customer_unit_assignments`, `Meter_Verse_assignments`, `sim_assignments` |
 | Append-only trigger | ✅ 1 | `block_ledger_modification()` on `customer_ledger_entries` |
-| Derived views | ✅ 3 | `meter_assignment_active_view`, `sim_assignment_active_view`, `customer_statement_view` |
+| Derived views | ✅ 3 | `Meter_Verse_assignment_active_view`, `sim_assignment_active_view`, `customer_statement_view` |
 | Prisma migration history | ✅ 8/8 | All migrations recorded in `_prisma_migrations` |
 
 **Total**: 22 models, 25+ enums in `sim_system` schema

@@ -477,8 +477,8 @@ export default function SmartTable<T extends Record<string, any>>({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All {filter.label}</SelectItem>
-                  {filter.options.map((opt) => (
-                    <SelectItem key={opt.value} value={opt.value}>
+                  {filter.options.map((opt, oi) => (
+                    <SelectItem key={opt.value ?? `opt-${oi}`} value={opt.value}>
                       {opt.label}
                     </SelectItem>
                   ))}

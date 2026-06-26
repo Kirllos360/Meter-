@@ -1,4 +1,4 @@
-# MCP Server Setup — Meter Pulse
+# MCP Server Setup — Meter Verse
 
 > **Date**: 2026-05-28
 > **Config**: `.opencode/opencode.json`

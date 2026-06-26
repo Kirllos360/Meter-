@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Meter Pulse MVP API
+  title: Meter Verse MVP API
   version: 1.0.0
   description: >-
     Contract for utility metering, billing, and ledger workflows.

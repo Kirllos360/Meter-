@@ -6,9 +6,9 @@ description: "Dependency-ordered implementation tasks for the Utility Metering a
 
 **Input**: Design documents from `/specs/001-metering-billing-platform/`
 
-**Prerequisites**: plan.md, spec.md, research.md, data-model.md, contracts/meter-pulse-api.yaml, quickstart.md, Frontend/FRONTEND_BUILD.md, Frontend/FRONTEND_SPRINT_BACKLOG.md
+**Prerequisites**: plan.md, spec.md, research.md, data-model.md, contracts/meter-verse-api.yaml, quickstart.md, Frontend/FRONTEND_BUILD.md, Frontend/FRONTEND_SPRINT_BACKLOG.md
 
-**Tests**: INCLUDED. Contract tests (against `contracts/meter-pulse-api.yaml`) and domain integration tests are explicitly required by the feature spec and plan Testing Plan. Write them before the implementation they cover.
+**Tests**: INCLUDED. Contract tests (against `contracts/meter-verse-api.yaml`) and domain integration tests are explicitly required by the feature spec and plan Testing Plan. Write them before the implementation they cover.
 
 ## Format: `[ID] [P?] [Story] Description`
 
@@ -20,7 +20,7 @@ description: "Dependency-ordered implementation tasks for the Utility Metering a
 
 - **Backend (new)**: `backend/src/<module>/`, migrations in `backend/prisma/`, tests in `backend/test/`
 - **Frontend (existing — do NOT rebuild)**: `Frontend/src/...`, smoke in `Frontend/scripts/smoke-all-pages.mjs`
-- **Contracts**: `specs/001-metering-billing-platform/contracts/meter-pulse-api.yaml`
+- **Contracts**: `specs/001-metering-billing-platform/contracts/meter-verse-api.yaml`
 
 ## ⚠️ Graphify-First Rule (frontend tasks)
 
@@ -63,7 +63,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
 - [X] T002 Add config + PostgreSQL connection module in `backend/src/common/config/`
   - **Dependencies**: T001
   - **Area/Files**: `backend/src/common/config/config.module.ts`, `backend/.env.example`, `backend/src/common/database/database.module.ts`
-  - **Acceptance**: `@nestjs/config` loads env; DB target is `meter_pulse` DB / `sim_system` schema; connection validated on boot
+  - **Acceptance**: `@nestjs/config` loads env; DB target is `Meter_Verse_pulse` DB / `sim_system` schema; connection validated on boot
   - **Validation**: `cd backend && npm run start:dev` shows successful DB connection log
   - **Risk**: Secrets leakage — keep real `.env` out of git, only commit `.env.example`.
 
@@ -84,7 +84,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
 - [X] T005 [P] Add local PostgreSQL via docker-compose in `backend/`
   - **Dependencies**: none
   - **Area/Files**: `backend/docker-compose.yml`, `backend/README.md` (DB run instructions)
-  - **Acceptance**: `docker compose up -d db` exposes a reachable `meter_pulse` Postgres
+  - **Acceptance**: `docker compose up -d db` exposes a reachable `Meter_Verse_pulse` Postgres
   - **Validation**: `cd backend && docker compose up -d db && docker compose ps`
   - **Risk**: Port collision with existing local services; make port configurable via env.
 
@@ -138,11 +138,11 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Area/Files**: `backend/src/main.ts`, `backend/src/common/openapi/openapi.setup.ts`
   - **Acceptance**: All routes mount under `/api/v1`; generated OpenAPI doc served at `/api/v1/docs`
   - **Validation**: `cd backend && npm run start:dev` then `curl -s localhost:3000/api/v1/docs-json | head`
-  - **Risk**: Generated spec diverging from `meter-pulse-api.yaml`; reconcile in T083.
+  - **Risk**: Generated spec diverging from `meter-verse-api.yaml`; reconcile in T083.
 
-- [X] T012 Build contract-test harness against `meter-pulse-api.yaml` in `backend/test/contract/`
+- [X] T012 Build contract-test harness against `meter-verse-api.yaml` in `backend/test/contract/`
   - **Dependencies**: T011
-  - **Area/Files**: `backend/test/contract/setup.ts` (supertest app bootstrap + OpenAPI response validator loading `specs/001-metering-billing-platform/contracts/meter-pulse-api.yaml`)
+  - **Area/Files**: `backend/test/contract/setup.ts` (supertest app bootstrap + OpenAPI response validator loading `specs/001-metering-billing-platform/contracts/meter-verse-api.yaml`)
   - **Acceptance**: Harness can assert any response against a schema/operationId from the YAML; one smoke assertion passes
   - **Validation**: `cd backend && npm test -- test/contract/setup`
   - **Risk**: Relative path to YAML from `backend/` must be stable; resolve via repo-root anchor.
@@ -158,15 +158,15 @@ A frontend task is not "started" until its `graphify query` has been run and its
 
 - [X] T014 [P] Migration — Meter, SIMCard, MeterAssignment, SIMAssignment in `backend/prisma/`
   - **Dependencies**: T013
-  - **Area/Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_meter_sim/`
-  - **Acceptance**: Unique `serial_number`, unique `iccid`; **partial unique index on `(meter_id) WHERE end_at IS NULL`** and **`(sim_id) WHERE end_at IS NULL`** (FR-004/FR-005); `parent_main_meter_id` required for `water_child`
-  - **Validation**: `cd backend && npx prisma migrate dev --name meter_sim && npx prisma migrate status`
+  - **Area/Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_Meter_Verse_sim/`
+  - **Acceptance**: Unique `serial_number`, unique `iccid`; **partial unique index on `(Meter_Verse_id) WHERE end_at IS NULL`** and **`(sim_id) WHERE end_at IS NULL`** (FR-004/FR-005); `parent_main_Meter_Verse_id` required for `water_child`
+  - **Validation**: `cd backend && npx prisma migrate dev --name Meter_Verse_sim && npx prisma migrate status`
   - **Risk**: Prisma partial unique indexes require raw SQL in migration; verify they actually apply in DB.
 
 - [X] T015 [P] Migration — Reading, ReadingReview, TariffPlan, BillingPeriod in `backend/prisma/`
   - **Dependencies**: T014
   - **Area/Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_readings_tariff/`
-  - **Acceptance**: Reading has unique `(meter_id, reading_at, source)`, status enum, snapshots, `raw_payload` jsonb; TariffPlan + BillingPeriod created
+  - **Acceptance**: Reading has unique `(Meter_Verse_id, reading_at, source)`, status enum, snapshots, `raw_payload` jsonb; TariffPlan + BillingPeriod created
   - **Validation**: `cd backend && npx prisma migrate dev --name readings_tariff && npx prisma migrate status`
   - **Risk**: jsonb defaults and decimal precision for consumption/rate must be explicit.
 
@@ -191,11 +191,11 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd backend && npx prisma migrate dev --name audit_reports && npx prisma migrate status`
   - **Risk**: AuditLog volume growth; add created_at index for retention queries.
 
-- [X] T019 Migration — derived views (`customer_statement_view`, `meter_assignment_active_view`, `sim_assignment_active_view`)
+- [X] T019 Migration — derived views (`customer_statement_view`, `Meter_Verse_assignment_active_view`, `sim_assignment_active_view`)
   - **Dependencies**: T014, T017
   - **Area/Files**: `backend/prisma/migrations/*_views/migration.sql`
   - **Acceptance**: Views return one active row per meter/SIM and a running-balance statement projection
-  - **Validation**: `cd backend && npx prisma migrate dev --name views` then `psql -c 'select * from meter_assignment_active_view limit 1'`
+  - **Validation**: `cd backend && npx prisma migrate dev --name views` then `psql -c 'select * from Meter_Verse_assignment_active_view limit 1'`
   - **Risk**: Views must stay aligned with table renames; document dependency.
 
 ### Frontend Sprint 0 foundation (Graphify-first)
@@ -445,7 +445,7 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Risk**: Only `valid`/approved-`corrected` readings billable; enforce before billing in US3.
 
 - [ ] T048a [US2] Water main-vs-sub variance service + `GET /api/v1/projects/{projectId}/water-balance` in `backend/src/readings/water-balance/`
-  - **Dependencies**: T047, T030 (parent_main_meter_id linkage)
+  - **Dependencies**: T047, T030 (parent_main_Meter_Verse_id linkage)
   - **Area/Files**: `backend/src/readings/water-balance/water-balance.service.ts`, `water-balance.controller.ts`
   - **Acceptance**: Computes variance = main-meter consumption − Σ(child-meter consumption) per period for operational review; returns variance + per-child breakdown (FR-009 comparison/variance)
   - **Validation**: `cd backend && npm test -- water-balance`
@@ -740,9 +740,9 @@ A frontend task is not "started" until its `graphify query` has been run and its
   - **Validation**: `cd Frontend && bun run lint && bun run build && bun run test:smoke && graphify update .`
   - **Risk**: Final regression window; freeze scope after green.
 
-- [ ] T083 Reconcile full backend contract suite against `meter-pulse-api.yaml`
+- [ ] T083 Reconcile full backend contract suite against `meter-verse-api.yaml`
   - **Dependencies**: T023–T024, T043–T044, T053–T056, T074
-  - **Area/Files**: `backend/test/contract/*`, `specs/001-metering-billing-platform/contracts/meter-pulse-api.yaml`
+  - **Area/Files**: `backend/test/contract/*`, `specs/001-metering-billing-platform/contracts/meter-verse-api.yaml`
   - **Acceptance**: Every contract operation has a passing test; served OpenAPI matches the YAML (no drift)
   - **Validation**: `cd backend && npm test -- test/contract`
   - **Risk**: Spec drift over the build; treat YAML as source of truth.
@@ -846,5 +846,5 @@ T027 Projects  T028 Locations  T029 Customers  T030 Meters  T031 SIM
 - **[P]** = different files, no incomplete dependencies.
 - Backend validation commands assume `npm` scripts in `backend/`; adjust if a different runner is configured in T001.
 - Frontend commands use `bun` per `Frontend/FRONTEND_BUILD.md` (`lint`, `build`, `test:smoke`).
-- `meter-pulse-api.yaml` is the contract source of truth; resolve any served-spec drift in T083.
+- `meter-verse-api.yaml` is the contract source of truth; resolve any served-spec drift in T083.
 - Constitution ratification (T085) is the final gate per plan Gate 4 — the feature is not "done" until it passes.

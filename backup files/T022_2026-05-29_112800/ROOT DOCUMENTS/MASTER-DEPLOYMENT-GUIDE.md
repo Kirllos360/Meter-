@@ -1,4 +1,4 @@
-# Meter Pulse — Master Deployment Guide
+# Meter Verse — Master Deployment Guide
 
 > Auto-generated 2026-05-28 | Consensus: 3/3 AI agents at 100%
 > Next: T021 (FE-002 React Query) | T022 (FE-003 Feature Flags)
@@ -9,7 +9,7 @@
 
 | Field | Value |
 |---|---|
-| Name | Meter Pulse — Utility Metering & Billing Platform |
+| Name | Meter Verse — Utility Metering & Billing Platform |
 | Stack | Backend: NestJS + PostgreSQL + Prisma ORM |
 | | Frontend: Next.js 16 + React 19 + TypeScript + Tailwind v4 + shadcn/ui |
 | Runtime | Bun (frontend) / Node 20+ (backend) |
@@ -69,7 +69,7 @@ backend/prisma/
 | T011 | API versioning /api/v1 + OpenAPI | ✅ Done | `backend/src/main.ts`, `openapi.setup.ts` |
 | T012 | Contract test harness | ✅ Done | `backend/test/contract/setup.ts` |
 | T013 | Core org migration (Project, LocationNode, Customer) | ✅ Done | `backend/prisma/migrations/*_core_org/` |
-| T014 | Meter/SIM migration | ✅ Done | `backend/prisma/migrations/*_meter_sim/` |
+| T014 | Meter/SIM migration | ✅ Done | `backend/prisma/migrations/*_Meter_Verse_sim/` |
 | T015 | Reading/Tariff migration | ✅ Done | `backend/prisma/migrations/*_readings_tariff/` |
 | T016 | Invoice migration | ✅ Done | `backend/prisma/migrations/*_invoices/` |
 | T017 | Payment/Ledger migration | ✅ Done | `backend/prisma/migrations/*_payments_ledger/` |
@@ -159,11 +159,11 @@ After merge, run: `cd backend && npx prisma migrate deploy && npx prisma generat
 PORT=3001
 DB_HOST=127.0.0.1
 DB_PORT=5432
-DB_NAME=meter_pulse
+DB_NAME=Meter_Verse_pulse
 DB_SCHEMA=sim_system
-DB_USER=meter_pulse
-DB_PASSWORD=meter_pulse_dev
-DATABASE_URL=postgresql://meter_pulse:meter_pulse_dev@127.0.0.1:5432/meter_pulse?schema=sim_system
+DB_USER=Meter_Verse_pulse
+DB_PASSWORD=Meter_Verse_pulse_dev
+DATABASE_URL=postgresql://Meter_Verse_pulse:Meter_Verse_pulse_dev@127.0.0.1:5432/Meter_Verse_pulse?schema=sim_system
 JWT_SECRET=dev-jwt-secret-do-not-use-in-production
 JWT_EXPIRES_IN=3600
 
@@ -212,7 +212,7 @@ NEXT_PUBLIC_API_URL=http://localhost:3001/api/v1
 | Spec document | `specs/001-metering-billing-platform/spec.md` |
 | Implementation plan | `specs/001-metering-billing-platform/plan.md` |
 | Data model | `specs/001-metering-billing-platform/data-model.md` |
-| API contract | `specs/001-metering-billing-platform/contracts/meter-pulse-api.yaml` |
+| API contract | `specs/001-metering-billing-platform/contracts/meter-verse-api.yaml` |
 | Documentation index | `documentation/markdown/00-index.md` |
 | Git commit log | `documentation/markdown/09-git-commit-log.md` |
 | Validation reports | `documentation/markdown/13-T*-validation-report.md` |

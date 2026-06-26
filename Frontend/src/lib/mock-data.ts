@@ -7,13 +7,22 @@ import type {
 // ---- Users ----
 export const mockUsers: User[] = [
   { id: 'USR-001', name: 'Ahmed El-Sayed', email: 'ahmed@meterpulse.com', role: 'super_admin', phone: '+201012345671', avatar: '', createdAt: '2024-01-15T10:00:00Z' },
-  { id: 'USR-002', name: 'Fatma Hassan', email: 'fatma@meterpulse.com', role: 'project_admin', phone: '+201012345672', avatar: '', createdAt: '2024-02-10T10:00:00Z' },
+  { id: 'USR-002', name: 'Fatma Hassan', email: 'fatma@meterpulse.com', role: 'admin', phone: '+201012345672', avatar: '', createdAt: '2024-02-10T10:00:00Z' },
   { id: 'USR-003', name: 'Omar Ibrahim', email: 'omar@meterpulse.com', role: 'operator', phone: '+201012345673', avatar: '', createdAt: '2024-03-05T10:00:00Z' },
   { id: 'USR-004', name: 'Youssef Ali', email: 'youssef@meterpulse.com', role: 'technician', phone: '+201012345674', avatar: '', createdAt: '2024-03-20T10:00:00Z' },
   { id: 'USR-005', name: 'Aisha Mohamed', email: 'aisha@meterpulse.com', role: 'finance', phone: '+201012345675', avatar: '', createdAt: '2024-04-01T10:00:00Z' },
   { id: 'USR-006', name: 'Karim Mahmoud', email: 'karim@meterpulse.com', role: 'support', phone: '+201012345676', avatar: '', createdAt: '2024-04-15T10:00:00Z' },
   { id: 'USR-007', name: 'Nadia Khalil', email: 'nadia@gmail.com', role: 'customer', phone: '+201098765431', avatar: '', createdAt: '2024-05-01T10:00:00Z' },
   { id: 'USR-008', name: 'Hassan Abdel-Rahim', email: 'hassan@gmail.com', role: 'customer', phone: '+201098765432', avatar: '', createdAt: '2024-05-10T10:00:00Z' },
+  { id: 'USR-009', name: 'Khaled System', email: 'khaled@meterpulse.com', role: 'system_admin', phone: '+201012345677', avatar: '', createdAt: '2024-06-01T10:00:00Z' },
+  { id: 'USR-010', name: 'Mariam Gamal', email: 'mariam@meterpulse.com', role: 'area_manager', phone: '+201012345678', avatar: '', createdAt: '2024-06-05T10:00:00Z' },
+  { id: 'USR-011', name: 'Hossam Kamel', email: 'hossam@meterpulse.com', role: 'team_leader', phone: '+201012345679', avatar: '', createdAt: '2024-06-10T10:00:00Z' },
+  { id: 'USR-012', name: 'Samir Naguib', email: 'samir@meterpulse.com', role: 'collector', phone: '+201012345680', avatar: '', createdAt: '2024-06-15T10:00:00Z' },
+  { id: 'USR-013', name: 'Tamer Saeed', email: 'tamer@meterpulse.com', role: 'meter_reader', phone: '+201012345681', avatar: '', createdAt: '2024-06-20T10:00:00Z' },
+  { id: 'USR-014', name: 'Nourhan Adel', email: 'nourhan@meterpulse.com', role: 'inspector', phone: '+201012345682', avatar: '', createdAt: '2024-07-01T10:00:00Z' },
+  { id: 'USR-015', name: 'Ehab Shaker', email: 'ehab@meterpulse.com', role: 'supervisor', phone: '+201012345683', avatar: '', createdAt: '2024-07-05T10:00:00Z' },
+  { id: 'USR-016', name: 'Rasha Tawfik', email: 'rasha@meterpulse.com', role: 'accountant', phone: '+201012345684', avatar: '', createdAt: '2024-07-10T10:00:00Z' },
+  { id: 'USR-017', name: 'Mostafa Adel', email: 'mostafa@meterpulse.com', role: 'viewer', phone: '+201012345685', avatar: '', createdAt: '2024-07-15T10:00:00Z' },
 ];
 
 // ---- Projects ----

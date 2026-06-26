@@ -1,4 +1,4 @@
-# Restore Point — Meter Pulse
+# Restore Point — Meter Verse
 
 > **ID**: RP-2026-05-29-v2 | **Task**: T022 (Multi-Tool Validation & Documentation Update) | **Status**: VALIDATED ✅
 

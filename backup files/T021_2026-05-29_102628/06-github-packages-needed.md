@@ -1,8 +1,8 @@
-# Required Tools & Services — Meter Pulse
+# Required Tools & Services — Meter Verse
 
 > **Single Source of Truth** — All applications, packages, services, and tools used in this project.
 > Includes download URLs, installation steps, and what each is used for.
-> Last updated: 2026-05-29 | Project: Meter Pulse (Metering & Billing Platform)
+> Last updated: 2026-05-29 | Project: Meter Verse (Metering & Billing Platform)
 
 ---
 
@@ -193,11 +193,11 @@ All installed via `backend/package.json`. Run `cd backend && npm install`.
 
 ### PostgreSQL
 - **Version**: 16 (Docker image: `postgres:16-alpine`)
-- **Use**: Primary database (database `meter_pulse`, schema `sim_system`)
+- **Use**: Primary database (database `Meter_Verse_pulse`, schema `sim_system`)
 - **GitHub**: https://github.com/postgres/postgres
 - **Download**: Docker image — `postgres:16-alpine`
 - **Run**: `cd backend && docker compose up -d db`
-- **Connection**: `postgresql://meter_pulse:meter_pulse_dev@127.0.0.1:5432/meter_pulse?schema=sim_system`
+- **Connection**: `postgresql://Meter_Verse_pulse:Meter_Verse_pulse_dev@127.0.0.1:5432/Meter_Verse_pulse?schema=sim_system`
 - **Config**: `backend/docker-compose.yml`, `backend/.env`
 
 ### Prisma
@@ -243,7 +243,7 @@ All installed via `backend/package.json`. Run `cd backend && npm install`.
 
 ### AJV (contract testing)
 - **Version**: ^8.17.x
-- **Use**: JSON Schema validation for contract tests against `meter-pulse-api.yaml`
+- **Use**: JSON Schema validation for contract tests against `meter-verse-api.yaml`
 - **GitHub**: https://github.com/ajv-validator/ajv
 - **Install**: Via npm — `backend/package.json`
 - **Related**: `ajv-formats` (format validators), `js-yaml` (YAML parsing)

@@ -1,5 +1,5 @@
 // ============================================
-// Meter Pulse - TypeScript Types & Interfaces
+// Meter Verse - TypeScript Types & Interfaces
 // ============================================
 
 // ---- Enums / Union Types ----

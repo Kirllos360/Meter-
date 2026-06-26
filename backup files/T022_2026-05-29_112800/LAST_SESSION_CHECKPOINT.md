@@ -1,4 +1,4 @@
-# LAST SESSION CHECKPOINT — Meter Pulse
+# LAST SESSION CHECKPOINT — Meter Verse
 
 > **IF YOU LOSE THIS SESSION**: Give this entire folder to any AI agent.
 > It contains EVERYTHING needed to continue without any data loss.
@@ -186,7 +186,7 @@ git clone https://github.com/Kirllos360/Meter-.git; cd Meter-; git checkout feat
 ## Emergency Contact
 
 If this file is found without context:
-- Project: Meter Pulse (Utility Metering & Billing Platform)
+- Project: Meter Verse (Utility Metering & Billing Platform)
 - Repo: https://github.com/Kirllos360/Meter-
 - Author: Kirllos Hany (kirllos.hany@epower.com.eg)
 - Branch: feature/t022-validation-docs

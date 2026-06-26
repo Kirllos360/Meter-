@@ -1,4 +1,4 @@
-# ⚠️ CONTINUE HERE — Meter Pulse Backup / Restore Point
+# ⚠️ CONTINUE HERE — Meter Verse Backup / Restore Point
 > Created: 2026-05-29 10:26:28
 > Last Git Commit: `bbe4065467f347e455d365301100c33545c3bb9a`
 > Branch: `feature/t021-react-query`
@@ -20,7 +20,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Name** | Meter Pulse — Utility Metering & Billing Platform |
+| **Name** | Meter Verse — Utility Metering & Billing Platform |
 | **Repo root** | `D:\meter\Meter-\` |
 | **Remote (origin)** | `https://github.com/Kirllos360/Meter-.git` |
 | **Remote (abady)** | `https://github.com/Abady001/Meter-.git` |

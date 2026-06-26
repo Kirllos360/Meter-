@@ -1,0 +1,231 @@
+/* ============================================================
+   Meter Verse Invoice Template CSS
+   Matches SBill JRXML layout: 421x297pt A4 Landscape
+   Edit this file to change invoice appearance
+   ============================================================ */
+
+/* --- Page & Base --- */
+.invoice-page {
+  font-family: 'DejaVu Sans', sans-serif;
+  font-size: 7pt;
+  color: #000;
+  line-height: 1.05;
+  background: #fff;
+  width: 411pt;
+  margin: 0;
+  position: relative;
+}
+
+/* --- Red Banner (JRXML: y=6, h=12, #CC0000) --- */
+.invoice-banner {
+  background: #CC0000;
+  height: 9pt;
+  margin: 0 0 3pt 0;
+  width: 100%;
+}
+
+/* --- Header Row: area | title | logo --- */
+.invoice-header {
+  width: 100%;
+  border-collapse: collapse;
+}
+.invoice-header td {
+  padding: 0;
+  vertical-align: middle;
+  border: none;
+}
+.invoice-area-box {
+  border: 0.25pt solid #999;
+  padding: 1.5pt 3pt;
+  font-size: 6.5pt;
+  text-align: right;
+}
+.invoice-title {
+  text-align: center;
+  color: #000066;
+  font-size: 8pt;
+  font-weight: bold;
+}
+.invoice-logo {
+  text-align: left;
+}
+.invoice-logo img {
+  max-height: 26pt;
+  max-width: 110pt;
+}
+
+/* --- Info Labels (المنطقة/المشروع/وحدة) --- */
+.invoice-info {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2pt 0;
+}
+.invoice-info td {
+  padding: 0;
+  border: none;
+  vertical-align: top;
+}
+.info-labels {
+  font-size: 6.5pt;
+  line-height: 1.4;
+}
+.info-labels .lbl {
+  color: #000066;
+  font-size: 7pt;
+}
+.company-box {
+  border: 0.25pt solid #999;
+  text-align: center;
+  padding: 1.5pt;
+  font-size: 6.5pt;
+}
+
+/* --- Invoice Number --- */
+.invoice-number {
+  text-align: right;
+  font-size: 7pt;
+  padding: 1pt 0;
+}
+.invoice-number .lbl {
+  color: #000066;
+  font-size: 7pt;
+}
+
+/* --- Grid Table (JRXML table section) --- */
+.invoice-grid {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1pt;
+}
+.invoice-grid td,
+.invoice-grid th {
+  border: 0.25pt solid #999;
+  padding: 1pt 2pt;
+  font-size: 6.5pt;
+  text-align: right;
+  vertical-align: middle;
+}
+.invoice-grid th {
+  background: #CCCCFF;
+  font-weight: bold;
+  text-align: center;
+  font-size: 6pt;
+}
+.invoice-grid .col-0 { width: 14.5%; }
+.invoice-grid .col-1 { width: 14%; }
+.invoice-grid .col-2 { width: 14%; }
+.invoice-grid .col-3 { width: 14%; }
+.invoice-grid .col-4 { width: 14%; }
+.invoice-grid .col-5 { width: 14%; }
+.invoice-grid .col-6 { width: 15.5%; }
+
+/* --- Cell Alignment Helpers --- */
+.val-left {
+  text-align: left;
+  font-family: 'DejaVu Sans Mono', monospace;
+  direction: ltr;
+  font-size: 6.5pt;
+}
+.val-center {
+  text-align: center;
+  font-family: 'DejaVu Sans Mono', monospace;
+  direction: ltr;
+  font-size: 6.5pt;
+}
+.val-bold { font-weight: bold; }
+.val-center-text { text-align: center; }
+
+/* --- Settlement (Credit in Red) --- */
+.settlement-credit {
+  color: #CC0000;
+}
+
+/* --- Totals Row Highlight --- */
+.totals-highlight {
+  background: #E8E8FF;
+  font-weight: bold;
+}
+
+/* --- Amount in Words Section (JRXML: y=200-234) --- */
+.words-cell {
+  font-size: 5.5pt;
+  line-height: 1.2;
+  padding: 1.5pt 3pt;
+  text-align: center;
+  border: 0.25pt solid #999;
+}
+.total-label {
+  background: #CCCCFF;
+  font-weight: bold;
+  text-align: center;
+  font-size: 6.5pt;
+}
+
+/* --- Thick Navy Line (JRXML: y=245, pen 4pt, #000099) --- */
+.thick-line {
+  border: none;
+  border-top: 4pt solid #000099;
+  margin: 2pt 0 1pt 0;
+}
+
+/* --- Signature Row (JRXML: y=254) --- */
+.sig-table td {
+  padding: 1pt;
+  border: none;
+  vertical-align: middle;
+}
+.sig-label {
+  color: #000066;
+  font-size: 7pt;
+  font-weight: bold;
+  text-align: right;
+}
+.sig-img {
+  text-align: left;
+}
+.sig-img img {
+  max-height: 18pt;
+}
+
+/* --- Footer --- */
+.invoice-footer {
+  text-align: center;
+  font-size: 5pt;
+  color: #666;
+  margin-top: 1pt;
+}
+
+/* --- Deleted Watermark (JRXML: #FF0033 60pt) --- */
+.deleted-watermark {
+  position: absolute;
+  top: 10pt;
+  left: 16pt;
+  right: 16pt;
+  bottom: 16pt;
+  color: #FF0033;
+  font-size: 60pt;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0.25;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* --- Print / PDF optimized --- */
+@media print {
+  .invoice-page {
+    width: 411pt;
+    margin: 0;
+  }
+}
+
+/* --- Utility-specific overrides (set via JS) --- */
+.invoice-title-elec { }
+.invoice-title-water { }
+.invoice-title-chilled { }
+.invoice-title-outdoor { }
+.invoice-title-solar { }
+.invoice-title-settlement { }

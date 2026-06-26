@@ -1,4 +1,4 @@
-# Meter Pulse Frontend Sprint Backlog
+# Meter Verse Frontend Sprint Backlog
 
 This backlog extends the existing frontend incrementally.
 
@@ -352,7 +352,7 @@ Constraints applied:
 
 Use this with each ticket:
 
-"Implement **[TICKET-ID] [TICKET-NAME]** in the existing Meter Pulse frontend.
+"Implement **[TICKET-ID] [TICKET-NAME]** in the existing Meter Verse frontend.
 Constraints: keep current stack, keep current app shell, keep current design system, do not remove existing modules.
 Scope: [paste scope].
 Acceptance criteria: [paste acceptance criteria].
