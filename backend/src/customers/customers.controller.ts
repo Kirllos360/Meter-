@@ -47,6 +47,29 @@ export class CustomersController {
     }
   }
 
+  @Get('search')
+  @Roles(Role.OPERATOR, Role.ADMIN, Role.SUPER_ADMIN, Role.FINANCE, Role.SUPPORT)
+  @ApiOperation({ summary: 'Search customers across all fields' })
+  async search(@Query() query: { q?: string; unitNo?: string; meterSerial?: string; name?: string; email?: string; phone?: string }) {
+    const where: any = {};
+    if (query.q) {
+      const q = query.q;
+      where.OR = [
+        { name: { contains: q, mode: 'insensitive' } },
+        { customerCode: { contains: q, mode: 'insensitive' } },
+        { phone: { contains: q } },
+        { email: { contains: q, mode: 'insensitive' } },
+      ];
+    } else {
+      if (query.name) where.name = { contains: query.name, mode: 'insensitive' };
+      if (query.email) where.email = { contains: query.email, mode: 'insensitive' };
+      if (query.phone) where.phone = { contains: query.phone };
+      if (query.unitNo) where.unitNumber = { contains: query.unitNo, mode: 'insensitive' };
+      if (query.meterSerial) where.meterSerial = { contains: query.meterSerial, mode: 'insensitive' };
+    }
+    return this.prisma.customer.findMany({ where, take: 50, orderBy: { name: 'asc' } });
+  }
+
   @Post()
   @Roles(Role.OPERATOR, Role.ADMIN, Role.SUPER_ADMIN)
   @Audit('customer', 'create')

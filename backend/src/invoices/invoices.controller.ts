@@ -22,6 +22,20 @@ export class InvoicesController {
     private readonly userAccess: UserAccessService,
   ) {}
 
+  @Get()
+  @Roles(Role.OPERATOR, Role.ADMIN, Role.SUPER_ADMIN, Role.FINANCE)
+  @ApiOperation({ summary: 'List invoices' })
+  async findAll(@Query('projectId') projectId?: string, @Query('limit') limit?: string, @Req() req?: any) {
+    const where: any = {};
+    if (projectId) where.projectId = projectId;
+    if (req?.user && req.user.role !== 'super_admin') {
+      const access = await this.userAccess.resolveAccess(req.user.userId, req.user.role);
+      if (access.projects.length) where.projectId = { in: access.projects };
+      else return [];
+    }
+    return this.prisma.invoice.findMany({ where, orderBy: { createdAt: 'desc' }, take: parseInt(limit || '100') });
+  }
+
   @Get(':id/pdf')
   @Roles(Role.OPERATOR, Role.ADMIN, Role.SUPER_ADMIN, Role.FINANCE)
   @ApiOperation({ summary: 'Download invoice as PDF (Master Template)' })

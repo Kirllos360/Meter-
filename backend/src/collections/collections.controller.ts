@@ -26,10 +26,10 @@ export class CollectionsController {
     return { projectId: { in: access.projects } };
   }
 
-  @Get('dashboard')
+  @Get('aging-breakdown')
   @Roles(Role.OPERATOR, Role.ADMIN, Role.SUPER_ADMIN, Role.FINANCE)
-  @ApiOperation({ summary: 'Collections dashboard KPIs' })
-  async getCollectionsDashboard(@Req() req?: any) {
+  @ApiOperation({ summary: 'Aging breakdown by bucket' })
+  async getAgingBreakdown(@Req() req?: any) {
     const pf = await this.resolveProjectFilter(req?.user);
     const invoices = await this.prisma.invoice.findMany({ where: { ...pf, status: { not: 'cancelled' } }, take: 500 }).catch(() => []);
     const buckets = { '0-30': 0, '31-60': 0, '61-90': 0, '90+': 0 };
@@ -112,7 +112,7 @@ export class CollectionsController {
   @Get('dashboard')
   @Roles(Role.OPERATOR, Role.ADMIN, Role.SUPER_ADMIN)
   @ApiOperation({ summary: 'Collection dashboard KPIs' })
-  async getDashboard(@Req() req?: any) {
+  async getCollectionsDashboard(@Req() req?: any) {
     const pf = await this.resolveProjectFilter(req?.user);
     const now = new Date();
     const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);

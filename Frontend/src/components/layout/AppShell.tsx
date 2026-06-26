@@ -20,9 +20,6 @@ import KpiCollectionsDashboard from '@/components/kpi/CollectionsDashboard';
 import KpiUtilitiesDashboard from '@/components/kpi/UtilitiesDashboard';
 import SyncGatewayPage from '@/components/sync/SyncGatewayPage';
 
-// Projects
-import ProjectsPage from '@/components/projects/ProjectsPage';
-import ProjectDetailPage from '@/components/projects/ProjectDetailPage';
 import LocationsPage from '@/components/projects/LocationsPage';
 
 // Customers
@@ -66,7 +63,6 @@ import SupportPage from '@/components/tickets/SupportPage';
 
 import { useT } from '@/lib/i18n/context';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { useRouter } from 'next/navigation';
 import GlobalSearchDialog from '@/components/shared/GlobalSearchDialog';
 import UploadCenterPage from '@/components/upload/UploadCenterPage';
 import TariffStudioPage from '@/components/tariffs/TariffStudioPage';
@@ -74,7 +70,6 @@ import WorkplacePage from '@/components/workspace/WorkplacePage';
 import SettlementPage from '@/components/settlement/SettlementPage';
 
 export function AppShell() {
-  const router = useRouter();
   const currentPage = usePageStore((s) => s.currentPage);
   const { navigate } = usePageStore();
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
@@ -193,7 +188,7 @@ function renderPage(page: PageKey): React.ReactNode {
       return <SyncGatewayPage />;
 
     case 'project-detail':
-      return <div className="p-6 text-muted-foreground">Projects page removed</div>;
+      return <div className="p-6 text-muted-foreground">Project details have moved to the Administration Portal</div>;
     case 'locations':
       return <LocationsPage />;
 
