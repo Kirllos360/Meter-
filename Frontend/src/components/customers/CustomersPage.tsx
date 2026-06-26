@@ -21,7 +21,14 @@ export default function CustomersPage() {
   const [selectedArea, setSelectedArea] = useState('');
   const [selectedProject, setSelectedProject] = useState('');
 
-  const projectId = typeof window !== 'undefined' ? localStorage.getItem('selected-project') || '' : '';
+  useEffect(() => {
+    const area = localStorage.getItem('selected-area') || '';
+    const project = localStorage.getItem('selected-project') || '';
+    setSelectedArea(area);
+    setSelectedProject(project);
+  }, []);
+
+  const projectId = selectedProject;
   const { data: customers } = useQuery({ queryKey: ['customers', projectId], queryFn: () => {
     if (!projectId) return Promise.resolve([]);
     return apiGet<any[]>(`/projects/${projectId}/customers`).catch(() => []);

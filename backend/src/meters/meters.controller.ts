@@ -20,6 +20,7 @@ import { Roles } from '../auth/roles.decorator';
 import { Role } from '../auth/types/role.enum';
 import { Audit } from '../audit/audit.decorator';
 import { UserAccessService } from '../auth/user-access.service';
+import { PrismaService } from '../common/database/prisma.service';
 import { MetersService } from './meters.service';
 import { NotificationsService } from '../notifications/notifications.service';
 import { AssignMeterDto } from './dto/assign-meter.dto';
@@ -35,6 +36,7 @@ export class MetersController {
     private readonly metersService: MetersService,
     private readonly notificationsService: NotificationsService,
     private readonly userAccess: UserAccessService,
+    private readonly prisma: PrismaService,
   ) {}
 
   private async validateProject(projectId: string, req: any): Promise<void> {
@@ -82,9 +84,15 @@ export class MetersController {
       );
       return results.flat();
     }
-    if (req.areaId && req.userAccess?.projectIds?.length) {
+    if (req.areaId) {
+      const areaProjects = await this.prisma.coreProject.findMany({
+        where: { areaId: req.areaId, isActive: true },
+        select: { id: true }
+      });
+      const projectIds = areaProjects.map(p => p.id);
+      if (projectIds.length === 0) return [];
       const results = await Promise.all(
-        (req.userAccess.projectIds as string[]).map((p: string) => this.metersService.findAll({ ...query, projectId: p }))
+        projectIds.map((p: string) => this.metersService.findAll({ ...query, projectId: p }))
       );
       return results.flat();
     }

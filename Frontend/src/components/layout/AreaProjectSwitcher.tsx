@@ -52,6 +52,21 @@ export function AreaProjectSwitcher() {
     window.location.reload();
   };
 
+  // Auto-select project when only one exists for the area
+  useEffect(() => {
+    if (selectedArea && !selectedProject) {
+      const areaObj = areas.find((a: any) => a.id === selectedArea || a.areaCode === selectedArea);
+      const areaProjects = selectedArea
+        ? projects.filter((p: any) => p.areaId === (areaObj?.id || selectedArea))
+        : [];
+      if (areaProjects.length === 1) {
+        const projId = areaProjects[0].id;
+        setSelectedProject(projId);
+        localStorage.setItem('selected-project', projId);
+      }
+    }
+  }, [selectedArea, projects]);
+
   const handleProject = (val: string) => {
     const projVal = val === '__all_projects__' ? '' : val;
     setSelectedProject(projVal);
