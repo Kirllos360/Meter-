@@ -1,101 +1,61 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { apiGet } from '@/lib/api';
 import { PageHeader, formatCurrency } from '@/components/shared/PageHelpers';
 import { StatusBadge } from '@/components/shared/StatusBadge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { usePageStore } from '@/lib/router-store';
 import { useT } from '@/lib/i18n/context';
-import { Phone, Mail, MapPin, Gauge, CreditCard, Search, Plus, Building2, Users } from 'lucide-react';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1';
+import { Phone, Mail, MapPin, Gauge, CreditCard, Search, Plus, Users, X } from 'lucide-react';
 
 export default function CustomersPage() {
   const t = useT();
   const { navigate } = usePageStore();
   const [search, setSearch] = useState('');
-  const [selectedArea, setSelectedArea] = useState('');
-  const [selectedProject, setSelectedProject] = useState('');
 
-  useEffect(() => {
-    const area = localStorage.getItem('selected-area') || '';
-    const project = localStorage.getItem('selected-project') || '';
-    setSelectedArea(area);
-    setSelectedProject(project);
-  }, []);
-
-  const projectId = selectedProject;
+  const projectId = typeof window !== 'undefined' ? localStorage.getItem('selected-project') || '' : '';
   const { data: customers } = useQuery({ queryKey: ['customers', projectId], queryFn: () => {
     if (!projectId) return Promise.resolve([]);
     return apiGet<any[]>(`/projects/${projectId}/customers`).catch(() => []);
   }, enabled: !!projectId });
-  const { data: areas } = useQuery({ queryKey: ['areas'], queryFn: () => apiGet<any[]>('/areas').catch(() => []) });
-  const { data: projects } = useQuery({ queryKey: ['projects'], queryFn: () => apiGet<any[]>('/projects').catch(() => []) });
 
-  const areaList = Array.isArray(areas) ? areas : [];
-  const projectList = Array.isArray(projects) ? projects : [];
-  const customerList = Array.isArray(customers) ? customers : [];
-
-  // Filter projects by selected area
-  const filteredProjects = selectedArea
-    ? projectList.filter((p: any) => p.areaId === selectedArea || p.area === selectedArea)
-    : projectList;
-
-  // Filter customers by area + project + search
-  const filteredCustomers = customerList.filter((c: any) => {
-    if (selectedArea && c.areaId !== selectedArea && c.area !== selectedArea) return false;
-    if (selectedProject && c.projectId !== selectedProject) return false;
-    if (search) {
-      const q = search.toLowerCase();
+  const customerList = useMemo(() => {
+    const list = Array.isArray(customers) ? customers : [];
+    if (!search.trim()) return list;
+    const q = search.toLowerCase().trim();
+    return list.filter((c: any) => {
       const name = (c.name || '').toLowerCase();
-      const code = (c.customerCode || '').toLowerCase();
+      const code = (c.customerCode || c.code || '').toLowerCase();
       const phone = (c.phone || '');
-      if (!name.includes(q) && !code.includes(q) && !phone.includes(q)) return false;
-    }
-    return true;
-  });
+      const email = (c.email || '').toLowerCase();
+      const area = (c.area || c.projectName || '').toLowerCase();
+      const meterSerial = (c.meterSerial || c.meters?.map?.((m: any) => m.serialNumber)?.join(' ') || '').toLowerCase();
+      return name.includes(q) || code.includes(q) || phone.includes(q) || email.includes(q) || area.includes(q) || meterSerial.includes(q);
+    });
+  }, [customers, search]);
 
   return (
     <div>
       <PageHeader title={t('customers.title')} subtitle={t('customers.subtitle')} />
 
-      {/* Area Tabs */}
-      <div className="mb-3">
-        <Tabs value={selectedArea} onValueChange={v => { setSelectedArea(v); setSelectedProject(''); }}>
-          <TabsList className="flex-wrap h-auto gap-1">
-            <TabsTrigger value="">All Areas</TabsTrigger>
-            {areaList.map((a: any) => (
-              <TabsTrigger key={a.id || a.areaCode} value={a.areaCode || a.id}>
-                <Building2 className="h-3 w-3 mr-1" />{a.areaName || a.name}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
-      </div>
-
-      {/* Project Sub Tabs */}
-      {selectedArea && (
-        <div className="mb-3">
-          <Tabs value={selectedProject} onValueChange={setSelectedProject}>
-            <TabsList className="flex-wrap h-auto gap-1">
-              <TabsTrigger value="">All Projects</TabsTrigger>
-              {filteredProjects.map((p: any) => (
-                <TabsTrigger key={p.id} value={p.id}>{p.name}</TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
-        </div>
-      )}
-
-      {/* Search + Add */}
+      {/* Smart Search */}
       <div className="flex items-center gap-3 mb-4">
-        <div className="relative flex-1 max-w-sm">
+        <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="Search customers..." className="pl-9 h-9" value={search} onChange={e => setSearch(e.target.value)} />
+          <Input
+            placeholder="Search by name, code, phone, email, meter serial..."
+            className="pl-9 pr-9 h-10"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+          {search && (
+            <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+              <X className="h-4 w-4" />
+            </button>
+          )}
         </div>
         <Button size="sm" className="gap-1" onClick={() => navigate('customer-detail', { id: 'new' })}>
           <Plus className="h-3.5 w-3.5" />Add Customer
@@ -104,7 +64,7 @@ export default function CustomersPage() {
 
       {/* Customer Cards Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredCustomers.map((customer: any) => {
+        {customerList.map((customer: any) => {
           const meterCount = customer.meters?.length ?? customer.activeMeters ?? 0;
           const invoiceCount = customer.invoices?.length ?? 0;
           return (
@@ -167,8 +127,10 @@ export default function CustomersPage() {
             </Card>
           );
         })}
-        {filteredCustomers.length === 0 && (
-          <div className="col-span-full text-center py-12 text-muted-foreground">No customers found</div>
+        {customerList.length === 0 && (
+          <div className="col-span-full text-center py-12 text-muted-foreground">
+            {projectId ? 'No customers found' : 'Select a project from the top bar to view customers'}
+          </div>
         )}
       </div>
     </div>
