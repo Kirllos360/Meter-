@@ -32,13 +32,15 @@ export default function ReadingsPage() {
   const handleSyncReadings = async () => {
     setSyncing(true);
     try {
-      let areaCode = localStorage.getItem('selected-area') || 'october';
+      let areaCode = localStorage.getItem('selected-area') || '';
       const areasRes = await fetch(`${API}/areas`, { headers: { Authorization: `Bearer ${getToken()}` } });
       if (areasRes.ok) {
         const areasList = await areasRes.json();
-        const found = (Array.isArray(areasList) ? areasList : []).find((a: any) => a.id === areaCode);
+        const stored = localStorage.getItem('selected-area') || '';
+        const found = (Array.isArray(areasList) ? areasList : []).find((a: any) => a.id === stored || a.areaCode === stored || a.areaName === stored);
         if (found?.areaCode) areaCode = found.areaCode;
       }
+      if (!areaCode) areaCode = 'AREA-1';
       const csrfToken = await getCsrfToken();
       const headers: Record<string, string> = { Authorization: `Bearer ${getToken()}`, 'Content-Type': 'application/json' };
       if (csrfToken) headers['x-csrf-token'] = csrfToken;

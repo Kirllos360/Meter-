@@ -10,6 +10,13 @@ import { v4 as uuid } from 'uuid';
 export class SyncOrchestratorService {
   private readonly logger = new Logger(SyncOrchestratorService.name);
 
+  // Map DB areaCode values (AREA-1, AREA-2) to sync keys (october, new_cairo)
+  private readonly AREA_CODE_MAP: Record<string, string> = {
+    'AREA-1': 'october', 'AREA-2': 'new_cairo', 'AREA-3': 'sodic_ednc',
+    'AREA-4': 'sodic_estates', 'AREA-5': 'sodic_vye', 'AREA-6': 'badya_city',
+    'AREA-7': 'north_coast', 'AREA-8': 'uvines_mall',
+  };
+
   // Direct Symbiot SQL Server connections per area
   private readonly SYMBIOT_DB: Record<string, { server: string; database: string; user: string; password: string }> = {
     october:     { server: 'VM1', database: 'PalmHills_October', user: 'sa', password: 'H$gVFED$x+vSqQ3K' },
@@ -30,6 +37,10 @@ export class SyncOrchestratorService {
     chillout:    { url: 'http://10.50.30.5:9990', user: 'admin', pass: 'iskra' },
   };
 
+  private toSyncKey(areaCode: string): string {
+    return this.AREA_CODE_MAP[areaCode] || areaCode;
+  }
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly config: ConfigService,
@@ -37,7 +48,8 @@ export class SyncOrchestratorService {
 
   // Connect to Symbiot SQL Server (READ ONLY - SELECT only)
   private async getSymbiotPool(areaCode: string): Promise<sql.ConnectionPool> {
-    const cfg = this.SYMBIOT_DB[areaCode];
+    const syncKey = this.toSyncKey(areaCode);
+    const cfg = this.SYMBIOT_DB[syncKey];
     if (!cfg) throw new Error(`No Symbiot database config for area: ${areaCode}`);
     return new sql.ConnectionPool({
       server: cfg.server, database: cfg.database,
@@ -64,7 +76,8 @@ export class SyncOrchestratorService {
 
   // Authenticate to per-area sBill/billing system and get JWT token
   private async sbillAuth(areaCode: string): Promise<{ token: string; url: string }> {
-    const cfg = this.SBILL_PER_AREA[areaCode] || this.SBILL_PER_AREA['october'];
+    const syncKey = this.toSyncKey(areaCode);
+    const cfg = this.SBILL_PER_AREA[syncKey] || this.SBILL_PER_AREA['october'];
     const body = JSON.stringify({ username: cfg.user, password: cfg.pass, rememberMe: true, projectId: '1' });
     const token = await new Promise<string>((resolve, reject) => {
       const req = http.request(`${cfg.url}/api/authenticate`, {

@@ -72,14 +72,16 @@ export default function MeterDetailPage() {
   const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1';
 
   const handleSyncReadings = async () => {
-    let areaCode = localStorage.getItem('selected-area') || 'october';
+    let areaCode = localStorage.getItem('selected-area') || '';
     try {
       const areasRes = await fetch(`${API}/areas`, { headers: { Authorization: `Bearer ${getToken()}` } });
       if (areasRes.ok) {
         const areasList = await areasRes.json();
-        const found = (Array.isArray(areasList) ? areasList : []).find((a: any) => a.id === areaCode);
+        const stored = localStorage.getItem('selected-area') || '';
+        const found = (Array.isArray(areasList) ? areasList : []).find((a: any) => a.id === stored || a.areaCode === stored || a.areaName === stored);
         if (found?.areaCode) areaCode = found.areaCode;
       }
+      if (!areaCode) areaCode = 'AREA-1';
       await fetch(`${API}/sync/meters/${areaCode}`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${getToken()}`, 'Content-Type': 'application/json' },
