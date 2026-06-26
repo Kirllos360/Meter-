@@ -101,7 +101,7 @@ export class SyncOrchestratorService {
         ? await this.prisma.coreProject.findFirst({ where: { areaId: areaRec.id, isActive: true } })
         : await this.prisma.coreProject.findFirst({ where: { isActive: true } });
       if (!project) return { synced: 0, errors: ['No active project for area: ' + areaCode], total: 0 };
-      const existingSerials = new Set((await this.prisma.meter.findMany({ select: { serialNumber: true } })).map(m => m.serialNumber));
+      const existingSerials = new Set((await this.prisma.meter.findMany({ where: { projectId: project.id }, select: { serialNumber: true } })).map(m => m.serialNumber));
 
       // Query devices with their EAV attributes flattened
       const devices = await pool.request().query(`
@@ -173,7 +173,7 @@ export class SyncOrchestratorService {
       ? await this.prisma.coreProject.findFirst({ where: { areaId: areaRec.id, isActive: true } })
       : await this.prisma.coreProject.findFirst({ where: { isActive: true } });
     if (!project) return { synced: 0, errors: ['No active project for area: ' + areaCode], total: 0 };
-    const existingSerials = new Set((await this.prisma.meter.findMany({ select: { serialNumber: true } })).map(m => m.serialNumber));
+    const existingSerials = new Set((await this.prisma.meter.findMany({ where: { projectId: project.id }, select: { serialNumber: true } })).map(m => m.serialNumber));
 
     for (let page = 0; page < 100; page++) {
       const data = await this.httpGet(`${url}/api/meters?page=${page}&size=100`, authHeader);
