@@ -51,6 +51,7 @@ import InvoicesPage from '@/components/billing/InvoicesPage';
 import InvoiceDetailPage from '@/components/billing/InvoiceDetailPage';
 import PaymentsPage from '@/components/billing/PaymentsPage';
 import BalancesPage from '@/components/billing/BalancesPage';
+import BillCycleComponent from '@/components/billing/BillCyclePage';
 
 // Reports
 import ReportsPage from '@/components/reports/ReportsPage';
@@ -190,11 +191,8 @@ function renderPage(page: PageKey): React.ReactNode {
     case 'sync-gateway':
       return <SyncGatewayPage />;
 
-    case 'projects':
-      return <ProjectsPage />;
-
     case 'project-detail':
-      return <ProjectDetailPage />;
+      return <div className="p-6 text-muted-foreground">Projects page removed</div>;
     case 'locations':
       return <LocationsPage />;
 
@@ -292,14 +290,7 @@ function AdminPortalRedirect() {
   );
 }
 
-function BillCyclePage() {
-  return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Bill Cycle</h1>
-      <p className="text-muted-foreground">Bill cycle management — create, schedule, and execute billing runs.</p>
-    </div>
-  );
-}
+function BillCyclePage() { return <BillCycleComponent />; }
 
 function DefaultNotFound() {
   const t = useT();

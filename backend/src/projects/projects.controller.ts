@@ -49,9 +49,8 @@ export class ProjectsController {
     Role.FINANCE,
     Role.SUPPORT
   )
-  async findAll(@Req() req: any) {
-    const areaId = req.headers['x-area-id'] as string | undefined;
-    return this.projectsService.findAll(areaId);
+  async findAll() {
+    return this.projectsService.findAll();
   }
 
   @Get(':id')

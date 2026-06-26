@@ -35,15 +35,6 @@ export const allNavItems: NavItem[] = [
     ],
   },
   {
-    title: 'Projects',
-    href: '/projects',
-    icon: 'Building2',
-    children: [
-      { title: 'Project List', href: '/projects', icon: 'List' },
-
-    ],
-  },
-  {
     title: 'Units',
     href: '/locations',
     icon: 'MapPin',
@@ -180,7 +171,7 @@ export const rolePermissions: RolePermissions = {
     'collections-dashboard-plus',
     'utility-dashboard',
     'solar-dashboard',
-    'projects',
+    // 'projects',
     'locations',
     'customers',
     'meters/*',
@@ -203,7 +194,7 @@ export const rolePermissions: RolePermissions = {
   ],
   system_admin: [
     'dashboard',
-    'projects',
+    // 'projects',
     'locations',
     'customers',
     'meters/*',
@@ -222,7 +213,7 @@ export const rolePermissions: RolePermissions = {
   ],
   admin: [
     'dashboard',
-    'projects',
+    // 'projects',
     'locations',
     'customers',
     'meters/*',
@@ -241,7 +232,7 @@ export const rolePermissions: RolePermissions = {
   ],
   area_manager: [
     'dashboard',
-    'projects',
+    // 'projects',
     'locations',
     'customers',
     'meters/*',
@@ -255,7 +246,7 @@ export const rolePermissions: RolePermissions = {
   ],
   team_leader: [
     'dashboard',
-    'projects',
+    // 'projects',
     'customers',
     'meters/*',
     'readings/*',
@@ -334,7 +325,7 @@ export const rolePermissions: RolePermissions = {
   ],
   supervisor: [
     'dashboard',
-    'projects',
+    // 'projects',
     'customers',
     'meters/*',
     'readings/*',
@@ -353,7 +344,7 @@ export const rolePermissions: RolePermissions = {
   ],
   viewer: [
     'dashboard',
-    'projects',
+    // 'projects',
     'customers',
     'meters/*',
     'readings/*',
@@ -424,7 +415,7 @@ export function getNavItemsForRole(role: UserRole): NavItem[] {
 
 const pageTitles: Record<string, { title: string; subtitle: string }> = {
   '/dashboard': { title: 'Dashboard', subtitle: 'Overview of your system' },
-  '/projects': { title: 'Projects', subtitle: 'Manage your projects' },
+  // '/projects': { title: 'Projects', subtitle: 'Manage your projects' },
   '/locations': { title: 'Locations', subtitle: 'Manage locations and buildings' },
   '/customers': { title: 'Customers', subtitle: 'Manage customer accounts' },
   '/meters': { title: 'Meters', subtitle: 'Manage water and electricity meters' },

@@ -52,7 +52,7 @@ export default function TariffStudioPage() {
 
   const handleSimulate = async () => {
     try {
-      const res = await apiPost<any>('/tariffs/simulate', { projectId: simForm.projectId, meterType: simForm.meterType, consumption: Number(simForm.consumption) });
+      const res = await apiPost<any>('/billing/tariffs/simulate', { projectId: simForm.projectId, meterType: simForm.meterType, consumption: Number(simForm.consumption) });
       setSimResult(res);
     } catch { toast.error('Simulation failed'); }
   };

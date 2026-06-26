@@ -113,7 +113,6 @@ const hrefToPageKey: Record<string, PageKey> = {
   '/sync-gateway': 'sync-gateway',
 
   '/upload-center': 'upload-center',
-  '/projects': 'projects',
   '/locations': 'locations',
   '/customers': 'customers',
   '/meters': 'meters',
@@ -218,7 +217,7 @@ interface SidebarItemProps {
 
 const titleToTKey: Record<string, string> = {
   'Dashboard': 'sidebar.dashboard',
-  'Projects': 'sidebar.projects',
+  // 'Projects': 'sidebar.projects',
   'Locations': 'sidebar.locations',
   'Customers': 'sidebar.customers',
   'Meters': 'sidebar.meters',
