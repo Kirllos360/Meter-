@@ -54,7 +54,7 @@ export class SyncOrchestratorService {
     return new sql.ConnectionPool({
       server: cfg.server, database: cfg.database,
       user: cfg.user, password: cfg.password,
-      options: { encrypt: false, trustServerCertificate: true, connectTimeout: 15000, requestTimeout: 30000 },
+      options: { encrypt: false, trustServerCertificate: true, connectTimeout: 15000, requestTimeout: 120000 },
     }).connect();
   }
 
