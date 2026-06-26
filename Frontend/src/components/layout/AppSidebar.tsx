@@ -126,6 +126,7 @@ const hrefToPageKey: Record<string, PageKey> = {
   '/water-balance': 'water-balance',
   '/invoices': 'invoices',
   '/payments': 'payments',
+  '/payment-new': 'payment-new',
   '/balances': 'balances',
   '/reports': 'reports',
   '/alerts': 'alerts',

@@ -44,7 +44,8 @@ export type PageKey =
   | 'kpi-utilities'
   | 'sync-gateway'
   | 'admin-portal'
-  | 'bill-cycle';
+  | 'bill-cycle'
+  | 'payment-new';
 
 interface RouterState {
   currentPage: PageKey;

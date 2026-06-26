@@ -52,6 +52,7 @@ import InvoiceDetailPage from '@/components/billing/InvoiceDetailPage';
 import PaymentsPage from '@/components/billing/PaymentsPage';
 import BalancesPage from '@/components/billing/BalancesPage';
 import BillCycleComponent from '@/components/billing/BillCyclePage';
+import PaymentWizardPage from '@/components/billing/PaymentWizardPage';
 
 // Reports
 import ReportsPage from '@/components/reports/ReportsPage';
@@ -239,6 +240,9 @@ function renderPage(page: PageKey): React.ReactNode {
 
     case 'payments':
       return <PaymentsPage />;
+
+    case 'payment-new':
+      return <PaymentWizardPage />;
 
     case 'balances':
       return <BalancesPage />;
