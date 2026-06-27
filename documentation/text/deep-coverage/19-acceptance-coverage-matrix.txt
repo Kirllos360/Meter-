@@ -1,0 +1,11 @@
+﻿Acceptance Coverage Matrix â€” T024
+
+  #   Criterion   Location   Validation   Status  
+ --- --- --- --- --- 
+  AC1   MeterTerminateRequest schema (required: reason, terminatedAt, finalReading)   meter-terminate.contract.spec.ts   validateResponseBody(schema, validBody)   âŒ TDD PENDING  
+  AC2   MeterTerminateResult response schema (200)   meter-terminate.contract.spec.ts   validateResponseBody(schema, sampleResponse)   âŒ TDD PENDING  
+  AC3   HTTP request fails with 404 (no endpoint)   meter-terminate.contract.spec.ts   request.post('/api/v1/meters/{id}/terminate')   âŒ TDD EXPECTED FAIL  
+  AC4   Schema-level assertions pass   meter-terminate.contract.spec.ts   Static validation   âœ… EXPECTED PASS  
+  AC5   No existing tests broken   backend/   npm test   âœ… EXPECTED PASS  
+
+Coverage: 5/5 = 100%

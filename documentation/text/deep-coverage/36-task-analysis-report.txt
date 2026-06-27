@@ -1,0 +1,13 @@
+﻿Task Analysis Report â€” T027
+
+1. Task ID
+T027 â€” US1 Contract Tests: listReadingReviewQueue
+
+2. User Story
+Contract test for GET /readings/review-queue. Validates { items: Reading[] } response and optional query params. TDD.
+
+3. Acceptance Criteria
+1. Validate response schema { items: Reading[] } (200)
+2. Validate optional query params (projectId, status)
+3. HTTP GET fails with 404 (TDD)
+4. No regressions

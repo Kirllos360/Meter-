@@ -1,0 +1,35 @@
+﻿Hidden Requirement Report â€” T022
+
+Analysis Sources
+- T022 Task Description
+- Acceptance Criteria (Sprint 0 / FE-003)
+- Spec files (specs/001-metering-billing-platform/)
+- Related tasks T020, T021
+- Architecture (ROUTE_OF_DATA.md)
+- Governance Rules (new)
+
+Discovered Hidden Requirements
+
+  #   Requirement   Source   Implication   Addressed  
+ --- --- --- --- --- 
+  HR1   Feature flags must default to 'mock' to preserve existing UX   Task context: "migration happens sprint-by-sprint"   Zero behavioral change in production   âœ… MODULE_FLAGS defaults all to 'mock'  
+  HR2   Feature flag system must be a simple data structure (no DB)   Task type: frontend-only   No backend coupling, no DB migration   âœ… Record<string, 'mock'\ 'api'>  
+  HR3   Documentation index must be updated for every new file   Governance Rule 4 (Documentation Sync)   Prevents documentation drift   âœ… 00-index.md updated  
+  HR4   Backup package must follow exact Rule 6 structure   Governance Rule 6   9 specific files required   âœ… task-T022_20260529_115035/  
+  HR5   Resume-context.md must be self-contained (no external deps)   Governance Rule 7   Any AI can continue without other files   âœ… resume-context.md  
+  HR6   All npm dependencies must be cataloged with download URLs   Governance Rule 8   Single source of truth for setup   âœ… 06-github-packages-needed.md  
+  HR7   Cross-task validation must include direct dependents   Governance Rule 2   T020, T021 verified compatible   âœ… Dependency Matrix  
+  HR8   PR must document validation evidence   Governance Rule 9   PR body includes build/test results   âœ… PR #24 body updated  
+  HR9   Closeout must ask explicit question before proceeding   Governance Rule 10   No silent task transitions   âœ… Final question at end  
+  HR10   Line endings (LFâ†’CRLF) must not introduce meaningful diffs   Git on Windows   Normalization commit separate from logic   âœ… d7ed1d7  
+
+Requirements Not Explicitly in Task Description
+
+  Hidden Requirement   Why It Matters   Status  
+ --- --- --- 
+  Feature flag naming convention (camelCase module names)   Consistency across all 5+ future flag consumers   âœ… Documented in AI_HANDOFF.md T022 section  
+  API endpoint must return 200 even when no flags configured   Robustness â€” empty flags object   âœ… Default handler returns {}  
+  Backup folder naming: task-TXXX_TIMESTAMP   Discoverable pattern for future backups   âœ… Rule 6 enforced  
+  Migration from mockâ†’API must be per-module, not global   Granular rollout control   âœ… MODULE_FLAGS is Record<string, ...>  
+
+Total hidden requirements: 14. All addressed.

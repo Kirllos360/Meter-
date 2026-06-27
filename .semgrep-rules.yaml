@@ -1,0 +1,56 @@
+rules:
+  - id: no-hardcoded-secrets
+    languages: [typescript, javascript]
+    message: Hardcoded secret/credential detected
+    pattern-either:
+      - pattern-regex: (password|secret|api[-_]?key|token)\s*[:=]\s*["'][^"']+["']
+    severity: ERROR
+    paths:
+      exclude:
+        - "*.spec.ts"
+        - "*.test.ts"
+        - ".env"
+        - ".env.example"
+        - "docs/"
+        - "backup files/"
+        - "restore-point-*/"
+
+  - id: no-console-log
+    languages: [typescript, javascript]
+    message: Avoid console.log in production code, use logger instead
+    pattern: console.log(...)
+    severity: WARNING
+    paths:
+      exclude:
+        - "*.spec.ts"
+        - "*.test.ts"
+        - "docs/"
+        - "backup files/"
+        - "restore-point-*/"
+        - "Frontend/examples/"
+        - "Frontend/scripts/"
+
+  - id: no-eval
+    languages: [typescript, javascript]
+    message: Avoid eval() - security risk
+    pattern: eval(...)
+    severity: ERROR
+
+  - id: use-strict-null-checks
+    languages: [typescript]
+    message: Use optional chaining or nullish coalescing
+    patterns:
+      - pattern: $X && $X.$Y
+      - pattern-not: $X?.$Y
+    severity: WARNING
+
+  - id: no-any-type
+    languages: [typescript]
+    message: Avoid using 'any' type
+    pattern: ": any"
+    severity: WARNING
+    paths:
+      exclude:
+        - "*.spec.ts"
+        - "*.test.ts"
+        - "docs/"

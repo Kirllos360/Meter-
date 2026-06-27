@@ -1,0 +1,10 @@
+﻿Hidden Requirements Report â€” T025
+
+  #   Requirement   Explicit?   Gap  
+ --- --- --- --- 
+  HR1   simId is uuid   âœ… Yes   None  
+  HR2   eligible is boolean   âœ… Yes   None  
+  HR3   reason is string   âœ… Yes   None  
+  HR4   cooldownUntil is nullable date-time   âœ… Yes â€” nullable: true   None  
+
+No hidden requirements.

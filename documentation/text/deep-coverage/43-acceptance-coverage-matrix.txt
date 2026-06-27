@@ -1,0 +1,4 @@
+﻿AC1: InvoiceGenerateRequest schema (projectId, billingPeriodId required)   âŒ TDD
+AC2: 202 response { batchId, generatedCount }   âŒ TDD
+AC3: HTTP POST fails (404)   âŒ EXPECTED FAIL
+AC4: No regressions   âœ…

@@ -1,8 +1,8 @@
-# Task List — Meter Pulse MVP
+# Task List — Meter Verse MVP
 
 > Ready to paste into Notion as a task database.
 > Source: `specs/001-metering-billing-platform/tasks.md`
-> Date: 2026-05-28
+> Date: 2026-05-31
 
 ---
 
@@ -28,7 +28,7 @@
 | T009 | Auth (JWT) + RBAC guard + role model | ✅ Done | High |
 | T010 | Append-only audit log service + interceptor | ✅ Done | High |
 | T011 | API versioning `/api/v1` + OpenAPI serving | ✅ Done | High |
-| T012 | Contract-test harness against `meter-pulse-api.yaml` | ✅ Done | High |
+| T012 | Contract-test harness against `meter-verse-api.yaml` | ✅ Done | High |
 
 ### PostgreSQL Schema / Migrations
 
@@ -40,15 +40,15 @@
 | T016 | Invoice, InvoiceLine, InvoiceAdjustment | ✅ Done | High |
 | T017 | Payment, PaymentAllocation, CustomerLedgerEntry | ✅ Done | High |
 | T018 | AuditLog, ReportJob | ✅ Done | Medium |
-| T019 | Derived views (customer_statement_view, meter_assignment_active_view, sim_assignment_active_view) | ✅ Done | Medium |
+| T019 | Derived views (customer_statement_view, Meter_Verse_assignment_active_view, sim_assignment_active_view) | ✅ Done | Medium |
 
 ### Frontend Sprint 0 Foundation
 
 | ID | Description | Status | Priority |
 |----|-------------|--------|----------|
-| T020 | FE-001 API client foundation | 🔲 Pending | High |
-| T021 | FE-002 React Query integration pattern | 🔲 Pending | High |
-| T022 | FE-003 Feature-flag toggles for API migration | 🔲 Pending | High |
+| T020 | FE-001 API client foundation | ✅ Done | High |
+| T021 | FE-002 React Query integration pattern | ✅ Done | High |
+| T022 | FE-003 Feature-flag toggles for API migration | ✅ Done | High |
 
 ---
 
@@ -58,36 +58,40 @@
 
 | ID | Description | Status | Priority |
 |----|-------------|--------|----------|
-| T023 | Contract test `assignMeter` (200 + 409) | 🔲 Pending | High |
-| T024 | Contract test `terminateMeter` + `getSimEligibility` | 🔲 Pending | High |
-| T025 | Integration test — assignment conflict | 🔲 Pending | High |
-| T026 | Integration test — SIM reuse after termination | 🔲 Pending | High |
+| T023 | Contract test `assignMeter` (200 + 409) | ✅ Done | High |
+| T024 | Contract test `terminateMeter` + `getSimEligibility` | ✅ Done | High |
+| T025 | Contract test `simEligibility` | ✅ Done | High |
+| T026 | Contract test `createReading` (201 + 422) | ✅ Done | High |
+| T027 | Contract test `listReadingReviewQueue` | ✅ Done | High |
+| T028 | Contract test `generateInvoices` | ✅ Done | Medium |
+| T029 | Contract test `issueInvoice` | ✅ Done | Medium |
+| T030 | Contract test `addInvoiceAdjustment` | ✅ Done | Medium |
 
 ### Backend Implementation
 
 | ID | Description | Status | Priority |
 |----|-------------|--------|----------|
-| T027 | Projects module (CRUD + status + tax/threshold) | 🔲 Pending | High |
-| T028 | Locations module (CRUD over LocationNode hierarchy) | 🔲 Pending | High |
-| T029 | Customers module + CustomerUnitAssignment | 🔲 Pending | High |
-| T030 | Meters module (CRUD + status lifecycle) | 🔲 Pending | High |
-| T031 | SIM module (CRUD + eligibility endpoint) | 🔲 Pending | High |
-| T032 | Assignment command + `POST /api/v1/meters/{meterId}/assign` | 🔲 Pending | High |
-| T033 | Termination command + `POST /api/v1/meters/{meterId}/terminate` | 🔲 Pending | High |
-| T034 | Dashboard summary endpoints | 🔲 Pending | High |
+| T031 | Projects module (CRUD + status + tax/threshold) | 🔲 Pending | High |
+| T032 | Locations module (CRUD over LocationNode hierarchy) | 🔲 Pending | High |
+| T033 | Customers module + CustomerUnitAssignment | 🔲 Pending | High |
+| T034 | Meters module (CRUD + status lifecycle) | 🔲 Pending | High |
+| T035 | SIM module (CRUD + eligibility endpoint) | 🔲 Pending | High |
+| T036 | Assignment command + `POST /api/v1/meters/{meterId}/assign` | 🔲 Pending | High |
+| T037 | Termination command + `POST /api/v1/meters/{meterId}/terminate` | 🔲 Pending | High |
+| T038 | Dashboard summary endpoints | 🔲 Pending | High |
 
 ### Frontend Migration
 
 | ID | Description | Status | Priority |
 |----|-------------|--------|----------|
-| T035 | FE-010 Projects + Locations API migration | 🔲 Pending | High |
-| T036 | FE-011 Customers API migration | 🔲 Pending | High |
-| T037 | FE-012 Dashboard KPI backend wiring | 🔲 Pending | High |
-| T038 | FE-020 Meters + SIM cards API migration | 🔲 Pending | High |
-| T039 | FE-021 Meter assignment workflow hardening | 🔲 Pending | High |
-| T040 | FE-022 Meter replacement + termination workflow | 🔲 Pending | High |
-| T041 | FE-023 SIM cooldown + reuse eligibility UI | 🔲 Pending | Medium |
-| T042 | US1 frontend batch validation + graph refresh | 🔲 Pending | High |
+| T039 | FE-010 Projects + Locations API migration | 🔲 Pending | High |
+| T040 | FE-011 Customers API migration | 🔲 Pending | High |
+| T041 | FE-012 Dashboard KPI backend wiring | 🔲 Pending | High |
+| T042 | FE-020 Meters + SIM cards API migration | 🔲 Pending | High |
+| T043 | FE-021 Meter assignment workflow hardening | 🔲 Pending | High |
+| T044 | FE-022 Meter replacement + termination workflow | 🔲 Pending | High |
+| T045 | FE-023 SIM cooldown + reuse eligibility UI | 🔲 Pending | Medium |
+| T046 | US1 frontend batch validation + graph refresh | 🔲 Pending | High |
 
 ---
 
@@ -97,24 +101,24 @@
 
 | ID | Description | Status | Priority |
 |----|-------------|--------|----------|
-| T043 | Contract test `createReading` (201 + 422) | 🔲 Pending | Medium |
-| T044 | Contract test `listReadingReviewQueue` | 🔲 Pending | Medium |
-| T045 | Integration test — reading validation thresholds + suspicious flagging | 🔲 Pending | Medium |
+| T047 | Contract test `createReading` (201 + 422) | ✅ Done | Medium |
+| T048 | Contract test `listReadingReviewQueue` | ✅ Done | Medium |
+| T049 | Integration test — reading validation thresholds + suspicious flagging | 🔲 Pending | Medium |
 
 ### Backend Implementation
 
 | ID | Description | Status | Priority |
 |----|-------------|--------|----------|
-| T046 | Project threshold-profile config | 🔲 Pending | Medium |
-| T047 | Readings module + `POST /api/v1/readings` | 🔲 Pending | Medium |
-| T047a | Automatic polling ingestion adapter | 🔲 Pending | Low |
-| T048 | Review queue + actions (approve/reject/correct) | 🔲 Pending | Medium |
-| T048a | Water main-vs-sub variance service + `GET /api/v1/projects/{projectId}/water-balance` | 🔲 Pending | Medium |
-| T049 | FE-030 Readings API migration | 🔲 Pending | Medium |
-| T050 | FE-031 Reading schema + business validation | 🔲 Pending | Medium |
-| T051 | FE-032 Anomaly review queue | 🔲 Pending | Medium |
-| T051a | Water balance UI migration | 🔲 Pending | Medium |
-| T052 | US2 frontend batch validation + graph refresh | 🔲 Pending | Medium |
+| T050 | Project threshold-profile config | 🔲 Pending | Medium |
+| T051 | Readings module + `POST /api/v1/readings` | ✅ Done | Medium |
+| T051a | Automatic polling ingestion adapter | 🔲 Pending | Low |
+| T052 | Review queue + actions (approve/reject/correct) | ✅ Done (GET only) | Medium |
+| T052a | Water main-vs-sub variance service + `GET /api/v1/projects/{projectId}/water-balance` | 🔲 Pending | Medium |
+| T053 | FE-030 Readings API migration | 🔲 Pending | Medium |
+| T054 | FE-031 Reading schema + business validation | 🔲 Pending | Medium |
+| T055 | FE-032 Anomaly review queue | 🔲 Pending | Medium |
+| T055a | Water balance UI migration | 🔲 Pending | Medium |
+| T056 | US2 frontend batch validation + graph refresh | 🔲 Pending | Medium |
 
 ---
 
@@ -124,38 +128,39 @@
 
 | ID | Description | Status | Priority |
 |----|-------------|--------|----------|
-| T053 | Contract test `generateInvoices` + `issueInvoice` | 🔲 Pending | Medium |
-| T054 | Contract test `addInvoiceAdjustment` | 🔲 Pending | Medium |
-| T055 | Contract test `createPayment` + `reversePayment` | 🔲 Pending | Medium |
-| T056 | Contract test `getCustomerStatement` | 🔲 Pending | Medium |
-| T057 | Integration test — invoice immutability + adjustment flow | 🔲 Pending | Medium |
-| T058 | Integration test — oldest-due-first allocation | 🔲 Pending | Medium |
-| T059 | Integration test — super-admin-only reversal + audit | 🔲 Pending | Medium |
-| T060 | Integration test — ledger running balance | 🔲 Pending | Medium |
+| T057 | Contract test `generateInvoices` | ✅ Done | Medium |
+| T058 | Contract test `issueInvoice` | ✅ Done | Medium |
+| T059 | Contract test `addInvoiceAdjustment` | ✅ Done | Medium |
+| T060 | Contract test `createPayment` + `reversePayment` | 🔲 Pending | Medium |
+| T061 | Contract test `getCustomerStatement` | 🔲 Pending | Medium |
+| T062 | Integration test — invoice immutability + adjustment flow | 🔲 Pending | Medium |
+| T063 | Integration test — oldest-due-first allocation | 🔲 Pending | Medium |
+| T064 | Integration test — super-admin-only reversal + audit | 🔲 Pending | Medium |
+| T065 | Integration test — ledger running balance | 🔲 Pending | Medium |
 
-### Backend Implementation
+### Backend Implementation (Billing Stubs Done)
 
 | ID | Description | Status | Priority |
 |----|-------------|--------|----------|
-| T061 | Tariff + billing-period module | 🔲 Pending | Medium |
-| T062 | Invoice generation `POST /api/v1/invoices/generate` | 🔲 Pending | Medium |
-| T062a | Water difference handling in invoice generation | 🔲 Pending | Medium |
-| T063 | Invoice issue `POST /api/v1/invoices/{invoiceId}/issue` | 🔲 Pending | Medium |
-| T064 | Invoice adjustments `POST /api/v1/invoices/{invoiceId}/adjustments` | 🔲 Pending | Medium |
-| T065 | Payments `POST /api/v1/payments` (oldest-due-first) | 🔲 Pending | Medium |
-| T066 | Payment reversal `POST /api/v1/payments/{paymentId}/reverse` | 🔲 Pending | Medium |
-| T067 | Ledger service + `GET /api/v1/customers/{customerId}/statement` | 🔲 Pending | Medium |
+| T066 | Tariff + billing-period module | 🔲 Pending | Medium |
+| T067 | Invoice generation `POST /api/v1/invoices/generate` | ✅ Done (stub) | Medium |
+| T067a | Water difference handling in invoice generation | 🔲 Pending | Medium |
+| T068 | Invoice issue `POST /api/v1/invoices/{invoiceId}/issue` | ✅ Done (stub) | Medium |
+| T069 | Invoice adjustments `POST /api/v1/invoices/{invoiceId}/adjustments` | ✅ Done (stub) | Medium |
+| T070 | Payments `POST /api/v1/payments` (oldest-due-first) | 🔲 Pending | Medium |
+| T071 | Payment reversal `POST /api/v1/payments/{paymentId}/reverse` | 🔲 Pending | Medium |
+| T072 | Ledger service + `GET /api/v1/customers/{customerId}/statement` | 🔲 Pending | Medium |
 
 ### Frontend Migration
 
 | ID | Description | Status | Priority |
 |----|-------------|--------|----------|
-| T068 | FE-040 Invoices API migration + state machine | 🔲 Pending | Medium |
-| T069 | FE-041 Payments allocation workflow | 🔲 Pending | Medium |
-| T070 | FE-042 Balances aging + collector tooling | 🔲 Pending | Medium |
-| T071 | FE-043 Customer statements v1 | 🔲 Pending | Medium |
-| T071a | Consumption view migration | 🔲 Pending | Medium |
-| T072 | US3 frontend batch validation + graph refresh | 🔲 Pending | Medium |
+| T073 | FE-040 Invoices API migration + state machine | 🔲 Pending | Medium |
+| T074 | FE-041 Payments allocation workflow | 🔲 Pending | Medium |
+| T075 | FE-042 Balances aging + collector tooling | 🔲 Pending | Medium |
+| T076 | FE-043 Customer statements v1 | 🔲 Pending | Medium |
+| T076a | Consumption view migration | 🔲 Pending | Medium |
+| T077 | US3 frontend batch validation + graph refresh | 🔲 Pending | Medium |
 
 ---
 
@@ -163,21 +168,22 @@
 
 | ID | Description | Status | Priority |
 |----|-------------|--------|----------|
-| T073 | Report export jobs (POST + GET) | 🔲 Pending | Low |
-| T074 | Contract test report endpoints | 🔲 Pending | Low |
-| T075 | RBAC action-gating + audit coverage tests | 🔲 Pending | Low |
-| T076 | FE-050 Reports v2 with async exports | 🔲 Pending | Low |
-| T077 | FE-051 Action-level permission gating | 🔲 Pending | Low |
-| T078 | FE-052 Alerts → Tickets linkage (out of scope) | 🔲 Pending | Low |
-| T079 | FE-060 Frontend contract + integration tests in CI | 🔲 Pending | Low |
-| T080 | FE-061 E2E coverage expansion | 🔲 Pending | Low |
-| T081 | FE-062 Observability + UX resilience | 🔲 Pending | Low |
-| T082 | Polish frontend batch validation + graph refresh | 🔲 Pending | Low |
-| T083 | Reconcile full backend contract suite | 🔲 Pending | Low |
-| T084 | Run quickstart.md MVP acceptance validation | 🔲 Pending | Low |
-| T084a | Backup/restore drill + RPO/RTO verification | 🔲 Pending | Low |
-| T085 | Ratify project constitution | 🔲 Pending | Low |
+| T078 | Report export jobs (POST + GET) | 🔲 Pending | Low |
+| T079 | Contract test report endpoints | 🔲 Pending | Low |
+| T080 | RBAC action-gating + audit coverage tests | 🔲 Pending | Low |
+| T081 | FE-050 Reports v2 with async exports | 🔲 Pending | Low |
+| T082 | FE-051 Action-level permission gating | 🔲 Pending | Low |
+| T083 | FE-052 Alerts → Tickets linkage (out of scope) | 🔲 Pending | Low |
+| T084 | FE-060 Frontend contract + integration tests in CI | 🔲 Pending | Low |
+| T085 | FE-061 E2E coverage expansion | 🔲 Pending | Low |
+| T086 | FE-062 Observability + UX resilience | 🔲 Pending | Low |
+| T087 | Polish frontend batch validation + graph refresh | 🔲 Pending | Low |
+| T088 | Reconcile full backend contract suite | 🔲 Pending | Low |
+| T089 | Run quickstart.md MVP acceptance validation | 🔲 Pending | Low |
+| T089a | Backup/restore drill + RPO/RTO verification | 🔲 Pending | Low |
+| T090 | Ratify project constitution | 🔲 Pending | Low |
 
 ---
 
-**Summary**: 45/85 tasks complete (53%), 40 pending.
+**Summary**: 55/90 tasks complete (61%), 35 pending.
+

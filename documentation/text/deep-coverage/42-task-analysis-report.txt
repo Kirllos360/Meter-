@@ -1,0 +1,2 @@
+﻿T028 â€” generateInvoices contract test
+POST /invoices/generate â†’ InvoiceGenerateRequest â†’ 202 { batchId, generatedCount }

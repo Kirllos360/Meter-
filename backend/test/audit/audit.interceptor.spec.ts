@@ -15,11 +15,11 @@ describe('AuditInterceptor', () => {
       get: jest.fn(),
       getAllAndOverride: jest.fn(),
       getAllAndMerge: jest.fn(),
-      getAll: jest.fn(),
+      getAll: jest.fn()
     } as unknown as jest.Mocked<Reflector>;
 
     auditService = {
-      create: jest.fn().mockResolvedValue(undefined),
+      create: jest.fn().mockResolvedValue(undefined)
     } as unknown as jest.Mocked<AuditService>;
 
     interceptor = new AuditInterceptor(reflector, auditService);
@@ -30,7 +30,7 @@ describe('AuditInterceptor', () => {
     user?: { userId?: string; role?: string; sub?: string },
     params?: Record<string, string>,
     body?: Record<string, unknown>,
-    correlationId?: string,
+    correlationId?: string
   ): ExecutionContext =>
     ({
       switchToHttp: () => ({
@@ -39,15 +39,15 @@ describe('AuditInterceptor', () => {
           user,
           params: params ?? {},
           body,
-          correlationId,
-        }),
+          correlationId
+        })
       }),
       getHandler: () => ({}),
-      getClass: () => ({}),
+      getClass: () => ({})
     }) as unknown as ExecutionContext;
 
   const mockCallHandler = (response: unknown): CallHandler => ({
-    handle: () => of(response),
+    handle: () => of(response)
   });
 
   describe('GET and OPTIONS bypass', () => {
@@ -59,7 +59,7 @@ describe('AuditInterceptor', () => {
           expect(result).toEqual({ data: 'ok' });
           expect(auditService.create).not.toHaveBeenCalled();
           done();
-        },
+        }
       });
     });
 
@@ -70,7 +70,7 @@ describe('AuditInterceptor', () => {
         next: (result) => {
           expect(auditService.create).not.toHaveBeenCalled();
           done();
-        },
+        }
       });
     });
   });
@@ -78,7 +78,13 @@ describe('AuditInterceptor', () => {
   describe('mutation audit logging', () => {
     it('should log audit for POST requests', (done) => {
       reflector.get.mockReturnValueOnce('meter').mockReturnValueOnce('CREATE');
-      const context = mockContext('POST', { userId: 'user-1', role: 'operator' }, {}, { name: 'meter-1' }, 'corr-123');
+      const context = mockContext(
+        'POST',
+        { userId: 'user-1', role: 'operator' },
+        {},
+        { name: 'meter-1' },
+        'corr-123'
+      );
 
       interceptor.intercept(context, mockCallHandler({ id: 'meter-1' })).subscribe({
         next: () => {
@@ -88,11 +94,11 @@ describe('AuditInterceptor', () => {
               actorRole: 'operator',
               action: 'CREATE',
               resourceType: 'meter',
-              correlationId: 'corr-123',
-            }),
+              correlationId: 'corr-123'
+            })
           );
           done();
-        },
+        }
       });
     });
 
@@ -102,23 +108,25 @@ describe('AuditInterceptor', () => {
         'PUT',
         { userId: 'user-2', role: 'admin' },
         { id: 'meter-5' },
-        { status: 'active', reading: 100 },
+        { status: 'active', reading: 100 }
       );
 
-      interceptor.intercept(context, mockCallHandler({ id: 'meter-5', status: 'active' })).subscribe({
-        next: () => {
-          expect(auditService.create).toHaveBeenCalledWith(
-            expect.objectContaining({
-              actorId: 'user-2',
-              actorRole: 'admin',
-              action: 'UPDATE',
-              resourceType: 'meter',
-              resourceId: 'meter-5',
-            }),
-          );
-          done();
-        },
-      });
+      interceptor
+        .intercept(context, mockCallHandler({ id: 'meter-5', status: 'active' }))
+        .subscribe({
+          next: () => {
+            expect(auditService.create).toHaveBeenCalledWith(
+              expect.objectContaining({
+                actorId: 'user-2',
+                actorRole: 'admin',
+                action: 'UPDATE',
+                resourceType: 'meter',
+                resourceId: 'meter-5'
+              })
+            );
+            done();
+          }
+        });
     });
 
     it('should log audit for PATCH requests', (done) => {
@@ -127,7 +135,7 @@ describe('AuditInterceptor', () => {
         'PATCH',
         { userId: 'user-3', role: 'finance' },
         { id: 'inv-10' },
-        { status: 'paid' },
+        { status: 'paid' }
       );
 
       interceptor.intercept(context, mockCallHandler({ id: 'inv-10', status: 'paid' })).subscribe({
@@ -137,17 +145,21 @@ describe('AuditInterceptor', () => {
               actorRole: 'finance',
               action: 'PATCH',
               resourceType: 'invoice',
-              resourceId: 'inv-10',
-            }),
+              resourceId: 'inv-10'
+            })
           );
           done();
-        },
+        }
       });
     });
 
     it('should log audit for DELETE requests', (done) => {
       reflector.get.mockReturnValueOnce('user').mockReturnValueOnce('DELETE');
-      const context = mockContext('DELETE', { userId: 'user-4', role: 'super_admin' }, { id: 'user-99' });
+      const context = mockContext(
+        'DELETE',
+        { userId: 'user-4', role: 'super_admin' },
+        { id: 'user-99' }
+      );
 
       interceptor.intercept(context, mockCallHandler({ deleted: true })).subscribe({
         next: () => {
@@ -156,11 +168,11 @@ describe('AuditInterceptor', () => {
               actorRole: 'super_admin',
               action: 'DELETE',
               resourceType: 'user',
-              resourceId: 'user-99',
-            }),
+              resourceId: 'user-99'
+            })
           );
           done();
-        },
+        }
       });
     });
 
@@ -174,11 +186,11 @@ describe('AuditInterceptor', () => {
             expect.objectContaining({
               actorId: 'user-1',
               action: 'POST',
-              resourceType: 'unknown',
-            }),
+              resourceType: 'unknown'
+            })
           );
           done();
-        },
+        }
       });
     });
   });
@@ -186,34 +198,44 @@ describe('AuditInterceptor', () => {
   describe('before/after snapshot capture', () => {
     it('should capture beforeState for PUT requests', (done) => {
       reflector.get.mockReturnValueOnce('meter').mockReturnValueOnce('UPDATE');
-      const context = mockContext('PUT', { userId: 'user-1', role: 'operator' }, { id: 'm-1' }, { status: 'active' });
+      const context = mockContext(
+        'PUT',
+        { userId: 'user-1', role: 'operator' },
+        { id: 'm-1' },
+        { status: 'active' }
+      );
 
       interceptor.intercept(context, mockCallHandler({ id: 'm-1', status: 'active' })).subscribe({
         next: () => {
           expect(auditService.create).toHaveBeenCalledWith(
             expect.objectContaining({
               beforeState: { status: 'active' },
-              afterState: { id: 'm-1', status: 'active' },
-            }),
+              afterState: { id: 'm-1', status: 'active' }
+            })
           );
           done();
-        },
+        }
       });
     });
 
     it('should not include beforeState for POST requests', (done) => {
       reflector.get.mockReturnValueOnce('meter').mockReturnValueOnce('CREATE');
-      const context = mockContext('POST', { userId: 'user-1', role: 'operator' }, {}, { name: 'new-meter' });
+      const context = mockContext(
+        'POST',
+        { userId: 'user-1', role: 'operator' },
+        {},
+        { name: 'new-meter' }
+      );
 
       interceptor.intercept(context, mockCallHandler({ id: 'm-2', name: 'new-meter' })).subscribe({
         next: () => {
           expect(auditService.create).toHaveBeenCalledWith(
             expect.objectContaining({
-              beforeState: undefined,
-            }),
+              beforeState: undefined
+            })
           );
           done();
-        },
+        }
       });
     });
   });
@@ -226,10 +248,10 @@ describe('AuditInterceptor', () => {
       interceptor.intercept(context, mockCallHandler({})).subscribe({
         next: () => {
           expect(auditService.create).toHaveBeenCalledWith(
-            expect.objectContaining({ actorId: 'specific-user' }),
+            expect.objectContaining({ actorId: 'specific-user' })
           );
           done();
-        },
+        }
       });
     });
 
@@ -240,10 +262,10 @@ describe('AuditInterceptor', () => {
       interceptor.intercept(context, mockCallHandler({})).subscribe({
         next: () => {
           expect(auditService.create).toHaveBeenCalledWith(
-            expect.objectContaining({ actorId: 'sub-user' }),
+            expect.objectContaining({ actorId: 'sub-user' })
           );
           done();
-        },
+        }
       });
     });
 
@@ -254,10 +276,10 @@ describe('AuditInterceptor', () => {
       interceptor.intercept(context, mockCallHandler({})).subscribe({
         next: () => {
           expect(auditService.create).toHaveBeenCalledWith(
-            expect.objectContaining({ actorId: 'anonymous', actorRole: 'anonymous' }),
+            expect.objectContaining({ actorId: 'anonymous', actorRole: 'anonymous' })
           );
           done();
-        },
+        }
       });
     });
   });
@@ -272,7 +294,7 @@ describe('AuditInterceptor', () => {
         next: (result) => {
           expect(result).toEqual({ success: true });
           done();
-        },
+        }
       });
     });
   });

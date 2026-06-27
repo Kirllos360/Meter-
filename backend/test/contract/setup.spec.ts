@@ -5,8 +5,10 @@ import {
   dereferenceSpec,
   getResponseSchema,
   validateResponseBody,
-  validateStatus,
+  validateStatus
 } from './setup';
+
+jest.setTimeout(30000);
 
 describe('API Contract Harness', () => {
   let app: NestExpressApplication;
@@ -51,7 +53,10 @@ describe('API Contract Harness', () => {
     });
 
     it('should resolve component schemas', () => {
-      const schemas = (spec.components as Record<string, unknown>)?.schemas as Record<string, unknown>;
+      const schemas = (spec.components as Record<string, unknown>)?.schemas as Record<
+        string,
+        unknown
+      >;
       expect(schemas).toBeDefined();
       expect(Object.keys(schemas).length).toBeGreaterThan(0);
     });

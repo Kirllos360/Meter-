@@ -1,0 +1,9 @@
+# Risk Mitigation Report — T026
+
+| Risk | Probability | Impact | Mitigation |
+|---|---|---|---|
+| source enum value mismatch | Low | Low | Test all 3 enum values (manual, import, automatic) |
+| rawPayload additionalProperties | Low | Low | Test with empty object and arbitrary properties |
+| 422 response is a $ref to ValidationError | Low | Low | Test that getResponseSchema resolves $ref correctly |
+
+All risks low.

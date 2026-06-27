@@ -1,14 +1,6 @@
-import {
-  ExceptionFilter,
-  Catch,
-  ArgumentsHost,
-} from '@nestjs/common';
+import { ExceptionFilter, Catch, ArgumentsHost } from '@nestjs/common';
 import { Response } from 'express';
-import {
-  getCorrelationId,
-  toErrorEnvelope,
-  statusFromException,
-} from './error-envelope';
+import { getCorrelationId, toErrorEnvelope, statusFromException } from './error-envelope';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {

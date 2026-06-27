@@ -1,4 +1,4 @@
-# Conversation Log — Meter Pulse Setup Session
+# Conversation Log — Meter Verse Setup Session
 
 > Complete record of all prompts and responses during initial project setup.
 > Date: 2026-05-26
@@ -240,11 +240,11 @@ b3386ee  2026-05-25 16:59  chore: refresh Graphify maps
 
 ## 19. T012 — Contract Test Harness
 
-**Prompt**: Proceed with T012 — Build contract-test harness against meter-pulse-api.yaml
+**Prompt**: Proceed with T012 — Build contract-test harness against meter-verse-api.yaml
 
 **Response**: Created `setup.ts` (YAML loading, custom `$ref` dereference to avoid ESM-only `@apidevtools/swagger-parser`, AJV validation, supertest test app factory). 8 contract tests covering spec loading, $ref resolution, health endpoint status + schema. Added missing `GET /health` with `healthCheck` operationId + `System` tag to the YAML contract.
 
-**Files**: `backend/test/contract/setup.ts`, `backend/test/contract/setup.spec.ts`, `specs/001-metering-billing-platform/contracts/meter-pulse-api.yaml`
+**Files**: `backend/test/contract/setup.ts`, `backend/test/contract/setup.spec.ts`, `specs/001-metering-billing-platform/contracts/meter-verse-api.yaml`
 
 **Packages added**: `supertest`, `ajv`, `ajv-formats`, `js-yaml` (+ types)
 
@@ -272,9 +272,9 @@ b3386ee  2026-05-25 16:59  chore: refresh Graphify maps
 
 **Response**: Added Meter (unique serial_number, types electricity/water_main/water_child), SIMCard (unique iccid), MeterAssignment, SIMAssignment models. Partial unique indexes via raw SQL: `WHERE end_at IS NULL`.
 
-**Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_meter_sim/`
+**Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_Meter_Verse_sim/`
 
-**Validation**: Unique serial_number ✅, unique iccid ✅, partial unique on (meter_id) WHERE end_at IS NULL ✅
+**Validation**: Unique serial_number ✅, unique iccid ✅, partial unique on (Meter_Verse_id) WHERE end_at IS NULL ✅
 
 ---
 
@@ -282,7 +282,7 @@ b3386ee  2026-05-25 16:59  chore: refresh Graphify maps
 
 **Prompt**: Proceed with T015 — Migration for Reading, ReadingReview, TariffPlan, BillingPeriod
 
-**Response**: Added Reading (unique meter_id+reading_at+source, status enum, snapshots jsonb, raw_payload jsonb), ReadingReview, TariffPlan, BillingPeriod models. DECIMAL(12,3) for consumption/rate.
+**Response**: Added Reading (unique Meter_Verse_id+reading_at+source, status enum, snapshots jsonb, raw_payload jsonb), ReadingReview, TariffPlan, BillingPeriod models. DECIMAL(12,3) for consumption/rate.
 
 **Files**: `backend/prisma/schema.prisma`, `backend/prisma/migrations/*_readings_tariff/`
 
@@ -325,6 +325,134 @@ b3386ee  2026-05-25 16:59  chore: refresh Graphify maps
 - Updated `10-progress-health-report.md` — 20% complete (17/85 tasks)
 - Updated `06-github-packages-needed.md` with T012 packages (AJV, js-yaml, etc.)
 - Updated memory files, email log, audit log CSV, commit log CSV, packages CSV
-- Synced to OneDrive at `C:\Users\EPower\OneDrive - Epower\kirllos\app\meter-pulse`
+- Synced to OneDrive at `C:\Users\EPower\OneDrive - Epower\kirllos\app\meter-verse`
 
 **Key metrics**: 17 tasks complete, 7 open PRs on Abady001/Meter-, 82 documentation files across 5 formats
+
+---
+
+## 26. T020 — FE-001 API Client Foundation
+
+**Prompt**: Proceed with T020 — API Client Foundation (FE-001)
+
+**Response**: Created `Frontend/src/lib/api/index.ts` with `apiGet<T>()`, `apiPost<T>()`, `apiPut<T>()`, `apiPatch<T>()`, `apiDelete<T>()` wrapping fetch, plus `ApiError` class and `BASE_URL` config. Added request/response interceptors pattern.
+
+**Files**: `Frontend/src/lib/api/index.ts`, `Frontend/src/lib/api/types.ts`
+
+**Validation**: `bun run build` clean ✅, `bun run lint` clean ✅
+
+---
+
+## 27. T021 — React Query Integration
+
+**Prompt**: Proceed with T021 — FE-002 React Query Integration Pattern
+
+**Response**: Created SSR-safe QueryClient + QueryProvider, `useProjectsList()`, `useProjectDetail(id)`, `useCustomersList()` hooks, and `QueryBoundary` loading/error/empty component. Integrated into ProjectsPage and ProjectDetailPage with mock fallback.
+
+**Files**: `Frontend/src/lib/api/query-client.tsx`, `Frontend/src/hooks/use-projects.ts`, `Frontend/src/components/shared/QueryBoundary.tsx`, `Frontend/src/app/layout.tsx`
+
+**Validation**: `bun run build` ✅, `bun run lint` 0 errors ✅, `graphify query` ✅
+
+**Backup**: `backup files/T021_2026-05-29_102628/` with AI_HANDOFF.md restore point
+
+---
+
+## 28. T022 — Feature Flags + Multi-Tool Validation
+
+**Prompt**: Proceed with T022 — FE-003 Feature Flag Toggles + documentation overhaul
+
+**Response**: Created `Frontend/src/lib/feature-flags.ts` (per-module mock/API toggle), `Frontend/src/pages/api/features.ts` (API endpoint), `ROUTE_OF_DATA.md` (architecture map), `documentation/markdown/16-checkpoint-report.md` (checkpoint), `documentation/markdown/17-extended-governance-rules.md` (governance), `deep-coverage/` (11 reports). Updated AI_HANDOFF, RESTORE_POINT, T001-T022 log, project architecture docs.
+
+**Validation**: Frontend build ✅, lint ✅, backend 82/82 tests ✅, build ✅, prisma validate ✅, graphify ✅
+
+---
+
+## 29. T023-T030 — US1-US3 Contract Tests (TDD)
+
+**Prompt**: Proceed with contract tests for remaining endpoints
+
+**Response**: Created 8 contract test suites (TDD approach — all specs pass, HTTP endpoints fail by design):
+- T023: `meter-assign.contract.spec.ts` — 15 tests (14 pass, 1 TDD fail)
+- T024: `meter-terminate.contract.spec.ts` — 12 tests (11 pass, 1 TDD fail)
+- T025: `sim-eligibility.contract.spec.ts` — 7 tests (6 pass, 1 TDD fail)
+- T026: `reading-create.contract.spec.ts` — 13 tests (12 pass, 1 TDD fail)
+- T027: `reading-review-queue.contract.spec.ts` — 7 tests (6 pass, 1 TDD fail)
+- T028: `invoice-generate.contract.spec.ts` — 8 tests (7 pass, 1 TDD fail)
+- T029: `invoice-issue.contract.spec.ts` — 7 tests (6 pass, 1 TDD fail)
+- T030: `invoice-adjustment.contract.spec.ts` — 8 tests (7 pass, 1 TDD fail)
+
+**Deep-coverage reports**: Created 30+ coverage reports (T023-T030) in `documentation/markdown/deep-coverage/`
+
+**Validation**: `npm test` 200+ pass ✅, `npm run build` ✅
+
+---
+
+## 30. T047/T048 — Readings Module + Review Queue + Billing Stubs
+
+**Prompt**: Implement Readings module, Review Queue endpoint, and Billing stubs
+
+**Response**:
+- Fixed 7 reading-validation integration tests (UUID v4 format, auth helpers, Prisma mocks)
+- Added `GET /readings/review-queue` with `projectId`/`status` query params to ReadingsController
+- Added `listReviewQueue()` method to ReadingsService
+- Created BillingController stubs: `POST /invoices/generate` → 202, `POST /invoices/:id/issue` → 200, `POST /invoices/:id/adjustments` → 201
+- Created BillingModule registered in AppModule
+- Added Prisma P2002 → HttpException(422) handler
+- ESLint: `argsIgnorePattern: '^_'` rule
+
+**Files created**: `backend/src/billing/billing.controller.ts`, `backend/src/billing/billing.module.ts`
+
+**Files modified**: reading-validation spec, reading-review-queue spec, invoice-* contract specs, readings controller+service, app.module.ts, .eslintrc.cjs, tasks.md
+
+**Validation**: `npm test` 287/287 ✅ (34 suites), `npm run build` ✅, `eslint` ✅, `prettier` ✅, `prisma validate` ✅, Frontend build ✅
+
+---
+
+## 31. Security Weaver Framework (Phase 1-5)
+
+**Prompt**: Implement comprehensive security framework
+
+**Response**: Executed 5-phase Security Weaver Framework:
+- **Phase 1 (Discovery)**: `security-assessment.md` — Attack surface inventory, 27 gaps identified
+- **Phase 2 (Gap Analysis)**: `security-gap-analysis.md` — 5 Critical, 8 High, 7 Medium, 4 Low, 3 Info
+- **Phase 3 (Roadmap)**: `security-roadmap.md` — Phase A-D (Sprint 1-3 + Ongoing), 20+ items
+- **Phase 4 (Phase A Implementation)**: 8 security controls deployed
+- **Phase 5 (Validation)**: `security-validation-report.md` — 6→14 active controls
+
+**Controls implemented**: Helmet (HTTP headers), CORS whitelist, rate-limiting (100 req/min), eslint-plugin-security (9 rules), 1MB body size limit, dep-audit script, Dockerfiles (backend + frontend multi-stage)
+
+**Files created**: `documentation/markdown/security-assessment.md`, `security-gap-analysis.md`, `security-roadmap.md`, `security-validation-report.md`, `backend/Dockerfile`, `Frontend/Dockerfile`, `.dockerignore`
+
+**Validation**: Build clean ✅, ESLint 0 errors ✅, all tests 287/287 ✅
+
+---
+
+## 32. Graphify Update + CI/CD + Safety Tooling
+
+**Prompt**: Update graphify, add CI pipeline and safety tools
+
+**Response**:
+- **Graphify updated**: 2573 nodes (+447), 4293 edges (+1040), 184 communities (+15) — 229 code files parsed
+- **Semantic extraction**: Failed (DeepSeek API 402 — insufficient balance); structural AST only
+- **CI pipeline**: `.github/workflows/ci.yml` (4 jobs: backend, frontend, security, secret-scan)
+- **Safety tools**: `backend/scripts/` — health-check.sh, backup-state.sh, alert.sh, test-sweep.sh
+- **Error code registry**: 10 codes (ERR-T048-001 through ERR-TEST-002)
+- **Restore point**: `restore-point-20260531-094024/` with AI_HANDOFF.md manifest, sweep report
+- **Tooling**: depcruise ✅, typedoc ✅, spectral ⚠️ (Windows), playwright available
+- **Temp files cleaned**: graphify_update.py, restore_check.py, merge_graph.py
+
+---
+
+## 33. Documentation Overhaul (Final Update)
+
+**Prompt**: Update ALL documentation to 2026-05-31 — index, security references, CI/CD, Docker, graphify
+
+**Response**: 
+- Updated `00-index.md` with security docs, CI/CD, Docker, graphify-out entries
+- Updated `15-task-list.md` — 55/90 tasks complete, all Phase 1-4 task statuses current
+- Updated `09-git-commit-log.md` — 66 commits with full T020-T030 history
+- Updated `01-conversation-log.md` — appended all sessions
+- Verified `02-memory-files.md` (current), `16-checkpoint-report.md` (current)
+- Added cross-references throughout for security documents and new infrastructure
+
+**Final system state**: 287/287 tests passing, all builds clean, 14 security controls active, graphify at 2573 nodes

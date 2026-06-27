@@ -1,0 +1,8 @@
+﻿File Impact Analysis â€” T024
+
+  File   Purpose   Risk   Change  
+ --- --- --- --- 
+  backend/test/contract/meter-terminate.contract.spec.ts   Contract test for terminateMeter   Low   Create  
+
+Downstream: T033 (MetersController.terminateMeter) will satisfy this test.
+Risk: Low â€” additive only, no existing files modified.

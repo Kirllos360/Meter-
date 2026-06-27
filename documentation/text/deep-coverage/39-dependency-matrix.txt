@@ -1,0 +1,7 @@
+﻿Dependency Matrix â€” T027
+
+  Dependency   Status  
+ --- --- 
+  Contract harness T012   âœ…  
+  API spec   âœ…  
+  Readings controller (future)   âŒ

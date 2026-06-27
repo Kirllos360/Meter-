@@ -1,0 +1,14 @@
+extends: [[spectral:oas, all]]
+
+rules:
+  operation-operationId: error
+  operation-tag-defined: warn
+  info-contact: warn
+  info-description: warn
+  path-params: error
+  no-eval-in-markdown: warn
+  no-script-tags-in-markdown: warn
+  oas3-unused-component: warn
+  oas3-valid-schema-example: warn
+  oas3-valid-media-example: warn
+  oas3-api-servers: warn

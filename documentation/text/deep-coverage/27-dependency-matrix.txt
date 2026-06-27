@@ -1,0 +1,9 @@
+﻿Dependency Matrix â€” T025
+
+  Dependency   Task   Status  
+ --- --- --- 
+  Contract test harness   T012   âœ… Complete  
+  API spec (YAML)   SpeckIt   âœ… v1.0.0  
+  Sim cards controller   T034   âŒ Not started  
+
+All upstream deps satisfied.

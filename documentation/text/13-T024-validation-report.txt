@@ -1,0 +1,20 @@
+﻿T024 Validation Report
+
+Task
+T024 â€” US1 Contract Tests: terminateMeter
+
+Test Results
+  Suite   Status   Details  
+ --- --- --- 
+  Contract definition (5)   âœ… PASS   Operation, status code, schemas validated against spec  
+  Request schema validation (4)   âœ… PASS   Valid/invalid MeterTerminateRequest bodies validated  
+  Response schema validation (2)   âœ… PASS   MeterTerminateResult (200) validated  
+  HTTP endpoint (1)   âŒ 1 FAIL   Expected: endpoint returns 404 (no implementation)  
+  All pre-existing tests (10 suites)   âœ… PASS   No regressions  
+
+Build
+- npm run build: âœ… Clean
+
+TDD Status
+- 11 tests pass (spec validation, schema assertions)
+- 1 test fails (HTTP endpoint â€” returns 404, expected [200])

@@ -48,8 +48,8 @@ describe('CorrelationMiddleware', () => {
     const req = {
       headers: {
         'x-correlation-id': 'primary-id',
-        'x-request-id': 'fallback-id',
-      },
+        'x-request-id': 'fallback-id'
+      }
     } as any;
     const res = { setHeader: jest.fn() } as any;
     const next = jest.fn();

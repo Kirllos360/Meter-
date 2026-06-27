@@ -1,0 +1,77 @@
+MCP Server Setup — Meter Verse
+
+Date: 2026-05-28
+Config: .opencode/opencode.json
+Status: Configured — requires credentials to activate
+
+
+Overview
+
+This project uses two MCP (Model Context Protocol) servers for AI-assisted development:
+
+  Server   Purpose   Status  
+ -------- --------- -------- 
+  Notion   Task management, spec tracking, documentation   Requires NOTION_TOKEN  
+  Odoo   ERP integration (customers, invoices, payments)   Requires Odoo credentials  
+
+
+Notion MCP
+
+Package: @notionhq/notion-mcp-server (official)
+
+Setup
+
+1. Go to https://www.notion.so/profile/integrations
+2. Create a new Internal Integration or select an existing one
+3. Copy the Internal Integration Secret (ntn_xxx)
+4. Connect relevant pages/databases to the integration (share page → "Connect to" → your integration)
+5. Set the token in .opencode/opencode.json:
+
+
+
+Available Tools (22 total)
+
+- Page CRUD: create, retrieve, update, search
+- Data source (database) operations: query, create, update, list templates
+- Comment operations: create, retrieve
+- Block operations: retrieve, update, delete, append children
+- User operations: list, retrieve
+- Move page
+
+
+Odoo MCP
+
+Package: @mweinheimer/odoo-mcp-server
+
+Setup
+
+1. Ensure Odoo instance is accessible (local or remote)
+2. Have database name, username, and password ready
+3. Configure in .opencode/opencode.json:
+
+
+
+Features
+
+- Full CRUD on any Odoo model
+- Advanced search with domain filtering
+- Custom method execution
+- XML-RPC and JSON-RPC protocol support
+
+
+Activation
+
+MCP servers are activated on opencode restart. After filling in credentials:
+
+
+
+Note: Both servers are disabled by default until credentials are provided. The config file serves as documentation and ready-to-use template — just fill in the values and restart.
+
+
+Git Command
+
+A custom command git:save is configured for quick commits:
+
+
+
+Usage in opencode:

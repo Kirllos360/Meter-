@@ -2,20 +2,33 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Version | Supported |
+|---------|-----------|
+| MVP (current) | ✅ Active development |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+To report a security issue, please open a GitHub Issue with the label `security` or contact the repository owner directly.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Do NOT open a public issue for critical vulnerabilities — use the private reporting mechanism in GitHub Security tab.
+
+## Security Controls
+
+This project implements:
+- **JWT Authentication** with RBAC (7 roles)
+- **Helmet** HTTP security headers
+- **CORS** origin whitelist
+- **Rate limiting** (100 req/min)
+- **CSRF** double-submit cookie protection
+- **Input validation** via class-validator
+- **Idempotency-Key** for mutation endpoints
+- **Append-only audit log** with SHA-256 hash chain
+- **SQL injection protection** via Prisma ORM
+- **Dependency scanning** via Dependabot + Trivy + Snyk
+- **SAST scanning** via Semgrep + njsscan + CodeQL
+- **Secret scanning** via TruffleHog
+- **Pre-commit hooks** via Husky
+
+## Build Security
+
+See `.github/workflows/test-agent.yml` for CI security checks run on every push.

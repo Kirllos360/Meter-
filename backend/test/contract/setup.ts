@@ -5,6 +5,8 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '../../src/app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from '../../src/common/http/all-exceptions.filter';
+import { JwtService } from '@nestjs/jwt';
+import { PrismaService } from '../../src/common/database/prisma.service';
 
 let _spec: Record<string, unknown> | null = null;
 
@@ -16,7 +18,7 @@ function yamlPath(): string {
     'specs',
     '001-metering-billing-platform',
     'contracts',
-    'meter-pulse-api.yaml',
+    'meter-pulse-api.yaml'
   );
 }
 
@@ -56,7 +58,7 @@ function resolveRef(ref: string, spec: Record<string, unknown>): unknown {
 function deepDereference(
   value: unknown,
   spec: Record<string, unknown>,
-  visited: Set<string>,
+  visited: Set<string>
 ): unknown {
   if (Array.isArray(value)) {
     return value.map((v) => deepDereference(v, spec, visited));
@@ -89,12 +91,15 @@ function deepDereference(
   return value;
 }
 
-export function dereferenceSpec(spec: Record<string, unknown>): Record<string, unknown> {
-  return deepDereference(spec, spec, new Set()) as Record<string, unknown>;
+export function dereferenceSpec(
+  spec: Record<string, unknown>,
+  resolveContext?: Record<string, unknown>
+): Record<string, unknown> {
+  return deepDereference(spec, resolveContext ?? spec, new Set()) as Record<string, unknown>;
 }
 
 export function getOperation(
-  operationId: string,
+  operationId: string
 ): { method: string; path: string; operation: Record<string, unknown> } | null {
   const spec = loadContract();
   const paths = spec.paths as Record<string, Record<string, unknown>> | undefined;
@@ -130,7 +135,7 @@ export function getExpectedStatuses(operationId: string): number[] {
 export function getResponseSchema(
   operationId: string,
   statusCode: number,
-  dereferenced?: boolean,
+  dereferenced?: boolean
 ): Record<string, unknown> | null {
   const spec = loadContract();
   const paths = spec.paths as Record<string, Record<string, unknown>> | undefined;
@@ -171,7 +176,7 @@ export function getResponseSchema(
       }
 
       if (dereferenced && schema) {
-        return dereferenceSpec(schema) as Record<string, unknown>;
+        return dereferenceSpec(schema, spec) as Record<string, unknown>;
       }
 
       return schema;
@@ -191,7 +196,7 @@ function getAjv(): unknown {
 
 export function validateResponseBody(
   schema: Record<string, unknown>,
-  body: unknown,
+  body: unknown
 ): { valid: boolean; errors: string[] } {
   const ajv = getAjv() as {
     validate: (schema: Record<string, unknown>, data: unknown) => boolean;
@@ -202,8 +207,8 @@ export function validateResponseBody(
     return { valid: true, errors: [] };
   }
 
-  const errorMessages = (ajv.errors ?? []).map(
-    (err) => `${err.instancePath} ${err.message ?? 'validation failed'}`.trim(),
+  const errorMessages = (ajv.errors ?? []).map((err) =>
+    `${err.instancePath} ${err.message ?? 'validation failed'}`.trim()
   );
 
   return { valid: false, errors: errorMessages };
@@ -212,12 +217,45 @@ export function validateResponseBody(
 export async function createTestApp(): Promise<{
   app: NestExpressApplication;
   request: ReturnType<typeof import('supertest')>;
+  authHeader: string;
 }> {
   const supertest = require('supertest');
 
+  // Create mock Prisma delegates
+  const mockDelegate = () => ({
+    findUnique: jest.fn(),
+    findFirst: jest.fn(),
+    findMany: jest.fn(),
+    create: jest.fn(),
+    update: jest.fn(),
+    delete: jest.fn(),
+    count: jest.fn()
+  });
+
+  const mockPrisma = {
+    meter: mockDelegate(),
+    meterAssignment: mockDelegate(),
+    sIMCard: mockDelegate(),
+    sIMAssignment: mockDelegate(),
+    customer: mockDelegate(),
+    customerUnitAssignment: mockDelegate(),
+    project: mockDelegate(),
+    projectThreshold: mockDelegate(),
+    locationNode: mockDelegate(),
+    reading: mockDelegate(),
+    auditLog: mockDelegate(),
+    user: mockDelegate(),
+    $connect: jest.fn().mockResolvedValue(undefined),
+    $disconnect: jest.fn().mockResolvedValue(undefined),
+    $on: jest.fn()
+  };
+
   const moduleFixture: TestingModule = await Test.createTestingModule({
-    imports: [AppModule],
-  }).compile();
+    imports: [AppModule]
+  })
+    .overrideProvider(PrismaService)
+    .useValue(mockPrisma as unknown as PrismaService)
+    .compile();
 
   const app = moduleFixture.createNestApplication<NestExpressApplication>();
 
@@ -227,15 +265,22 @@ export async function createTestApp(): Promise<{
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
-      transform: true,
-    }),
+      transform: true
+    })
   );
 
   app.useGlobalFilters(new AllExceptionsFilter());
 
   await app.init();
 
-  return { app, request: supertest(app.getHttpServer()) };
+  const jwtService = app.get(JwtService);
+  const token = jwtService.sign({
+    sub: 'test-user',
+    userId: 'test-user-id',
+    role: 'operator'
+  });
+
+  return { app, request: supertest(app.getHttpServer()), authHeader: `Bearer ${token}` };
 }
 
 export function validateStatus(operationId: string, status: number): boolean {

@@ -1,0 +1,11 @@
+﻿Dependency Matrix â€” T024
+
+  Dependency   Task   Status  
+ --- --- --- 
+  Contract test harness   T012   âœ… Complete  
+  API spec (YAML)   SpeckIt   âœ… v1.0.0  
+  T023 pattern   T023   âœ… Complete  
+  MetersController.terminateMeter   T033   âŒ Not started  
+
+External deps: supertest, ajv, ajv-formats, js-yaml â€” all installed.
+All upstream deps satisfied.

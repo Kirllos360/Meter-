@@ -42,3 +42,53 @@
 41,2026-05-26,a5532f9,Kirllos Hany,"test(backend): finalize T012 contract harness",Phase 2
 42,2026-05-26,1912d9d,Kirllos Hany,"T012: contract test harness with YAML spec loading, deref, AJV validation",Phase 2
 43,2026-05-28,336e0e0,Kirllos Hany,"docs: mark T001-T017 as [X] completed in tasks.md",Docs
+44,2026-05-28,9f379c7,Kirllos Hany,"T018: add AuditLog index + ReportJob migration",Phase 2
+45,2026-05-28,6936e2f,Kirllos Hany,"T019: add derived views migration (3 views)",Phase 2
+46,2026-05-28,05b686a,Kirllos Hany,"T020: add FE-001 API client foundation",Phase 2
+47,2026-05-28,efd6f6a,Kirllos Hany,"T020: add validation report + update documentation and task checklist",Phase 2
+48,2026-05-28,831b8f2,Kirllos Hany,"T020: fix build script for Windows cross-platform compatibility",Phase 2
+49,2026-05-28,1b73182,Kirllos Hany,"T020: add master deployment guide, finished tasks log, next-section prompt",Docs
+50,2026-05-28,8db1f3a,Kirllos Hany,"docs: update graphify after T020 completion",Docs
+51,2026-05-28,ca24c9a,Kirllos Hany,"MCP: add Notion + Odoo MCP server config",Setup
+52,2026-05-29,bbe4065,Kirllos Hany,"T021: FE-002 React Query Integration Pattern",Phase 2
+53,2026-05-29,f432342,Kirllos Hany,"T021: add session backup + update documentation",Docs
+54,2026-05-29,eda86d7,Kirllos Hany,"T022: add feature flags, ROUTE_OF_DATA.md, multi-tool docs update",Phase 2
+55,2026-05-29,bc1edcd,Kirllos Hany,"T022: update AI_HANDOFF.md with session checkpoint ref",Docs
+56,2026-05-29,d7ed1d7,Kirllos Hany,"T022: normalize migration.sql line endings",Phase 2
+57,2026-05-29,a45a74e,Kirllos Hany,"T022: add extended governance rules, backup, update doc index",Phase 2
+58,2026-05-29,482c722,Kirllos Hany,"T022: add deep-coverage gate reports (11 reports)",Phase 2
+59,2026-05-29,6e1438e,Kirllos Hany,"T022: update confidence score to 100%",Phase 2
+60,2026-05-29,221d806,Kirllos Hany,"T022: fix doc index to reflect 100% confidence score",Docs
+61,2026-05-29,e0aa936,Kirllos Hany,"T023: contract test for assignMeter (TDD — 14 pass, 1 fail)",Phase 3
+62,2026-05-29,fc7c601,Kirllos Hany,"T024: contract test for terminateMeter (TDD — 11 pass, 1 fail)",Phase 3
+63,2026-05-29,96015e1,Kirllos Hany,"T025: contract test for simEligibility (TDD — 6 pass, 1 fail)",Phase 3
+64,2026-05-29,e80d557,Kirllos Hany,"T026: contract test for createReading (TDD — 12 pass, 1 fail)",Phase 3
+65,2026-05-29,6641acf,Kirllos Hany,"T027: contract test for listReadingReviewQueue (TDD — 6 pass, 1 fail)",Phase 3
+66,2026-05-29,df58682,Kirllos Hany,"T028: contract test for generateInvoices (TDD — 7 pass, 1 fail)",Phase 3
+67,2026-05-29,ab1e294,Kirllos Hany,"T029: contract test for issueInvoice (TDD — 6 pass, 1 fail)",Phase 3
+68,2026-05-29,bb0096e,Kirllos Hany,"T030: contract test for addInvoiceAdjustment (TDD — 7 pass, 1 fail)",Phase 3
+69,2026-05-31,8e19557,Kirllos Hany,"feat: US3 complete — T055-T060 contract + integration tests (373/373)",Phase 3
+70,2026-05-31,fbfb27d,Kirllos Hany,"fix: resolve 17 Dependabot alerts via npm overrides + .github/dependabot.yml",Security
+71,2026-05-31,c0e2836,Kirllos Hany,"fix: add dependabot config at repo root",Security
+72,2026-05-31,96920ad,Kirllos Hany,"tools: add CodeQL workflow + OSV Scanner, update test-agent MANIFEST",Security
+73,2026-05-31,ad273e3,Kirllos Hany,"tools: install njsscan, codespell, snyk into test-agent + fix typo",Security
+74,2026-05-31,dcf2ef4,Kirllos Hany,"fix: revert NestJS v11->v10, revert Jest v28->v29, restore 373/373 tests",Phase 3
+75,2026-05-31,4b103ef,Kirllos Hany,"ci: add test-agent workflow — runs all 15+ tools on every push",CI
+76,2026-05-31,0926b76,Kirllos Hany,"fix: test-agent workflow YAML syntax + add check-graph.py script",CI
+77,2026-05-31,c0ea00c,Kirllos Hany,"fix: lockfile regen — all NestJS v10, all tests 373/373",Phase 3
+78,2026-05-31,d22a45e,Kirllos Hany,"fix: replace prisma validate with prisma generate (no DB in CI)",CI
+79,2026-05-31,213eb7e,Kirllos Hany,"fix: add PostgreSQL service + migrate to test-agent workflow",CI
+80,2026-05-31,31fbf86,Kirllos Hany,"fix: use postgres user for CI PostgreSQL service",CI
+81,2026-05-31,7af3c2a,Kirllos Hany,"fix: pg_isready healthcheck quoting",CI
+82,2026-05-31,066dd1f,Kirllos Hany,"fix: use correct spectral package name",CI
+83,2026-05-31,25b9b3e,Kirllos Hany,"fix: add bun setup for frontend build in CI",CI
+84,2026-05-31,d324ea4,Kirllos Hany,"fix: remove graphify pip install, add continue-on-error for codeql",CI
+85,2026-05-31,d5df8a5,Kirllos Hany,"fix: remove graphify job from CI (build artifacts)",CI
+86,2026-05-31,2a80c54,Kirllos Hany,"docs: add SECURITY.md with vulnerability reporting policy",Security
+87,2026-06-01,75f7b68,Kirllos Hany,"fix: RCA deep scan fixes + T061-T065 billing implementation",Phase 3
+88,2026-06-01,1f93b0d,Kirllos Hany,"fix: CI workflow failures — husky prepare script + SBOM deps + Trivy SARIF guard",CI
+89,2026-06-01,a708827,Kirllos Hany,"fix: CI workflow — prisma validate needs DATABASE_URL, SBOM peer dep issues, SARIF upload permissions",CI
+90,2026-06-01,3b18d30,Kirllos Hany,"fix: CI backend — DatabaseService reads DB_USER/DB_PASSWORD from ConfigService (not DATABASE_URL)",CI
+91,2026-06-01,4f1f4f0,Kirllos Hany,"fix: CI backend — create .env file in CI for ConfigService compatibility",CI
+92,2026-06-01,ccbaa7a,Kirllos Hany,"fix: CI backend — create sim_system schema before tests",CI
+93,2026-06-01,95ea349,Kirllos Hany,"fix: CI backend — run prisma migrate deploy for integration tests",CI

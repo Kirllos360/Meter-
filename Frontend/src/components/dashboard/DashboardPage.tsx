@@ -38,13 +38,11 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { cn } from '@/lib/utils';
-import {
-  mockKPIs,
-  mockConsumptionData,
-  mockAlerts,
-  mockRecentActivity,
-  mockMeters,
-} from '@/lib/mock-data';
+import { useT } from '@/lib/i18n/context';
+import { useDashboardKpis, useConsumptionTrend, useRecentActivity } from '@/hooks/use-dashboard';
+import { useMetersList } from '@/hooks/use-meters';
+import { useQuery } from '@tanstack/react-query';
+import { apiGet } from '@/lib/api';
 
 // ---- Icon Map ----
 
@@ -59,28 +57,11 @@ const iconMap: Record<string, React.ElementType> = {
   Scale,
 };
 
-// ---- Revenue Mock Data ----
-
-const revenueData = [
-  { month: 'Feb', invoices: 185000, payments: 172000 },
-  { month: 'Mar', invoices: 198000, payments: 189000 },
-  { month: 'Apr', invoices: 192000, payments: 185000 },
-  { month: 'May', invoices: 210000, payments: 198000 },
-  { month: 'Jun', invoices: 225000, payments: 215000 },
-  { month: 'Jul', invoices: 242000, payments: 230000 },
-  { month: 'Aug', invoices: 248000, payments: 238000 },
-  { month: 'Sep', invoices: 235000, payments: 222000 },
-  { month: 'Oct', invoices: 218000, payments: 208000 },
-  { month: 'Nov', invoices: 205000, payments: 195000 },
-  { month: 'Dec', invoices: 220000, payments: 210000 },
-  { month: 'Jan', invoices: 232000, payments: 218000 },
-];
-
 // ---- Meter Status Data ----
 
-function getMeterStatusData() {
+function getMeterStatusData(metersList: any[]) {
   const counts: Record<string, number> = {};
-  mockMeters.forEach((m) => {
+  metersList.forEach((m: any) => {
     counts[m.status] = (counts[m.status] || 0) + 1;
   });
   return Object.entries(counts)
@@ -103,7 +84,7 @@ const PIE_COLORS: Record<string, string> = {
 
 function getAlertSummary() {
   const counts = { critical: 0, high: 0, medium: 0, low: 0 };
-  const unacknowledged = mockAlerts.filter((a) => !a.acknowledged);
+  const unacknowledged: any[] = [];
   unacknowledged.forEach((a) => {
     counts[a.severity] = (counts[a.severity] || 0) + 1;
   });
@@ -333,24 +314,48 @@ function renderPieLabel({
 
 // ---- Format timestamp ----
 
-function formatTime(timestamp: string) {
+function formatTime(timestamp: string, t: (path: string, params?: Record<string, string | number>) => string) {
   const date = new Date(timestamp);
   const now = new Date();
   const diffMs = now.getTime() - date.getTime();
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-  if (diffHours < 1) return 'Just now';
-  if (diffHours < 24) return `${diffHours}h ago`;
-  if (diffDays < 7) return `${diffDays}d ago`;
+  if (diffHours < 1) return t('common.justNow');
+  if (diffHours < 24) return t('common.hoursAgo', { count: diffHours });
+  if (diffDays < 7) return t('common.daysAgo', { count: diffDays });
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
 // ---- Main Dashboard ----
-
 export default function DashboardPage() {
-  const meterStatusData = getMeterStatusData();
-  const alertSummary = getAlertSummary();
+  const t = useT();
+
+  const kpisQuery = useDashboardKpis();
+  const consumptionQuery = useConsumptionTrend();
+  const activityQuery = useRecentActivity();
+  const { data: meters } = useMetersList();
+  const metersList = meters ?? [];
+  const { data: collData } = useQuery({ queryKey: ['coll-dash'], queryFn: () => apiGet<any>('/collections/dashboard') });
+  const { data: agingData } = useQuery({ queryKey: ['coll-aging'], queryFn: () => apiGet<any>('/collections/aging') });
+  const collections = collData ?? {};
+  const aging = agingData ?? {};
+
+  const apiKpis = kpisQuery.data?.kpis;
+  const mergedKPIs = apiKpis
+    ? ([] as any[])    : [];
+
+  const consumptionData = consumptionQuery.data?.data ?? [];
+  const recentActivity = activityQuery.data?.items ?? [];
+
+  const meterStatusData = kpisQuery.data?.meterStatusDistribution
+    ? kpisQuery.data.meterStatusDistribution.map(d => ({ name: d.status, value: d.count }))
+    : getMeterStatusData(metersList);
+
+  const apiAlertCounts = kpisQuery.data?.alertSeverityCounts;
+  const alertSummary = apiAlertCounts
+    ? { critical: 0, high: 0, medium: 0, low: 0, ...Object.fromEntries(apiAlertCounts.map(a => [a.severity, a.count])) }
+    : getAlertSummary();
   const totalAlerts =
     alertSummary.critical + alertSummary.high + alertSummary.medium + alertSummary.low;
 
@@ -358,15 +363,15 @@ export default function DashboardPage() {
     <div className="space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-foreground">{t('dashboard.title')}</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          Overview of your utility metering operations
+          {t('dashboard.subtitle')}
         </p>
       </div>
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        {mockKPIs.map((kpi, i) => (
+        {mergedKPIs.map((kpi, i) => (
           <KPICard key={kpi.label} {...kpi} index={i} />
         ))}
       </div>
@@ -378,26 +383,26 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold text-foreground">
-                Consumption Trends
+                {t('dashboard.consumptionTrends')}
               </h3>
               <p className="text-xs text-muted-foreground mt-0.5">
-                Monthly electricity &amp; water consumption
+                {t('dashboard.consumptionSubtitle')}
               </p>
             </div>
             <div className="flex items-center gap-3 text-xs">
               <div className="flex items-center gap-1.5">
                 <Zap className="h-3 w-3 text-primary" />
-                <span className="text-muted-foreground">Electricity</span>
+                <span className="text-muted-foreground">{t('dashboard.electricity')}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Droplets className="h-3 w-3 text-emerald-400" />
-                <span className="text-muted-foreground">Water</span>
+                <span className="text-muted-foreground">{t('dashboard.water')}</span>
               </div>
             </div>
           </div>
           <div className="h-[280px]">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={mockConsumptionData}>
+              <AreaChart data={consumptionData}>
                 <defs>
                   <linearGradient id="elecGrad" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#A3FF12" stopOpacity={0.3} />
@@ -441,7 +446,7 @@ export default function DashboardPage() {
                 <Area
                   type="monotone"
                   dataKey="electricity"
-                  name="Electricity (kWh)"
+                  name={t('dashboard.electricityKwh')}
                   stroke="#A3FF12"
                   strokeWidth={2}
                   fill="url(#elecGrad)"
@@ -449,7 +454,7 @@ export default function DashboardPage() {
                 <Area
                   type="monotone"
                   dataKey="water"
-                  name="Water (m³)"
+                  name={t('dashboard.waterM3')}
                   stroke="#12FFA3"
                   strokeWidth={2}
                   fill="url(#waterGrad)"
@@ -464,26 +469,26 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold text-foreground">
-                Revenue Overview
+                {t('dashboard.revenueOverview')}
               </h3>
               <p className="text-xs text-muted-foreground mt-0.5">
-                Invoices vs payments by month
+                {t('dashboard.revenueSubtitle')}
               </p>
             </div>
             <div className="flex items-center gap-3 text-xs">
               <div className="flex items-center gap-1.5">
                 <div className="h-2.5 w-2.5 rounded-sm bg-primary" />
-                <span className="text-muted-foreground">Invoices</span>
+                <span className="text-muted-foreground">{t('dashboard.invoices')}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="h-2.5 w-2.5 rounded-sm bg-emerald-400" />
-                <span className="text-muted-foreground">Payments</span>
+                <span className="text-muted-foreground">{t('dashboard.payments')}</span>
               </div>
             </div>
           </div>
           <div className="h-[280px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={revenueData} barGap={4}>
+              <BarChart data={[]} barGap={4}>
                 <CartesianGrid
                   strokeDasharray="3 3"
                   stroke="rgba(255,255,255,0.06)"
@@ -534,10 +539,10 @@ export default function DashboardPage() {
         <div className="glass-card rounded-xl p-4 sm:p-6">
           <div className="mb-4">
             <h3 className="text-sm font-semibold text-foreground">
-              Meter Status Distribution
+              {t('dashboard.meterStatusDistribution')}
             </h3>
             <p className="text-xs text-muted-foreground mt-0.5">
-              {mockMeters.length} total meters
+              {t('dashboard.totalMeters', { count: metersList.length })}
             </p>
           </div>
           <div className="h-[280px] flex items-center">
@@ -563,7 +568,7 @@ export default function DashboardPage() {
                 </Pie>
                 <Tooltip
                   content={
-                    <ChartTooltip formatter={(v: number) => `${v} meters`} />
+                    <ChartTooltip formatter={(v: number) => `${v} ${t('common.meters')}`} />
                   }
                 />
               </PieChart>
@@ -590,10 +595,10 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between mb-5">
             <div>
               <h3 className="text-sm font-semibold text-foreground">
-                Alert Summary
+                {t('dashboard.alertsSummary')}
               </h3>
               <p className="text-xs text-muted-foreground mt-0.5">
-                {totalAlerts} unacknowledged alerts
+                {t('dashboard.unacknowledgedAlerts', { count: totalAlerts })}
               </p>
             </div>
             <div className="relative">
@@ -627,10 +632,10 @@ export default function DashboardPage() {
                       </div>
                       <div>
                         <p className="text-sm font-medium text-foreground">
-                          {config.label}
+                          {t('alerts.' + key)}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          {count} active alert{count !== 1 ? 's' : ''}
+                          {t('dashboard.activeAlert', { count })}
                         </p>
                       </div>
                     </div>
@@ -660,17 +665,17 @@ export default function DashboardPage() {
         <div className="flex items-center justify-between mb-5">
           <div>
             <h3 className="text-sm font-semibold text-foreground">
-              Recent Activity
+              {t('dashboard.recentActivity')}
             </h3>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Latest system events and actions
+              {t('dashboard.recentActivitySubtitle')}
             </p>
           </div>
           <ArrowUpRight className="h-4 w-4 text-muted-foreground" />
         </div>
 
         <div className="space-y-1 max-h-[400px] overflow-y-auto pr-1 custom-scrollbar">
-          {mockRecentActivity.map((item, idx) => {
+          {recentActivity.map((item, idx) => {
             const IconComp = activityIconMap[item.type] ?? Activity;
             const colorClass = activityColorMap[item.type] ?? 'text-slate-400 bg-slate-400/10';
 
@@ -689,7 +694,7 @@ export default function DashboardPage() {
                   >
                     <IconComp className="h-3.5 w-3.5" />
                   </div>
-                  {idx < mockRecentActivity.length - 1 && (
+                  {idx < recentActivity.length - 1 && (
                     <div className="w-px h-full min-h-[8px] bg-border/30 mt-1" />
                   )}
                 </div>
@@ -700,7 +705,7 @@ export default function DashboardPage() {
                       {item.title}
                     </p>
                     <span className="text-[10px] text-muted-foreground/60 shrink-0">
-                      {formatTime(item.timestamp)}
+                      {formatTime(item.timestamp, t)}
                     </span>
                   </div>
                   <p className="text-xs text-muted-foreground mt-0.5 truncate">

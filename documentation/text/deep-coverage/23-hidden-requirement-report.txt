@@ -1,0 +1,13 @@
+﻿Hidden Requirements Report â€” T024
+
+  #   Requirement   Explicit?   Gap  
+ --- --- --- --- 
+  HR1   reason is required string   âœ… Yes   None  
+  HR2   terminatedAt is required date-time   âœ… Yes   None  
+  HR3   finalReading is required number   âœ… Yes   None  
+  HR4   MeterTerminateResult has no required fields   âœ… Yes â€” required not specified   Response may include only subset  
+  HR5   meterStatus is string   âœ… Yes   None  
+  HR6   simStatus is string   âœ… Yes   None  
+  HR7   simReusable is boolean   âœ… Yes   None  
+
+No hidden requirements. All spec requirements are explicit.

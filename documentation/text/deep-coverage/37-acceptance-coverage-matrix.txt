@@ -1,0 +1,8 @@
+﻿Acceptance Coverage Matrix â€” T027
+
+  #   Criterion   Status  
+ --- --- --- 
+  AC1   { items: Reading[] } schema validation   âŒ TDD  
+  AC2   Optional query params documented   âœ… Spec  
+  AC3   HTTP GET fails (404)   âŒ EXPECTED FAIL  
+  AC4   No regressions   âœ…

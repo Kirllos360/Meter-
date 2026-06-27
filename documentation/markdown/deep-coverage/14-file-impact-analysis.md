@@ -1,0 +1,30 @@
+# File Impact Analysis — T023
+
+## Primary Files (created by T023)
+
+| File | Purpose | Dependency Relationship | Risk Level | Change Required | Validation Required |
+|---|---|---|---|---|---|
+| `backend/test/contract/meter-assign.contract.spec.ts` | Contract test for assignMeter | T012 (harness), T031/T032 (will satisfy) | Low | Create | `npm test` |
+
+## Direct Dependencies (T012 Contract Harness)
+
+| File | Dependency | Why |
+|---|---|---|
+| `backend/test/contract/setup.ts` | T012 | Provides `createTestApp()`, `loadContract()`, `getResponseSchema()`, `validateResponseBody()`, `validateStatus()` |
+| `backend/test/contract/setup.spec.ts` | T012 | Pattern for contract test structure — T023 follows same describe/it pattern |
+
+## Downstream Dependents
+
+| File | Task | Why |
+|---|---|---|
+| `backend/src/meters/meters.controller.ts` | T031 | T023 HTTP test will exercise this endpoint after T031 |
+| `backend/src/meters/meters.service.ts` | T031 | Implements assignMeter logic |
+| `backend/src/meters/dto/meter-assign.request.ts` | T031 | Request DTO matching MeterAssignRequest schema |
+| `backend/src/meters/dto/meter-assignment.response.ts` | T031 | Response DTO matching MeterAssignment schema |
+| `backend/src/meters/meters.module.ts` | T030 | Module registration |
+
+## Files NOT Modified
+All existing files remain untouched — T023 is additive only.
+
+**Total files analyzed: 1 created, 4 downstream dependents**
+**Risk levels: Low (all)**

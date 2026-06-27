@@ -1,0 +1,2 @@
+﻿T030 â€” addInvoiceAdjustment contract test
+POST /invoices/{invoiceId}/adjustments â†’ 201

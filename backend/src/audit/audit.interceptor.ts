@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  NestInterceptor,
-  ExecutionContext,
-  CallHandler,
-} from '@nestjs/common';
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Observable, map } from 'rxjs';
 import { AuditService } from './audit.service';
@@ -13,7 +8,7 @@ import { AUDIT_RESOURCE_KEY, AUDIT_ACTION_KEY } from './audit.decorator';
 export class AuditInterceptor implements NestInterceptor {
   constructor(
     private readonly reflector: Reflector,
-    private readonly auditService: AuditService,
+    private readonly auditService: AuditService
   ) {}
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
@@ -26,14 +21,9 @@ export class AuditInterceptor implements NestInterceptor {
 
     const resourceType =
       this.reflector.get<string>(AUDIT_RESOURCE_KEY, context.getHandler()) ?? 'unknown';
-    const action =
-      this.reflector.get<string>(AUDIT_ACTION_KEY, context.getHandler()) ?? method;
+    const action = this.reflector.get<string>(AUDIT_ACTION_KEY, context.getHandler()) ?? method;
 
-    const resourceId =
-      request.params?.id ??
-      request.body?.id ??
-      request.params?.[0] ??
-      'unknown';
+    const resourceId = request.params?.id ?? request.body?.id ?? request.params?.[0] ?? 'unknown';
 
     const actorId = request.user?.userId ?? request.user?.sub ?? 'anonymous';
     const actorRole = request.user?.role ?? 'anonymous';
@@ -55,12 +45,12 @@ export class AuditInterceptor implements NestInterceptor {
             beforeState: beforeState ?? undefined,
             afterState: afterState ?? undefined,
             reason: request.body?.reason ?? undefined,
-            correlationId,
+            correlationId
           })
           .catch(() => {});
 
         return responseData;
-      }),
+      })
     );
   }
 }

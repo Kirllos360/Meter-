@@ -1,0 +1,1 @@
+﻿Risk: customerIds is optional array of uuids â€” test with and without.

@@ -3,7 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function setupOpenApi(app: INestApplication): void {
   const config = new DocumentBuilder()
-    .setTitle('Meter Pulse API')
+    .setTitle('???? ????????? API')
     .setDescription('Utility metering and billing platform API')
     .setVersion('1.0')
     .addServer('/api/v1')
@@ -12,14 +12,14 @@ export function setupOpenApi(app: INestApplication): void {
         type: 'http',
         scheme: 'bearer',
         bearerFormat: 'JWT',
-        in: 'header',
+        in: 'header'
       },
-      'JWT-auth',
+      'JWT-auth'
     )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/v1/docs', app, document, {
-    jsonDocumentUrl: 'api/v1/docs-json',
+    jsonDocumentUrl: 'api/v1/docs-json'
   });
 }

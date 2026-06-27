@@ -1,0 +1,58 @@
+﻿T020 Validation Report â€” FE-001 API Client Foundation
+
+Created: 2026-05-28
+Branch: feature/t020-api-client
+Commit: 05b686a
+
+Validation Summary
+
+  Check   Result   Details  
+ --- --- --- 
+  bun run lint   âœ… PASS   0 errors, 0 warnings  
+  npx next build   âœ… PASS   Compiled in 11.2s, all pages generated  
+  graphify query   âœ… PASS   30 nodes in community 29, cross-linked to mock-auth.ts  
+  graphify update .   âœ… PASS   1025 nodes, 2735 edges indexed  
+  Additive only   âœ… PASS   4 new files + 4 lines in mock-auth.ts  
+  No app-shell changes   âœ… PASS   No routing, layout, or shell modifications  
+
+Files Created
+
+  File   Purpose  
+ --- --- 
+  Frontend/src/lib/api/client.ts   Centralized fetch wrapper: GET/POST/PUT/PATCH/DELETE, correlation ID injection, auth header attachment, URL parameter building, response pipeline  
+  Frontend/src/lib/api/errors.ts   ApiError class matching T006 ErrorEnvelope contract { code, message, details?, correlationId }, parseApiError(), isApiError() type guard  
+  Frontend/src/lib/api/auth.ts   Token storage (getToken/setToken/clearToken), refresh token support (setRefreshToken/getRefreshToken/refreshToken), auth header helper (getAuthHeaders)  
+  Frontend/src/lib/api/index.ts   Barrel exports for all public API  
+
+File Modified
+
+  File   Change  
+ --- --- 
+  Frontend/src/lib/mock-auth.ts   +4 lines: imports setToken/clearToken from @/lib/api, calls setToken() on login/switchRole, clearToken() on logout  
+
+Acceptance Criteria Verification
+
+  Criterion   Status   Evidence  
+ --- --- --- 
+  One shared API wrapper (base /api/v1)   âœ…   client.ts â€” NEXT_PUBLIC_API_URL defaults to http://localhost:3001/api/v1  
+  Parses ErrorEnvelope consistently   âœ…   errors.ts â€” parseApiError() parses T006 contract shape  
+  Logs correlationId on errors   âœ…   client.ts:46 â€” [API] ${code} (${status}) correlationId=${id}  
+  Auth token attach + refresh hooks   âœ…   auth.ts â€” getAuthHeaders() auto-attached, refreshToken() available  
+  Used by â‰¥1 module   âœ…   mock-auth.ts â€” useAuthStore.login/logout/switchRole calls setToken/clearToken  
+
+Backend Contract Compatibility
+
+  Backend Module   Frontend Counterpart   Compatible  
+ --- --- --- 
+  T006 ErrorEnvelope { code, message, details?, correlationId }   ApiError class + parseApiError()   âœ…  
+  T007 Correlation ID (x-correlation-id header)   generateCorrelationId() + header injection   âœ…  
+  T011 API versioning (/api/v1)   BASE_URL defaults to http://localhost:3001/api/v1   âœ…  
+
+Speckit Validation
+
+
+
+Environment Notes
+
+- Build cp -r failure is pre-existing (Unix syntax on Windows PowerShell), unrelated to T020
+- Smoke test requires Node.js bunx in PATH â€” pre-existing environment issue

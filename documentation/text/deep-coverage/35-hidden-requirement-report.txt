@@ -1,0 +1,16 @@
+﻿Hidden Requirements Report â€” T026
+
+  #   Requirement   Explicit?   Gap  
+ --- --- --- --- 
+  HR1   meterId required uuid   âœ…   None  
+  HR2   projectId required uuid   âœ…   None  
+  HR3   readingValue required number   âœ…   None  
+  HR4   readingAt required date-time   âœ…   None  
+  HR5   source required with enum [manual, import, automatic]   âœ…   None  
+  HR6   rawPayload optional additionalProperties object   âœ…   None  
+  HR7   id uuid in response   âœ…   None  
+  HR8   status enum in response   âœ…   None  
+  HR9   consumptionValue nullable number   âœ…   None  
+  HR10   projectThresholdProfile nullable string   âœ…   None  
+
+No hidden requirements.

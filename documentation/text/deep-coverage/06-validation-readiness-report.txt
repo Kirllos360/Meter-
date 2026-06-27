@@ -1,0 +1,32 @@
+﻿Validation Readiness Report â€” T022
+
+Validation Commands Verification
+
+  Command   Tool Exists   Command Exists   Environment Ready   Dependencies Installed   Last Run   Result  
+ --- --- --- --- --- --- --- 
+  cd Frontend && bun run build   âœ… Bun v1.3.14   âœ… Frontend/package.json   âœ… Windows   âœ…   2026-05-29   âœ… PASS  
+  cd Frontend && bun run lint --no-cache --max-warnings 0   âœ… Bun v1.3.14   âœ… Frontend/package.json   âœ… Windows   âœ… ESLint   2026-05-29   âœ… PASS  
+  cd backend && npm test   âœ… Node v24.15.0   âœ… backend/package.json   âœ… Windows   âœ… Jest   2026-05-29   âœ… 82/82  
+  cd backend && npm run build   âœ… Node v24.15.0   âœ… backend/package.json   âœ… Windows   âœ… tsc   2026-05-29   âœ… PASS  
+  cd backend && npm run lint   âœ… Node v24.15.0   âœ… backend/package.json   âœ… Windows   âœ… ESLint   2026-05-29   âœ… PASS  
+  cd backend && npx prisma validate   âœ… Prisma ^6.19.3   âœ… backend/package.json   âœ… Windows   âœ… Prisma CLI   2026-05-29   âœ… PASS  
+  cd Frontend && graphify query   âœ… Graphify v0.8.18   âœ… uv tool   âœ… Windows   âœ… Python 3.12   2026-05-29   âœ… PASS  
+  cd Frontend && graphify update .   âœ… Graphify v0.8.18   âœ… uv tool   âœ… Windows   âœ… Python 3.12   2026-05-29   âœ… PASS  
+  gh pr view 24   âœ… GitHub CLI   âœ… System   âœ… Windows   âœ… Auth   2026-05-29   âœ… OPEN  
+  specify --version   âœ… Speckit v0.8.13   âœ… uv tool   âš ï¸ Needs WSL2 for bash scripts   âœ…   2026-05-29   âœ… Installed  
+  openspec --version   âœ… OpenSpec v1.3.1   âœ… npm global   âœ… Windows   âœ…   2026-05-29   âœ… Installed  
+  open-interpreter --version   âœ… open-interpreter 0.4.3   âœ… pip   âœ… Windows   âœ… Python   2026-05-29   âœ… Installed  
+
+Environment Summary
+  Component   Status  
+ --- --- 
+  OS   Windows 11 âœ…  
+  Shell   PowerShell 5.1 âœ…  
+  Node.js   v24.15.0 âœ…  
+  Bun   v1.3.14 âœ…  
+  Docker Desktop   29.4.2 âœ…  
+  Python   3.12.13 âœ…  
+  Git   Latest âœ…  
+  WSL2   Installed (needs Ubuntu init) âš ï¸  
+
+Readiness: 12/12 tools verified. 1 environment item has warning (WSL2).

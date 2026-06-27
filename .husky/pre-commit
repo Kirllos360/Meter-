@@ -1,0 +1,22 @@
+echo "=== PRE-COMMIT HOOKS ==="
+echo "Running eslint..."
+cd backend && npx eslint src/ --max-warnings 6
+if [ $? -ne 0 ]; then
+  echo "❌ ESLint failed"
+  exit 1
+fi
+
+echo "Running tests..."
+cd backend && npm test -- --bail --silent
+if [ $? -ne 0 ]; then
+  echo "❌ Tests failed"
+  exit 1
+fi
+
+echo "Running prettier check..."
+cd "$(dirname "$0")/.." && npx prettier --check "backend/src/**/*.ts" "backend/test/**/*.ts"
+if [ $? -ne 0 ]; then
+  echo "⚠️  Prettier warnings found (non-blocking)"
+fi
+
+echo "=== All pre-commit checks passed! ==="

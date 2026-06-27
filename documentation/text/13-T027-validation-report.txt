@@ -1,0 +1,18 @@
+﻿T027 Validation Report
+
+Task
+T027 â€” US1 Contract Tests: listReadingReviewQueue
+
+Test Results
+  Suite   Status  
+ --- --- 
+  Contract definition (3)   âœ… PASS  
+  Response schema (3)   âœ… PASS ($ref dereference fix verified)  
+  HTTP endpoint (1)   âŒ 1 FAIL (TDD)  
+  Preexisting   âœ… PASS  
+
+Fix: setup.ts dereference resolve context
+- dereferenceSpec(schema) â†’ dereferenceSpec(schema, spec) â€” enables nested $ref resolution
+- All existing tests unaffected
+
+TDD: 6 pass, 1 fail

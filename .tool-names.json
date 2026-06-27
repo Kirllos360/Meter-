@@ -1,0 +1,20 @@
+{
+  "jest":      "npx jest --passWithNoTests",
+  "eslint":    "npx eslint src/",
+  "prettier":  "npx prettier --check src/",
+  "semgrep":   "semgrep --config=auto src/",
+  "trivy":     "trivy fs --scanners vuln,secret,config .",
+  "spectral":  "spectral lint **/*.yaml",
+  "playwright":"npx playwright test",
+  "depcruise": "npx depcruise src/",
+  "typedoc":   "npx typedoc",
+  "repomix":   "npx repomix --style markdown",
+  "supertest": "npx jest --testPathPattern=contract",
+  "graphify":  "python -m graphify extract",
+  "graphiti":  "python -c \"from graphiti_core import Graphiti; print('OK')\"",
+  "specify":   "specify",
+  "openspec":  "npx openspec --version",
+  "mcp-fs":    "npx @modelcontextprotocol/server-filesystem",
+  "mcp-git":   "npx @cyanheads/git-mcp-server",
+  "mcp-pg":    "npx @modelcontextprotocol/server-postgres"
+}

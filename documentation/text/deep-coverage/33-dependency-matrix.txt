@@ -1,0 +1,9 @@
+﻿Dependency Matrix â€” T026
+
+  Dependency   Task   Status  
+ --- --- --- 
+  Contract harness   T012   âœ…  
+  API spec   SpeckIt   âœ…  
+  Readings controller   T035 (est.)   âŒ  
+
+All upstream satisfied.

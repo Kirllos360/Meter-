@@ -1,0 +1,6 @@
+extends: [[spectral:oas, all]]
+rules:
+  operation-tag-defined: off
+  operation-operationId: error
+  path-params: error
+  no-eval-in-markdown: off

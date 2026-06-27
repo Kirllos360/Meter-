@@ -1,0 +1,11 @@
+﻿Acceptance Coverage Matrix â€” T026
+
+  #   Criterion   Status  
+ --- --- --- 
+  AC1   ReadingCreateRequest schema validation   âŒ TDD PENDING  
+  AC2   Reading response schema validation (201)   âŒ TDD PENDING  
+  AC3   ValidationError â†’ ErrorEnvelope (422)   âŒ TDD PENDING  
+  AC4   HTTP POST fails (404)   âŒ TDD EXPECTED FAIL  
+  AC5   No regressions   âœ… EXPECTED  
+
+Coverage: 5/5

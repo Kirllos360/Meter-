@@ -1,0 +1,3 @@
+﻿Hidden Requirements Report â€” T027
+
+No hidden requirements. Response is { items: Reading[] } with optional query params.

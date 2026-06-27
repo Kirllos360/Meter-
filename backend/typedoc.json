@@ -1,0 +1,12 @@
+{
+  "entryPoints": ["src/main.ts"],
+  "out": "docs/api",
+  "tsconfig": "tsconfig.json",
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "node_modules/**"],
+  "name": "Meter Verse API",
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "readme": "none",
+  "plugin": []
+}
