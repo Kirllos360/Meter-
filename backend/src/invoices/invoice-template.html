@@ -4,39 +4,43 @@
 <body>
 <div class="invoice-container">
 {{DELETED_WATERMARK}}
-<div class="banner"></div>
+<div class="bn"></div>
 
-<table class="hdr"><tr>
-  <td style="width:25%"><div class="area-box">{{AREA_NAME}}</div></td>
-  <td style="width:50%"><div class="title-cell">{{INVOICE_TITLE}}</div></td>
-  <td class="logo-cell" style="width:25%">{{LOGO_IMG}}</td>
-</tr></table>
-
-<table class="info"><tr>
-  <td style="width:72%"><div class="info-labels">
-    <div><span class="lbl">المنطقة :</span> {{AREA_NAME}}</div>
-    <div><span class="lbl">المشروع :</span> {{PROJECT_NAME}}</div>
-    <div><span class="lbl">وحدة رقم:</span> {{UNIT_NUMBER}}</div>
-  </div></td>
-  <td style="width:28%"><div class="company-box">{{COMPANY_NAME}}<br><span style="font-size:5.5pt;color:#666">{{COMPANY_LICENSE}}</span></div></td>
-</tr></table>
-
-<div class="inv-num"><span class="lbl">رقم </span>{{INVOICE_NUMBER}}</div>
-
-<!-- Row 1 (JRXML y=64) -->
-<table class="grid">
+<!-- Row 1: Header info | Title | Signature -->
+<table class="hdr">
   <tr>
-    <th style="width:14.3%">نوع النشاط</th>
-    <th style="width:12.1%">كود العميل</th>
-    <th style="width:12.1%">تاريخ الإصدار</th>
-    <th style="width:12.1%">اشهر المحاسبة</th>
-    <th style="width:12.1%">رقم العداد</th>
-    <th style="width:12.1%">عدد العدادات</th>
-    <th style="width:14.3%">مقابل القدرة</th>
+    <td style="width:45%">
+      <span style="color:#000066;font-size:8pt">المنطقة :</span> {{AREA_NAME}}<br>
+      <span style="color:#000066;font-size:8pt">المشروع :</span> {{PROJECT_NAME}}<br>
+      <span style="color:#000066;font-size:8pt">:مقر ةدحو</span> {{UNIT_NUMBER}}
+    </td>
+    <td style="width:30%;text-align:center">
+      <div style="font-size:10pt;font-weight:bold;color:#000066">{{INVOICE_TITLE}}</div>
+      <div style="font-size:9pt;color:#000">{{INVOICE_NUMBER}}</div>
+      <div style="font-size:7pt;color:#000066">رقم</div>
+    </td>
+    <td style="width:25%;text-align:left;vertical-align:bottom">
+      {{LOGO_IMG}}
+      <div style="font-size:7pt;color:#000066;font-weight:bold;text-align:left">/ العضو المنتدب</div>
+      {{SIGNATURE_IMG}}
+    </td>
+  </tr>
+</table>
+
+<!-- Row 2-3: Headers + Data -->
+<table class="g">
+  <tr>
+    <th style="width:15%">نوع النشاط</th>
+    <th style="width:13%">كود العميل</th>
+    <th style="width:13%">تاريخ الإصدار</th>
+    <th style="width:13%">اشهر المحاسبة</th>
+    <th style="width:13%">رقم العداد</th>
+    <th style="width:13%">عدد العدادات</th>
+    <th style="width:20%">مقابل القدرة</th>
   </tr>
   <tr>
-    <td>{{METER_TYPE}}</td>
-    <td>{{CUSTOMER_CODE}}</td>
+    <td class="c">{{METER_TYPE}}</td>
+    <td class="c">{{CUSTOMER_CODE}}</td>
     <td class="c">{{ISSUE_DATE}}</td>
     <td class="c">{{BILLING_PERIOD}}</td>
     <td class="ac">{{METER_SERIAL}}</td>
@@ -45,48 +49,48 @@
   </tr>
 </table>
 
-<!-- Row 2 (JRXML y=98) -->
-<table class="grid">
+<!-- Row 4-7: Customer + Readings -->
+<table class="g">
   <tr>
-    <th style="width:14.3%">عدد العدادات</th>
-    <th style="width:57.1%" colspan="4">السيد/</th>
-    <th style="width:14.3%">حالية ({{UNIT_LABEL}})</th>
-    <th style="width:14.3%">سابقة ({{UNIT_LABEL}})</th>
+    <th style="width:15%">عدد العدادات</th>
+    <th style="width:52%" colspan="4">السيد/</th>
+    <th style="width:15%">حالية ({{UNIT_LABEL}})</th>
+    <th style="width:15%">سابقة ({{UNIT_LABEL}})</th>
   </tr>
   <tr>
     <td class="c">1</td>
-    <td colspan="4">{{CUSTOMER_NAME}}</td>
+    <td colspan="4">{{CUSTOMER_NAME}}<br><span style="font-size:6pt;color:#666">/العنوان {{ADDRESS}}</span></td>
     <td class="ac">{{END_READING}}</td>
     <td class="ac">{{START_READING}}</td>
   </tr>
 </table>
 
-<!-- Row 3 (JRXML y=132) -->
-<table class="grid">
+<!-- Row 6-7: Capacity + Status -->
+<table class="g">
   <tr>
-    <th style="width:14.3%">{{COL0_LABEL}}</th>
-    <th style="width:57.1%" colspan="4">العنوان/</th>
-    <th style="width:14.3%">الإستهلاك ({{UNIT_LABEL}})</th>
-    <th style="width:14.3%">حالة الفاتورة</th>
+    <th style="width:15%">مقابل القدرة</th>
+    <th style="width:52%" colspan="4">قيمة الإستهلاك (جم)</th>
+    <th style="width:15%">الإستهلاك ({{UNIT_LABEL}})</th>
+    <th style="width:15%">حالة الفاتورة</th>
   </tr>
   <tr>
-    <td class="al">0.000</td>
-    <td colspan="4">{{ADDRESS}}</td>
-    <td class="al b">{{CONSUMPTION}}</td>
+    <td class="c">-</td>
+    <td colspan="4" class="al b">{{CONS_AMOUNT}}</td>
+    <td class="ac b">{{CONSUMPTION}}</td>
     <td class="c">{{STATUS}}</td>
   </tr>
 </table>
 
-<!-- Charge Matrix (JRXML y=166) — labels from JRXML static texts -->
-<table class="grid">
+<!-- Row 8-9: Charge Matrix (EXACTLY matching sBill Excel) -->
+<table class="g">
   <tr>
-    <th style="width:14.3%">خصومات (جم)</th>
-    <th style="width:14.3%">إدارية (جم)</th>
-    <th style="width:14.3%">تسويات (جم)</th>
-    <th style="width:14.3%">رسوم ودمغات (جم)</th>
-    <th style="width:14.3%">قيمة الإستهلاك (جم)</th>
-    <th style="width:14.3%">الإستهلاك ({{UNIT_LABEL}})</th>
-    <th style="width:14.3%">خدمة عملاء (جم)</th>
+    <th style="width:15%">خصومات (جم)</th>
+    <th style="width:13%">إدارية (جم)</th>
+    <th style="width:13%">تسويات (جم)</th>
+    <th style="width:13%">رسوم ودمغات (جم)</th>
+    <th style="width:13%">قيمة الإستهلاك (جم)</th>
+    <th style="width:15%">الإستهلاك ({{UNIT_LABEL}})</th>
+    <th style="width:18%">خدمة عملاء (جم)</th>
   </tr>
   <tr>
     <td class="al">0.000</td>
@@ -99,56 +103,18 @@
   </tr>
 </table>
 
-<!-- Totals (JRXML y=200) — 3 rows -->
-<table class="grid">
+<!-- Row 10-11: Total -->
+<table class="g">
   <tr>
-    <th style="width:14.3%">الرصيد السابق</th>
-    <td class="al" style="width:14.3%">{{BALANCE_BEFORE}}</td>
-    <th style="width:14.3%">المجموع</th>
-    <td class="al b" style="width:14.3%">{{SUBTOTAL}}</td>
-    <th style="width:14.3%">المدفوعات</th>
-    <td class="al" style="width:14.3%">{{PAYMENTS}}</td>
-    <th style="width:14.3%">المبلغ المفتوح</th>
-  </tr>
-  <tr>
-    <th>المصاريف الحالية</th>
-    <td class="al">{{CURRENT_CHARGES}}</td>
-    <th>الضريبة</th>
-    <td class="al">{{TAX_AMOUNT}}</td>
-    <th>تسويات</th>
-    <td class="al {{SETTLEMENT_CLASS}}">{{SETTLEMENT_AMOUNT}}</td>
-    <td class="al b">{{OPEN_AMOUNT}}</td>
-  </tr>
-  <tr class="hl">
-    <th>إجمالي الفاتورة (جم)</th>
-    <td class="al b">{{TOTAL_AMOUNT}}</td>
-    <th>الرصيد بعد الفاتورة</th>
-    <td class="al b">{{BALANCE_AFTER}}</td>
-    <th>تاريخ الاستحقاق</th>
-    <td>{{DUE_DATE}}</td>
-    <td class="c">{{STATUS}}</td>
-  </tr>
-</table>
-
-<table class="grid" style="margin-bottom:0">
-  <tr>
-    <td class="wc" style="width:71%">{{AMOUNT_WORDS_AR}}</td>
-    <td class="tl" style="width:14%">المبلغ الإجمالي</td>
+    <th style="width:15%">إجمالي الفاتورة (جم)</th>
+    <td colspan="4" class="wc" style="width:55%">{{AMOUNT_WORDS_AR}}</td>
+    <td class="tl" style="width:15%">المبلغ الإجمالي</td>
     <td class="al b" style="width:15%">{{TOTAL_AMOUNT}}</td>
   </tr>
 </table>
 
 <div class="tl2"></div>
-
-<table style="width:100%;border-collapse:collapse">
-  <tr class="st">
-    <td style="width:70%;font-size:5pt;color:#666;text-align:right">{{LICENSE_TEXT}}</td>
-    <td class="si" style="width:15%">{{SIGNATURE_IMG}}</td>
-    <td class="sl" style="width:15%">العضو المنتدب /</td>
-  </tr>
-</table>
-
-<div class="ft">Meter Verse / عالم العدادات | {{GENERATED_AT}}</div>
+<div class="ft">{{COMPANY_LICENSE}} | Meter Verse / عالم العدادات | {{GENERATED_AT}}</div>
 </div>
 </body>
 </html>
