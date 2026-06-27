@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { usePageStore } from '@/lib/router-store';
 import { useMeterDetail } from '@/hooks/use-meters';
 import { useReadingsList } from '@/hooks/use-readings';
@@ -19,7 +20,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Zap, Droplets, Wifi, MapPin, Building2, Home, User, Pencil, MoreHorizontal, RefreshCw } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { apiPut, getToken } from '@/lib/api';
+import { apiPut, apiPost, apiPatch, getToken } from '@/lib/api';
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -40,7 +41,14 @@ export default function MeterDetailPage() {
   const [editOpen, setEditOpen] = useState(false);
   const [saving, setSaving] = useState(false);
   const [editData, setEditData] = useState({ meterSerial: '', meterType: '', brand: '', model: '', phaseType: '', ampRating: '', diameter: '' });
+  const [tariffOpen, setTariffOpen] = useState(false);
+  const [customerOpen, setCustomerOpen] = useState(false);
+  const [selectedTariffId, setSelectedTariffId] = useState('');
+  const [customerSearch, setCustomerSearch] = useState('');
+  const [customerResults, setCustomerResults] = useState<any[]>([]);
+  const [selectedCustomerId, setSelectedCustomerId] = useState('');
   const queryClient = useQueryClient();
+  const { data: tariffs } = useQuery({ queryKey: ['tariffs', meter?.projectId, meter?.meterType], queryFn: () => apiGet<any[]>('/tariffs').catch(() => []), enabled: !!meter });
 
   if (isNew) {
     return (
@@ -137,8 +145,8 @@ export default function MeterDetailPage() {
             {meter.status === 'available' || meter.status === 'new' ? (
               <>
                 <Button variant="outline" size="sm" className="gap-1" onClick={() => navigate('meter-assign', { id: meter.id })}><Pencil className="h-4 w-4" /> Assign Unit</Button>
-                <Button variant="outline" size="sm" className="gap-1"><Pencil className="h-4 w-4" /> Assign Tariff</Button>
-                <Button variant="outline" size="sm" className="gap-1"><Pencil className="h-4 w-4" /> Assign Customer</Button>
+                <Button variant="outline" size="sm" className="gap-1" onClick={() => setTariffOpen(true)}><Pencil className="h-4 w-4" /> Assign Tariff</Button>
+                <Button variant="outline" size="sm" className="gap-1" onClick={() => setCustomerOpen(true)}><Pencil className="h-4 w-4" /> Assign Customer</Button>
               </>
             ) : (
               <>
@@ -275,6 +283,76 @@ export default function MeterDetailPage() {
         <TabsContent value="alerts"><div className="text-center py-8 text-muted-foreground text-sm">{t('alerts.noAlerts')}</div></TabsContent>
         <TabsContent value="maintenance"><div className="text-center py-8 text-muted-foreground text-sm">No maintenance records.</div></TabsContent>
       </Tabs>
+
+      {/* Assign Tariff Dialog */}
+      <Dialog open={tariffOpen} onOpenChange={setTariffOpen}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>Assign Tariff — {meter?.serialNumber}</DialogTitle></DialogHeader>
+          <div className="space-y-4 py-4">
+            <Select value={selectedTariffId} onValueChange={setSelectedTariffId}>
+              <SelectTrigger><SelectValue placeholder="Select tariff" /></SelectTrigger>
+              <SelectContent>
+                {(tariffs ?? []).filter((t: any) => !meter?.meterType || t.utilityType === meter.meterType).map((t: any) => (
+                  <SelectItem key={t.id} value={t.id}>{t.tariffName} ({t.tariffCode})</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setTariffOpen(false)}>Cancel</Button>
+            <Button onClick={async () => {
+              if (!selectedTariffId) return;
+              try {
+                await apiPatch(`/tariffs/${selectedTariffId}`, { projectId: meter?.projectId });
+                toast.success('Tariff assigned');
+                setTariffOpen(false);
+              } catch { toast.error('Failed'); }
+            }} disabled={!selectedTariffId}>Assign</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Assign Customer Dialog */}
+      <Dialog open={customerOpen} onOpenChange={setCustomerOpen}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>Assign Customer — {meter?.serialNumber}</DialogTitle></DialogHeader>
+          <div className="space-y-4 py-4">
+            <Input placeholder="Search customer by name, code, phone..." value={customerSearch}
+              onChange={async e => {
+                setCustomerSearch(e.target.value);
+                if (e.target.value.length > 2) {
+                  const res = await apiGet<any[]>(`/projects/${meter?.projectId}/customers`).catch(() => []);
+                  const q = e.target.value.toLowerCase();
+                  setCustomerResults((Array.isArray(res) ? res : []).filter((c: any) =>
+                    (c.name || '').toLowerCase().includes(q) || (c.customerCode || '').toLowerCase().includes(q) || (c.phone || '').includes(q)
+                  ));
+                }
+              }} />
+            {customerResults.length > 0 && (
+              <div className="space-y-1 max-h-48 overflow-y-auto">
+                {customerResults.map((c: any) => (
+                  <div key={c.id} className={`p-2 rounded cursor-pointer text-sm ${selectedCustomerId === c.id ? 'bg-primary/10 border-primary' : 'hover:bg-muted'}`}
+                    onClick={() => setSelectedCustomerId(c.id)}>
+                    {c.name} <span className="text-muted-foreground">({c.customerCode})</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setCustomerOpen(false)}>Cancel</Button>
+            <Button onClick={async () => {
+              if (!selectedCustomerId) return;
+              try {
+                await apiPost(`/meters/${meterId}/assign`, { customerId: selectedCustomerId, projectId: meter?.projectId, unitId: meter?.locationId || '', startAt: new Date().toISOString() });
+                toast.success('Customer assigned');
+                setCustomerOpen(false);
+                queryClient.invalidateQueries({ queryKey: ['meters'] });
+              } catch { toast.error('Failed'); }
+            }} disabled={!selectedCustomerId}>Assign</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
         <DialogContent className="max-w-lg">
