@@ -4,136 +4,89 @@
   <meta charset="utf-8">
   <style>{{CSS_CONTENT}}</style>
 </head>
-<body class="invoice-page">
-  {{DELETED_WATERMARK}}
+<body>
+  <div class="invoice-container">
+    {{DELETED_WATERMARK}}
 
-  <div class="invoice-banner"></div>
+    <div class="header">
+      <table class="header-table">
+        <tr>
+          <td class="header-left">
+            <div class="company-name">{{COMPANY_NAME}}</div>
+            <div class="company-license">{{COMPANY_LICENSE}}</div>
+          </td>
+          <td class="header-center">
+            <div class="invoice-title">{{INVOICE_TITLE}} <span style="color:#e94560;font-size:9pt">(SETTLEMENT)</span></div>
+            <div class="invoice-number"># {{INVOICE_NUMBER}}</div>
+          </td>
+          <td class="header-right">{{LOGO_IMG}}</td>
+        </tr>
+      </table>
+    </div>
 
-  <table class="invoice-header">
-    <tr>
-      <td style="width:25%"><div class="invoice-area-box">{{AREA_NAME}}</div></td>
-      <td style="width:50%"><div class="invoice-title">{{INVOICE_TITLE}}</div></td>
-      <td class="invoice-logo" style="width:25%">{{LOGO_IMG}}</td>
-    </tr>
-  </table>
+    <div class="info-section">
+      <table class="info-table">
+        <tr>
+          <td class="info-label">العميل</td>
+          <td class="info-value">{{CUSTOMER_NAME}}</td>
+          <td class="info-label">كود العميل</td>
+          <td class="info-value">{{CUSTOMER_CODE}}</td>
+        </tr>
+        <tr>
+          <td class="info-label">المنطقة</td>
+          <td class="info-value">{{AREA_NAME}}</td>
+          <td class="info-label">المشروع</td>
+          <td class="info-value">{{PROJECT_NAME}}</td>
+        </tr>
+        <tr>
+          <td class="info-label">نوع التسوية</td>
+          <td class="info-value">{{SETTLEMENT_TYPE}}</td>
+          <td class="info-label">فترة التسوية</td>
+          <td class="info-value">{{BILLING_PERIOD}}</td>
+        </tr>
+        <tr>
+          <td class="info-label">تاريخ الإصدار</td>
+          <td class="info-value">{{ISSUE_DATE}}</td>
+          <td class="info-label">تاريخ الاستحقاق</td>
+          <td class="info-value">{{DUE_DATE}}</td>
+        </tr>
+      </table>
+    </div>
 
-  <table class="invoice-info">
-    <tr>
-      <td style="width:72%">
-        <div class="info-labels">
-          <div><span class="lbl">المنطقة :</span> {{AREA_NAME}}</div>
-          <div><span class="lbl">المشروع :</span> {{PROJECT_NAME}}</div>
-          <div><span class="lbl">وحدة رقم:</span> {{UNIT_NUMBER}}</div>
-        </div>
-      </td>
-      <td style="width:28%"><div class="company-box">{{COMPANY_NAME}}<br><span style="font-size:5.5pt;color:#666">{{COMPANY_LICENSE}}</span></div></td>
-    </tr>
-  </table>
+    <div class="section-title">بنود التسوية</div>
+    <table class="data-table">
+      <tr>
+        <th style="width:40%">البيان</th>
+        <th style="width:15%">الكمية</th>
+        <th style="width:15%">سعر الوحدة</th>
+        <th style="width:15%">الإجمالي</th>
+        <th style="width:15%">ملاحظات</th>
+      </tr>
+      {{CHARGE_ROWS}}
+      <tr class="total-row">
+        <td colspan="3" class="val-left">صافي التسوية</td>
+        <td class="val-left val-bold">{{TOTAL_AMOUNT}}</td>
+        <td></td>
+      </tr>
+    </table>
 
-  <div class="invoice-number"><span class="lbl">رقم </span>{{INVOICE_NUMBER}}</div>
+    <div class="words-section">{{AMOUNT_WORDS_AR}}</div>
+    <div class="bank-details">{{COMPANY_BANK_DETAILS}}</div>
 
-  <!-- Settlement Row 1 -->
-  <table class="invoice-grid">
-    <tr>
-      <th class="col-0">نوع التسوية</th>
-      <th class="col-1">كود العميل</th>
-      <th class="col-2">تاريخ الإصدار</th>
-      <th class="col-3">تاريخ التسوية</th>
-      <th class="col-4">رقم العداد</th>
-      <th class="col-5">المشروع</th>
-      <th class="col-6">حالة التسوية</th>
-    </tr>
-    <tr>
-      <td class="col-0">{{SETTLEMENT_TYPE}}</td>
-      <td class="col-1">{{CUSTOMER_CODE}}</td>
-      <td class="col-2 val-center-text">{{ISSUE_DATE}}</td>
-      <td class="col-3 val-center-text">{{BILLING_PERIOD}}</td>
-      <td class="col-4 val-center">{{METER_SERIAL}}</td>
-      <td class="col-5">{{PROJECT_NAME}}</td>
-      <td class="col-6 val-center-text">{{STATUS}}</td>
-    </tr>
-  </table>
-
-  <!-- Settlement Row 2: Customer -->
-  <table class="invoice-grid">
-    <tr>
-      <th class="col-0">السيد/</th>
-      <td class="col-1" colspan="4">{{CUSTOMER_NAME}}</td>
-      <th class="col-5">الوحدة</th>
-      <td class="col-6">{{UNIT_NUMBER}}</td>
-    </tr>
-  </table>
-
-  <!-- Settlement Charge Matrix -->
-  <table class="invoice-grid">
-    <tr>
-      <th class="col-0">تسويات (جم)</th>
-      <th class="col-1">إدارية (جم)</th>
-      <th class="col-2">رسوم ودمغات (جم)</th>
-      <th class="col-3">قيمة التسوية (جم)</th>
-      <th class="col-4">خدمة عملاء (جم)</th>
-      <th class="col-5">البيان</th>
-      <th class="col-6">{{STATUS}}</th>
-    </tr>
-    <tr>
-      <td class="col-0 val-left val-bold {{SETTLEMENT_CLASS}}">{{SETTLEMENT_AMOUNT}}</td>
-      <td class="col-1 val-left">{{ADMIN_AMOUNT}}</td>
-      <td class="col-2 val-left">{{OTHER_AMOUNT}}</td>
-      <td class="col-3 val-left val-bold">{{CONS_AMOUNT}}</td>
-      <td class="col-4 val-left">{{CS_AMOUNT}}</td>
-      <td class="col-5" colspan="2">{{DESCRIPTION}}</td>
-    </tr>
-  </table>
-
-  <!-- Totals -->
-  <table class="invoice-grid">
-    <tr>
-      <th class="col-0">الرصيد السابق</th>
-      <td class="col-1 val-left">{{BALANCE_BEFORE}}</td>
-      <th class="col-2">المجموع</th>
-      <td class="col-3 val-left val-bold">{{SUBTOTAL}}</td>
-      <th class="col-4">المدفوعات</th>
-      <td class="col-5 val-left">{{PAYMENTS}}</td>
-      <th class="col-6">المبلغ المفتوح</th>
-    </tr>
-    <tr>
-      <th class="col-0">المصاريف الحالية</th>
-      <td class="col-1 val-left">{{CURRENT_CHARGES}}</td>
-      <th class="col-2">الضريبة</th>
-      <td class="col-3 val-left">{{TAX_AMOUNT}}</td>
-      <th class="col-4">تسويات</th>
-      <td class="col-5 val-left {{SETTLEMENT_CLASS}}">{{SETTLEMENT_AMOUNT}}</td>
-      <td class="col-6 val-left val-bold">{{OPEN_AMOUNT}}</td>
-    </tr>
-    <tr class="totals-highlight">
-      <th class="col-0">إجمالي الفاتورة (جم)</th>
-      <td class="col-1 val-left val-bold">{{TOTAL_AMOUNT}}</td>
-      <th class="col-2">الرصيد بعد الفاتورة</th>
-      <td class="col-3 val-left val-bold">{{BALANCE_AFTER}}</td>
-      <th class="col-4">تاريخ الاستحقاق</th>
-      <td class="col-5">{{DUE_DATE}}</td>
-      <td class="col-6 val-center-text">{{STATUS}}</td>
-    </tr>
-  </table>
-
-  <table class="invoice-grid" style="margin-bottom:0">
-    <tr>
-      <td class="words-cell" style="width:71%;text-align:right;direction:rtl">{{AMOUNT_WORDS_AR}}</td>
-      <td class="total-label" style="width:14%">المبلغ الإجمالي</td>
-      <td class="val-left val-bold" style="width:15%">{{TOTAL_AMOUNT}}</td>
-    </tr>
-  </table>
-
-  <div class="thick-line"></div>
-
-  <table style="width:100%;border-collapse:collapse">
-    <tr class="sig-table">
-      <td style="width:70%;font-size:5pt;color:#666;text-align:right">{{LICENSE_TEXT}}</td>
-      <td class="sig-img" style="width:15%">{{SIGNATURE_IMG}}</td>
-      <td class="sig-label" style="width:15%">العضو المنتدب /</td>
-    </tr>
-  </table>
-
-  <div class="invoice-footer">Meter Verse / عالم العدادات | {{GENERATED_AT}}</div>
+    <div class="footer">
+      <table class="footer-table">
+        <tr>
+          <td class="footer-right">
+            <div class="sig-label">العضو المنتدب /</div>
+            {{SIGNATURE_IMG}}
+          </td>
+          <td class="footer-left">
+            <div class="generated-at">{{GENERATED_AT}}</div>
+            <div class="powered-by">Meter Verse | Settlement</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </body>
 </html>
