@@ -16,6 +16,7 @@ export type PageKey =
   | 'locations'
   | 'customers'
   | 'customer-detail'
+  | 'customer-new'
   | 'meters'
   | 'meter-detail'
   | 'meter-assign'

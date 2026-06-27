@@ -57,7 +57,7 @@ export default function CustomersPage() {
             </button>
           )}
         </div>
-        <Button size="sm" className="gap-1" onClick={() => navigate('customer-detail', { id: 'new' })}>
+        <Button size="sm" className="gap-1" onClick={() => navigate('customer-new')}>
           <Plus className="h-3.5 w-3.5" />Add Customer
         </Button>
       </div>

@@ -115,6 +115,7 @@ const hrefToPageKey: Record<string, PageKey> = {
   '/upload-center': 'upload-center',
   '/locations': 'locations',
   '/customers': 'customers',
+  '/customer-new': 'customer-new',
   '/meters': 'meters',
   '/meters/assign': 'meter-assign',
   '/meters/replace': 'meter-replace',

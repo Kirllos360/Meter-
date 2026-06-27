@@ -25,6 +25,7 @@ import LocationsPage from '@/components/projects/LocationsPage';
 // Customers
 import CustomersPage from '@/components/customers/CustomersPage';
 import CustomerDetailPage from '@/components/customers/CustomerDetailPage';
+import NewCustomerPage from '@/components/customers/NewCustomerPage';
 
 
 // Meters
@@ -197,6 +198,9 @@ function renderPage(page: PageKey): React.ReactNode {
 
     case 'customer-detail':
       return <CustomerDetailPage />;
+
+    case 'customer-new':
+      return <NewCustomerPage />;
     case 'meters':
       return <MetersPage />;
 
