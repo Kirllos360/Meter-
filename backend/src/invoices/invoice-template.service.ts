@@ -131,7 +131,7 @@ export class InvoiceTemplateService {
     // Variable replacements
     const vars: Record<string, string> = {
       CSS_CONTENT: cssContent,
-      DELETED_WATERMARK: isDeleted ? '<div class="deleted-watermark">ملغيــــة</div>' : '',
+      DELETED_WATERMARK: isDeleted ? '<div class="dl">ملغيــــة</div>' : '',
       CHARGE_ROWS: chargeRows,
       COMPANY_BANK_DETAILS: d.companyBankDetails || '',
       AREA_NAME: d.areaName || 'أكتوبر',

@@ -6,14 +6,12 @@
 {{DELETED_WATERMARK}}
 <div class="banner"></div>
 
-<!-- Header Row: area box | title | logo -->
 <table class="hdr"><tr>
   <td style="width:25%"><div class="area-box">{{AREA_NAME}}</div></td>
   <td style="width:50%"><div class="title-cell">{{INVOICE_TITLE}}</div></td>
   <td class="logo-cell" style="width:25%">{{LOGO_IMG}}</td>
 </tr></table>
 
-<!-- Info Labels + Company Box -->
 <table class="info"><tr>
   <td style="width:72%"><div class="info-labels">
     <div><span class="lbl">المنطقة :</span> {{AREA_NAME}}</div>
@@ -25,138 +23,132 @@
 
 <div class="inv-num"><span class="lbl">رقم </span>{{INVOICE_NUMBER}}</div>
 
-<!-- Row 1 (y=64-81): 7 columns -->
+<!-- Row 1 (JRXML y=64) -->
 <table class="grid">
   <tr>
-    <th class="col-w1">نوع النشاط</th>
-    <th class="col-w2">كود العميل</th>
-    <th class="col-w3">تاريخ الإصدار</th>
-    <th class="col-w4">اشهر المحاسبة</th>
-    <th class="col-w5">رقم العداد</th>
-    <th class="col-w6">عدد العدادات</th>
-    <th class="col-w7">مقابل القدرة</th>
+    <th style="width:14.3%">نوع النشاط</th>
+    <th style="width:12.1%">كود العميل</th>
+    <th style="width:12.1%">تاريخ الإصدار</th>
+    <th style="width:12.1%">اشهر المحاسبة</th>
+    <th style="width:12.1%">رقم العداد</th>
+    <th style="width:12.1%">عدد العدادات</th>
+    <th style="width:14.3%">مقابل القدرة</th>
   </tr>
   <tr>
-    <td class="col-w1">{{METER_TYPE}}</td>
-    <td class="col-w2">{{CUSTOMER_CODE}}</td>
-    <td class="col-w3 align-center-text">{{ISSUE_DATE}}</td>
-    <td class="col-w4 align-center-text">{{BILLING_PERIOD}}</td>
-    <td class="col-w5 align-center">{{METER_SERIAL}}</td>
-    <td class="col-w6 align-center-text">1</td>
-    <td class="col-w7 align-center-text">-</td>
+    <td>{{METER_TYPE}}</td>
+    <td>{{CUSTOMER_CODE}}</td>
+    <td class="c">{{ISSUE_DATE}}</td>
+    <td class="c">{{BILLING_PERIOD}}</td>
+    <td class="ac">{{METER_SERIAL}}</td>
+    <td class="c">1</td>
+    <td class="c">-</td>
   </tr>
 </table>
 
-<!-- Row 2 (y=98-115) -->
+<!-- Row 2 (JRXML y=98) -->
 <table class="grid">
   <tr>
-    <th class="col-w1">عدد العدادات</th>
-    <th class="col-w2" colspan="3">السيد/</th>
-    <th class="col-w3">حالية ({{UNIT_LABEL}})</th>
-    <th class="col-w4">سابقة ({{UNIT_LABEL}})</th>
-    <th class="col-w5">الإستهلاك ({{UNIT_LABEL}})</th>
+    <th style="width:14.3%">عدد العدادات</th>
+    <th style="width:57.1%" colspan="4">السيد/</th>
+    <th style="width:14.3%">حالية ({{UNIT_LABEL}})</th>
+    <th style="width:14.3%">سابقة ({{UNIT_LABEL}})</th>
   </tr>
   <tr>
-    <td class="col-w1 align-center-text">1</td>
-    <td class="col-w2" colspan="3">{{CUSTOMER_NAME}}</td>
-    <td class="col-w3 align-center">{{END_READING}}</td>
-    <td class="col-w4 align-center">{{START_READING}}</td>
-    <td class="col-w5 align-center align-bold">{{CONSUMPTION}}</td>
+    <td class="c">1</td>
+    <td colspan="4">{{CUSTOMER_NAME}}</td>
+    <td class="ac">{{END_READING}}</td>
+    <td class="ac">{{START_READING}}</td>
   </tr>
 </table>
 
-<!-- Row 3 (y=132-149) -->
+<!-- Row 3 (JRXML y=132) -->
 <table class="grid">
   <tr>
-    <th class="col-w1">{{COL0_LABEL}}</th>
-    <th class="col-w2" colspan="3">العنوان/</th>
-    <th class="col-w3">قيمة الإستهلاك (جم)</th>
-    <th class="col-w4">إجمالي الإستهلاك</th>
-    <th class="col-w5">حالة الفاتورة</th>
+    <th style="width:14.3%">{{COL0_LABEL}}</th>
+    <th style="width:57.1%" colspan="4">العنوان/</th>
+    <th style="width:14.3%">الإستهلاك ({{UNIT_LABEL}})</th>
+    <th style="width:14.3%">حالة الفاتورة</th>
   </tr>
   <tr>
-    <td class="col-w1 align-left">0.000</td>
-    <td class="col-w2" colspan="3">{{ADDRESS}}</td>
-    <td class="col-w3 align-left align-bold">{{CONS_AMOUNT}}</td>
-    <td class="col-w4 align-left align-bold">{{CONSUMPTION}} {{UNIT_LABEL}}</td>
-    <td class="col-w5 align-center-text">{{STATUS}}</td>
+    <td class="al">0.000</td>
+    <td colspan="4">{{ADDRESS}}</td>
+    <td class="al b">{{CONSUMPTION}}</td>
+    <td class="c">{{STATUS}}</td>
   </tr>
 </table>
 
-<!-- Charge Matrix (y=166-183) -->
+<!-- Charge Matrix (JRXML y=166) — labels from JRXML static texts -->
 <table class="grid">
   <tr>
-    <th class="col-w1">{{COL0_LABEL}}</th>
-    <th class="col-w2">إدارية (جم)</th>
-    <th class="col-w3">تسويات (جم)</th>
-    <th class="col-w4">رسوم ودمغات (جم)</th>
-    <th class="col-w5">قيمة الإستهلاك (جم)</th>
-    <th class="col-w6">خدمة عملاء (جم)</th>
-    <th class="col-w7">الإستهلاك ({{UNIT_LABEL}})</th>
+    <th style="width:14.3%">خصومات (جم)</th>
+    <th style="width:14.3%">إدارية (جم)</th>
+    <th style="width:14.3%">تسويات (جم)</th>
+    <th style="width:14.3%">رسوم ودمغات (جم)</th>
+    <th style="width:14.3%">قيمة الإستهلاك (جم)</th>
+    <th style="width:14.3%">الإستهلاك ({{UNIT_LABEL}})</th>
+    <th style="width:14.3%">خدمة عملاء (جم)</th>
   </tr>
   <tr>
-    <td class="col-w1 align-left">0.000</td>
-    <td class="col-w2 align-left">{{ADMIN_AMOUNT}}</td>
-    <td class="col-w3 align-left {{SETTLEMENT_CLASS}}">{{SETTLEMENT_AMOUNT}}</td>
-    <td class="col-w4 align-left">{{OTHER_AMOUNT}}</td>
-    <td class="col-w5 align-left align-bold">{{CONS_AMOUNT}}</td>
-    <td class="col-w6 align-left">{{CS_AMOUNT}}</td>
-    <td class="col-w7 align-center align-bold">{{CONSUMPTION}}</td>
+    <td class="al">0.000</td>
+    <td class="al">{{ADMIN_AMOUNT}}</td>
+    <td class="al {{SETTLEMENT_CLASS}}">{{SETTLEMENT_AMOUNT}}</td>
+    <td class="al">{{OTHER_AMOUNT}}</td>
+    <td class="al b">{{CONS_AMOUNT}}</td>
+    <td class="ac b">{{CONSUMPTION}}</td>
+    <td class="al">{{CS_AMOUNT}}</td>
   </tr>
 </table>
 
-<!-- Totals (y=200-234): 3 rows -->
+<!-- Totals (JRXML y=200) — 3 rows -->
 <table class="grid">
   <tr>
-    <th class="col-w1">الرصيد السابق</th>
-    <td class="col-w2 align-left">{{BALANCE_BEFORE}}</td>
-    <th class="col-w3">المجموع</th>
-    <td class="col-w4 align-left align-bold">{{SUBTOTAL}}</td>
-    <th class="col-w5">المدفوعات</th>
-    <td class="col-w6 align-left">{{PAYMENTS}}</td>
-    <th class="col-w7">المبلغ المفتوح</th>
+    <th style="width:14.3%">الرصيد السابق</th>
+    <td class="al" style="width:14.3%">{{BALANCE_BEFORE}}</td>
+    <th style="width:14.3%">المجموع</th>
+    <td class="al b" style="width:14.3%">{{SUBTOTAL}}</td>
+    <th style="width:14.3%">المدفوعات</th>
+    <td class="al" style="width:14.3%">{{PAYMENTS}}</td>
+    <th style="width:14.3%">المبلغ المفتوح</th>
   </tr>
   <tr>
-    <th class="col-w1">المصاريف الحالية</th>
-    <td class="col-w2 align-left">{{CURRENT_CHARGES}}</td>
-    <th class="col-w3">الضريبة</th>
-    <td class="col-w4 align-left">{{TAX_AMOUNT}}</td>
-    <th class="col-w5">تسويات</th>
-    <td class="col-w6 align-left {{SETTLEMENT_CLASS}}">{{SETTLEMENT_AMOUNT}}</td>
-    <td class="col-w7 align-left align-bold">{{OPEN_AMOUNT}}</td>
+    <th>المصاريف الحالية</th>
+    <td class="al">{{CURRENT_CHARGES}}</td>
+    <th>الضريبة</th>
+    <td class="al">{{TAX_AMOUNT}}</td>
+    <th>تسويات</th>
+    <td class="al {{SETTLEMENT_CLASS}}">{{SETTLEMENT_AMOUNT}}</td>
+    <td class="al b">{{OPEN_AMOUNT}}</td>
   </tr>
-  <tr class="totals-highlight">
-    <th class="col-w1">إجمالي الفاتورة (جم)</th>
-    <td class="col-w2 align-left align-bold">{{TOTAL_AMOUNT}}</td>
-    <th class="col-w3">الرصيد بعد الفاتورة</th>
-    <td class="col-w4 align-left align-bold">{{BALANCE_AFTER}}</td>
-    <th class="col-w5">تاريخ الاستحقاق</th>
-    <td class="col-w6">{{DUE_DATE}}</td>
-    <td class="col-w7 align-center-text">{{STATUS}}</td>
+  <tr class="hl">
+    <th>إجمالي الفاتورة (جم)</th>
+    <td class="al b">{{TOTAL_AMOUNT}}</td>
+    <th>الرصيد بعد الفاتورة</th>
+    <td class="al b">{{BALANCE_AFTER}}</td>
+    <th>تاريخ الاستحقاق</th>
+    <td>{{DUE_DATE}}</td>
+    <td class="c">{{STATUS}}</td>
   </tr>
 </table>
 
-<!-- Amount in Words + Total Label -->
 <table class="grid" style="margin-bottom:0">
   <tr>
-    <td class="words-cell" style="width:71%;text-align:right;direction:rtl">{{AMOUNT_WORDS_AR}}</td>
-    <td class="total-label" style="width:14%">المبلغ الإجمالي</td>
-    <td class="align-left align-bold" style="width:15%">{{TOTAL_AMOUNT}}</td>
+    <td class="wc" style="width:71%">{{AMOUNT_WORDS_AR}}</td>
+    <td class="tl" style="width:14%">المبلغ الإجمالي</td>
+    <td class="al b" style="width:15%">{{TOTAL_AMOUNT}}</td>
   </tr>
 </table>
 
-<div class="thick-line"></div>
+<div class="tl2"></div>
 
-<!-- Signature -->
 <table style="width:100%;border-collapse:collapse">
-  <tr class="sig-table">
+  <tr class="st">
     <td style="width:70%;font-size:5pt;color:#666;text-align:right">{{LICENSE_TEXT}}</td>
-    <td class="sig-img" style="width:15%">{{SIGNATURE_IMG}}</td>
-    <td class="sig-label" style="width:15%">العضو المنتدب /</td>
+    <td class="si" style="width:15%">{{SIGNATURE_IMG}}</td>
+    <td class="sl" style="width:15%">العضو المنتدب /</td>
   </tr>
 </table>
 
-<div class="footer">Meter Verse / عالم العدادات | {{GENERATED_AT}}</div>
+<div class="ft">Meter Verse / عالم العدادات | {{GENERATED_AT}}</div>
 </div>
 </body>
 </html>

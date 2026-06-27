@@ -1,75 +1,36 @@
-/* Meter Verse Invoice — Clone of SBill JRXML A4 Landscape (421x297pt) */
-.invoice-container {
-  font-family: 'DejaVu Sans', sans-serif;
-  font-size: 7pt;
-  color: #000;
-  background: #fff;
-  width: 411pt;
-  margin: 0;
-  position: relative;
-  line-height: 1.05;
-}
-.deleted-watermark {
-  position: absolute; top: 14pt; left: 16pt; right: 16pt; bottom: 16pt;
-  color: #FF0033; font-size: 60pt; font-weight: bold; text-align: center;
-  opacity: 0.25; pointer-events: none; z-index: 999;
-  display: flex; align-items: center; justify-content: center;
-}
-.banner { background: #CC0000; height: 9pt; width: 100%; margin-bottom: 3pt; }
-
-/* Header row: area box | title | logo */
-.hdr { width: 100%; border-collapse: collapse; }
-.hdr td { padding: 0; vertical-align: middle; border: none; }
-.area-box { border: 0.25pt solid #999; padding: 1.5pt 3pt; font-size: 6.5pt; text-align: right; }
-.title-cell { text-align: center; color: #000066; font-size: 8pt; font-weight: bold; }
-.logo-cell { text-align: left; }
-.logo-cell img { max-height: 26pt; max-width: 110pt; }
-
-/* Info row */
-.info { width: 100%; border-collapse: collapse; margin: 2pt 0; }
-.info td { padding: 0; border: none; vertical-align: top; }
-.info-labels { font-size: 6.5pt; line-height: 1.4; }
-.info-labels .lbl { color: #000066; font-size: 7pt; }
-.company-box { border: 0.25pt solid #999; text-align: center; padding: 1.5pt; font-size: 6.5pt; }
-
-.inv-num { text-align: right; font-size: 7pt; padding: 1pt 0; }
-.inv-num .lbl { color: #000066; font-size: 7pt; }
-
-/* Grid tables matching JRXML 7-column layout */
-.grid { width: 100%; border-collapse: collapse; margin-bottom: 1pt; }
-.grid td, .grid th { border: 0.25pt solid #999; padding: 1pt 2pt; font-size: 6.5pt; text-align: right; vertical-align: middle; }
-.grid th { background: #CCCCFF; font-weight: bold; text-align: center; font-size: 6pt; }
-.col-w1 { width: 14.5%; }
-.col-w2 { width: 14%; }
-.col-w3 { width: 14%; }
-.col-w4 { width: 14%; }
-.col-w5 { width: 14%; }
-.col-w6 { width: 14%; }
-.col-w7 { width: 15.5%; }
-
-.align-left { text-align: left; font-family: 'DejaVu Sans Mono', monospace; direction: ltr; font-size: 6.5pt; }
-.align-center { text-align: center; font-family: 'DejaVu Sans Mono', monospace; direction: ltr; font-size: 6.5pt; }
-.align-bold { font-weight: bold; }
-.align-center-text { text-align: center; }
-
-.settlement-credit { color: #CC0000; }
-.totals-highlight { background: #E8E8FF; font-weight: bold; }
-
-/* Words cell */
-.words-cell { font-size: 5.5pt; line-height: 1.2; padding: 1.5pt 3pt; text-align: center; border: 0.25pt solid #999; }
-.total-label { background: #CCCCFF; font-weight: bold; text-align: center; font-size: 6.5pt; }
-
-/* Thick navy line */
-.thick-line { border: none; border-top: 4pt solid #000099; margin: 2pt 0 1pt 0; }
-
-/* Signature row */
-.sig-table td { padding: 1pt; border: none; vertical-align: middle; }
-.sig-label { color: #000066; font-size: 7pt; font-weight: bold; text-align: right; }
-.sig-img { text-align: left; }
-.sig-img img { max-height: 18pt; }
-
-.footer { text-align: center; font-size: 5pt; color: #666; margin-top: 1pt; }
-
-@media print {
-  .invoice-container { width: 411pt; margin: 0; }
-}
+/* SBill JRXML clone — A4 Landscape 421x297pt */
+body { font-family:'DejaVu Sans',sans-serif; font-size:7pt; margin:0; color:#000; background:#fff; }
+.invoice-container { width:411pt; margin:0; position:relative; line-height:1.05; }
+.dl { position:absolute; top:14pt; left:16pt; right:16pt; bottom:16pt; color:#FF0033; font-size:60pt; font-weight:bold; text-align:center; opacity:0.25; pointer-events:none; z-index:999; display:flex; align-items:center; justify-content:center; }
+.bn { background:#CC0000; height:9pt; margin-bottom:3pt; }
+.hdr { width:100%; border-collapse:collapse; }
+.hdr td { padding:0; vertical-align:middle; border:none; }
+.ab { border:0.25pt solid #999; padding:1.5pt 3pt; font-size:6.5pt; text-align:right; }
+.tt { text-align:center; color:#000066; font-size:8pt; font-weight:bold; }
+.lg { text-align:left; }
+.lg img { max-height:26pt; max-width:110pt; }
+.if { width:100%; border-collapse:collapse; margin:2pt 0; }
+.if td { padding:0; border:none; vertical-align:top; }
+.il { font-size:6.5pt; line-height:1.4; }
+.il .lb { color:#000066; font-size:7pt; }
+.cb { border:0.25pt solid #999; text-align:center; padding:1.5pt; font-size:6.5pt; }
+.iv { text-align:right; font-size:7pt; padding:1pt 0; }
+.iv .lb { color:#000066; font-size:7pt; }
+.g { width:100%; border-collapse:collapse; margin-bottom:1pt; }
+.g td, .g th { border:0.25pt solid #999; padding:1pt 2pt; font-size:6.5pt; text-align:right; vertical-align:middle; }
+.g th { background:#CCCCFF; font-weight:bold; text-align:center; font-size:6pt; }
+.al { text-align:left; font-family:'DejaVu Sans Mono',monospace; direction:ltr; font-size:6.5pt; }
+.ac { text-align:center; font-family:'DejaVu Sans Mono',monospace; direction:ltr; font-size:6.5pt; }
+.b { font-weight:bold; }
+.c { text-align:center; }
+.sc { color:#CC0000; }
+.hl { background:#E8E8FF; font-weight:bold; }
+.wc { font-size:5.5pt; line-height:1.2; padding:1.5pt 3pt; text-align:center; border:0.25pt solid #999; }
+.tl { background:#CCCCFF; font-weight:bold; text-align:center; font-size:6.5pt; }
+.tl2 { border:none; border-top:4pt solid #000099; margin:2pt 0 1pt 0; }
+.st td { padding:1pt; border:none; vertical-align:middle; }
+.sl { color:#000066; font-size:7pt; font-weight:bold; text-align:right; }
+.si { text-align:left; }
+.si img { max-height:18pt; }
+.ft { text-align:center; font-size:5pt; color:#666; margin-top:1pt; }
+@media print { .invoice-container { width:411pt; margin:0; } }
