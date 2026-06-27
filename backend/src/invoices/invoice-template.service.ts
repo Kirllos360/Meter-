@@ -122,10 +122,18 @@ export class InvoiceTemplateService {
     const settlementIsCredit = settlementSigned < 0;
     const isDeleted = d.status === 'cancelled' || d.status === 'DELETED';
 
+    // Build charge rows
+    const chargeRows = d.chargeLines.map(l => {
+      const chargeName = l.chargeNameAr || l.chargeName;
+      return `<tr><td>${chargeName}</td><td class="val-center">${l.quantity}</td><td class="val-center">${l.rateAmount.toFixed(3)}</td><td class="val-left">${l.lineAmount.toFixed(3)}</td><td></td></tr>`;
+    }).join('');
+
     // Variable replacements
     const vars: Record<string, string> = {
       CSS_CONTENT: cssContent,
       DELETED_WATERMARK: isDeleted ? '<div class="deleted-watermark">ملغيــــة</div>' : '',
+      CHARGE_ROWS: chargeRows,
+      COMPANY_BANK_DETAILS: d.companyBankDetails || '',
       AREA_NAME: d.areaName || 'أكتوبر',
       INVOICE_TITLE: d.invoiceTitle,
       LOGO_IMG: d.companyLogo ? `<img src="${d.companyLogo}" />` : '',
