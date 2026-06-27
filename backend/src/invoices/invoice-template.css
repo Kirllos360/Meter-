@@ -1,136 +1,75 @@
-/* Meter Verse Invoice Template v2 — Professional Enterprise Design */
+/* Meter Verse Invoice — Clone of SBill JRXML A4 Landscape (421x297pt) */
 .invoice-container {
-  font-family: 'DejaVu Sans', 'Arial', sans-serif;
-  font-size: 9pt;
-  color: #1a1a2e;
-  background: #fff;
-  width: 700px;
-  margin: 0 auto;
-  padding: 20px 25px;
-  position: relative;
-  line-height: 1.4;
-}
-
-/* Deleted Watermark */
-.deleted-watermark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-30deg);
-  color: #ff0000;
-  font-size: 48pt;
-  font-weight: bold;
-  opacity: 0.12;
-  pointer-events: none;
-  z-index: 999;
-  white-space: nowrap;
-}
-
-/* Header */
-.header { margin-bottom: 15px; }
-.header-table { width: 100%; border-collapse: collapse; }
-.header-table td { vertical-align: middle; padding: 5px; }
-.header-left { width: 35%; text-align: right; }
-.company-name { font-size: 14pt; font-weight: bold; color: #1a1a2e; }
-.company-license { font-size: 7pt; color: #888; margin-top: 2px; }
-.header-center { width: 30%; text-align: center; }
-.invoice-title { font-size: 13pt; font-weight: bold; color: #0f3460; }
-.invoice-number { font-size: 9pt; color: #e94560; font-weight: bold; margin-top: 3px; }
-.header-right { width: 35%; text-align: left; }
-.header-right img { max-height: 50px; max-width: 150px; }
-
-/* Separator Line */
-.separator { border: none; border-top: 2px solid #0f3460; margin: 8px 0; }
-
-/* Info Section */
-.info-section { margin-bottom: 12px; }
-.info-table { width: 100%; border-collapse: collapse; }
-.info-table td { padding: 4px 8px; border: 1px solid #ddd; font-size: 8.5pt; }
-.info-label { background: #f0f4ff; color: #0f3460; font-weight: bold; width: 15%; text-align: right; }
-.info-value { width: 35%; text-align: right; }
-
-/* Section Titles */
-.section-title {
-  font-size: 10pt;
-  font-weight: bold;
-  color: #0f3460;
-  background: #e8edf5;
-  padding: 5px 10px;
-  margin: 10px 0 5px 0;
-  border-right: 4px solid #0f3460;
-}
-
-/* Data Tables */
-.data-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
-.data-table th {
-  background: #0f3460;
-  color: #fff;
-  font-size: 8pt;
-  font-weight: bold;
-  padding: 6px 8px;
-  text-align: center;
-  border: 1px solid #0f3460;
-}
-.data-table td {
-  padding: 5px 8px;
-  border: 1px solid #ddd;
-  font-size: 8.5pt;
-  text-align: right;
-}
-.data-table tr:nth-child(even) { background: #f8f9fc; }
-
-/* Summary Table */
-.summary-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
-.summary-table td { padding: 5px 10px; border: 1px solid #ddd; font-size: 9pt; }
-.summary-label { background: #f0f4ff; color: #0f3460; font-weight: bold; width: 25%; text-align: right; }
-.summary-value { width: 25%; text-align: left; font-family: 'DejaVu Sans Mono', monospace; }
-.summary-total { background: #e8edf5; font-weight: bold; }
-
-/* Totals */
-.subtotal-row td { border-top: 2px solid #0f3460; }
-.total-row td { background: #0f3460; color: #fff; font-weight: bold; font-size: 10pt; }
-
-/* Alignment Helpers */
-.val-left { text-align: left; font-family: 'DejaVu Sans Mono', monospace; direction: ltr; }
-.val-center { text-align: center; font-family: 'DejaVu Sans Mono', monospace; direction: ltr; }
-.val-bold { font-weight: bold; }
-
-/* Settlement Credit */
-.settlement-credit { color: #cc0000; }
-
-/* Amount in Words */
-.words-section {
-  font-size: 8pt;
-  color: #333;
-  padding: 8px 10px;
-  margin: 8px 0;
-  background: #f8f9fc;
-  border: 1px solid #eee;
-  text-align: center;
-  line-height: 1.5;
-}
-
-/* Bank Details */
-.bank-details {
+  font-family: 'DejaVu Sans', sans-serif;
   font-size: 7pt;
-  color: #666;
-  padding: 5px 10px;
-  margin: 5px 0;
-  text-align: center;
+  color: #000;
+  background: #fff;
+  width: 411pt;
+  margin: 0;
+  position: relative;
+  line-height: 1.05;
 }
+.deleted-watermark {
+  position: absolute; top: 14pt; left: 16pt; right: 16pt; bottom: 16pt;
+  color: #FF0033; font-size: 60pt; font-weight: bold; text-align: center;
+  opacity: 0.25; pointer-events: none; z-index: 999;
+  display: flex; align-items: center; justify-content: center;
+}
+.banner { background: #CC0000; height: 9pt; width: 100%; margin-bottom: 3pt; }
 
-/* Footer */
-.footer { margin-top: 15px; border-top: 2px solid #0f3460; padding-top: 8px; }
-.footer-table { width: 100%; border-collapse: collapse; }
-.footer-table td { vertical-align: middle; padding: 5px; }
-.footer-right { width: 50%; text-align: right; }
-.sig-label { font-size: 9pt; color: #0f3460; font-weight: bold; margin-bottom: 5px; }
-.footer-right img { max-height: 30px; }
-.footer-left { width: 50%; text-align: left; }
-.generated-at { font-size: 7pt; color: #888; }
-.powered-by { font-size: 7pt; color: #aaa; margin-top: 2px; }
+/* Header row: area box | title | logo */
+.hdr { width: 100%; border-collapse: collapse; }
+.hdr td { padding: 0; vertical-align: middle; border: none; }
+.area-box { border: 0.25pt solid #999; padding: 1.5pt 3pt; font-size: 6.5pt; text-align: right; }
+.title-cell { text-align: center; color: #000066; font-size: 8pt; font-weight: bold; }
+.logo-cell { text-align: left; }
+.logo-cell img { max-height: 26pt; max-width: 110pt; }
 
-/* Print Optimization */
+/* Info row */
+.info { width: 100%; border-collapse: collapse; margin: 2pt 0; }
+.info td { padding: 0; border: none; vertical-align: top; }
+.info-labels { font-size: 6.5pt; line-height: 1.4; }
+.info-labels .lbl { color: #000066; font-size: 7pt; }
+.company-box { border: 0.25pt solid #999; text-align: center; padding: 1.5pt; font-size: 6.5pt; }
+
+.inv-num { text-align: right; font-size: 7pt; padding: 1pt 0; }
+.inv-num .lbl { color: #000066; font-size: 7pt; }
+
+/* Grid tables matching JRXML 7-column layout */
+.grid { width: 100%; border-collapse: collapse; margin-bottom: 1pt; }
+.grid td, .grid th { border: 0.25pt solid #999; padding: 1pt 2pt; font-size: 6.5pt; text-align: right; vertical-align: middle; }
+.grid th { background: #CCCCFF; font-weight: bold; text-align: center; font-size: 6pt; }
+.col-w1 { width: 14.5%; }
+.col-w2 { width: 14%; }
+.col-w3 { width: 14%; }
+.col-w4 { width: 14%; }
+.col-w5 { width: 14%; }
+.col-w6 { width: 14%; }
+.col-w7 { width: 15.5%; }
+
+.align-left { text-align: left; font-family: 'DejaVu Sans Mono', monospace; direction: ltr; font-size: 6.5pt; }
+.align-center { text-align: center; font-family: 'DejaVu Sans Mono', monospace; direction: ltr; font-size: 6.5pt; }
+.align-bold { font-weight: bold; }
+.align-center-text { text-align: center; }
+
+.settlement-credit { color: #CC0000; }
+.totals-highlight { background: #E8E8FF; font-weight: bold; }
+
+/* Words cell */
+.words-cell { font-size: 5.5pt; line-height: 1.2; padding: 1.5pt 3pt; text-align: center; border: 0.25pt solid #999; }
+.total-label { background: #CCCCFF; font-weight: bold; text-align: center; font-size: 6.5pt; }
+
+/* Thick navy line */
+.thick-line { border: none; border-top: 4pt solid #000099; margin: 2pt 0 1pt 0; }
+
+/* Signature row */
+.sig-table td { padding: 1pt; border: none; vertical-align: middle; }
+.sig-label { color: #000066; font-size: 7pt; font-weight: bold; text-align: right; }
+.sig-img { text-align: left; }
+.sig-img img { max-height: 18pt; }
+
+.footer { text-align: center; font-size: 5pt; color: #666; margin-top: 1pt; }
+
 @media print {
-  .invoice-container { width: 100%; padding: 10px 15px; }
+  .invoice-container { width: 411pt; margin: 0; }
 }
